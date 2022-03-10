@@ -1,6 +1,14 @@
 import { BaseUrl, HttpMethod, User } from '@blubberfish/types'
 import { createApi } from './utils'
 
+export const login = createApi<{ username: string, password: string }, User>({
+    method: HttpMethod.POST,
+    url: `${BaseUrl.REST}/login`,
+    builders: {
+        response: Promise.resolve
+    }
+})
+
 export const listUser = createApi<void, User[]>({
     method: HttpMethod.POST,
     url: `${BaseUrl.REST}/users`,
