@@ -1,0 +1,12 @@
+on:
+  workflow_dispatch:
+env:
+jobs:
+  build-then-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./.github/workflows/aws-lambda-deploy.yml
+        with:
+          aws_lambda_name: 'dev-test'
+          output_dir: 'dist/apps/services/users'
+          project_name: 'services-users'
