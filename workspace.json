@@ -1,6 +1,7 @@
 {
   "version": 2,
   "projects": {
+    "frontend-cradle": "apps/frontend/cradle",
     "services-core": "libs/services/core",
     "services-users": "apps/services/users",
     "types": "libs/types"
