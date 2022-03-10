@@ -8,7 +8,7 @@ import {
 
 const userDeleteHandler = async (event) => {
   const { path, pathParameters } = event;
-  if (!/^\/?user\/)/i.test(path)) return null;
+  if (!/^\/?user\//i.test(path)) return null;
 
   const { userid } = pathParameters ?? {};
 
