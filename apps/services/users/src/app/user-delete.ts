@@ -7,12 +7,12 @@ import {
 } from '@blubberfish/services/core';
 
 const userDeleteHandler = async (event) => {
-  const {
-    path,
-    pathParameters: { userid },
-  } = event;
+  const { path, pathParameters } = event;
   if (!/^\/?user\//i.test(path)) return null;
 
+  console.log('pathParameters', pathParameters);
+
+  const { userid } = pathParameters;
   if (!userid)
     return apiExceptionFactory(ServiceException.IncompletePayload, '', 400);
 

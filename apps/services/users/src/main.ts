@@ -5,6 +5,8 @@ import {
 } from '@blubberfish/services/core';
 import './app/log-in';
 import './app/users-list';
+import './app/user-create';
+import './app/user-delete';
 import './app/log-in';
 import './app/log-out';
 
