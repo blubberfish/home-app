@@ -35,6 +35,6 @@ jobs:
       - name: Bundle then deploy
         run: |
           cd ${{ github.event.inputs.project_output_dir }}/${{ github.event.inputs.project_name }}
-          npm i -P
+          npm i -P tslib
           zip -r -X "./bundle.zip" .
           aws lambda update-function-code --function-name "${{ github.event.inputs.aws_lambda }}" --zip-file "fileb://bundle.zip"
