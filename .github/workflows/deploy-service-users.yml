@@ -1,5 +1,15 @@
 on:
   workflow_dispatch:
+    inputs:
+      aws_lambda: 
+        required: true
+        type: string
+      project_name: 
+        required: true
+        type: string
+      project_output_dir: 
+        required: true
+        type: string
 env: 
   aws_region: ap-southeast-1
 jobs:
@@ -16,13 +26,13 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_U }}
           aws-secret-access-key: ${{ secrets.AWS_ACCESS_S }}
           aws-region: ${{ env.aws_region }}
-      - name: build project
+      - name: Build project
         run: |
           npm ci
-          npx nx build ${{ inputs.project_name }}
-      - name: bundle files
+          npx nx build ${{ github.event.inputs.project_name }}
+      - name: Bundle files
         run: |
-          cd ${{ inputs.output_dir }}
+          cd ${{ github.event.inputs.project_output_dir }}
           zip -r -X "./bundle.zip" .
-      - name: deploy bundle
-        run: aws lambda update-function-code --function-name "${{ inputs.aws_lambda_name }}" --zip-file "fileb://bundle.zip"
+      - name: Deploy bundle
+        run: aws lambda update-function-code --function-name "${{ github.event.inputs.aws_lambda }}" --zip-file "fileb://bundle.zip"
