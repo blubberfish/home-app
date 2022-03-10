@@ -31,7 +31,7 @@ jobs:
       - name: Build project
         run: |
           npm ci
-          npx nx build ${{ github.event.inputs.project_name }} --outputPath=${{ github.event.inputs.project_output_dir }}/${{ github.event.inputs.project_name }}
+          npx nx build ${{ github.event.inputs.project_name }} --generatePackageJson --outputPath=${{ github.event.inputs.project_output_dir }}/${{ github.event.inputs.project_name }}
       - name: Bundle then deploy
         run: |
           cd ${{ github.event.inputs.project_output_dir }}/${{ github.event.inputs.project_name }}
