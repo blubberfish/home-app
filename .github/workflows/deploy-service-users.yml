@@ -19,9 +19,5 @@ jobs:
       - uses: ./.github/workflows/aws-lambda-deploy.yml
         with:
           aws_lambda_name: 'dev-test'
-          aws_region: ${{ env.aws_region }}
-          aws_secret: ${{ secrets.AWS_ACCESS_S }}
-          aws_user: ${{ secrets.AWS_ACCESS_U }}
           output_dir: 'dist/apps/services/users'
           project_name: 'services-users'
-          pat: ${{ secrets.BLUBBERFISH }}
