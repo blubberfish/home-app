@@ -15,7 +15,9 @@ export const createApi = <I, O>({ url, builders = {}, method = HttpMethod.GET }:
     return async (params?: I) => {
         const { url: urlBuilder, headers: headersBuilder, body: bodyBuilder } = builders
 
-        const fetchOptions: RequestInit = {}
+        const fetchOptions: RequestInit = {
+            method
+        }
 
         if (headersBuilder) {
             fetchOptions['headers'] = await headersBuilder(params)
