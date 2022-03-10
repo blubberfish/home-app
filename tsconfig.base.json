@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@blubberfish/services/client": ["libs/services/client/src/index.ts"],
       "@blubberfish/services/core": ["libs/services/core/src/index.ts"],
       "@blubberfish/types": ["libs/types/src/index.ts"]
     }
