@@ -3,7 +3,9 @@ on:
     inputs:
       aws_lambda:
         required: true
-        type: string
+        type: choice
+        options:
+          - cradle-user-management
       project_name:
         required: true
         type: choice
