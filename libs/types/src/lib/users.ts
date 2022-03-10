@@ -13,3 +13,11 @@ export interface User extends UserLoginInfo, UserProfile {
   createdOn: string;
   updatedOn?: string;
 }
+
+export interface CreateUserPayload {
+  familyName: string;
+  givenName: string;
+  password: string;
+  username: string;
+  preferredName?: string;
+}

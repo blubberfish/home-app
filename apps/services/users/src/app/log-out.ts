@@ -7,7 +7,7 @@ import {
 
 const logoutHandler = async (event) => {
   const { headers, path } = event;
-  if (!/^\/?logout/.test(path)) return null;
+  if (!/^\/?logout/i.test(path)) return null;
 
   const cookie = parse(headers['Cookie'] ?? '');
   if (cookie['S'] && /^test$/i.test(cookie['S'])) {

@@ -6,7 +6,7 @@ import {
 
 const userListHandler = async (event) => {
   const { path } = event;
-  if (!/^\/?users/.test(path)) return null;
+  if (!/^\/?users/i.test(path)) return null;
 
   const people = await usersCollectionFactory();
   try {

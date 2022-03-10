@@ -7,6 +7,8 @@ export enum HttpMethod {
 }
 
 export enum ServiceException {
+  DuplicateRecord = 'record.duplicate',
+  IncompletePayload = 'payload.incomplete',
   MissingCredential = 'credentials.missing',
   WrongCredentials = 'credentials.wrong',
   Unknown = 'unknown',

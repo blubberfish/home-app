@@ -11,7 +11,7 @@ import {
 
 const loginHandler = async (event) => {
   const { path, body } = event;
-  if (!/^\/?login/.test(path)) return null;
+  if (!/^\/?login/i.test(path)) return null;
 
   const { username, password } = JSON.parse(body ?? '') ?? {};
   if (username && password) {
