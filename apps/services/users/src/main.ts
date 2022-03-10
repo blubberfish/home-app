@@ -22,6 +22,7 @@ exports.handler = async (event, context) => {
           ...result,
           headers: {
             ...result.headers,
+            "Access-Control-Allow-Headers": "*",
             'Access-Control-Allow-Origin': '*'
           }
         };
