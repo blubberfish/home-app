@@ -18,7 +18,13 @@ exports.handler = async (event, context) => {
     )) {
       const result = await handler(event, context);
       if (result) {
-        return result;
+        return {
+          ...result,
+          headers: {
+            ...result.headers,
+            'Access-Control-Allow-Origin': '*'
+          }
+        };
       }
     }
   }
