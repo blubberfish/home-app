@@ -16,8 +16,13 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_U }}
           aws-secret-access-key: ${{ secrets.AWS_ACCESS_S }}
           aws-region: ${{ env.aws_region }}
-      - uses: ./.github/workflows/aws-lambda-deploy.yml
-        with:
-          aws_lambda_name: 'dev-test'
-          output_dir: 'dist/apps/services/users'
-          project_name: 'services-users'
+      - name: build project
+        run: |
+          npm ci
+          npx nx build ${{ inputs.project_name }}
+      - name: bundle files
+        run: |
+          cd ${{ inputs.output_dir }}
+          zip -r -X "./bundle.zip" .
+      - name: deploy bundle
+        run: aws lambda update-function-code --function-name "${{ inputs.aws_lambda_name }}" --zip-file "fileb://bundle.zip"
