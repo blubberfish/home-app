@@ -1,3 +1,4 @@
+import { ObjectId } from 'mongodb'
 import {
   apiExceptionFactory,
   registerHandler,
@@ -18,7 +19,7 @@ const userDeleteHandler = async (event) => {
   try {
     const people = await usersCollectionFactory();
     await people.deleteOne({
-      _id: userid,
+      _id: new ObjectId(userid),
     });
 
     return {
