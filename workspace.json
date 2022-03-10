@@ -1,6 +1,8 @@
 {
   "version": 2,
   "projects": {
-    "services-users": "apps/services/users"
+    "services-core": "libs/services/core",
+    "services-users": "apps/services/users",
+    "types": "libs/types"
   }
 }
