@@ -34,11 +34,13 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_U }}
           aws-secret-access-key: ${{ secrets.AWS_ACCESS_S }}
           aws-region: ${{ inputs.aws_region }}
-      - run: |
+      - name: build
+        run: |
           npm ci
           npx nx build ${{ inputs.project_name }}
+      - name: bundle
+        run: |
           cd ${{ inputs.output_dir }}
           zip -r -X "./bundle.zip" .
-          aws lambda update-function-code --function-name "${{ inputs.aws_lambda_name }}" --zip-file "fileb://$BUNDLE_FILE"
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.BLUBBERFISH }}
+      - name: deploy
+        run: aws lambda update-function-code --function-name "${{ inputs.aws_lambda_name }}" --zip-file "fileb://$BUNDLE_FILE"
