@@ -8,11 +8,10 @@ import {
 
 const userDeleteHandler = async (event) => {
   const { path, pathParameters } = event;
-  if (!/^\/?user\//i.test(path)) return null;
+  if (!/^\/?user\/)/i.test(path)) return null;
 
-  console.log('pathParameters', pathParameters);
+  const { userid } = pathParameters ?? {};
 
-  const { userid } = pathParameters;
   if (!userid)
     return apiExceptionFactory(ServiceException.IncompletePayload, '', 400);
 
