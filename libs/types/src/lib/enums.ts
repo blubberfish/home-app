@@ -1,3 +1,8 @@
+export enum BaseUrl {
+  REAL_TIME = 'wss://70fvoznwjf.execute-api.ap-southeast-1.amazonaws.com/production/',
+  REST = 'https://ce3wh01ayk.execute-api.ap-southeast-1.amazonaws.com/prod'
+}
+
 export enum HttpMethod {
   GET = 'GET',
   DELETE = 'DELETE',
