@@ -1,3 +1,4 @@
+import * as cookie from 'cookie';
 import { v4 as uuid } from 'uuid';
 import {
   ServiceException,
@@ -9,17 +10,16 @@ import {
 } from '@blubberfish/services/core';
 
 const loginHandler = async (event) => {
-  const { path, body } = event;
+  const { headers, path, body } = event;
   if (!/^\/?login/.test(path)) return null;
 
   const { username, password } = JSON.parse(body ?? '') ?? {};
   if (username && password) {
     try {
       const people = await usersCollectionFactory();
-      const sessionId = uuid();
-
       const person = await people.findOne({ username });
       if (person && (await match(password, person.password))) {
+        const sessionId = uuid();
         const { value } = await people.findOneAndUpdate(
           { _id: person._id },
           {
@@ -37,8 +37,16 @@ const loginHandler = async (event) => {
           }
         );
 
+        const cookieData = cookie.parse(headers['Cookie'] ?? '');
+        cookie['S'] = sessionId;
         return {
           statusCode: 200,
+          headers: {
+            'Set-Cookie': Object.entries(cookieData).reduce((data, entry) => {
+              const cookieEntry = cookie.serialize(entry[0], entry[1]);
+              return data ? `${data};${cookieEntry}` : cookieEntry;
+            }, ''),
+          },
           body: JSON.stringify(value),
         };
       }

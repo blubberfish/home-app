@@ -5,6 +5,8 @@ import {
 } from '@blubberfish/services/core';
 import './app/log-in';
 import './app/users-list';
+import './app/log-in';
+import './app/log-out';
 
 exports.handler = async (event, context) => {
   const { httpMethod } = event;
