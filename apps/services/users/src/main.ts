@@ -1,5 +1,22 @@
-import { handler } from './app/list-users'
-exports.handler = async (event) => {
-  const result = await handler(event)
-  return result || { statusCode: 404 }
+import {
+  hanlderRegistrar,
+  Handler,
+  HttpMethod,
+} from '@blubberfish/services/core';
+import './app/log-in';
+import './app/users-list';
+
+exports.handler = async (event, context) => {
+  const { httpMethod } = event;
+  if (httpMethod && hanlderRegistrar[httpMethod as HttpMethod]) {
+    for (const handler of Object.values<Handler<any, any, any>>(
+      hanlderRegistrar[httpMethod]
+    )) {
+      const result = await handler(event, context);
+      if (result) {
+        return result;
+      }
+    }
+  }
+  return { statusCode: 404 };
 };

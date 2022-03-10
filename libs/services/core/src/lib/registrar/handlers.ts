@@ -1,10 +1,4 @@
-export enum HttpMethod {
-  GET = 'GET',
-  DELETE = 'DELETE',
-  PATCH = 'PATCH',
-  POST = 'POST',
-  PUT = 'PUT',
-}
+import { HttpMethod } from '@blubberfish/types';
 
 export type Handler<E, R, C = unknown> = (event: E, context: C) => Promise<R>;
 
@@ -14,11 +8,14 @@ export type Registry<E, R, C> = Partial<{
 
 /** @todo */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const registrar: Registry<any, any, any> = {};
+export const hanlderRegistrar: Registry<any, any, any> = {};
 
-export const register = <E, R, C>(
+export const registerHandler = <E, R, C>(
   method: HttpMethod,
   handler: Handler<E, R, C>
 ) => {
-  registrar[method] = { ...registrar[method], [handler.name]: handler };
+  hanlderRegistrar[method] = {
+    ...hanlderRegistrar[method],
+    [handler.name]: handler,
+  };
 };

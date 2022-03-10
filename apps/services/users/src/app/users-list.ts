@@ -1,6 +1,10 @@
-import { usersCollectionFactory } from '@blubberfish/services/core';
+import {
+  HttpMethod,
+  registerHandler,
+  usersCollectionFactory,
+} from '@blubberfish/services/core';
 
-export const handler = async (event) => {
+const userListHandler = async (event) => {
   const { path } = event;
   if (!/^\/?users/.test(path)) return null;
 
@@ -20,3 +24,5 @@ export const handler = async (event) => {
     };
   }
 };
+
+registerHandler(HttpMethod.GET, userListHandler);
