@@ -1,5 +1,7 @@
 on:
   workflow_dispatch:
+env: 
+  aws_region: ap-southeast-1
 jobs:
   build-then-deploy:
     runs-on: ubuntu-latest
@@ -13,10 +15,11 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_U }}
           aws-secret-access-key: ${{ secrets.AWS_ACCESS_S }}
-          aws-region: ${{ inputs.aws_region }}
+          aws-region: ${{ env.aws_region }}
       - uses: ./.github/workflows/aws-lambda-deploy.yml
         with:
           aws_lambda_name: 'dev-test'
+          aws_region: ${{ env.aws_region }}
           output_dir: 'dist/apps/services/users'
           project_name: 'services-users'
           AWS_ACCESS_U: ${{ secrets.AWS_ACCESS_U }}
