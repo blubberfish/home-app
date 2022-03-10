@@ -1,6 +1,7 @@
 {
   "root": "libs/types",
   "sourceRoot": "libs/types/src",
+  "projectType": "library",
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",
