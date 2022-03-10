@@ -3,11 +3,11 @@ on:
 jobs:
   build-then-deploy:
     uses: ./.github/workflows/aws-lambda-deploy
-      with:
-        aws_lambda_name: 'dev-test'
-        output_dir: 'dist/apps/services/users'
-        project_name: 'services-users'
-      secrets: 
-        AWS_ACCESS_U: ${{ secrets.AWS_ACCESS_U }}
-        AWS_ACCESS_S: ${{ secrets.AWS_ACCESS_S }}
-        BLUBBERFISH: ${{ secrets.BLUBBERFISH }}
+    with:
+      aws_lambda_name: 'dev-test'
+      output_dir: 'dist/apps/services/users'
+      project_name: 'services-users'
+    secrets: 
+      AWS_ACCESS_U: ${{ secrets.AWS_ACCESS_U }}
+      AWS_ACCESS_S: ${{ secrets.AWS_ACCESS_S }}
+      BLUBBERFISH: ${{ secrets.BLUBBERFISH }}
