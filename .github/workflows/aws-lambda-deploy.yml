@@ -1,26 +1,37 @@
 on:
-  workflow_call:
+  workflow_dispatch:
     inputs:
+      aws_lambda: 
+        required: true
+        type: string
       project_name: 
         required: true
         type: string
-      output_dir: 
-        required: true
+      project_output_dir: 
+        default: dist/apps/services
         type: string
-      aws_lambda_name: 
-        type: string
-        required: true
+env: 
+  aws_region: ap-southeast-1
 jobs:
-  build-deploy:
+  Build-And-Deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: build
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.5.1
+        with:
+          node-version: 16
+          registry-url: https://npm.pkg.github.com
+      - uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_U }}
+          aws-secret-access-key: ${{ secrets.AWS_ACCESS_S }}
+          aws-region: ${{ env.aws_region }}
+      - name: Build project
         run: |
           npm ci
-          npx nx build ${{ inputs.project_name }}
-      - name: bundle
+          npx nx build services-${{ github.event.inputs.project_name }}
+      - name: Bundle then deploy
         run: |
-          cd ${{ inputs.output_dir }}
+          cd ${{ github.event.inputs.project_output_dir }}/${{ github.event.inputs.project_name }}
           zip -r -X "./bundle.zip" .
-      - name: deploy
-        run: aws lambda update-function-code --function-name "${{ inputs.aws_lambda_name }}" --zip-file "fileb://bundle.zip"
+          aws lambda update-function-code --function-name "${{ github.event.inputs.aws_lambda }}" --zip-file "fileb://bundle.zip"
