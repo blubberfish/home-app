@@ -13,7 +13,7 @@ on:
 env: 
   aws_region: ap-southeast-1
 jobs:
-  build-then-deploy:
+  Build-And-Deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -28,11 +28,13 @@ jobs:
           aws-region: ${{ env.aws_region }}
       - name: Build project
         run: |
-          npm ci
-          npx nx build ${{ github.event.inputs.project_name }}
+          # npm ci
+          # npx nx build ${{ github.event.inputs.project_name }}
       - name: Bundle files
         run: |
           cd ${{ github.event.inputs.project_output_dir }}
-          zip -r -X "./bundle.zip" .
+          # zip -r -X "./bundle.zip" .
       - name: Deploy bundle
-        run: aws lambda update-function-code --function-name "${{ github.event.inputs.aws_lambda }}" --zip-file "fileb://bundle.zip"
+        run: |
+          echo $PWD
+          # aws lambda update-function-code --function-name "${{ github.event.inputs.aws_lambda }}" --zip-file "fileb://bundle.zip"
