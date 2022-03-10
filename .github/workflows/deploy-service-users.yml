@@ -20,8 +20,8 @@ jobs:
         with:
           aws_lambda_name: 'dev-test'
           aws_region: ${{ env.aws_region }}
+          aws_secret: ${{ secrets.AWS_ACCESS_S }}
+          aws_user: ${{ secrets.AWS_ACCESS_U }}
           output_dir: 'dist/apps/services/users'
           project_name: 'services-users'
-          AWS_ACCESS_U: ${{ secrets.AWS_ACCESS_U }}
-          AWS_ACCESS_S: ${{ secrets.AWS_ACCESS_S }}
-          BLUBBERFISH: ${{ secrets.BLUBBERFISH }}
+          pat: ${{ secrets.BLUBBERFISH }}

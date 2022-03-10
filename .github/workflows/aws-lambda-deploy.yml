@@ -14,11 +14,11 @@ on:
         type: string
         required: true
     secrets:
-      AWS_ACCESS_U:
+      aws_user:
         required: true
-      AWS_ACCESS_S:
+      aws_secret:
         required: true
-      BLUBBERFISH:
+      pat:
         required: true
 jobs:
   build-deploy:
