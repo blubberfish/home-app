@@ -1,16 +1,16 @@
 on:
   workflow_dispatch:
     inputs:
-      aws_lambda: 
+      aws_lambda:
         required: true
         type: string
-      project_name: 
+      project_name:
         required: true
         type: string
-      project_output_dir: 
-        default: dist/apps/services
+      project_output_dir:
+        default: dist/apps
         type: string
-env: 
+env:
   aws_region: ap-southeast-1
 jobs:
   Build-And-Deploy:
@@ -29,9 +29,10 @@ jobs:
       - name: Build project
         run: |
           npm ci
-          npx nx build services-${{ github.event.inputs.project_name }} --externalDependencies=none
+          npx nx build services-${{ github.event.inputs.project_name }}
       - name: Bundle then deploy
         run: |
           cd ${{ github.event.inputs.project_output_dir }}/${{ github.event.inputs.project_name }}
+          npm i -P
           zip -r -X "./bundle.zip" .
           aws lambda update-function-code --function-name "${{ github.event.inputs.aws_lambda }}" --zip-file "fileb://bundle.zip"
