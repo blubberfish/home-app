@@ -1,6 +1,5 @@
 on:
   workflow_dispatch:
-env:
 jobs:
   build-then-deploy:
     runs-on: ubuntu-latest

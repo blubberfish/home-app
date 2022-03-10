@@ -20,8 +20,6 @@ on:
         required: true
       BLUBBERFISH:
         required: true
-env:
-  BUILD_DIR: dist
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
