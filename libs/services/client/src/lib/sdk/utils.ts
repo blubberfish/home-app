@@ -1,8 +1,8 @@
-import { Enum, HttpMethod } from '@blubberfish/types'
+import { HttpMethod } from '@blubberfish/types'
 
 export type ApiOption<I, O> = {
     url: string,
-    method?: Enum<typeof HttpMethod>,
+    method?: HttpMethod,
     builders?: Partial<{
         url: (input?: I, base?: string) => string,
         headers: (input?: I) => Promise<HeadersInit>,
