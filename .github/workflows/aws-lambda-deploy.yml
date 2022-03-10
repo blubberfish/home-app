@@ -1,0 +1,46 @@
+on:
+  workflow_call:
+    inputs:
+      project_name: 
+        required: true
+        type: string
+      output_dir: 
+        required: true
+        type: string
+      aws_region: 
+        type: string
+        default: ap-southeast-1
+      aws_lambda_name: 
+        type: string
+        required: true
+    secrets:
+      AWS_ACCESS_U:
+        required: true
+      AWS_ACCESS_S:
+        required: true
+      BLUBBERFISH:
+        required: true
+env:
+  BUILD_DIR: dist
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.5.1
+        with:
+          node-version: 16
+          registry-url: https://npm.pkg.github.com
+      - uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_U }}
+          aws-secret-access-key: ${{ secrets.AWS_ACCESS_S }}
+          aws-region: ${{ inputs.aws_region }}
+      - run: |
+          npm ci
+          npx nx build ${{ inputs.project_name }}
+          cd ${{ inputs.output_dir }}
+          zip -r -X "./bundle.zip" .
+          aws lambda update-function-code --function-name "${{ inputs.aws_lambda_name }}" --zip-file "fileb://$BUNDLE_FILE"
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.BLUBBERFISH }}
