@@ -6,7 +6,9 @@ on:
         type: string
       project_name:
         required: true
-        type: string
+        type: choice
+        options:
+          - services-users
       project_output_dir:
         default: dist/apps
         type: string
