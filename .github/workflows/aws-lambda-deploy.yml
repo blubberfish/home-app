@@ -7,18 +7,8 @@ on:
       output_dir: 
         required: true
         type: string
-      aws_region: 
-        type: string
-        default: ap-southeast-1
       aws_lambda_name: 
         type: string
-        required: true
-    secrets:
-      aws_user:
-        required: true
-      aws_secret:
-        required: true
-      pat:
         required: true
 jobs:
   build-deploy:
@@ -33,4 +23,4 @@ jobs:
           cd ${{ inputs.output_dir }}
           zip -r -X "./bundle.zip" .
       - name: deploy
-        run: aws lambda update-function-code --function-name "${{ inputs.aws_lambda_name }}" --zip-file "fileb://$BUNDLE_FILE"
+        run: aws lambda update-function-code --function-name "${{ inputs.aws_lambda_name }}" --zip-file "fileb://bundle.zip"
