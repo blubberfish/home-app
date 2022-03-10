@@ -1,4 +1,4 @@
-import * as cookie from 'cookie';
+import { serialize } from 'cookie';
 import { v4 as uuid } from 'uuid';
 import {
   ServiceException,
@@ -10,7 +10,7 @@ import {
 } from '@blubberfish/services/core';
 
 const loginHandler = async (event) => {
-  const { headers, path, body } = event;
+  const { path, body } = event;
   if (!/^\/?login/.test(path)) return null;
 
   const { username, password } = JSON.parse(body ?? '') ?? {};
@@ -37,15 +37,10 @@ const loginHandler = async (event) => {
           }
         );
 
-        const cookieData = cookie.parse(headers['Cookie'] ?? '');
-        cookie['S'] = sessionId;
         return {
           statusCode: 200,
           headers: {
-            'Set-Cookie': Object.entries(cookieData).reduce((data, entry) => {
-              const cookieEntry = cookie.serialize(entry[0], entry[1]);
-              return data ? `${data};${cookieEntry}` : cookieEntry;
-            }, ''),
+            'Set-Cookie': serialize('S', sessionId),
           },
           body: JSON.stringify(value),
         };
