@@ -1,12 +1,9 @@
-import { Route, Switch } from 'react-router-dom';
-import LoginPage, {
-  PATH as LoginPath,
-} from '@blubberfish/frontend/pages/login';
+import { useSelector } from 'react-redux';
+import { loggedInUserSelector } from '@blubberfish/frontend/shared/login';
+import PrivateRoutes from './routes/private';
+import PublicRoutes from './routes/pubilc';
 
 export function App() {
-  return (
-    <Switch>
-      <Route path={LoginPath} component={LoginPage} />
-    </Switch>
-  );
+  const user = useSelector(loggedInUserSelector);
+  return user ? <PrivateRoutes /> : <PublicRoutes />;
 }
