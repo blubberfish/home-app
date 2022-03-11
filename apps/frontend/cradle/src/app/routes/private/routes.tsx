@@ -1,5 +1,11 @@
-import { Switch } from 'react-router-dom';
+import { Switch, Redirect, Route } from 'react-router-dom';
 
 export default () => {
-  return <Switch></Switch>;
+  return (
+    <Switch>
+      <Route>
+        <Redirect to="/" />
+      </Route>
+    </Switch>
+  );
 };
