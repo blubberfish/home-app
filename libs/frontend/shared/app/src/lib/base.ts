@@ -1,7 +1,5 @@
-import { User } from '@blubberfish/types';
-
 export type AppState = {
-  currentUser?: User;
+  /** @todo */
 };
 
 export const IDENTIFIER = 'app';

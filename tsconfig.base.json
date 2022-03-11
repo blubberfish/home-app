@@ -25,6 +25,9 @@
       "@blubberfish/frontend/shared/app": [
         "libs/frontend/shared/app/src/index.ts"
       ],
+      "@blubberfish/frontend/shared/login": [
+        "libs/frontend/shared/login/src/index.ts"
+      ],
       "@blubberfish/services/client": ["libs/services/client/src/index.ts"],
       "@blubberfish/services/core": ["libs/services/core/src/index.ts"],
       "@blubberfish/types": ["libs/types/src/index.ts"]

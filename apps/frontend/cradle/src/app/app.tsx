@@ -7,9 +7,6 @@ export function App() {
   return (
     <Switch>
       <Route path={LoginPath} component={LoginPage} />
-      <Route>
-        <span>TEST</span>
-      </Route>
     </Switch>
   );
 }

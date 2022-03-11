@@ -6,6 +6,7 @@
     "frontend-pages-login": "libs/frontend/pages/login",
     "frontend-redux": "libs/frontend/redux",
     "frontend-shared-app": "libs/frontend/shared/app",
+    "frontend-shared-login": "libs/frontend/shared/login",
     "services-client": "libs/services/client",
     "services-core": "libs/services/core",
     "services-realtime": "apps/services/realtime",
