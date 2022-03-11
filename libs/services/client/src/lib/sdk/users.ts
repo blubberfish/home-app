@@ -6,12 +6,15 @@ import {
 } from '@blubberfish/types';
 import { createApi } from './utils';
 
-export const login = createApi<{ username: string; password: string }, User>({
+export const login = createApi<
+  { username: string; password: string },
+  Partial<User>
+>({
   method: HttpMethod.POST,
   url: `${BaseUrl.REST}/login`,
   builders: {
     body: (input) => JSON.stringify(input),
-    response: Promise.resolve,
+    response: async (response) => response as Partial<User>,
   },
 });
 
