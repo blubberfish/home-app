@@ -1,18 +1,34 @@
-import { MongoClient } from 'mongodb'
-import { User } from '@blubberfish/types'
+import { MongoClient } from 'mongodb';
+import { User, SubscriberGroup } from '@blubberfish/types';
 
-const DB = 'cradle'
-const USERS = 'people'
+const DATABASE = {
+  NAME: 'cradle',
+  COLLECTION: {
+    WEBSOCKET_GROUP: 'ws_groups',
+    USERS: 'people',
+  },
+} as const;
 
-let dbclient: MongoClient | null = null
+let dbclient: MongoClient | null = null;
 
 const clientFactory = async () => {
   if (!dbclient) {
-    const { DB_H, DB_S, DB_U } = process.env
-    dbclient = new MongoClient(`mongodb+srv://${DB_U}:${DB_S}@${DB_H}/`, { w: 'majority', retryWrites: true })
-    await dbclient.connect()
+    const { DB_H, DB_S, DB_U } = process.env;
+    dbclient = new MongoClient(`mongodb+srv://${DB_U}:${DB_S}@${DB_H}/`, {
+      w: 'majority',
+      retryWrites: true,
+    });
+    await dbclient.connect();
   }
-  return dbclient
-}
+  return dbclient;
+};
 
-export const usersCollectionFactory = async () => await (await clientFactory()).db(DB).collection<User>(USERS)
+export const usersCollectionFactory = async () =>
+  (await clientFactory())
+    .db(DATABASE.NAME)
+    .collection<User>(DATABASE.COLLECTION.USERS);
+
+export const webSocketGroupCollection = async () =>
+  (await clientFactory())
+    .db(DATABASE.NAME)
+    .collection<SubscriberGroup>(DATABASE.COLLECTION.WEBSOCKET_GROUP);
