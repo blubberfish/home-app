@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Slice, SliceCaseReducers } from '@reduxjs/toolkit';
+import { combineReducers, Slice, SliceCaseReducers } from '@reduxjs/toolkit';
 import { dynamicSlices, getReducer } from './store';
 import { useStore } from 'react-redux';
 
@@ -15,13 +15,11 @@ export const useModule = <
     const module = dynamicSlices[slice.name];
     if (!module) {
       dynamicSlices[slice.name] = slice.reducer;
-      store.replaceReducer(getReducer());
+      store.replaceReducer(combineReducers(getReducer()));
     }
-    console.log('dynamicSlices', dynamicSlices);
     return () => {
-      console.log('unmount:dynamicSlices', dynamicSlices);
       delete dynamicSlices[slice.name];
-      store.replaceReducer(getReducer());
+      store.replaceReducer(combineReducers(getReducer()));
     };
   }, [slice, store]);
 };

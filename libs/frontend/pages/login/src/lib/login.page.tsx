@@ -1,9 +1,12 @@
 import { useCallback, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Alert, AlertType, Box, Panel } from '@blubberfish/frontend/components';
 import { login } from '@blubberfish/services/client';
 import { SUB_PATH } from './config';
+import module from './module';
 
 export const LoginPage = () => {
+  const dispatch = useDispatch();
   const [pending, setPending] = useState(false);
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
@@ -11,6 +14,7 @@ export const LoginPage = () => {
 
   const submit = useCallback(() => {
     setPending(true);
+    dispatch(module.actions.setPending());
     setAlertMessage(() => undefined);
     login({ username, password })
       .then(
@@ -24,7 +28,7 @@ export const LoginPage = () => {
       .finally(() => {
         setPending(false);
       });
-  }, [username, password]);
+  }, [dispatch, username, password]);
   return (
     <Panel
       display="grid"

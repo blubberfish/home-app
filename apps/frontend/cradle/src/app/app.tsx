@@ -1,10 +1,15 @@
 import { Route, Switch } from 'react-router-dom';
-import LoginPage from '@blubberfish/frontend/pages/login';
+import LoginPage, {
+  PATH as LoginPath,
+} from '@blubberfish/frontend/pages/login';
 
 export function App() {
   return (
     <Switch>
-      <Route component={LoginPage} />
+      <Route path={LoginPath} component={LoginPage} />
+      <Route>
+        <span>TEST</span>
+      </Route>
     </Switch>
   );
 }
