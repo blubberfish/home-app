@@ -28,17 +28,16 @@ export const listUser = createApi<void, User[]>({
 
 export const createUser = createApi<CreateUserPayload, void>({
   method: HttpMethod.POST,
+  restricted: true,
   url: `${BaseUrl.REST}/user`,
   builders: {
-    headers: async () => ({
-      'x-api-key': 'rxlVo3YyUaaU0IN5pEK202bZXQm49N8X4aRi1t3R',
-    }),
     body: (input) => JSON.stringify(input),
   },
 });
 
 export const deleteUser = createApi<string, void>({
   method: HttpMethod.POST,
+  restricted: true,
   url: `${BaseUrl.REST}/user`,
   builders: {
     url: (input, base) => `${base}/${input}`,
