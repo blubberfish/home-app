@@ -1,1 +1,1 @@
-export * from './lib/frontend-pages-landing';
+export { default } from './lib/landing.page';
