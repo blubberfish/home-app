@@ -18,6 +18,9 @@
       "@blubberfish/frontend/components": [
         "libs/frontend/components/src/index.ts"
       ],
+      "@blubberfish/frontend/pages/landing": [
+        "libs/frontend/pages/landing/src/index.ts"
+      ],
       "@blubberfish/frontend/pages/login": [
         "libs/frontend/pages/login/src/index.ts"
       ],

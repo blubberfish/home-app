@@ -3,6 +3,7 @@
   "projects": {
     "frontend-components": "libs/frontend/components",
     "frontend-cradle": "apps/frontend/cradle",
+    "frontend-pages-landing": "libs/frontend/pages/landing",
     "frontend-pages-login": "libs/frontend/pages/login",
     "frontend-redux": "libs/frontend/redux",
     "frontend-shared-app": "libs/frontend/shared/app",
