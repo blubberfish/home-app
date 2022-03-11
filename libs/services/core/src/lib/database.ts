@@ -4,7 +4,7 @@ import { User, SubscriberGroup } from '@blubberfish/types';
 const DATABASE = {
   NAME: 'cradle',
   COLLECTION: {
-    WEBSOCKET_GROUP: 'ws_groups',
+    WEBSOCKET_GROUP: 'web_socket_groups',
     USERS: 'people',
   },
 } as const;
