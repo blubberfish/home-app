@@ -1,34 +1,24 @@
 import { useCallback, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Alert, AlertType, Box, Panel } from '@blubberfish/frontend/components';
-import { login } from '@blubberfish/services/client';
+import {
+  loginThunk,
+  loginErrorSelector,
+  loginPendingSelector,
+} from '@blubberfish/frontend/shared/login';
 import { SUB_PATH } from './config';
-import module from './module';
 
 export const LoginPage = () => {
   const dispatch = useDispatch();
-  const [pending, setPending] = useState(false);
+  const pending = useSelector(loginPendingSelector);
+  const alertMessage = useSelector(loginErrorSelector);
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
-  const [alertMessage, setAlertMessage] = useState<string>();
 
   const submit = useCallback(() => {
-    setPending(true);
-    dispatch(module.actions.setPending());
-    setAlertMessage(() => undefined);
-    login({ username, password })
-      .then(
-        () => {
-          //
-        },
-        ({ message }) => {
-          setAlertMessage(message);
-        }
-      )
-      .finally(() => {
-        setPending(false);
-      });
+    dispatch(loginThunk({ username, password }));
   }, [dispatch, username, password]);
+
   return (
     <Panel
       display="grid"
@@ -38,7 +28,7 @@ export const LoginPage = () => {
     >
       {alertMessage && <Alert type={AlertType.Error}>{alertMessage}</Alert>}
       <input
-        disabled={pending}
+        disabled={!!pending}
         onChange={({ target: { value } }) => {
           setUsername(value);
         }}
@@ -46,14 +36,14 @@ export const LoginPage = () => {
         value={username}
       />
       <input
-        disabled={pending}
+        disabled={!!pending}
         onChange={({ target: { value } }) => {
           setPassword(value);
         }}
         placeholder="Password"
         value={password}
       />
-      <button disabled={pending} onClick={submit} type="button">
+      <button disabled={!!pending} onClick={submit} type="button">
         Login
       </button>
       <Box
