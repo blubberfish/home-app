@@ -1,0 +1,23 @@
+{
+  "root": "libs/frontend/shared/app",
+  "sourceRoot": "libs/frontend/shared/app/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/frontend/shared/app/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/frontend/shared/app"],
+      "options": {
+        "jestConfig": "libs/frontend/shared/app/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

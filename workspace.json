@@ -4,6 +4,8 @@
     "frontend-components": "libs/frontend/components",
     "frontend-cradle": "apps/frontend/cradle",
     "frontend-pages-login": "libs/frontend/pages/login",
+    "frontend-redux": "libs/frontend/redux",
+    "frontend-shared-app": "libs/frontend/shared/app",
     "services-client": "libs/services/client",
     "services-core": "libs/services/core",
     "services-realtime": "apps/services/realtime",

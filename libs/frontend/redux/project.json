@@ -1,0 +1,23 @@
+{
+  "root": "libs/frontend/redux",
+  "sourceRoot": "libs/frontend/redux/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/frontend/redux/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/frontend/redux"],
+      "options": {
+        "jestConfig": "libs/frontend/redux/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}
