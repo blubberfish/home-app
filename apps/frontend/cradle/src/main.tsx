@@ -11,6 +11,8 @@ import App from './app';
 
 const theme: Theme = {
   colors: {
+    primary: 'steelblue',
+    'primary-text': 'white',
     background: ['white', 'whitesmoke', 'gainsboro'],
     error: ['lavenderblush', 'crimson'],
     success: ['honeydew', 'forestgreen'],

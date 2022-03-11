@@ -1,6 +1,12 @@
 import { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Alert, AlertType, Box, Panel } from '@blubberfish/frontend/components';
+import {
+  Alert,
+  AlertType,
+  Box,
+  Button,
+  Panel,
+} from '@blubberfish/frontend/components';
 import {
   loginThunk,
   loginErrorSelector,
@@ -43,9 +49,9 @@ export const LoginPage = () => {
         placeholder="Password"
         value={password}
       />
-      <button disabled={!!pending} onClick={submit} type="button">
-        Login
-      </button>
+      <Button disabled={!!pending} onClick={submit} variant="primary">
+        LOGIN
+      </Button>
       <Box
         mx={3}
         display="grid"
