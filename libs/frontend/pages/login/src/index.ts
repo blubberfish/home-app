@@ -1,1 +1,1 @@
-export { LoginPage as default } from './lib/page';
+export { default } from './lib/root.page';

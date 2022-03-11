@@ -1,6 +1,7 @@
 import { HTMLAttributes } from 'react';
 import styled from 'styled-components';
 import {
+  compose,
   border,
   BorderProps,
   color,
@@ -23,6 +24,8 @@ import {
   JustifyItemsProps,
   justifySelf,
   JustifySelfProps,
+  position,
+  PositionProps,
 } from 'styled-system';
 
 type BoxStyleSystemProps = AlignContentProps &
@@ -35,20 +38,24 @@ type BoxStyleSystemProps = AlignContentProps &
   ColorProps &
   GridProps &
   LayoutProps &
+  PositionProps &
   SpaceProps;
 
 export type BoxProps = BoxStyleSystemProps & HTMLAttributes<HTMLDivElement>;
 
-export const Box = styled.div<BoxStyleSystemProps>(
+const boxStyle = compose(
   alignContent,
   alignItems,
   alignSelf,
-  justifyContent,
-  justifyItems,
-  justifySelf,
   border,
   color,
   grid,
+  justifyContent,
+  justifyItems,
+  justifySelf,
   layout,
+  position,
   space
 );
+
+export const Box = styled.div<BoxStyleSystemProps>(boxStyle);
