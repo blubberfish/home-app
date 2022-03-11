@@ -24,16 +24,20 @@ const loginHandler = async (event) => {
           { _id: person._id },
           {
             $set: {
-              webSession: {
-                id: sessionId,
-                startedOn: Date.now(),
-              },
+              webToken: sessionId,
+              webTokenCreatedOn: new Date().toISOString(),
             },
           },
           {
             returnDocument: 'after',
             upsert: false,
-            projection: { password: 0 },
+            projection: {
+              password: 0,
+              webToken: 0,
+              webTokenCreatedOn: 0,
+              socketToken: 0,
+              socketTokenCreatedOn: 0,
+            },
           }
         );
 
