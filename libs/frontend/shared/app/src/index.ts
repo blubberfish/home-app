@@ -1,11 +1,2 @@
-import { createSlice } from '@reduxjs/toolkit';
-
-export const IDENTIFIER = 'app';
-
-export default createSlice({
-  name: IDENTIFIER,
-  initialState: {
-    ready: false,
-  },
-  reducers: {},
-});
+export { default } from './lib/slice';
+export * from './lib/selector';
