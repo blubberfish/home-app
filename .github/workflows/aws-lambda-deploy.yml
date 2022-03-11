@@ -6,11 +6,13 @@ on:
         type: choice
         options:
           - cradle-user-management
+          - cradle-ws-management
       project_name:
         required: true
         type: choice
         options:
           - services-users
+          - services-realtime
       project_output_dir:
         default: dist/apps
         type: string
