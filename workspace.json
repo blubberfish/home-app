@@ -1,6 +1,7 @@
 {
   "version": 2,
   "projects": {
+    "frontend-components": "libs/frontend/components",
     "frontend-cradle": "apps/frontend/cradle",
     "frontend-pages-login": "libs/frontend/pages/login",
     "services-client": "libs/services/client",

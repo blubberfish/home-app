@@ -15,6 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@blubberfish/frontend/components": [
+        "libs/frontend/components/src/index.ts"
+      ],
       "@blubberfish/frontend/pages/login": [
         "libs/frontend/pages/login/src/index.ts"
       ],
