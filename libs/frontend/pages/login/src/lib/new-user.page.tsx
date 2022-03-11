@@ -2,8 +2,7 @@ import { useCallback, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Box } from '@blubberfish/frontend/components';
 import { createUser } from '@blubberfish/services/client';
-import { CreateUserPayload } from '@blubberfish/types';
-import { PATH } from './config';
+import { CreateUserPayload, FrontEndLoginPath } from '@blubberfish/types';
 
 export const NewUserPage = () => {
   const [userPayload, setUserPayload] = useState<CreateUserPayload>({
@@ -17,7 +16,7 @@ export const NewUserPage = () => {
     createUser(userPayload);
   }, [userPayload]);
   const cancel = useCallback(() => {
-    history.replace(PATH);
+    history.replace(FrontEndLoginPath.Root);
   }, [history]);
   return (
     <Box

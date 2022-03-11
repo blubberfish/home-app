@@ -1,8 +1,8 @@
 import { Route, Switch } from 'react-router-dom';
 import { Box } from '@blubberfish/frontend/components';
+import { FrontEndLoginPath } from '@blubberfish/types';
 import { LoginPage } from './login.page';
 import { NewUserPage } from './new-user.page';
-import { SUB_PATH } from './config';
 
 export default () => (
   <Box
@@ -20,7 +20,7 @@ export default () => (
       gridTemplateRows="1fr"
     >
       <Switch>
-        <Route path={SUB_PATH.NEW_USER} component={NewUserPage} />
+        <Route path={FrontEndLoginPath.NewUser} component={NewUserPage} />
         <Route component={LoginPage} />
       </Switch>
     </Box>

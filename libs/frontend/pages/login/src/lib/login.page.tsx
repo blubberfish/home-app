@@ -7,12 +7,12 @@ import {
   Button,
   Panel,
 } from '@blubberfish/frontend/components';
+import { FrontEndLoginPath } from '@blubberfish/types';
 import {
   loginThunk,
   loginErrorSelector,
   loginPendingSelector,
 } from '@blubberfish/frontend/shared/login';
-import { SUB_PATH } from './config';
 
 export const LoginPage = () => {
   const dispatch = useDispatch();
@@ -64,7 +64,7 @@ export const LoginPage = () => {
         <span>or</span>
         <Box borderBottom="1px solid #0003" />
       </Box>
-      <a href={SUB_PATH.NEW_USER}>New user?</a>
+      <a href={FrontEndLoginPath.NewUser}>New user?</a>
     </Panel>
   );
 };
