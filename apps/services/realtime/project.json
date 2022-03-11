@@ -1,0 +1,52 @@
+{
+  "root": "apps/services/realtime",
+  "sourceRoot": "apps/services/realtime/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:webpack",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/services/realtime",
+        "main": "apps/services/realtime/src/main.ts",
+        "tsConfig": "apps/services/realtime/tsconfig.app.json",
+        "assets": ["apps/services/realtime/src/assets"]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/services/realtime/src/environments/environment.ts",
+              "with": "apps/services/realtime/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/node:node",
+      "options": {
+        "buildTarget": "services-realtime:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/services/realtime/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/services/realtime"],
+      "options": {
+        "jestConfig": "apps/services/realtime/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

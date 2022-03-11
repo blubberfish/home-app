@@ -1,0 +1,23 @@
+{
+  "root": "libs/frontend/pages/login",
+  "sourceRoot": "libs/frontend/pages/login/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/frontend/pages/login/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/frontend/pages/login"],
+      "options": {
+        "jestConfig": "libs/frontend/pages/login/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}
