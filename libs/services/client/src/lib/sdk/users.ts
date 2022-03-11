@@ -1,4 +1,9 @@
-import { BaseUrl, HttpMethod, User } from '@blubberfish/types';
+import {
+  BaseUrl,
+  HttpMethod,
+  User,
+  CreateUserPayload,
+} from '@blubberfish/types';
 import { createApi } from './utils';
 
 export const login = createApi<{ username: string; password: string }, User>({
@@ -18,10 +23,13 @@ export const listUser = createApi<void, User[]>({
   },
 });
 
-export const createUser = createApi<User, void>({
+export const createUser = createApi<CreateUserPayload, void>({
   method: HttpMethod.POST,
   url: `${BaseUrl.REST}/user`,
   builders: {
+    headers: async () => ({
+      'x-api-key': 'rxlVo3YyUaaU0IN5pEK202bZXQm49N8X4aRi1t3R',
+    }),
     body: (input) => JSON.stringify(input),
   },
 });
