@@ -1,1 +1,1 @@
-export * from './lib/frontend-pages-login';
+export { LoginPage as default } from './lib/page';
