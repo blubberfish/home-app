@@ -4,12 +4,12 @@ import { loggedInUserSelector } from '@blubberfish/frontend/shared/login';
 import PrivateRoutes from './routes/private';
 import PublicRoutes from './routes/pubilc';
 
-const fallback = () => null
+const Fallback = () => null
 
 export function App() {
   const user = useSelector(loggedInUserSelector);
 
   const children = useMemo(() => !user ? <PublicRoutes /> : <PrivateRoutes />, [!user])
 
-  return <Suspense fallback={fallback}>{children}</Suspense>;
+  return <Suspense fallback={<Fallback />}>{children}</Suspense>;
 }
