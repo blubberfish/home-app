@@ -6,7 +6,7 @@ import PublicRoutes from './routes/pubilc';
 
 const Fallback = () => null
 
-export function App() {
+export default function App() {
   const user = useSelector(loggedInUserSelector);
 
   const children = useMemo(() => !user ? <PublicRoutes /> : <PrivateRoutes />, [!user])

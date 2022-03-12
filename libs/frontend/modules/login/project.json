@@ -1,6 +1,6 @@
 {
-  "root": "libs/frontend/redux",
-  "sourceRoot": "libs/frontend/redux/src",
+  "root": "libs/frontend/modules/login",
+  "sourceRoot": "libs/frontend/modules/login/src",
   "projectType": "library",
   "tags": [],
   "targets": {
@@ -8,14 +8,14 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/frontend/redux/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": ["libs/frontend/modules/login/**/*.{ts,tsx,js,jsx}"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/frontend/redux"],
+      "outputs": ["coverage/libs/frontend/modules/login"],
       "options": {
-        "jestConfig": "libs/frontend/redux/jest.config.js",
+        "jestConfig": "libs/frontend/modules/login/jest.config.js",
         "passWithNoTests": true
       }
     }

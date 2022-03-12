@@ -21,18 +21,14 @@
       "@blubberfish/frontend/modules/core": [
         "libs/frontend/modules/core/src/index.ts"
       ],
+      "@blubberfish/frontend/modules/login": [
+        "libs/frontend/modules/login/src/index.ts"
+      ],
       "@blubberfish/frontend/pages/landing": [
         "libs/frontend/pages/landing/src/index.ts"
       ],
       "@blubberfish/frontend/pages/login": [
         "libs/frontend/pages/login/src/index.ts"
-      ],
-      "@blubberfish/frontend/redux": ["libs/frontend/redux/src/index.ts"],
-      "@blubberfish/frontend/shared/app": [
-        "libs/frontend/shared/app/src/index.ts"
-      ],
-      "@blubberfish/frontend/shared/login": [
-        "libs/frontend/shared/login/src/index.ts"
       ],
       "@blubberfish/services/client": ["libs/services/client/src/index.ts"],
       "@blubberfish/services/core": ["libs/services/core/src/index.ts"],

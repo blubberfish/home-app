@@ -1,9 +1,9 @@
 module.exports = {
-  displayName: 'frontend-shared-login',
+  displayName: 'frontend-modules-login',
   preset: '../../../../jest.preset.js',
   transform: {
     '^.+\\.[tj]sx?$': 'babel-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../../../coverage/libs/frontend/shared/login',
+  coverageDirectory: '../../../../coverage/libs/frontend/modules/login',
 };

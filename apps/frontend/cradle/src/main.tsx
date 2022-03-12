@@ -5,9 +5,8 @@ import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { Theme } from 'styled-system';
 import { GlobalStyle } from '@blubberfish/frontend/components';
-import store from '@blubberfish/frontend/redux';
 
-import App from './app';
+import App, { store } from './app';
 
 const theme: Theme = {
   colors: {

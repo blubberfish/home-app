@@ -23,6 +23,11 @@ export type User = UserLoginInfo &
     updatedOn?: string;
   };
 
+export type CurrentUser = Omit<
+  User,
+  'webToken' | 'webTokenCreatedOn' | 'socketToken' | 'socketTokenCreatedOn'
+>;
+
 export type CreateUserPayload = {
   familyName: string;
   givenName: string;
