@@ -23,13 +23,3 @@ export enum ServiceException {
   WrongCredentials = 'credentials.wrong',
   Unknown = 'unknown',
 }
-
-export enum FrontEndPath {
-  Root = '/',
-  Login = '/login',
-}
-
-export const FrontEndLoginPath = {
-  Root: FrontEndPath.Login,
-  NewUser: `${FrontEndPath.Login}/new-user`,
-} as const;

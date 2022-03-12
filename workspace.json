@@ -7,6 +7,7 @@
     "frontend-modules-login": "libs/frontend/modules/login",
     "frontend-pages-landing": "libs/frontend/pages/landing",
     "frontend-pages-login": "libs/frontend/pages/login",
+    "frontend-pages-routes": "libs/frontend/pages/routes",
     "services-client": "libs/services/client",
     "services-core": "libs/services/core",
     "services-realtime": "apps/services/realtime",

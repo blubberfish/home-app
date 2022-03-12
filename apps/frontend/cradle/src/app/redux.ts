@@ -1,4 +1,4 @@
 import { createStore } from '@blubberfish/frontend/modules/core';
-import {} from '@blubberfish/frontend/modules/login';
+import loginSlice from '@blubberfish/frontend/modules/login';
 
-export default createStore([]);
+export default createStore([loginSlice]);
