@@ -8,22 +8,17 @@ import {
   Panel,
 } from '@blubberfish/frontend/components';
 import { FrontEndLoginPath } from '@blubberfish/types';
-import {
-  loginThunk,
-  loginErrorSelector,
-  loginPendingSelector,
-} from '@blubberfish/frontend/shared/login';
 
 export const LoginPage = () => {
-  const dispatch = useDispatch();
-  const pending = useSelector(loginPendingSelector);
-  const alertMessage = useSelector(loginErrorSelector);
+  const dispatch = useDispatch()
+  const pending = false;
+  const alertMessage = null;
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
 
   const submit = useCallback(() => {
-    dispatch(loginThunk({ username, password }));
-  }, [dispatch, username, password]);
+    /** @todo */
+  }, [username, password]);
 
   return (
     <Panel
