@@ -10,11 +10,13 @@ import {
 
 export const GlobalStyle = createGlobalStyle<
   ColorProps & SpaceProps & TypographyProps
->`
-  * { box-sizing: border-box; }
-body { 
-  ${color}
-  ${space}
-  ${typography}
- }
+  >`
+  * {
+     box-sizing: border-box; 
+  }
+  body { 
+    ${color}
+    ${space}
+    ${typography}
+  }
 `;
