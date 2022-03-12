@@ -23,7 +23,7 @@ const factory = () => {
     registerStaticModules: (slices: Slice[]) =>
       slices.forEach((slice) => (staticModules[slice.name] = slice.reducer)),
     mountToStore: <
-      State = any,
+      State,
       CaseReducers extends SliceCaseReducers<State> = SliceCaseReducers<State>,
       Name extends string = string
     >(
@@ -36,7 +36,7 @@ const factory = () => {
       }
     },
     unmountFromStore: <
-      State = any,
+      State,
       CaseReducers extends SliceCaseReducers<State> = SliceCaseReducers<State>,
       Name extends string = string
     >(

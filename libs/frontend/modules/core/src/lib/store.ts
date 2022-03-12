@@ -1,7 +1,11 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, Slice } from '@reduxjs/toolkit';
 import { getCurrentReducers, registerStaticModules } from './modules';
+import { Environment } from '@blubberfish/types';
 
-export const createStore = () =>
-  configureStore({
+export const createStore = (slices: Slice[]) => {
+  registerStaticModules(slices);
+  return configureStore({
     reducer: getCurrentReducers(),
+    devTools: process.env['NODE_ENV'] === Environment.Dev,
   });
+};
