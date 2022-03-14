@@ -6,8 +6,9 @@ const HeroBrand = () => <span>BLUBBERFISH</span>;
 const HeroNav = () => (
   <Grid
     grid={{
-      justifyContent: 'end',
-      templateColumns: '1fr',
+      gap: 16,
+      autoColumns: 'max-content',
+      autoFlow: 'column',
       templateRows: 'min-content',
     }}
   >
@@ -17,15 +18,30 @@ const HeroNav = () => (
 );
 
 const HeroHead = () => (
-  <Box p={3}>
+  <Grid
+    px={32}
+    py={16}
+    grid={{
+      justifyContent: 'space-between',
+      autoColumns: 'max-content',
+      autoFlow: 'column',
+      templateRows: 'min-content',
+    }}
+  >
     <HeroBrand />
     <HeroNav />
-  </Box>
+  </Grid>
 );
 
 export default () => (
-  <Box bg="steelblue" fg="aliceblue">
+  <Grid
+    bg="steelblue"
+    fg="aliceblue"
+    grid={{ templateColumns: '1fr', templateRows: ['min-content', '1fr'] }}
+  >
     <HeroHead />
-    <Box p={5}>TEST</Box>
-  </Box>
+    <Box px={32} py={64}>
+      TEST
+    </Box>
+  </Grid>
 );

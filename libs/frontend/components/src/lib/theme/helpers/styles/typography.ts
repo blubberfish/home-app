@@ -3,6 +3,7 @@ import {
   FlattenSimpleInterpolation,
   ThemedStyledProps,
 } from 'styled-components';
+import { num2Px } from '../css';
 import { resolve } from '../resolve';
 import {
   FontFamilyProps,
@@ -47,7 +48,7 @@ export const fontSize = <
   size &&
     styles.push(
       css`
-        font-family: ${resolve(size, theme.fontSizes)};
+        font-family: ${num2Px(resolve(size, theme.fontSizes))};
       `
     );
 

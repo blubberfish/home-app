@@ -12,7 +12,7 @@ import {
   Theme,
   ThemeCssValue,
 } from '../../../../types';
-import { toPx } from '../css';
+import { num2Px } from '../css';
 import { resolve } from '../resolve';
 
 const cssProperty = (side: EdgeSide, type?: EdgeType) => {
@@ -26,7 +26,7 @@ const cssProperty = (side: EdgeSide, type?: EdgeType) => {
 const cssEdge = (value: ThemeCssValue, side: EdgeSide, type?: EdgeType) =>
   css`
     ${cssProperty(side, type)}: ${typeof value === 'number'
-      ? toPx(value)
+      ? num2Px(value)
       : value};
   `;
 

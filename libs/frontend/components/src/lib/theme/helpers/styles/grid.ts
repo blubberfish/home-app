@@ -3,6 +3,7 @@ import {
   FlattenSimpleInterpolation,
   ThemedStyledProps,
 } from 'styled-components';
+import { num2Px } from '../css';
 import { resolve } from '../resolve';
 import { GridProps, Theme } from '../../../../types';
 
@@ -36,8 +37,8 @@ export const grid = <
       case 'string':
         styles.push(
           css`
-            column-gap: ${resolve(gap, theme.spacings)};
-            row-gap: ${resolve(gap, theme.spacings)};
+            column-gap: ${num2Px(resolve(gap, theme.spacings))};
+            row-gap: ${num2Px(resolve(gap, theme.spacings))};
           `
         );
         break;
@@ -45,13 +46,13 @@ export const grid = <
         gap.x &&
           styles.push(
             css`
-              column-gap: ${resolve(gap.x, theme.spacings)};
+              column-gap: ${num2Px(resolve(gap.x, theme.spacings))};
             `
           );
         gap.y &&
           styles.push(
             css`
-              row-gap: ${resolve(gap.y, theme.spacings)};
+              row-gap: ${num2Px(resolve(gap.y, theme.spacings))};
             `
           );
         break;

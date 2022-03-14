@@ -3,6 +3,7 @@ import {
   FlattenSimpleInterpolation,
   ThemedStyledProps,
 } from 'styled-components';
+import { num2Px } from '../css';
 import { resolve } from '../resolve';
 import { SizeProps, Theme } from '../../../../types';
 
@@ -25,42 +26,42 @@ export const size = <
   (h || h === 0) &&
     styles.push(
       css`
-        height: ${resolve(h, theme.sizes)};
+        height: ${num2Px(resolve(h, theme.sizes))};
       `
     );
 
   (maxH || maxH === 0) &&
     styles.push(
       css`
-        max-height: ${resolve(maxH, theme.sizes)};
+        max-height: ${num2Px(resolve(maxH, theme.sizes))};
       `
     );
 
   (minH || minH === 0) &&
     styles.push(
       css`
-        min-height: ${resolve(minH, theme.sizes)};
+        min-height: ${num2Px(resolve(minH, theme.sizes))};
       `
     );
 
   (w || w === 0) &&
     styles.push(
       css`
-        width: ${resolve(w, theme.sizes)};
+        width: ${num2Px(resolve(w, theme.sizes))};
       `
     );
 
   (maxW || maxW === 0) &&
     styles.push(
       css`
-        max-width: ${resolve(maxW, theme.sizes)};
+        max-width: ${num2Px(resolve(maxW, theme.sizes))};
       `
     );
 
   (minW || minW === 0) &&
     styles.push(
       css`
-        min-width: ${resolve(minW, theme.sizes)};
+        min-width: ${num2Px(resolve(minW, theme.sizes))};
       `
     );
 

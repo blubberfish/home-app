@@ -37,6 +37,7 @@ export const Box = styled.div<
     SizeProps
 >`
   box-spacing: border-box;
+  display: block;
   ${background}
   ${border}
   ${color}

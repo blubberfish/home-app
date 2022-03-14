@@ -1,1 +1,2 @@
-export const toPx = (value: number) => `${value}px`;
+export const num2Px = (value: string | number) =>
+  typeof value === 'number' ? `${value}px` : value;

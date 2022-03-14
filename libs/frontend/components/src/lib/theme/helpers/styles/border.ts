@@ -4,21 +4,18 @@ import {
   ThemedStyledProps,
 } from 'styled-components';
 import {
-  EdgeCorner,
   EdgeSide,
-  EdgeType,
   BorderStyleProps,
   BorderProps,
   RadiusProps,
   Theme,
-  ThemeCssValue,
 } from '../../../../types';
-import { toPx } from '../css';
+import { num2Px } from '../css';
 import { resolve } from '../resolve';
 
 const borderCss = (side: EdgeSide, style: BorderStyleProps, theme: Theme) =>
   css`border-${side}: ${
-    typeof style.size === 'number' ? toPx(style.size) : style.size ?? '0px'
+    typeof style.size === 'number' ? num2Px(style.size) : style.size ?? '0px'
   } ${style.style ?? 'solid'} ${
     style.color ? resolve(style.color, theme.colors) : 'currentColor'
   };`;
