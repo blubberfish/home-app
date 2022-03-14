@@ -2,38 +2,36 @@ import { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import { ThemeProvider } from 'styled-components';
-import { Theme } from 'styled-system';
 import { GlobalStyle } from '@blubberfish/frontend/components';
 
 import App, { store } from './app';
 
-const theme: Theme = {
+const theme = {
   colors: {
     primary: 'steelblue',
     'primary-text': 'white',
-    background: ['white', 'whitesmoke', 'gainsboro'],
-    error: ['lavenderblush', 'crimson'],
-    success: ['honeydew', 'forestgreen'],
-    warning: ['ivory', 'goldenrod'],
-    info: ['ghostwhite', 'dimgray'],
+    background: 'whitesmoke',
+    'background-strong': 'white',
+    'background-weak': 'gainsboro',
+    error: 'crimson',
+    'error-accent': 'lavenderblush',
+    success: 'forestgreen',
+    'success-accent': 'honeydew',
+    warning: 'goldenrod',
+    'warning-accent': 'ivory',
+    info: 'dimgray',
+    'info-accent': 'ghostwhite',
   },
 };
 
 ReactDOM.render(
   <StrictMode>
     <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        <GlobalStyle
-          bg="background.1"
-          m={0}
-          fontFamily="sans-serif"
-          fontSize={['14px', '18px']}
-        />
+      <GlobalStyle bg="background.1" font="sans-serif" size={18} theme={theme}>
         <BrowserRouter>
           <App />
         </BrowserRouter>
-      </ThemeProvider>
+      </GlobalStyle>
     </Provider>
   </StrictMode>,
   document.getElementById('root')

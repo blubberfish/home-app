@@ -19,7 +19,7 @@ const Style = createGlobalStyle<
   }
 `;
 
-export const Global = <T extends Theme = Theme>({
+export const GlobalStyle = <T extends Theme = Theme>({
   children,
   theme,
   ...rest
