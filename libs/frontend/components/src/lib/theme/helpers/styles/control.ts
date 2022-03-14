@@ -12,26 +12,32 @@ export const indication = <
     Theme
   >
 >({
-  opacity,
+  indication,
   theme,
 }: P) => {
   const styles: FlattenSimpleInterpolation[] = [];
 
-  if (opacity) {
-    (opacity.disabled === 0 || opacity.disabled) &&
+  if (indication?.opacity) {
+    (indication.opacity.disabled === 0 || indication.opacity.disabled) &&
       styles.push(
         css`
           &:disabled {
-            opacity: ${resolve(opacity.disabled, theme.opacityIndications)};
+            opacity: ${resolve(
+              indication.opacity.disabled,
+              theme.opacityIndications
+            )};
           }
         `
       );
 
-    (opacity.hover === 0 || opacity.hover) &&
+    (indication.opacity.hover === 0 || indication.opacity.hover) &&
       styles.push(
         css`
           &:hover {
-            opacity: ${resolve(opacity.hover, theme.opacityIndications)};
+            opacity: ${resolve(
+              indication.opacity.hover,
+              theme.opacityIndications
+            )};
           }
         `
       );
