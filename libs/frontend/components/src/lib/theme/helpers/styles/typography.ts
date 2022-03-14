@@ -4,17 +4,63 @@ import {
   ThemedStyledProps,
 } from 'styled-components';
 import { resolve } from '../resolve';
-import { TypographyProps, Theme } from '../../../../types';
+import {
+  FontFamilyProps,
+  FontSizeProps,
+  FontStyleProps,
+  TypographyProps,
+  Theme,
+} from '../../../../types';
 
-export const typography = <
-  P extends ThemedStyledProps<TypographyProps, Theme> = ThemedStyledProps<
-    TypographyProps,
+export const fontFamily = <
+  P extends ThemedStyledProps<FontFamilyProps, Theme> = ThemedStyledProps<
+    FontFamilyProps,
     Theme
   >
 >({
   theme,
-  family,
+  font,
+}: P) => {
+  const styles: FlattenSimpleInterpolation[] = [];
+
+  font &&
+    styles.push(
+      css`
+        font-family: ${resolve(font, theme.fontFamilies)};
+      `
+    );
+
+  return styles;
+};
+
+export const fontSize = <
+  P extends ThemedStyledProps<FontSizeProps, Theme> = ThemedStyledProps<
+    FontSizeProps,
+    Theme
+  >
+>({
+  theme,
   size,
+}: P) => {
+  const styles: FlattenSimpleInterpolation[] = [];
+
+  size &&
+    styles.push(
+      css`
+        font-family: ${resolve(size, theme.fontSizes)};
+      `
+    );
+
+  return styles;
+};
+
+export const fontStyle = <
+  P extends ThemedStyledProps<FontStyleProps, Theme> = ThemedStyledProps<
+    FontStyleProps,
+    Theme
+  >
+>({
+  theme,
   truncate,
   weight,
   wrap,
@@ -24,20 +70,6 @@ export const typography = <
       white-space: ${wrap ? 'wrap' : 'nowrap'};
     `,
   ];
-
-  family &&
-    styles.push(
-      css`
-        font-family: ${family};
-      `
-    );
-
-  size &&
-    styles.push(
-      css`
-        font-family: ${resolve(size, theme.fontSizes)};
-      `
-    );
 
   truncate &&
     styles.push(
@@ -49,9 +81,18 @@ export const typography = <
   weight &&
     styles.push(
       css`
-        font-weight: ${weight};
+        font-weight: ${resolve(weight, theme.fontWeights)};
       `
     );
 
   return styles;
 };
+
+export const typography = <
+  P extends ThemedStyledProps<TypographyProps, Theme> = ThemedStyledProps<
+    TypographyProps,
+    Theme
+  >
+>(
+  props: P
+) => [...fontFamily(props), ...fontSize(props), ...fontStyle(props)];
