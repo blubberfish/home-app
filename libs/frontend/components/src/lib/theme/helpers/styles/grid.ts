@@ -17,7 +17,18 @@ export const grid = <
 }: P) => {
   const styles: FlattenSimpleInterpolation[] = [];
 
-  const { gap, autoColumns, autoRows, templateColumns, templateRows } = g ?? {};
+  const {
+    alignContent,
+    alignItems,
+    justifyContent,
+    justifyItems,
+    gap,
+    autoColumns,
+    autoFlow,
+    autoRows,
+    templateColumns,
+    templateRows,
+  } = g ?? {};
 
   if (gap) {
     switch (typeof gap) {
@@ -48,6 +59,34 @@ export const grid = <
     }
   }
 
+  alignContent &&
+    styles.push(
+      css`
+        align-content: ${alignContent};
+      `
+    );
+
+  alignItems &&
+    styles.push(
+      css`
+        align-items: ${alignItems};
+      `
+    );
+
+  justifyContent &&
+    styles.push(
+      css`
+        justify-content: ${justifyContent};
+      `
+    );
+
+  justifyItems &&
+    styles.push(
+      css`
+        justify-items: ${justifyItems};
+      `
+    );
+
   autoColumns &&
     styles.push(
       css`
@@ -63,6 +102,13 @@ export const grid = <
         grid-auto-rows: ${Array.isArray(autoRows)
           ? autoRows.join(' ')
           : autoRows};
+      `
+    );
+
+  autoFlow &&
+    styles.push(
+      css`
+        grid-auto-flow: ${autoFlow};
       `
     );
 
