@@ -33,6 +33,7 @@ export type PaddingProps = {
 };
 
 export type PositionProps = {
+  position?: 'relative' | 'absolute' | 'fixed' | 'sticky';
   x?: ThemeCssValue;
   y?: ThemeCssValue;
   l?: ThemeCssValue;

@@ -124,6 +124,7 @@ export const position = <
     Theme
   >
 >({
+  position,
   b,
   l,
   r,
@@ -133,6 +134,13 @@ export const position = <
   theme,
 }: P) => {
   const styles: FlattenSimpleInterpolation[] = [];
+
+  position &&
+    styles.push(
+      css`
+        position: ${position};
+      `
+    );
 
   const left = l || x;
   left && styles.push(cssEdge(resolve(left, theme.spacings), EdgeSide.left));

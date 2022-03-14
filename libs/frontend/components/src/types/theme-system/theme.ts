@@ -8,6 +8,7 @@ export type Theme = {
   breakpoints?: ThemeValue;
   colors?: ThemeValue;
   opacities?: ThemeValue;
+  radii?: ThemeValue;
   spacings?: ThemeValue;
   fontFamilies?: ThemeValue;
   fontSizes?: ThemeValue;
