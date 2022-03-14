@@ -3,6 +3,7 @@ import {
   background,
   border,
   color,
+  layout,
   margin,
   padding,
   position,
@@ -12,6 +13,7 @@ import {
   BackgroundColorProps,
   BorderProps,
   ColorProps,
+  LayoutProps,
   MarginProps,
   PaddingProps,
   PositionProps,
@@ -22,6 +24,7 @@ export const Box = styled.div<
   BackgroundColorProps &
     BorderProps &
     ColorProps &
+    LayoutProps &
     MarginProps &
     PaddingProps &
     PositionProps &
@@ -31,6 +34,7 @@ export const Box = styled.div<
   ${background}
   ${border}
   ${color}
+  ${layout}
   ${margin}
   ${padding}
   ${position}
