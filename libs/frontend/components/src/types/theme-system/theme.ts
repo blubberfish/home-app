@@ -9,4 +9,5 @@ export type Theme = {
   colors?: ThemeValue;
   opacities?: ThemeValue;
   spacings?: ThemeValue;
+  fontSizes?: ThemeValue;
 };
