@@ -27,7 +27,7 @@ const theme = {
 ReactDOM.render(
   <StrictMode>
     <Provider store={store}>
-      <GlobalStyle bg="background.1" font="sans-serif" size={18} theme={theme}>
+      <GlobalStyle bg="background" font="sans-serif" size={18} theme={theme}>
         <BrowserRouter>
           <App />
         </BrowserRouter>

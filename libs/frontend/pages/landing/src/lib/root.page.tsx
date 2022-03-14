@@ -1,38 +1,8 @@
-export type PageLayoutChildren = {
-    hero: {
-        actions: ({ label: string, callback: () => void })[]
-    }
-}
+import { Box } from '@blubberfish/frontend/components';
+import Hero from './hero';
 
-export type PageLayoutProps = {
-    children?: PageLayoutChildren
-}
-
-export const PageLayout = ({ children }: PageLayoutProps) => {
-    const { hero } = children ?? {}
-    return <div>
-        {hero && (
-            <header>
-                <nav>
-                    {hero.actions.map((action, i) => <button key={i}>{action.label}</button>)}
-                </nav>
-            </header>
-        )}
-    </div>
-}
-
-export const Page = () => {
-    return <PageLayout>
-        {{
-            hero: {
-                actions: [
-                    {
-                        label: 'registration', callback: () => {
-                            //
-                        }
-                    }
-                ]
-            }
-        }}
-    </PageLayout>
-}
+export const Page = () => (
+  <Box>
+    <Hero />
+  </Box>
+);

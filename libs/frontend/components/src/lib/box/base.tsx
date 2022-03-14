@@ -8,6 +8,7 @@ import {
   padding,
   position,
   radius,
+  size,
 } from '../theme/helpers';
 import {
   BackgroundColorProps,
@@ -18,6 +19,7 @@ import {
   PaddingProps,
   PositionProps,
   RadiusProps,
+  SizeProps,
 } from '../../types';
 
 export const Box = styled.div<
@@ -28,7 +30,8 @@ export const Box = styled.div<
     MarginProps &
     PaddingProps &
     PositionProps &
-    RadiusProps
+    RadiusProps &
+    SizeProps
 >`
   box-spacing: border-box;
   ${background}
@@ -39,4 +42,5 @@ export const Box = styled.div<
   ${padding}
   ${position}
   ${radius}
+  ${size}
 `;

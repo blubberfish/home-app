@@ -1,29 +1,31 @@
-import { Box } from '@blubberfish/frontend/components'
-import { FrontEndLoginPath } from '@blubberfish/types'
+import { Box, Grid } from '@blubberfish/frontend/components';
+import { FrontEndPublicPath } from '@blubberfish/frontend/pages/routes';
 
-const HeroBrand = () => (
-  <span>BLUBBERFISH</span>
-)
+const HeroBrand = () => <span>BLUBBERFISH</span>;
 
 const HeroNav = () => (
-  <Box gridGap={2} display='grid' gridAutoColumns='max-content' gridAutoFlow="column">
-    <a href={FrontEndLoginPath.Root}>Login</a>
-    <a href={FrontEndLoginPath.NewUser}>Register</a>
-  </Box >
-)
+  <Grid
+    grid={{
+      justifyContent: 'end',
+      templateColumns: '1fr',
+      templateRows: 'min-content',
+    }}
+  >
+    <a href={FrontEndPublicPath.Root}>Login</a>
+    <a href={FrontEndPublicPath.NewUser}>Register</a>
+  </Grid>
+);
 
 const HeroHead = () => (
-  <Box p={3} gridGap={2} display='grid' gridAutoColumns='max-content' gridAutoFlow="column" alignItems='center' justifyContent='space-between' >
+  <Box p={3}>
     <HeroBrand />
     <HeroNav />
-  </Box >
-)
+  </Box>
+);
 
 export default () => (
-  <Box bg='steelblue' color='aliceblue' display='grid' gridTemplateColumns='1fr' gridTemplateRows=' min-content 1fr' >
+  <Box bg="steelblue" fg="aliceblue">
     <HeroHead />
-    <Box p={5} display='grid' alignContent='center' justifyContent='center'>
-      TEST
-    </Box>
+    <Box p={5}>TEST</Box>
   </Box>
-)
+);

@@ -9,6 +9,7 @@ export type Theme = {
   colors?: ThemeValue;
   opacities?: ThemeValue;
   radii?: ThemeValue;
+  sizes?: ThemeValue;
   spacings?: ThemeValue;
   fontFamilies?: ThemeValue;
   fontSizes?: ThemeValue;
