@@ -37,7 +37,7 @@ export const radius = <
   tleft &&
     styles.push(
       css`
-        border-top-left-radius: ${resolve(tleft, theme.radii)};
+        border-top-left-radius: ${num2Px(resolve(tleft, theme.radii))};
       `
     );
 
@@ -45,7 +45,7 @@ export const radius = <
   tright &&
     styles.push(
       css`
-        border-top-right-radius: ${resolve(tright, theme.radii)};
+        border-top-right-radius: ${num2Px(resolve(tright, theme.radii))};
       `
     );
 
@@ -53,7 +53,7 @@ export const radius = <
   bleft &&
     styles.push(
       css`
-        border-bottom-left-radius: ${resolve(bleft, theme.radii)};
+        border-bottom-left-radius: ${num2Px(resolve(bleft, theme.radii))};
       `
     );
 
@@ -61,7 +61,7 @@ export const radius = <
   bright &&
     styles.push(
       css`
-        border-bottom-right-radius: ${resolve(bright, theme.radii)};
+        border-bottom-right-radius: ${num2Px(resolve(bright, theme.radii))};
       `
     );
 

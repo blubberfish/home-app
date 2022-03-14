@@ -27,6 +27,26 @@ export const background = <
     styles.push(css`
       background-image: url('${resolve(bgImg.url, theme.images)}');
     `);
+
+    bgImg.attachment &&
+      styles.push(css`
+        background-attachment: ${bgImg.attachment};
+      `);
+
+    bgImg.position &&
+      styles.push(css`
+        background-position: ${bgImg.position};
+      `);
+
+    bgImg.repeat &&
+      styles.push(css`
+        background-repeat: ${bgImg.repeat};
+      `);
+
+    bgImg.size &&
+      styles.push(css`
+        background-size: ${bgImg.size};
+      `);
   }
 
   return styles;
