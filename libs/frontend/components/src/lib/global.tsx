@@ -1,11 +1,22 @@
 import { PropsWithChildren } from 'react';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
-import { fontFamily, fontSize } from './theme/helpers';
-import { FontFamilyProps, FontSizeProps, Theme } from '../types';
+import { background, fontFamily, fontSize } from './theme/helpers';
+import {
+  BackgroundColorProps,
+  FontFamilyProps,
+  FontSizeProps,
+  Theme,
+} from '../types';
 
-const Style = createGlobalStyle<FontFamilyProps & FontSizeProps>`
-  ${fontFamily}
-  ${fontSize}
+const Style = createGlobalStyle<
+  BackgroundColorProps & FontFamilyProps & FontSizeProps
+>`
+  body {
+    margin: 0;
+    ${fontFamily}
+    ${fontSize}
+    ${background}
+  }
 `;
 
 export const Global = <T extends Theme = Theme>({
@@ -13,7 +24,8 @@ export const Global = <T extends Theme = Theme>({
   theme,
   ...rest
 }: PropsWithChildren<
-  FontFamilyProps &
+  BackgroundColorProps &
+    FontFamilyProps &
     FontSizeProps & {
       theme?: T;
     }
