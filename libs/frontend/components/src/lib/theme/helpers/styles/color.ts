@@ -11,7 +11,6 @@ export const background = <
   bg,
   theme,
 }: P) => {
-  console.trace(bg);
   return bg
     ? css`
         background: ${resolve(bg, theme.colors)};

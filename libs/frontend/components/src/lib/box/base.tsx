@@ -5,6 +5,7 @@ import {
   color,
   layout,
   margin,
+  overflow,
   padding,
   position,
   radius,
@@ -16,6 +17,7 @@ import {
   ColorProps,
   LayoutProps,
   MarginProps,
+  OverflowProps,
   PaddingProps,
   PositionProps,
   RadiusProps,
@@ -28,6 +30,7 @@ export const Box = styled.div<
     ColorProps &
     LayoutProps &
     MarginProps &
+    OverflowProps &
     PaddingProps &
     PositionProps &
     RadiusProps &
@@ -39,6 +42,7 @@ export const Box = styled.div<
   ${color}
   ${layout}
   ${margin}
+  ${overflow}
   ${padding}
   ${position}
   ${radius}
