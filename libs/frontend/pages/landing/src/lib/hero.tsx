@@ -1,7 +1,5 @@
-import { Box, Grid, Link } from '@blubberfish/frontend/components';
+import { Box, Grid, Link, FontWeight } from '@blubberfish/frontend/components';
 import { FrontEndPublicPath } from '@blubberfish/frontend/pages/routes';
-
-const HeroBrand = () => <span>BLUBBERFISH</span>;
 
 const HeroNav = () => (
   <Grid
@@ -12,8 +10,12 @@ const HeroNav = () => (
       templateRows: 'min-content',
     }}
   >
-    <Link href={FrontEndPublicPath.Root}>Login</Link>
-    <Link href={FrontEndPublicPath.NewUser}>Register</Link>
+    <Link href={FrontEndPublicPath.Root} weight={FontWeight.light}>
+      Login
+    </Link>
+    <Link href={FrontEndPublicPath.NewUser} weight={FontWeight.light}>
+      Register
+    </Link>
   </Grid>
 );
 
@@ -22,26 +24,38 @@ const HeroHead = () => (
     px={32}
     py={16}
     grid={{
-      justifyContent: 'space-between',
+      justifyContent: 'end',
       autoColumns: 'max-content',
       autoFlow: 'column',
       templateRows: 'min-content',
     }}
   >
-    <HeroBrand />
     <HeroNav />
   </Grid>
 );
 
 export default () => (
   <Grid
-    bg="steelblue"
+    bgImg={{
+      url: 'https://s3-eu-west-1.amazonaws.com/video.gallereplay.com/free_cinemagraphs/Gif/Waves-and-Reflected-Clouds.gif',
+      position: 'center',
+      size: 'cover',
+    }}
     fg="aliceblue"
     grid={{ templateColumns: '1fr', templateRows: ['min-content', '1fr'] }}
   >
     <HeroHead />
-    <Box px={32} py={64}>
-      TEST
-    </Box>
+    <Grid
+      px={32}
+      py={128}
+      grid={{
+        alignItems: 'center',
+        justifyItems: 'center',
+        templateColumns: '1fr',
+        templateRows: '1fr',
+      }}
+    >
+      <Box bg="#0003" w={256} h={256} radius={{ all: '50%' }} />
+    </Grid>
   </Grid>
 );
