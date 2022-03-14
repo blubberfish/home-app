@@ -1,4 +1,4 @@
-import { Box, Grid } from '@blubberfish/frontend/components';
+import { Box, Grid, Link } from '@blubberfish/frontend/components';
 import { FrontEndPublicPath } from '@blubberfish/frontend/pages/routes';
 
 const HeroBrand = () => <span>BLUBBERFISH</span>;
@@ -12,8 +12,8 @@ const HeroNav = () => (
       templateRows: 'min-content',
     }}
   >
-    <a href={FrontEndPublicPath.Root}>Login</a>
-    <a href={FrontEndPublicPath.NewUser}>Register</a>
+    <Link href={FrontEndPublicPath.Root}>Login</Link>
+    <Link href={FrontEndPublicPath.NewUser}>Register</Link>
   </Grid>
 );
 

@@ -14,4 +14,5 @@ export type Theme = {
   fontFamilies?: ThemeValue;
   fontSizes?: ThemeValue;
   fontWeights?: ThemeValue;
+  opacityIndications?: ThemeValue;
 };
