@@ -36,7 +36,7 @@ export const Box = styled.div<
     RadiusProps &
     SizeProps
 >`
-  box-spacing: border-box;
+  box-sizing: border-box;
   display: block;
   ${background}
   ${border}

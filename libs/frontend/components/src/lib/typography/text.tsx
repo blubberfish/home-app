@@ -4,25 +4,15 @@ import { ColorProps, FontSizeProps, FontStyleProps } from '../../types';
 
 export type TextProps = ColorProps &
   FontSizeProps &
-  Pick<FontStyleProps, 'wrap' | 'truncate'> & {
-    bold?: boolean;
+  Pick<FontStyleProps, 'weight' | 'wrap' | 'truncate'> & {
     italics?: boolean;
     underline?: boolean;
     children: string;
   };
 
-export const Text = ({
-  children,
-  bold,
-  italics,
-  underline,
-  ...rest
-}: TextProps) => {
+export const Text = ({ children, italics, underline, ...rest }: TextProps) => {
   const content = useMemo(() => {
     let child: ReactNode = children;
-    if (bold) {
-      child = <b>{child}</b>;
-    }
     if (italics) {
       child = <i>{child}</i>;
     }
@@ -30,7 +20,7 @@ export const Text = ({
       child = <u>{child}</u>;
     }
     return child;
-  }, [bold, children, italics, underline]);
+  }, [children, italics, underline]);
 
   return <BaseText {...rest}>{content}</BaseText>;
 };

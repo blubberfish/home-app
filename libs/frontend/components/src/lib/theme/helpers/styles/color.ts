@@ -1,4 +1,8 @@
-import { css, ThemedStyledProps } from 'styled-components';
+import {
+  css,
+  FlattenSimpleInterpolation,
+  ThemedStyledProps,
+} from 'styled-components';
 import { resolve } from '../resolve';
 import { BackgroundColorProps, ColorProps, Theme } from '../../../../types';
 
@@ -9,13 +13,23 @@ export const background = <
   >
 >({
   bg,
+  bgImg,
   theme,
 }: P) => {
-  return bg
-    ? css`
-        background: ${resolve(bg, theme.colors)};
-      `
-    : null;
+  const styles: FlattenSimpleInterpolation[] = [];
+
+  bg &&
+    styles.push(css`
+      background: ${resolve(bg, theme.colors)};
+    `);
+
+  if (bgImg) {
+    styles.push(css`
+      background-image: url('${resolve(bgImg.url, theme.images)}');
+    `);
+  }
+
+  return styles;
 };
 
 export const color = <

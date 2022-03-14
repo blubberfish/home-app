@@ -7,6 +7,7 @@ export type ThemeValue =
 export type Theme = {
   breakpoints?: ThemeValue;
   colors?: ThemeValue;
+  images?: ThemeValue;
   opacities?: ThemeValue;
   radii?: ThemeValue;
   sizes?: ThemeValue;

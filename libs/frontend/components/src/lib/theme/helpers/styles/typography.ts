@@ -48,7 +48,7 @@ export const fontSize = <
   size &&
     styles.push(
       css`
-        font-family: ${num2Px(resolve(size, theme.fontSizes))};
+        font-size: ${num2Px(resolve(size, theme.fontSizes))};
       `
     );
 
