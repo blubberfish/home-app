@@ -46,5 +46,5 @@ export const useAnimation = ({ duration, loop, onEnd }: AnimationOptions) => {
     refFrame.current = requestAnimationFrame(animate);
   }, [animate]);
 
-  return normalizedProgress;
+  return [normalizedProgress, animationDuration];
 };
