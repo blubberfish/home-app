@@ -1,14 +1,16 @@
-import { useMemo, Suspense } from 'react';
-import { useSelector } from 'react-redux';
-import { currentUserSelector } from '@blubberfish/frontend/modules/login';
-import PrivateRoutes from './routes/private';
-import PublicRoutes from './routes/pubilc';
+import styled from 'styled-components';
+import NxWelcome from './nx-welcome';
 
-const Fallback = () => null
+const StyledApp = styled.div`
+  // Your style here
+`;
 
-export default function App() {
-  const isUserLoggedIn = !!useSelector(currentUserSelector);
-  const children = useMemo(() => !isUserLoggedIn ? <PublicRoutes /> : <PrivateRoutes />, [isUserLoggedIn])
-
-  return <Suspense fallback={<Fallback />}>{children}</Suspense>;
+export function App() {
+  return (
+    <StyledApp>
+      <NxWelcome title="frontend-cradle" />
+    </StyledApp>
+  );
 }
+
+export default App;
