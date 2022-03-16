@@ -1,1 +1,5 @@
-import { Routes } from 'react-router-dom';
+import { PublicRoutes } from './components/public';
+
+export const Routes = () => {
+  return <PublicRoutes />;
+};

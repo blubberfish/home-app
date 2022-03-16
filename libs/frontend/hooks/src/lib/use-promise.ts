@@ -1,13 +1,16 @@
 import { useCallback, useEffect, useState } from 'react';
 
-export const useApi = (apiCallback: () => Promise<void>, start?: boolean) => {
+export const usePromise = (
+  promiseCallback: () => Promise<void>,
+  start?: boolean
+) => {
   const [pending, setPending] = useState(start ?? false);
   const call = useCallback(() => {
     setPending(() => true);
-    apiCallback().finally(() => {
+    promiseCallback().finally(() => {
       setPending(() => false);
     });
-  }, [apiCallback]);
+  }, [promiseCallback]);
 
   useEffect(() => {
     start && call();

@@ -1,15 +1,16 @@
-import styled from 'styled-components';
-import NxWelcome from './nx-welcome';
+import { Suspense } from 'react'
+import { BrowserRouter } from 'react-router-dom'
+import { Routes } from '@blubberfish/frontend/routes'
 
-const StyledApp = styled.div`
-  // Your style here
-`;
+const Empty = () => null
 
 export function App() {
   return (
-    <StyledApp>
-      <NxWelcome title="frontend-cradle" />
-    </StyledApp>
+    <BrowserRouter>
+      <Suspense fallback={<Empty />}>
+        <Routes />
+      </Suspense>
+    </BrowserRouter>
   );
 }
 
