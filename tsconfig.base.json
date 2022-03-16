@@ -24,15 +24,6 @@
       "@blubberfish/frontend/modules/login": [
         "libs/frontend/modules/login/src/index.ts"
       ],
-      "@blubberfish/frontend/pages/landing": [
-        "libs/frontend/pages/landing/src/index.ts"
-      ],
-      "@blubberfish/frontend/pages/login": [
-        "libs/frontend/pages/login/src/index.ts"
-      ],
-      "@blubberfish/frontend/pages/routes": [
-        "libs/frontend/pages/routes/src/index.ts"
-      ],
       "@blubberfish/services/client": ["libs/services/client/src/index.ts"],
       "@blubberfish/services/core": ["libs/services/core/src/index.ts"],
       "@blubberfish/types": ["libs/types/src/index.ts"]
