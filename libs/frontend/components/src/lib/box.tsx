@@ -1,61 +1,62 @@
-import { HTMLAttributes } from 'react';
 import styled from 'styled-components';
 import {
-  compose,
-  border,
-  BorderProps,
-  color,
-  ColorProps,
-  grid,
-  GridProps,
-  layout,
-  LayoutProps,
-  space,
-  SpaceProps,
   alignContent,
-  AlignContentProps,
   alignItems,
-  AlignItemsProps,
   alignSelf,
-  AlignSelfProps,
   justifyContent,
-  JustifyContentProps,
   justifyItems,
-  JustifyItemsProps,
   justifySelf,
-  JustifySelfProps,
+  border,
+  color,
+  grid,
+  layout,
   position,
+  space,
+  AlignContentProps,
+  AlignItemsProps,
+  AlignSelfProps,
+  JustifyContentProps,
+  JustifyItemsProps,
+  JustifySelfProps,
+  BorderProps,
+  ColorProps,
+  GridProps,
+  LayoutProps,
   PositionProps,
+  SpaceProps,
 } from 'styled-system';
 
-type BoxStyleSystemProps = AlignContentProps &
-  AlignItemsProps &
+export const Box = styled.div<
   AlignSelfProps &
-  JustifyContentProps &
-  JustifyItemsProps &
   JustifySelfProps &
   BorderProps &
   ColorProps &
-  GridProps &
   LayoutProps &
   PositionProps &
-  SpaceProps;
-
-export type BoxProps = BoxStyleSystemProps & HTMLAttributes<HTMLDivElement>;
-
-const boxStyle = compose(
-  alignContent,
-  alignItems,
+  SpaceProps
+>(
+  {
+    boxSizing: 'border-box',
+  },
   alignSelf,
+  justifySelf,
   border,
   color,
-  grid,
-  justifyContent,
-  justifyItems,
-  justifySelf,
   layout,
   position,
   space
 );
 
-export const Box = styled.div<BoxStyleSystemProps>(boxStyle);
+export const Grid = styled(Box)<
+  GridProps &
+  AlignContentProps &
+  AlignItemsProps &
+  JustifyContentProps &
+  JustifyItemsProps
+>({ display: 'grid' },
+  alignContent,
+  alignItems,
+  justifyContent,
+  justifyItems,
+  grid
+);
