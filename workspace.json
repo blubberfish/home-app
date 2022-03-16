@@ -3,6 +3,7 @@
   "projects": {
     "frontend-components": "libs/frontend/components",
     "frontend-cradle": "apps/frontend/cradle",
+    "frontend-hooks": "libs/frontend/hooks",
     "frontend-modules-core": "libs/frontend/modules/core",
     "frontend-modules-login": "libs/frontend/modules/login",
     "frontend-pages-private-dashboard": "libs/frontend/pages/private/dashboard",

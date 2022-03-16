@@ -18,6 +18,7 @@
       "@blubberfish/frontend/components": [
         "libs/frontend/components/src/index.ts"
       ],
+      "@blubberfish/frontend/hooks": ["libs/frontend/hooks/src/index.ts"],
       "@blubberfish/frontend/modules/core": [
         "libs/frontend/modules/core/src/index.ts"
       ],
