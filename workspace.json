@@ -3,6 +3,9 @@
   "projects": {
     "frontend-components": "libs/frontend/components",
     "frontend-cradle": "apps/frontend/cradle",
+    "frontend-micro-dashboard": "apps/frontend/micro/dashboard",
+    "frontend-micro-home": "apps/frontend/micro/home",
+    "frontend-micro-login": "apps/frontend/micro/login",
     "frontend-modules-core": "libs/frontend/modules/core",
     "frontend-modules-login": "libs/frontend/modules/login",
     "frontend-pages-landing": "libs/frontend/pages/landing",

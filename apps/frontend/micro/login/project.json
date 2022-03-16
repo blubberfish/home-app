@@ -1,0 +1,73 @@
+{
+  "root": "apps/frontend/micro/login",
+  "sourceRoot": "apps/frontend/micro/login/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/frontend/micro/login",
+        "index": "apps/frontend/micro/login/src/index.html",
+        "baseHref": "/",
+        "main": "apps/frontend/micro/login/src/main.tsx",
+        "polyfills": "apps/frontend/micro/login/src/polyfills.ts",
+        "tsConfig": "apps/frontend/micro/login/tsconfig.app.json",
+        "assets": [
+          "apps/frontend/micro/login/src/favicon.ico",
+          "apps/frontend/micro/login/src/assets"
+        ],
+        "styles": [],
+        "scripts": [],
+        "webpackConfig": "apps/frontend/micro/login/webpack.config.js"
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/frontend/micro/login/src/environments/environment.ts",
+              "with": "apps/frontend/micro/login/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "options": {
+        "buildTarget": "frontend-micro-login:build",
+        "hmr": false
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "frontend-micro-login:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/frontend/micro/login/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/frontend/micro/login"],
+      "options": {
+        "jestConfig": "apps/frontend/micro/login/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
