@@ -3,7 +3,7 @@ import { useAnimation, AnimationDuration } from '@blubberfish/frontend/hooks'
 import { Box, Grid } from '../box';
 
 const PlainDot = ({ onClick }: { onClick?: () => void }) => (
-  <Box radius={{ all: 2 }} w={32} h={4} bg="#fff8" onClick={onClick} />
+  <Box radius={{ all: 2 }} w={32} h={4} bg="#0008" onClick={onClick} />
 );
 
 type ActiveDotProps = {
@@ -17,10 +17,10 @@ const ActiveDot = ({ duration, onEnd, onClick }: ActiveDotProps) => {
   const [lStyle, rStyle] = useMemo(
     () => [
       {
-        clipPath: `inset(0% ${totalTime ? 100 - progress : 0}% 0% 0%)`,
+        clipPath: `inset(0% ${totalTime ? 100 - (progress * 100) : 0}% 0% 0%)`,
       },
       {
-        clipPath: `inset(0% 0% 0% ${totalTime ? progress : 100}%)`,
+        clipPath: `inset(0% 0% 0% ${totalTime ? progress * 100 : 100}%)`,
       },
     ],
     [progress, totalTime]
@@ -35,9 +35,9 @@ const ActiveDot = ({ duration, onEnd, onClick }: ActiveDotProps) => {
       onClick={onClick}
       position="relative"
     >
-      <Box w="100%" h="100%" bg="#fff8" style={lStyle} />
+      <Box w="100%" h="100%" bg="#0003" style={lStyle} />
       <Box
-        bg="#fff3"
+        bg="#0008"
         style={rStyle}
         position="absolute"
         l={0}
@@ -72,6 +72,9 @@ export const CarouselDots = ({
             key={i}
             duration={duration}
             onClick={handleClick}
+            onEnd={() => {
+              setActive(current => (current + 1) % Math.max(1, count))
+            }}
           />
         ) : (
           <PlainDot
