@@ -15,25 +15,31 @@ const logoutHandler = async (event) => {
   if (cookie['W'] && cookie['U']) {
     try {
       const people = await usersCollectionFactory();
-      await people.findOneAndUpdate(
+      const person = await people.findOne(
         {
           _id: ObjectId.createFromHexString(cookie['U']),
           'sessionContext.web.session': cookie['W'],
         },
         {
-          $unset: { 'sessionContext.web': '' },
-        },
-        { returnDocument: 'after', upsert: false }
+          projection: {
+            sessionContext: 0,
+            password: 0,
+          },
+        }
       );
+      return {
+        statusCode: 200,
+        headers: {
+          'Set-Cookie': `${serialize('W', 'none')};${serialize('U', 'none')}`,
+        },
+        body: JSON.stringify(person),
+      };
     } catch (e) {
       console.error(e);
     }
   }
   return {
-    statusCode: 200,
-    headers: {
-      'Set-Cookie': `${serialize('W', 'none')};${serialize('U', 'none')}`,
-    },
+    statusCode: 404,
   };
 };
 
