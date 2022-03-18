@@ -26,6 +26,9 @@ export const currentUser = createApi<void, CurrentUser>({
   restricted: true,
   url: `${BaseUrl.REST}/current`,
   builders: {
+    headers: async () => ({
+      'x-session': `${localStorage.getItem('W')};${localStorage.getItem('U')}`,
+    }),
     response: async (response) => response as CurrentUser,
   },
 });
