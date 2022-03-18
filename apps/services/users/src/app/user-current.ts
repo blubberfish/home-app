@@ -37,12 +37,7 @@ const logoutHandler = async (event) => {
       console.error(e);
     }
   }
-  return {
-    ...apiExceptionFactory(ServiceException.InvalidSession, '', 401),
-    multiValueHeaders: {
-      'Set-Cookie': [serialize('W', 'none'), serialize('U', 'none')],
-    },
-  };
+  return apiExceptionFactory(ServiceException.InvalidSession, '', 401);
 };
 
 registerHandler(HttpMethod.GET, logoutHandler);
