@@ -38,7 +38,9 @@ const userCreateHandler = async (event) => {
       preferredName,
       username,
       password: await obfuscate(password),
-      createdOn: new Date().toISOString(),
+      meta: {
+        createdOn: new Date().toISOString(),
+      },
     });
 
     return {

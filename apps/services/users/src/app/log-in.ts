@@ -24,8 +24,10 @@ const loginHandler = async (event) => {
           { _id: person._id },
           {
             $set: {
-              webToken: sessionId,
-              webTokenCreatedOn: new Date().toISOString(),
+              'sessionContext.web': {
+                session: sessionId,
+                startedOn: new Date().toISOString(),
+              },
             },
           },
           {
@@ -33,10 +35,7 @@ const loginHandler = async (event) => {
             upsert: false,
             projection: {
               password: 0,
-              webToken: 0,
-              webTokenCreatedOn: 0,
-              socketToken: 0,
-              socketTokenCreatedOn: 0,
+              sessionContext: 0,
             },
           }
         );
@@ -44,7 +43,10 @@ const loginHandler = async (event) => {
         return {
           statusCode: 200,
           headers: {
-            'Set-Cookie': serialize('S', sessionId),
+            'Set-Cookie': `${serialize('W', sessionId)};${serialize(
+              'U',
+              person._id.toHexString()
+            )}`,
           },
           body: JSON.stringify(value),
         };

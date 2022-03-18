@@ -10,13 +10,13 @@ const logoutHandler = async (event) => {
   if (!/^\/?logout/i.test(path)) return null;
 
   const cookie = parse(headers['Cookie'] ?? '');
-  if (cookie['S'] && /^test$/i.test(cookie['S'])) {
+  if (cookie['W']) {
     try {
       const people = await usersCollectionFactory();
       await people.findOneAndUpdate(
-        { 'webSession.id': cookie['S'] },
+        { 'sessionContext.web.session': cookie['W'] },
         {
-          $unset: { webSession: '' },
+          $unset: { 'sessionContext.web': '' },
         },
         { returnDocument: 'after', upsert: false }
       );
@@ -27,7 +27,7 @@ const logoutHandler = async (event) => {
   return {
     statusCode: 200,
     headers: {
-      'Set-Cookie': serialize('S', 'none'),
+      'Set-Cookie': `${serialize('W', 'none')};${serialize('U', 'none')}`,
     },
   };
 };

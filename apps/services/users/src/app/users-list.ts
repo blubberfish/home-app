@@ -11,7 +11,7 @@ const userListHandler = async (event) => {
   const people = await usersCollectionFactory();
   try {
     const result = await (
-      await people.find({}, { projection: { rtSession: 0, webSession: 0 } })
+      await people.find({}, { projection: { sessionContext: 0 } })
     ).toArray();
     return {
       statusCode: 200,
