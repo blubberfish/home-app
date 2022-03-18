@@ -33,11 +33,14 @@ export const createApi = <I, O>({
       fetchOptions['headers'] = await headersBuilder(params);
     }
 
-    if (restricted && process.env['NX_APIKEY']) {
-      fetchOptions['headers'] = {
-        ...fetchOptions['headers'],
-        'x-api-key': process.env['NX_APIKEY'],
-      };
+    if (restricted) {
+      fetchOptions['credentials'] = 'include';
+      if (process.env['NX_APIKEY']) {
+        fetchOptions['headers'] = {
+          ...fetchOptions['headers'],
+          'x-api-key': process.env['NX_APIKEY'],
+        };
+      }
     }
 
     if (bodyBuilder) {

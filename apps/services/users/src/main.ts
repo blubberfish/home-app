@@ -12,7 +12,7 @@ import './app/log-in';
 import './app/log-out';
 
 exports.handler = async (event, context) => {
-  const { httpMethod } = event;
+  const { httpMethod, headers } = event;
   if (httpMethod && hanlderRegistrar[httpMethod as HttpMethod]) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     for (const handler of Object.values<Handler<any, any, any>>(
@@ -24,8 +24,9 @@ exports.handler = async (event, context) => {
           ...result,
           headers: {
             ...result.headers,
+            'Access-Control-Allow-Credentials': 'true',
             'Access-Control-Allow-Headers': '*',
-            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Origin': headers['origin'] || '*',
           },
         };
       }
