@@ -1,27 +1,33 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Box, Grid } from '@blubberfish/frontend/components';
 import { usePromise } from '@blubberfish/frontend/hooks';
+import { CurrentUser } from '@blubberfish/types';
 import { setCurrentUser } from '@blubberfish/frontend/modules/shared/session';
 import { login, currentUser } from '@blubberfish/services/client';
 
 export const Page = () => {
   const dispatch = useDispatch();
+  const [user, setUser] = useState<CurrentUser>();
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
-  const loginHandler = useCallback(
+  const loginPromiseFactory = useCallback(
     () =>
       login({
         username,
         password,
       })
         .then(() => currentUser())
-        .then((user) => {
-          user && dispatch(setCurrentUser(user));
+        .then((currentUser) => {
+          currentUser && setUser(currentUser);
         }),
-    [dispatch, username, password]
+    [username, password]
   );
-  const [pending, run] = usePromise(loginHandler);
+  const [pending, run] = usePromise(loginPromiseFactory);
+
+  useEffect(() => {
+    !pending && user && dispatch(setCurrentUser(user));
+  }, [dispatch, pending, user]);
 
   return (
     <Grid

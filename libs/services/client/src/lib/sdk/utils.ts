@@ -1,4 +1,4 @@
-import { HttpMethod } from '@blubberfish/types';
+import { ApplicationSession, HttpMethod } from '@blubberfish/types';
 
 export type ApiOption<I, O> = {
   url: string;
@@ -59,3 +59,23 @@ export const createApi = <I, O>({
     }
   };
 };
+
+type SessionKey = keyof ApplicationSession;
+
+export const appSess2Store = (session: ApplicationSession) => {
+  (Object.keys(session) as SessionKey[]).forEach((key) => {
+    localStorage.setItem(key, session[key]);
+  });
+};
+
+export const store2AppSess = () =>
+  (['U', 'W'] as SessionKey[]).reduce(
+    (seed: Partial<ApplicationSession>, key) => ({
+      ...seed,
+      [key]: localStorage.getItem(key) ?? '',
+    }),
+    {}
+  );
+
+export const serializeAppSess = (session: Partial<ApplicationSession>) =>
+  `${session.W};${session.U}`;
