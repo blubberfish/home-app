@@ -18,7 +18,7 @@ export const Page = () => {
         <CarouselDots
           count={8}
           duration={{ s: 5 }}
-          layout={{ gap: 5, thickness: 5, size: 24 }}
+          layout={{ gap: 8, thickness: 5, size: 24 }}
         />
       </Grid>
     </Grid>
