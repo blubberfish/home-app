@@ -15,7 +15,7 @@ export type AnimationOptions = {
 export const useAnimation = ({ duration, loop, onEnd }: AnimationOptions) => {
   const animationDuration = useMemo(() => {
     const { m, ms, s } = duration ?? {};
-    return (m ?? 0) * 60 * 1000 + (s ?? 0) * 1000 + (ms ?? 0);
+    return Math.max(0, (m ?? 0) * 60 * 1000 + (s ?? 0) * 1000 + (ms ?? 0));
   }, [duration]);
   const refTime = useRef(0);
   const refFrame = useRef(0);
@@ -44,6 +44,9 @@ export const useAnimation = ({ duration, loop, onEnd }: AnimationOptions) => {
 
   useEffect(() => {
     refFrame.current = requestAnimationFrame(animate);
+    return () => {
+      refFrame.current && cancelAnimationFrame(refFrame.current);
+    };
   }, [animate]);
 
   return [normalizedProgress, animationDuration];
