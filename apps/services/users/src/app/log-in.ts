@@ -44,8 +44,11 @@ const loginHandler = async (event) => {
           statusCode: 200,
           multiValueHeaders: {
             'Set-Cookie': [
-              serialize('W', sessionId),
-              serialize('U', person._id.toHexString()),
+              serialize('W', sessionId, { secure: true, sameSite: 'lax' }),
+              serialize('U', person._id.toHexString(), {
+                secure: true,
+                sameSite: 'none',
+              }),
             ],
           },
           body: JSON.stringify(value),

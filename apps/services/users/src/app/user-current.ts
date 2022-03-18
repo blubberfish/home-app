@@ -1,4 +1,4 @@
-import { parse, serialize } from 'cookie';
+import { parse } from 'cookie';
 import {
   apiExceptionFactory,
   usersCollectionFactory,
