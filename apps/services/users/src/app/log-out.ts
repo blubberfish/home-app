@@ -26,8 +26,8 @@ const logoutHandler = async (event) => {
   }
   return {
     statusCode: 200,
-    headers: {
-      'Set-Cookie': `${serialize('W', 'none')};${serialize('U', 'none')}`,
+    multiValueHeaders: {
+      'Set-Cookie': [serialize('W', 'none'), serialize('U', 'none')],
     },
   };
 };

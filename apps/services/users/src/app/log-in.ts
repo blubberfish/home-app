@@ -42,11 +42,11 @@ const loginHandler = async (event) => {
 
         return {
           statusCode: 200,
-          headers: {
-            'Set-Cookie': `${serialize('W', sessionId)};${serialize(
-              'U',
-              person._id.toHexString()
-            )}`,
+          multiValueHeaders: {
+            'Set-Cookie': [
+              serialize('W', sessionId),
+              serialize('U', person._id.toHexString()),
+            ],
           },
           body: JSON.stringify(value),
         };
