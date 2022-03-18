@@ -38,11 +38,10 @@ const logoutHandler = async (event) => {
     }
   }
   return {
-    statusCode: 401,
+    ...apiExceptionFactory(ServiceException.InvalidSession, '', 401),
     multiValueHeaders: {
       'Set-Cookie': [serialize('W', 'none'), serialize('U', 'none')],
     },
-    body: apiExceptionFactory(ServiceException.InvalidSession, '', 401),
   };
 };
 
