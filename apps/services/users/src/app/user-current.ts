@@ -26,10 +26,11 @@ const logoutHandler = async (event) => {
           },
         }
       );
-      return {
-        statusCode: 200,
-        body: JSON.stringify(person),
-      };
+      if (person)
+        return {
+          statusCode: 200,
+          body: JSON.stringify(person),
+        };
     } catch (e) {
       console.error(e);
     }
