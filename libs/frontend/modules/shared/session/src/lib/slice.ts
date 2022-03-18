@@ -2,7 +2,7 @@ import { CurrentUser } from '@blubberfish/types';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IDENTIFIER, getInitialState } from './base';
 
-export default createSlice({
+const slice = createSlice({
   initialState: getInitialState(),
   name: IDENTIFIER,
   reducers: {
@@ -14,3 +14,9 @@ export default createSlice({
     },
   },
 });
+
+export default slice;
+
+export const {
+  actions: { setCurrentUser, unsetCurrentUser },
+} = slice;

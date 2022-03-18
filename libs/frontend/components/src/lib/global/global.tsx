@@ -13,7 +13,10 @@ const Style = createGlobalStyle<ColorProps & TypographyProps>`
 
 export type GlobalStyleProps = PropsWithChildren<{ theme?: Theme }>;
 
-export const GlobalStyle = ({ children, theme = {} }: GlobalStyleProps) => {
+export const GlobalStyle = ({
+  children,
+  theme = { spacings: [0, 4, 8, 16, 24, 32, 64] },
+}: GlobalStyleProps) => {
   return (
     <ThemeProvider theme={theme}>
       <Style font="sans-serif" />

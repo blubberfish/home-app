@@ -2,15 +2,24 @@ import { Box, Grid } from '@blubberfish/frontend/components';
 
 export const HeroHead = () => (
   <Grid
-    grid={{ templateColumns: '1fr max-content', templateRows: 'min-content' }}
-    px={3}
-    py={2}
+    bg="#0008"
+    grid={{
+      autoColumns: 'max-content',
+      autoFlow: 'column',
+      templateRows: 'min-content',
+      alignContent: 'center',
+      justifyContent: 'space-between',
+    }}
+    px={5}
+    py={3}
   >
-    <Box />
+    <Box h={24} w={24} bg="#0003" radius={{ all: '50%' }} />
     <Grid
       grid={{
+        alignContent: 'center',
         autoColumns: 'max-content',
         autoFlow: 'column',
+        gap: 3,
         templateRows: 'min-content',
       }}
     >

@@ -9,17 +9,18 @@ import { createApi } from './utils';
 
 export const login = createApi<
   { username: string; password: string },
-  Partial<User>
+  CurrentUser
 >({
   method: HttpMethod.POST,
   url: `${BaseUrl.REST}/login`,
   builders: {
     body: (input) => JSON.stringify(input),
-    response: async (response) => response as Partial<User>,
+    response: async (response) => response as CurrentUser,
   },
 });
 
 export const currentUser = createApi<void, CurrentUser>({
+  method: HttpMethod.GET,
   restricted: true,
   url: `${BaseUrl.REST}/current`,
   builders: {
