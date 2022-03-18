@@ -1,8 +1,10 @@
 import { parse } from 'cookie';
 import {
+  apiExceptionFactory,
   usersCollectionFactory,
   HttpMethod,
   registerHandler,
+  ServiceException,
 } from '@blubberfish/services/core';
 import { ObjectId } from 'mongodb';
 
@@ -36,7 +38,8 @@ const logoutHandler = async (event) => {
     }
   }
   return {
-    statusCode: 404,
+    statusCode: 401,
+    body: apiExceptionFactory(ServiceException.InvalidSession, '', 401),
   };
 };
 
