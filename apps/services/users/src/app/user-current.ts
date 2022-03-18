@@ -1,4 +1,4 @@
-import { parse } from 'cookie';
+import { parse, serialize } from 'cookie';
 import {
   apiExceptionFactory,
   usersCollectionFactory,
@@ -39,6 +39,9 @@ const logoutHandler = async (event) => {
   }
   return {
     statusCode: 401,
+    multiValueHeaders: {
+      'Set-Cookie': [serialize('W', 'none'), serialize('U', 'none')],
+    },
     body: apiExceptionFactory(ServiceException.InvalidSession, '', 401),
   };
 };
