@@ -11,7 +11,6 @@ const logoutHandler = async (event) => {
   if (!/^\/?current\/?/i.test(path)) return null;
 
   const cookie = parse(headers['Cookie'] ?? '');
-  console.table(headers);
   if (cookie['W'] && cookie['U']) {
     try {
       const people = await usersCollectionFactory();
