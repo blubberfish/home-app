@@ -3,6 +3,7 @@ import {
   Handler,
   HttpMethod,
 } from '@blubberfish/services/core';
+import './app/cors-preflight';
 import './app/log-in';
 import './app/users-list';
 import './app/user-current';
