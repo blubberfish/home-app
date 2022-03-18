@@ -1,4 +1,5 @@
 import {
+  ApplicationSession,
   BaseUrl,
   HttpMethod,
   User,
@@ -7,15 +8,16 @@ import {
 } from '@blubberfish/types';
 import { createApi } from './utils';
 
-export const login = createApi<
-  { username: string; password: string },
-  CurrentUser
->({
+export const login = createApi<{ username: string; password: string }, void>({
   method: HttpMethod.POST,
   url: `${BaseUrl.REST}/login`,
   builders: {
     body: (input) => JSON.stringify(input),
-    response: async (response) => response as CurrentUser,
+    response: async (response) => {
+      Object.entries(response as ApplicationSession).forEach(([key, value]) =>
+        localStorage.setItem(key, value)
+      );
+    },
   },
 });
 

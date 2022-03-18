@@ -12,3 +12,14 @@ export const apiExceptionFactory = (
     details,
   }),
 });
+
+export const sessionFactory = ({
+  webSessionId,
+  userId,
+}: {
+  webSessionId: string;
+  userId: string;
+}) => ({
+  W: webSessionId,
+  U: userId,
+});
