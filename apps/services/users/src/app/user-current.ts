@@ -1,4 +1,4 @@
-import { parse, serialize } from 'cookie';
+import { parse } from 'cookie';
 import {
   usersCollectionFactory,
   HttpMethod,
@@ -28,9 +28,6 @@ const logoutHandler = async (event) => {
       );
       return {
         statusCode: 200,
-        headers: {
-          'Set-Cookie': `${serialize('W', 'none')};${serialize('U', 'none')}`,
-        },
         body: JSON.stringify(person),
       };
     } catch (e) {
