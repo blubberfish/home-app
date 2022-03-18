@@ -1,13 +1,17 @@
-import { lazy } from 'react'
-import { Routes, Route } from 'react-router-dom';
+import { lazy } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
-const LoginPage = lazy(() => import('@blubberfish/frontend/pages/public/login'))
-
+const HomePage = lazy(() => import('@blubberfish/frontend/pages/public/home'));
+const LoginPage = lazy(
+  () => import('@blubberfish/frontend/pages/public/login')
+);
 
 export const PublicRoutes = () => {
   return (
     <Routes>
-      <Route index element={<LoginPage />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/" element={<HomePage />} />
+      <Route element={<Navigate to="/" />} />
     </Routes>
   );
 };

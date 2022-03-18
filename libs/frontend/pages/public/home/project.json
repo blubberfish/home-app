@@ -1,0 +1,25 @@
+{
+  "root": "libs/frontend/pages/public/home",
+  "sourceRoot": "libs/frontend/pages/public/home/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/frontend/pages/public/home/**/*.{ts,tsx,js,jsx}"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/frontend/pages/public/home"],
+      "options": {
+        "jestConfig": "libs/frontend/pages/public/home/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

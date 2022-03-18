@@ -28,6 +28,9 @@
       "@blubberfish/frontend/pages/private/dashboard": [
         "libs/frontend/pages/private/dashboard/src/index.ts"
       ],
+      "@blubberfish/frontend/pages/public/home": [
+        "libs/frontend/pages/public/home/src/index.ts"
+      ],
       "@blubberfish/frontend/pages/public/login": [
         "libs/frontend/pages/public/login/src/index.ts"
       ],
