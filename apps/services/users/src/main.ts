@@ -5,6 +5,7 @@ import {
 } from '@blubberfish/services/core';
 import './app/log-in';
 import './app/users-list';
+import './app/user-current';
 import './app/user-create';
 import './app/user-delete';
 import './app/log-in';
@@ -13,6 +14,7 @@ import './app/log-out';
 exports.handler = async (event, context) => {
   const { httpMethod } = event;
   if (httpMethod && hanlderRegistrar[httpMethod as HttpMethod]) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     for (const handler of Object.values<Handler<any, any, any>>(
       hanlderRegistrar[httpMethod]
     )) {
@@ -22,9 +24,9 @@ exports.handler = async (event, context) => {
           ...result,
           headers: {
             ...result.headers,
-            "Access-Control-Allow-Headers": "*",
-            'Access-Control-Allow-Origin': '*'
-          }
+            'Access-Control-Allow-Headers': '*',
+            'Access-Control-Allow-Origin': '*',
+          },
         };
       }
     }
