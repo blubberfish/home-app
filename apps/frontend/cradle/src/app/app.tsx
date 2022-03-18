@@ -1,16 +1,12 @@
-import { Suspense } from 'react'
-import { BrowserRouter } from 'react-router-dom'
-import { Routes } from '@blubberfish/frontend/routes'
-
-const Empty = () => null
+import { Provider } from 'react-redux';
+import AppRoutes from './components/routes';
+import store from './redux';
 
 export function App() {
   return (
-    <BrowserRouter>
-      <Suspense fallback={<Empty />}>
-        <Routes />
-      </Suspense>
-    </BrowserRouter>
+    <Provider store={store}>
+      <AppRoutes />
+    </Provider>
   );
 }
 

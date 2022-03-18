@@ -22,8 +22,8 @@
       "@blubberfish/frontend/modules/core": [
         "libs/frontend/modules/core/src/index.ts"
       ],
-      "@blubberfish/frontend/modules/login": [
-        "libs/frontend/modules/login/src/index.ts"
+      "@blubberfish/frontend/modules/shared/session": [
+        "libs/frontend/modules/shared/session/src/index.ts"
       ],
       "@blubberfish/frontend/pages/private/dashboard": [
         "libs/frontend/pages/private/dashboard/src/index.ts"
@@ -31,7 +31,6 @@
       "@blubberfish/frontend/pages/public/login": [
         "libs/frontend/pages/public/login/src/index.ts"
       ],
-      "@blubberfish/frontend/routes": ["libs/frontend/routes/src/index.ts"],
       "@blubberfish/services/client": ["libs/services/client/src/index.ts"],
       "@blubberfish/services/core": ["libs/services/core/src/index.ts"],
       "@blubberfish/types": ["libs/types/src/index.ts"]

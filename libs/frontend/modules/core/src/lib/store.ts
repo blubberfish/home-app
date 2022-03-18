@@ -9,3 +9,7 @@ export const createStore = (slices: Slice[]) => {
     devTools: process.env['NODE_ENV'] === Environment.Dev,
   });
 };
+
+export type GlobalState<S, I extends string = string> = {
+  [key in I]: S;
+};

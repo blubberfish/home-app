@@ -2,6 +2,7 @@ import {
   BaseUrl,
   HttpMethod,
   User,
+  CurrentUser,
   CreateUserPayload,
 } from '@blubberfish/types';
 import { createApi } from './utils';
@@ -15,6 +16,14 @@ export const login = createApi<
   builders: {
     body: (input) => JSON.stringify(input),
     response: async (response) => response as Partial<User>,
+  },
+});
+
+export const currentUser = createApi<void, CurrentUser>({
+  restricted: true,
+  url: `${BaseUrl.REST}/current`,
+  builders: {
+    response: async (response) => response as CurrentUser,
   },
 });
 
