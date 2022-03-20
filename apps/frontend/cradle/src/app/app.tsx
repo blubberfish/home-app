@@ -1,5 +1,5 @@
 import { Provider } from 'react-redux';
-import { GlobalStyle } from '@blubberfish/frontend/components';
+import { GlobalStyle } from '@blubberfish/frontend/ui/components';
 import AppRoutes from './components/routes';
 import store from './redux';
 

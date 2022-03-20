@@ -8,6 +8,7 @@
     "frontend-pages-private-dashboard": "libs/frontend/pages/private/dashboard",
     "frontend-pages-public-home": "libs/frontend/pages/public/home",
     "frontend-pages-public-login": "libs/frontend/pages/public/login",
+    "frontend-pages-routes": "libs/frontend/pages/routes",
     "frontend-ui-components": "libs/frontend/ui/components",
     "frontend-ui-theme": "libs/frontend/ui/theme",
     "services-client": "libs/services/client",

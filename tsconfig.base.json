@@ -31,6 +31,9 @@
       "@blubberfish/frontend/pages/public/login": [
         "libs/frontend/pages/public/login/src/index.ts"
       ],
+      "@blubberfish/frontend/pages/routes": [
+        "libs/frontend/pages/routes/src/index.ts"
+      ],
       "@blubberfish/frontend/ui/components": [
         "libs/frontend/ui/components/src/index.ts"
       ],
