@@ -1,7 +1,6 @@
 {
   "version": 2,
   "projects": {
-    "frontend-components": "libs/frontend/components",
     "frontend-cradle": "apps/frontend/cradle",
     "frontend-hooks": "libs/frontend/hooks",
     "frontend-modules-core": "libs/frontend/modules/core",
@@ -9,6 +8,8 @@
     "frontend-pages-private-dashboard": "libs/frontend/pages/private/dashboard",
     "frontend-pages-public-home": "libs/frontend/pages/public/home",
     "frontend-pages-public-login": "libs/frontend/pages/public/login",
+    "frontend-ui-components": "libs/frontend/ui/components",
+    "frontend-ui-theme": "libs/frontend/ui/theme",
     "services-client": "libs/services/client",
     "services-core": "libs/services/core",
     "services-realtime": "apps/services/realtime",
