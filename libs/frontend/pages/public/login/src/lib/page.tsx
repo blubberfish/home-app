@@ -1,13 +1,16 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Box, Grid } from '@blubberfish/frontend/components';
+import { useNavigate } from 'react-router-dom';
+import { Box, Grid } from '@blubberfish/frontend/ui/components';
 import { usePromise } from '@blubberfish/frontend/hooks';
 import { CurrentUser } from '@blubberfish/types';
 import { setCurrentUser } from '@blubberfish/frontend/modules/shared/session';
+import { PATH } from '@blubberfish/frontend/pages/routes';
 import { login, currentUser } from '@blubberfish/services/client';
 
 export const Page = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [user, setUser] = useState<CurrentUser>();
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
@@ -20,8 +23,9 @@ export const Page = () => {
         .then(() => currentUser())
         .then((currentUser) => {
           currentUser && setUser(currentUser);
+          navigate(PATH.PRIVATE.DASHBOARD);
         }),
-    [username, password]
+    [username, password, navigate]
   );
   const [pending, run] = usePromise(loginPromiseFactory);
 

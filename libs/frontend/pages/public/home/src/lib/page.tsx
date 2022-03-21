@@ -1,4 +1,4 @@
-import { Box } from '@blubberfish/frontend/components';
+import { Box } from '@blubberfish/frontend/ui/components';
 import { Hero } from './hero';
 
 export const Page = () => {

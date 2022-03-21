@@ -1,8 +1,13 @@
 export const PATH = {
-  PRIVATE: {},
+  PRIVATE: {
+    DASHBOARD: 'dashboard',
+    ACCOUNT: 'account',
+    RECIPES: 'recipes',
+    USERS: 'users',
+  },
   PUBLIC: {
-    LOGIN: '/login',
-    NEW_USER: `/new-user`,
+    LOGIN: 'login',
+    NEW_USER: `new-user`,
   },
   ALL: '*',
 } as const;

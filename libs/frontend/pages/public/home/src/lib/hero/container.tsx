@@ -1,4 +1,4 @@
-import { Grid } from '@blubberfish/frontend/components';
+import { Grid } from '@blubberfish/frontend/ui/components';
 import { HeroBody } from './body';
 import { HeroHead } from './header';
 

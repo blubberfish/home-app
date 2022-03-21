@@ -1,4 +1,4 @@
-import { Box, Grid } from '@blubberfish/frontend/components';
+import { Box, Grid } from '@blubberfish/frontend/ui/components';
 
 export const HeroBody = () => (
   <Grid
