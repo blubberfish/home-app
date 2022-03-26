@@ -1,5 +1,10 @@
 import { MongoClient } from 'mongodb';
-import { User, SubscriberGroup } from '@blubberfish/types';
+import {
+  BabyProfile,
+  BabyTrackingData,
+  User,
+  SubscriberGroup,
+} from '@blubberfish/types';
 
 const DATABASE = {
   NAME: 'cradle',
@@ -33,12 +38,12 @@ export const usersCollectionFactory = async () =>
 export const babiesCollectionFactory = async () =>
   (await clientFactory())
     .db(DATABASE.NAME)
-    .collection<User>(DATABASE.COLLECTION.BABIES);
+    .collection<BabyProfile>(DATABASE.COLLECTION.BABIES);
 
 export const babyTrackerCollectionFactory = async () =>
   (await clientFactory())
     .db(DATABASE.NAME)
-    .collection<User>(DATABASE.COLLECTION.BABY_TRACKING);
+    .collection<BabyTrackingData>(DATABASE.COLLECTION.BABY_TRACKING);
 
 export const webSocketGroupCollection = async () =>
   (await clientFactory())
