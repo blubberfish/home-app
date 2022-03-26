@@ -70,10 +70,14 @@ export const appSess2Store = (session: ApplicationSession) => {
 
 export const store2AppSess = () =>
   (['U', 'W'] as SessionKey[]).reduce(
-    (seed: Partial<ApplicationSession>, key) => ({
-      ...seed,
-      [key]: localStorage.getItem(key) ?? '',
-    }),
+    (seed: Partial<ApplicationSession> | null, key) => {
+      const value = localStorage.getItem(key);
+      if (!seed || !value) return null;
+      return {
+        ...seed,
+        [key]: value,
+      };
+    },
     {}
   );
 

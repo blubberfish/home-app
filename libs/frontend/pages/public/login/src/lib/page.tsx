@@ -1,17 +1,18 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Box, Grid } from '@blubberfish/frontend/ui/components';
 import { usePromise } from '@blubberfish/frontend/hooks';
-import { CurrentUser } from '@blubberfish/types';
-import { setCurrentUser } from '@blubberfish/frontend/modules/shared/session';
+import { Module } from '@blubberfish/frontend/modules/core';
 import { PATH } from '@blubberfish/frontend/pages/routes';
 import { login, currentUser } from '@blubberfish/services/client';
 
-export const Page = () => {
+import slice, { isUserLoggedInSelector, setLoggedIn } from './redux';
+
+const Page = () => {
   const dispatch = useDispatch();
+  const isLoggedIn = useSelector(isUserLoggedInSelector);
   const navigate = useNavigate();
-  const [user, setUser] = useState<CurrentUser>();
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
   const loginPromiseFactory = useCallback(
@@ -19,19 +20,25 @@ export const Page = () => {
       login({
         username,
         password,
-      })
-        .then(() => currentUser())
-        .then((currentUser) => {
-          currentUser && setUser(currentUser);
-          navigate(PATH.PRIVATE.DASHBOARD);
-        }),
-    [username, password, navigate]
+      }).then(() => {
+        dispatch(setLoggedIn());
+      }),
+    [username, password, dispatch]
   );
   const [pending, run] = usePromise(loginPromiseFactory);
 
   useEffect(() => {
-    !pending && user && dispatch(setCurrentUser(user));
-  }, [dispatch, pending, user]);
+    isLoggedIn && navigate(PATH.PRIVATE.DASHBOARD);
+  }, [dispatch, navigate, isLoggedIn]);
+
+  useEffect(() => {
+    !isLoggedIn &&
+      currentUser().then((user) => {
+        if (user) {
+          dispatch(setLoggedIn());
+        }
+      });
+  }, [dispatch, isLoggedIn]);
 
   return (
     <Grid
@@ -74,3 +81,9 @@ export const Page = () => {
     </Grid>
   );
 };
+
+export default () => (
+  <Module slice={slice}>
+    <Page />
+  </Module>
+);

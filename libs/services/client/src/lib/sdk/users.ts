@@ -35,9 +35,13 @@ export const currentUser = createApi<void, CurrentUser>({
   restricted: true,
   url: `${BaseUrl.REST}/current`,
   builders: {
-    headers: async () => ({
-      [HttpHeader.SESSION]: serializeAppSess(store2AppSess()),
-    }),
+    headers: async () => {
+      const session = await store2AppSess();
+      if (!session) throw new Error('FE:session_unavailable');
+      return {
+        [HttpHeader.SESSION]: serializeAppSess(session),
+      };
+    },
     response: async (response) => response as CurrentUser,
   },
 });

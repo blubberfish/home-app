@@ -1,1 +1,1 @@
-export { Page as default } from './lib/page';
+export { default } from './lib/page';
