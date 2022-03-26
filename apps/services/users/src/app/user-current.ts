@@ -12,7 +12,7 @@ const logoutHandler = async (event) => {
   if (!/^\/?current\/?/i.test(path)) return null;
 
   try {
-    const person = await validateSession(headers[HttpHeader.SESSION]);
+    const person = await validateSession(headers?.[HttpHeader.SESSION] ?? '');
     if (person) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { password, sessionContext, _id, ...data } = person;
