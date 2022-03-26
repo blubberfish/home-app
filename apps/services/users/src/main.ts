@@ -1,6 +1,7 @@
 import {
   hanlderRegistrar,
   Handler,
+  HttpHeader,
   HttpMethod,
 } from '@blubberfish/services/core';
 import './app/cors-preflight';
@@ -26,8 +27,8 @@ exports.handler = async (event, context) => {
           headers: {
             ...result.headers,
             'Access-Control-Allow-Credentials': 'true',
-            'Access-Control-Allow-Headers': 'x-api-key,x-session',
-            'Access-Control-Allow-Origin': headers['origin'] || '*',
+            'Access-Control-Allow-Headers': `${HttpHeader.APIKEY},${HttpHeader.SESSION}`,
+            'Access-Control-Allow-Origin': headers[HttpHeader.ORIGIN] || '*',
           },
         };
       }

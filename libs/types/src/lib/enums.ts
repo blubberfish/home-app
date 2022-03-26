@@ -9,6 +9,7 @@ export enum BaseUrl {
 }
 
 export enum HttpHeader {
+  ORIGIN = 'origin',
   SESSION = 'x-session',
   APIKEY = 'x-api-key',
 }
