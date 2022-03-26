@@ -1,4 +1,4 @@
-import { ApplicationSession, HttpMethod } from '@blubberfish/types';
+import { ApplicationSession, HttpHeader, HttpMethod } from '@blubberfish/types';
 
 export type ApiOption<I, O> = {
   url: string;
@@ -38,7 +38,7 @@ export const createApi = <I, O>({
       if (process.env['NX_APIKEY']) {
         fetchOptions['headers'] = {
           ...fetchOptions['headers'],
-          'x-api-key': process.env['NX_APIKEY'],
+          [HttpHeader.APIKEY]: process.env['NX_APIKEY'],
         };
       }
     }

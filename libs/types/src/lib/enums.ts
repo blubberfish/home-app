@@ -8,6 +8,11 @@ export enum BaseUrl {
   REST = 'https://ce3wh01ayk.execute-api.ap-southeast-1.amazonaws.com/prod',
 }
 
+export enum HttpHeader {
+  SESSION = 'x-session',
+  APIKEY = 'x-api-key',
+}
+
 export enum HttpMethod {
   GET = 'GET',
   DELETE = 'DELETE',

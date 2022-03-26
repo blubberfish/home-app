@@ -1,6 +1,7 @@
 import {
   ApplicationSession,
   BaseUrl,
+  HttpHeader,
   HttpMethod,
   User,
   CurrentUser,
@@ -35,7 +36,7 @@ export const currentUser = createApi<void, CurrentUser>({
   url: `${BaseUrl.REST}/current`,
   builders: {
     headers: async () => ({
-      'x-session': serializeAppSess(store2AppSess()),
+      [HttpHeader.SESSION]: serializeAppSess(store2AppSess()),
     }),
     response: async (response) => response as CurrentUser,
   },
