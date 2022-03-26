@@ -1,2 +1,2 @@
-export { createStore, GlobalState } from './lib/store';
-export { Module } from './lib/component';
+export * from './lib/store';
+export * from './lib/component';
