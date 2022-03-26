@@ -35,17 +35,14 @@ export const Page = () => {
 
   return (
     <Grid
-      bg="steelblue"
       grid={{
-        alignContent: 'center',
-        templateColumns: '1fr max-content',
-        templateRows: 'min-content',
+        templateColumns: 'max-content 1fr',
+        templateRows: '1fr',
       }}
-      px={5}
       w="100%"
       minH="100vh"
     >
-      <Box />
+      <Box p={32} bg="steelblue" />
       <Grid
         bg="whitesmoke"
         radius={{ all: 4 }}
@@ -53,7 +50,7 @@ export const Page = () => {
           alignContent: 'center',
           autoRows: 'min-content',
           autoFlow: 'row',
-          templateColumns: '1fr',
+          templateColumns: 'max-content',
           gap: 2,
         }}
         p={5}
