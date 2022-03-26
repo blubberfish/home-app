@@ -23,3 +23,13 @@ export const sessionFactory = ({
   W: webSessionId,
   U: userId,
 });
+
+export const sessionDeserializer = (raw: string) => {
+  const [W, U] = raw.split(';');
+
+  if (!(W && U)) {
+    return null;
+  }
+
+  return [W, U];
+};
