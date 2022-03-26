@@ -6,6 +6,8 @@ const DATABASE = {
   COLLECTION: {
     WEBSOCKET_GROUP: 'web_socket_groups',
     USERS: 'people',
+    BABIES: 'babies',
+    BABY_TRACKING: 'baby_tracking',
   },
 } as const;
 
@@ -27,6 +29,16 @@ export const usersCollectionFactory = async () =>
   (await clientFactory())
     .db(DATABASE.NAME)
     .collection<User>(DATABASE.COLLECTION.USERS);
+
+export const babiesCollectionFactory = async () =>
+  (await clientFactory())
+    .db(DATABASE.NAME)
+    .collection<User>(DATABASE.COLLECTION.BABIES);
+
+export const babyTrackerCollectionFactory = async () =>
+  (await clientFactory())
+    .db(DATABASE.NAME)
+    .collection<User>(DATABASE.COLLECTION.BABY_TRACKING);
 
 export const webSocketGroupCollection = async () =>
   (await clientFactory())

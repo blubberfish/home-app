@@ -11,6 +11,7 @@
     "frontend-pages-routes": "libs/frontend/pages/routes",
     "frontend-ui-components": "libs/frontend/ui/components",
     "frontend-ui-theme": "libs/frontend/ui/theme",
+    "services-baby": "apps/services/baby",
     "services-client": "libs/services/client",
     "services-core": "libs/services/core",
     "services-realtime": "apps/services/realtime",
