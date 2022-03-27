@@ -2,10 +2,6 @@ import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { PATH } from '@blubberfish/frontend/pages/routes';
 
-const HomePage = lazy(() => import('@blubberfish/frontend/pages/public/home'));
-const LoginPage = lazy(
-  () => import('@blubberfish/frontend/pages/public/login')
-);
 const DashboardPage = lazy(
   () => import('@blubberfish/frontend/pages/private/dashboard')
 );
@@ -34,8 +30,8 @@ export default () => {
             <Route path={PATH.PRIVATE.USERS} element={<Empty />} />
             <Route path={PATH.ALL} element={<Empty />} />
           </Route>
-          <Route path={PATH.PUBLIC.LOGIN} element={<LoginPage />} />
-          <Route path={PATH.ALL} element={<HomePage />} />
+          <Route path={PATH.PUBLIC.LOGIN} element={<Empty />} />
+          <Route path={PATH.ALL} element={<Empty />} />
         </Routes>
       </Suspense>
     </BrowserRouter >

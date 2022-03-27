@@ -2,6 +2,7 @@
   "version": 2,
   "projects": {
     "frontend-cradle": "apps/frontend/cradle",
+    "frontend-cradle-baby": "apps/frontend/cradle-baby",
     "frontend-hooks": "libs/frontend/hooks",
     "frontend-modules-core": "libs/frontend/modules/core",
     "frontend-pages-private-dashboard": "libs/frontend/pages/private/dashboard",
