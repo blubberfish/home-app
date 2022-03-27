@@ -24,6 +24,7 @@ export enum HttpMethod {
 }
 
 export enum ServiceException {
+  DoesNotExist = 'record.missing',
   DuplicateRecord = 'record.duplicate',
   IncompletePayload = 'payload.incomplete',
   InvalidSession = 'session.invalid',

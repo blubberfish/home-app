@@ -7,6 +7,7 @@ import {
 import './app/log-in';
 import './app/log-out';
 import './app/create-account';
+import './app/get-account';
 
 exports.handler = async (event, context) => {
   const { httpMethod, headers } = event;
