@@ -21,6 +21,10 @@ export type Account = AccountInfo & {
   password: string;
 };
 
+export type PersonEntityPayload = Omit<PersonEntity, 'dtob'> & {
+  dtob: string;
+};
+
 export type CreateAccountPayload = {
   displayName: string;
   username: string;

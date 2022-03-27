@@ -8,6 +8,9 @@ import './app/log-in';
 import './app/log-out';
 import './app/create-account';
 import './app/get-account';
+import './app/update-account-name';
+import './app/add-account-children';
+import './app/add-account-parents';
 
 exports.handler = async (event, context) => {
   const { httpMethod, headers } = event;
