@@ -1,6 +1,12 @@
-import { Handler, hanlderRegistrar } from '@blubberfish/services/core';
-import { HttpHeader, HttpMethod } from '@blubberfish/types';
-import './app/create-baby';
+import {
+  hanlderRegistrar,
+  Handler,
+  HttpHeader,
+  HttpMethod,
+} from '@blubberfish/services/core';
+import './app/log-in';
+import './app/log-out';
+import './app/create-account';
 
 exports.handler = async (event, context) => {
   const { httpMethod, headers } = event;
@@ -16,7 +22,7 @@ exports.handler = async (event, context) => {
           headers: {
             ...result.headers,
             'Access-Control-Allow-Credentials': 'true',
-            'Access-Control-Allow-Headers': `${HttpHeader.APIKEY},${HttpHeader.SESSION}`,
+            'Access-Control-Allow-Headers': `${HttpHeader.APIKEY}`,
             'Access-Control-Allow-Origin': headers[HttpHeader.ORIGIN] || '*',
           },
         };
