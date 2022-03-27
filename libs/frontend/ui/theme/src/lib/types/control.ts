@@ -1,8 +1,13 @@
 export type IndicationProps = {
   indication?: {
-    opacity?: {
-      disabled?: number | string;
-      hover?: number | string;
+    hover?: {
+      opacity?: number | string;
+    };
+    focus?: {
+      opacity?: number | string;
+    };
+    disabled?: {
+      opacity?: number | string;
     };
   };
 };

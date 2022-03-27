@@ -17,30 +17,37 @@ export const indication = <
 }: P) => {
   const styles: FlattenSimpleInterpolation[] = [];
 
-  if (indication?.opacity) {
-    (indication.opacity.disabled === 0 || indication.opacity.disabled) &&
-      styles.push(
-        css`
-          &:disabled {
-            opacity: ${resolve(
-              indication.opacity.disabled,
-              theme.opacityIndications
-            )};
-          }
-        `
-      );
+  if (indication?.disabled) {
+    styles.push(
+      css`
+        &:disabled {
+          opacity: ${resolve(
+            indication.disabled.opacity ?? '1',
+            theme.opacities
+          )};
+        }
+      `
+    );
+  }
 
-    (indication.opacity.hover === 0 || indication.opacity.hover) &&
-      styles.push(
-        css`
-          &:hover {
-            opacity: ${resolve(
-              indication.opacity.hover,
-              theme.opacityIndications
-            )};
-          }
-        `
-      );
+  if (indication?.focus) {
+    styles.push(
+      css`
+        &:focus {
+          opacity: ${resolve(indication.focus.opacity ?? '1', theme.opacities)};
+        }
+      `
+    );
+  }
+
+  if (indication?.hover) {
+    styles.push(
+      css`
+        &:hover {
+          opacity: ${resolve(indication.hover.opacity ?? '1', theme.opacities)};
+        }
+      `
+    );
   }
 
   return styles;

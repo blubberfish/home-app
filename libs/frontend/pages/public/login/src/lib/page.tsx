@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { Box, Grid } from '@blubberfish/frontend/ui/components';
+import { Box, Grid, Input } from '@blubberfish/frontend/ui/components';
 import { usePromise } from '@blubberfish/frontend/hooks';
 import { Module } from '@blubberfish/frontend/modules/core';
 import { PATH } from '@blubberfish/frontend/pages/routes';
@@ -62,14 +62,14 @@ const Page = () => {
         }}
         p={5}
       >
-        <input
+        <Input
           disabled={pending}
           value={username}
           onChange={({ target: { value } }) => {
             setUsername(value);
           }}
         />
-        <input
+        <Input
           disabled={pending}
           value={password}
           onChange={({ target: { value } }) => {

@@ -22,10 +22,10 @@ export default () => {
             path={PATH.PRIVATE.DASHBOARD}
             element={
               <DashboardPage
-                links={[
-                  { label: 'Account', path: PATH.PRIVATE.ACCOUNT },
-                  { label: 'Recipes', path: PATH.PRIVATE.RECIPES },
-                  { label: 'Users', path: PATH.PRIVATE.USERS },
+                features={[
+                  { label: 'Account', props: { path: PATH.PRIVATE.ACCOUNT } },
+                  { label: 'Recipes', props: { path: PATH.PRIVATE.RECIPES } },
+                  { label: 'Users', props: { path: PATH.PRIVATE.USERS } },
                 ]}
               />
             }
@@ -38,6 +38,6 @@ export default () => {
           <Route path={PATH.ALL} element={<HomePage />} />
         </Routes>
       </Suspense>
-    </BrowserRouter>
+    </BrowserRouter >
   );
 };

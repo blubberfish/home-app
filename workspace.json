@@ -8,6 +8,7 @@
     "frontend-pages-public-home": "libs/frontend/pages/public/home",
     "frontend-pages-public-login": "libs/frontend/pages/public/login",
     "frontend-pages-routes": "libs/frontend/pages/routes",
+    "frontend-style-system": "libs/frontend/style-system",
     "frontend-ui-components": "libs/frontend/ui/components",
     "frontend-ui-theme": "libs/frontend/ui/theme",
     "services-baby": "apps/services/baby",

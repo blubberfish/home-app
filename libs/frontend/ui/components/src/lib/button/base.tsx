@@ -17,7 +17,7 @@ import {
 } from '@blubberfish/frontend/ui/theme';
 import { HTMLAttributes } from 'react';
 
-type BaseButtonExtension = BackgroundColorProps &
+type ButtonExtension = BackgroundColorProps &
   ColorProps &
   BorderProps &
   IndicationProps &
@@ -25,34 +25,37 @@ type BaseButtonExtension = BackgroundColorProps &
   MarginProps &
   RadiusProps;
 
-export type BaseButtonProps = HTMLAttributes<HTMLButtonElement> &
-  BaseButtonExtension;
+export type ButtonProps = HTMLAttributes<HTMLButtonElement> &
+  ButtonExtension;
 
 export const BaseButton = styled.button.attrs(
-  (props: BaseButtonExtension) =>
-    ({
-      type: 'button',
-      bg: 'lightgray',
-      border: {
-        all: 'none',
-        ...props.border,
+  (props: ButtonProps) =>
+  ({
+    type: 'button',
+    bg: 'lightgray',
+    px: 3,
+    py: 2,
+    ...props,
+    radius: {
+      all: 3,
+      ...props.radius,
+    },
+    indication: {
+      disabled: {
+        opacity: 0.5,
+        ...props.indication?.disabled,
       },
-      indication: {
-        ...props.indication,
-        opacity: {
-          disabled: 0.5,
-          hover: 0.81,
-          ...props.indication?.opacity,
-        },
+      hover: {
+        opacity: 0.81,
+        ...props.indication?.hover
       },
-      px: 3,
-      py: 2,
-      radius: {
-        all: 3,
-        ...props.radius,
-      },
-      ...props,
-    } as BaseButtonProps)
+      ...props.indication,
+    },
+    border: {
+      all: 'none',
+      ...props.border,
+    },
+  } as ButtonProps)
 )`
   ${background}
   ${border}

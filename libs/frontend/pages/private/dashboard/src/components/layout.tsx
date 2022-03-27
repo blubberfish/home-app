@@ -1,4 +1,4 @@
-import { Outlet, useNavigate } from 'react-router-dom';
+import { useNavigate, RouteProps, Route, Routes } from 'react-router-dom';
 import {
   Box,
   BaseButton,
@@ -6,16 +6,16 @@ import {
   Feather,
 } from '@blubberfish/frontend/ui/components';
 
-export type DashboardLinks = {
+export type DashboardFeature = {
   label: string;
-  path: string;
+  props: RouteProps;
 };
 
 export type LayoutProps = {
-  links: DashboardLinks[];
+  features: DashboardFeature[];
 };
 
-export const Layout = ({ links }: LayoutProps) => {
+export const Layout = ({ features }: LayoutProps) => {
   const navigate = useNavigate();
   return (
     <Grid
@@ -51,19 +51,21 @@ export const Layout = ({ links }: LayoutProps) => {
           autoFlow: 'row',
         }}
       >
-        {links.map((item, i) => (
+        {features.map((feature, i) => (
           <BaseButton
             key={i}
             bg="gainsboro"
-            onClick={() => navigate(item.path ?? '/')}
+            onClick={() => navigate(feature.props.path ?? '/')}
             radius={{ all: 0 }}
           >
-            {item.label}
+            {feature.label}
           </BaseButton>
         ))}
       </Grid>
       <Box column={{ index: 2 }} row={{ index: 2 }}>
-        <Outlet />
+        <Routes>
+          {features.map((feature, i) => <Route key={i} {...feature.props} />)}
+        </Routes>
       </Box>
       <Grid column={{ index: 1, span: 2 }} row={{ index: 3 }}></Grid>
     </Grid>
