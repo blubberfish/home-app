@@ -31,7 +31,7 @@ export const OverlayLayout = ({
 }: OverlayLayoutProps) => (
   <Container pos="fixed" posX={0} posY={0} z={2} {...props}>
     <Container
-      pos="relative"
+      pos="absolute"
       posX={0}
       posY={0}
       bg="#0008"

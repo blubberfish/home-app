@@ -13,20 +13,25 @@ import {
   font,
   ColorProps,
   color,
+  BackgroundImageProps,
+  backgroundImage,
   AlignmentProps,
   alignment,
 } from '@blubberfish/style-system';
 import { ConstrainedLayout } from './constrained';
 
-const HeaderContainer = styled.div<ColorProps>`
+const HeaderContainer = styled.div<BackgroundImageProps & ColorProps>`
+  ${backgroundImage}
   ${color}
 `;
 
 const StyledHeaderConstrainedLayout = styled(ConstrainedLayout)<
-  PaddingProps & GridProps & AlignmentProps
+  PaddingProps & MarginProps & GridProps & ColorProps & AlignmentProps
 >`
   ${padding}
+  ${margin}
   ${grid}
+  ${color}
   ${alignment}
 `;
 
@@ -53,7 +58,11 @@ const Container = styled.div<
 `;
 
 export type ApplicationLayoutProps = PropsWithChildren<{
-  head?: { left?: JSX.Element; right?: JSX.Element };
+  head?: {
+    left?: JSX.Element;
+    right?: JSX.Element;
+    style?: BackgroundImageProps & ColorProps;
+  };
 }>;
 
 export const ApplicationLayout = ({
@@ -70,11 +79,17 @@ export const ApplicationLayout = ({
   >
     <GlobalStyle ft="sans-serif" ftSize={2} mar={0} bg="background" />
     {head && (
-      <HeaderContainer bg="header" fg="header_text">
+      <HeaderContainer
+        bg="primary"
+        fg="white"
+        bgUrl="login-header"
+        bgSize="cover"
+      >
         <StyledHeaderConstrainedLayout
           justifyItems={
             head && head.right && !head.left ? 'end' : 'space-between'
           }
+          marT={3}
           pad={3}
         >
           {head.left}

@@ -4,6 +4,7 @@ export * from './border';
 export * from './color';
 export * from './font';
 export * from './grid';
+export * from './indication';
 export * from './margin';
 export * from './padding';
 export * from './position';
