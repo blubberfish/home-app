@@ -50,14 +50,15 @@ export const LoginLayout = ({ children }: HomePageLayoutProps) => {
       templateRows="1fr"
     >
       <Container
-        w="100%"
-        wMax="717px"
-        marX="auto"
+        alignContent="center"
         templateColumns="1fr"
         autoRows="min-content"
         autoFlow="row"
         gap={5}
-        alignContent="center"
+        padX={3}
+        w="100%"
+        wMax="717px"
+        marX="auto"
       >
         {children}
       </Container>
