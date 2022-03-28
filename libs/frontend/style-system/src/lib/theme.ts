@@ -5,7 +5,7 @@ export type ThemePreset =
   | Record<number | string, ThemeValue>;
 
 export const defaultTheme = {
-  radius: [0, 2, 4, 8, 12, 16],
+  radii: [0, 2, 4, 8, 12, 16],
   spacing: [0, 4, 8, 16, 24, 32, 48, 64, 128],
   fontSizes: [0, 12, 18, 24],
   fontWeights: ['0', '100', '400', '700'],
@@ -14,8 +14,6 @@ export const defaultTheme = {
   colors: {
     primary: 'steelblue',
     primary_light: 'lightsteelblue',
-    header: 'primary_light',
-    header_text: 'white',
     background: 'whitesmoke',
     background_strong: 'white',
     background_weak: 'gainsboro',

@@ -1,5 +1,6 @@
 export * from './alignment';
 export * from './background-image';
+export * from './border';
 export * from './color';
 export * from './font';
 export * from './grid';
