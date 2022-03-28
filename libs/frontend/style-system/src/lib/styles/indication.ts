@@ -4,7 +4,8 @@ import {
   StyledProps,
 } from 'styled-components';
 
-type StyleSystemFunction = (props: unknown) => FlattenSimpleInterpolation[];
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type StyleSystemFunction = (props: any) => FlattenSimpleInterpolation[];
 
 export enum IndicationType {
   Disabled = 'disabled',

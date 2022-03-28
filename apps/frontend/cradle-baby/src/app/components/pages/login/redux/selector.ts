@@ -1,8 +1,8 @@
 import { createSelector } from '@reduxjs/toolkit';
 import { GlobalState } from '@blubberfish/frontend/modules/core';
-import { HomePageState, name } from './base';
+import { LoginPageState, name } from './base';
 
-const stateSelector = (state: GlobalState<HomePageState, typeof name>) =>
+const stateSelector = (state: GlobalState<LoginPageState, typeof name>) =>
   state[name];
 
 export const showMenuSelector = createSelector(

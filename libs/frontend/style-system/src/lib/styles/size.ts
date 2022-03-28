@@ -57,7 +57,7 @@ export const size = <Props extends SizeProps>({
   isStringOrNumber(h) &&
     styles.push(
       css`
-        height: ${resolve(w!, heights)};
+        height: ${resolve(h!, heights)};
       `
     );
   isStringOrNumber(hMin) &&
