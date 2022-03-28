@@ -1,34 +1,51 @@
 import { PropsWithChildren } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import {
+  SizeProps,
+  size,
+  PaddingProps,
+  padding,
   MarginProps,
   margin,
-  color,
+  GridProps,
+  grid,
+  FontProps,
+  font,
   ColorProps,
+  color,
+  AlignmentProps,
+  alignment,
 } from '@blubberfish/style-system';
 import { ConstrainedLayout } from './constrained';
 
-const GlobalStyle = createGlobalStyle<ColorProps & MarginProps>`
+const HeaderContainer = styled.div<ColorProps>`
   ${color}
-  ${margin}
 `;
 
-const Container = styled.div<{ justify?: string; headless?: boolean }>`
-  min-height: 100vh;
-  width: 100%;
-  display: grid;
-  template-columns: 1fr;
-  template-rows: ${({ headless }) => (headless ? '1fr' : 'min-content 1fr')};
-  auto-rows: 1fr;
-  auto-flow: row;
+const StyledHeaderConstrainedLayout = styled(ConstrainedLayout)<
+  PaddingProps & GridProps & AlignmentProps
+>`
+  ${padding}
+  ${grid}
+  ${alignment}
+`;
 
-  header {
-    display: grid;
-    auto-flow: column;
-    auto-columns: max-content
-    template-rows: min-content;
-    ${({ justify }) => (justify ? ` justify-items: ${justify};` : null)}
+const GlobalStyle = createGlobalStyle<ColorProps & FontProps & MarginProps>`
+  body {
+    font-family: sans-serif;
+    ${color}
+    ${font}
+    ${margin}
   }
+`;
+
+const Container = styled.div<
+  AlignmentProps & ColorProps & GridProps & SizeProps
+>`
+  ${alignment}
+  ${color}
+  ${grid}
+  ${size}
 `;
 
 export type ApplicationLayoutProps = PropsWithChildren<{
@@ -40,15 +57,26 @@ export const ApplicationLayout = ({
   head,
 }: ApplicationLayoutProps) => (
   <Container
-    headless={!head}
-    justify={head && head.right && !head.left ? 'end' : 'space-between'}
+    templateColumns="1fr"
+    templateRows={head?.left || head?.right ? 'min-content' : '1fr'}
+    autoRows="1fr"
+    autoFlow="row"
+    w="100%"
+    hMin="100vh"
   >
-    <GlobalStyle />
+    <GlobalStyle ft="sans-serif" ftSize={2} mar={0} bg="background" />
     {head && (
-      <ConstrainedLayout>
-        {head.left}
-        {head.right}
-      </ConstrainedLayout>
+      <HeaderContainer bg="header" fg="header_text">
+        <StyledHeaderConstrainedLayout
+          justifyItems={
+            head && head.right && !head.left ? 'end' : 'space-between'
+          }
+          pad={3}
+        >
+          {head.left}
+          {head.right}
+        </StyledHeaderConstrainedLayout>
+      </HeaderContainer>
     )}
     {children}
   </Container>
