@@ -8,6 +8,8 @@ import {
   border,
   ColorProps,
   color,
+  FontProps,
+  font,
   OpacityProps,
   opacity,
 } from '@blubberfish/style-system';
@@ -54,6 +56,30 @@ export const controlIndication = <Props extends ControlIndicationProps>({
         ${border({ theme, ...hoverIndication })}
         ${color({ theme, ...hoverIndication })}
         ${border({ theme, ...hoverIndication })}
+      }
+    `);
+  }
+
+  return styles;
+};
+
+export type PlaceholderProps = Pick<ColorProps, 'fg'> & FontProps;
+
+export type ControlPlaceholderProps = {
+  controlPlaceholder?: PlaceholderProps;
+};
+
+export const controlPlaceholder = <Props extends ControlPlaceholderProps>({
+  theme,
+  controlPlaceholder,
+}: StyledProps<Props>) => {
+  const styles: FlattenSimpleInterpolation[] = [];
+
+  if (controlPlaceholder) {
+    styles.push(css`
+      &::placeholder {
+        ${font({ theme, ...controlPlaceholder })}
+        ${color({ theme, ...controlPlaceholder })}
       }
     `);
   }

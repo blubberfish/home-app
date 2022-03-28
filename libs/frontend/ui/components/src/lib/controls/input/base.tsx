@@ -14,11 +14,17 @@ import {
   radius,
   RadiusProps,
 } from '@blubberfish/style-system';
-import { controlIndication, ControlIndicationProps } from '../styles';
+import {
+  controlIndication,
+  ControlIndicationProps,
+  controlPlaceholder,
+  ControlPlaceholderProps,
+} from '../styles';
 
 const BaseInput = styled.input<
   ColorProps &
   ControlIndicationProps &
+  ControlPlaceholderProps &
   BorderProps &
   FontProps &
   FontStyleProps &
@@ -32,19 +38,24 @@ const BaseInput = styled.input<
   ${border}
   ${color}
   ${controlIndication}
+  ${controlPlaceholder}
   ${font}
   ${fontStyle}
   ${padding}
   ${radius}
 `;
 
-export const Input = forwardRef<HTMLInputElement, ComponentPropsWithoutRef<'input'>>(
-  (props: ComponentPropsWithoutRef<'input'>, ref) => {
+export type InputProps = {
+  invert?: boolean;
+} & ComponentPropsWithoutRef<'input'>;
+
+export const Input = forwardRef<HTMLInputElement, InputProps>(
+  ({ invert, ...props }: InputProps, ref) => {
     return (
       <BaseInput
         ref={ref}
-        bg="background_strong"
-        fg={'text-strong'}
+        bg="transparent"
+        fg={invert ? 'text_invert_strong' : 'text_strong'}
         ftWeight={3}
         padX={3}
         padY={2}
@@ -56,6 +67,9 @@ export const Input = forwardRef<HTMLInputElement, ComponentPropsWithoutRef<'inpu
         }}
         disabledIndication={{
           opacity: 1,
+        }}
+        controlPlaceholder={{
+          ftAlign: 'center'
         }}
         {...props}
       />

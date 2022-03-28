@@ -8,6 +8,7 @@ import { resolve } from '../utils';
 
 export type FontProps = {
   ft?: string;
+  ftAlign?: 'left' | 'right' | 'center';
   ftSize?: number | string;
   ftWeight?: number | string;
 };
@@ -15,6 +16,7 @@ export type FontProps = {
 export const font = <Props extends FontProps>({
   theme,
   ft,
+  ftAlign,
   ftSize,
   ftWeight,
 }: StyledProps<Props>) => {
@@ -25,6 +27,12 @@ export const font = <Props extends FontProps>({
     styles.push(
       css`
         font-family: ${ft};
+      `
+    );
+  ftAlign &&
+    styles.push(
+      css`
+        text-align: ${ftAlign};
       `
     );
   (ftSize || ftSize === 0) &&
