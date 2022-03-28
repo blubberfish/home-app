@@ -14,7 +14,6 @@ export type AlignmentProps = {
 };
 
 export const alignment = <Props extends AlignmentProps>({
-  theme,
   alignContent,
   alignItems,
   alignSelf,

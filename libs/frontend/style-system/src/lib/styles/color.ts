@@ -17,7 +17,7 @@ export const color = <Props extends ColorProps>({
   fg,
 }: StyledProps<Props>) => {
   const styles: FlattenSimpleInterpolation[] = [];
-  const colors = (theme as Theme).colors ?? defaultTheme.colors;
+  const colors = (theme as Theme)?.colors ?? defaultTheme.colors;
   bg &&
     styles.push(
       css`

@@ -30,8 +30,8 @@ export const size = <Props extends SizeProps>({
   hMin,
 }: StyledProps<Props>) => {
   const styles: FlattenSimpleInterpolation[] = [];
-  const widths = (theme as Theme).widths ?? defaultTheme.widths;
-  const heights = (theme as Theme).heights ?? defaultTheme.heights;
+  const widths = (theme as Theme)?.widths ?? defaultTheme.widths;
+  const heights = (theme as Theme)?.heights ?? defaultTheme.heights;
 
   isStringOrNumber(w) &&
     styles.push(

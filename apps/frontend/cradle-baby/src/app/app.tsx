@@ -1,15 +1,19 @@
-import styled from 'styled-components';
-import NxWelcome from './nx-welcome';
-
-const StyledApp = styled.div`
-  // Your style here
-`;
+import { ApplicationLayout } from './components/layout/application';
+import { ConstrainedLayout } from './components/layout/constrained';
 
 export function App() {
   return (
-    <StyledApp>
-      <NxWelcome title="frontend-cradle-baby" />
-    </StyledApp>
+    <ApplicationLayout
+      head={{
+        right: <div>MENU</div>,
+      }}
+    >
+      <ConstrainedLayout>
+        <header>LOGIN</header>
+        <section>TEST</section>
+        <section>TEST</section>
+      </ConstrainedLayout>
+    </ApplicationLayout>
   );
 }
 

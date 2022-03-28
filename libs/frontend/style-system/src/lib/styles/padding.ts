@@ -27,7 +27,7 @@ export const padding = <Props extends PaddingProps>({
   padY,
 }: StyledProps<Props>) => {
   const styles: FlattenSimpleInterpolation[] = [];
-  const padding = (theme as Theme).spacing ?? defaultTheme.spacing;
+  const padding = (theme as Theme)?.spacing ?? defaultTheme.spacing;
 
   const l = padL || padX || pad;
   l &&

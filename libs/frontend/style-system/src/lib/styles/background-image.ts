@@ -23,7 +23,7 @@ export const backgroundImage = <Props extends BackgroundImageProps>({
   bgSize,
 }: StyledProps<Props>) => {
   const styles: FlattenSimpleInterpolation[] = [];
-  const images = (theme as Theme).images ?? defaultTheme.images;
+  const images = (theme as Theme)?.images ?? defaultTheme.images;
 
   bgUrl &&
     styles.push(css`

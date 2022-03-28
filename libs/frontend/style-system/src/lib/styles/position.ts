@@ -31,7 +31,7 @@ export const position = <Props extends PositionProps>({
       position: ${pos || 'relative'};
     `,
   ];
-  const position = (theme as Theme).spacing ?? defaultTheme.spacing;
+  const position = (theme as Theme)?.spacing ?? defaultTheme.spacing;
 
   const l = posL || posX;
   l &&

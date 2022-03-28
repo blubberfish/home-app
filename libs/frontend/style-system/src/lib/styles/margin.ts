@@ -27,7 +27,7 @@ export const margin = <Props extends MarginProps>({
   marY,
 }: StyledProps<Props>) => {
   const styles: FlattenSimpleInterpolation[] = [];
-  const marginTheme = (theme as Theme).spacing ?? defaultTheme.spacing;
+  const marginTheme = (theme as Theme)?.spacing ?? defaultTheme.spacing;
 
   const l = marL || marX || mar;
   l &&

@@ -33,7 +33,7 @@ export const grid = <Props extends GridProps>({
       display: grid;
     `,
   ];
-  const spacing = (theme as Theme).spacing || defaultTheme.spacing;
+  const spacing = (theme as Theme)?.spacing || defaultTheme.spacing;
 
   const gX = gapX || gap;
   gX &&

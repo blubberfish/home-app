@@ -17,8 +17,8 @@ export const font = <Props extends FontSizeProps>({
   ftWeight,
 }: StyledProps<Props>) => {
   const styles: FlattenSimpleInterpolation[] = [];
-  const fontSizes = (theme as Theme).fontSizes ?? defaultTheme.fontSizes;
-  const fontWeights = (theme as Theme).fontWeights ?? defaultTheme.fontWeights;
+  const fontSizes = (theme as Theme)?.fontSizes ?? defaultTheme.fontSizes;
+  const fontWeights = (theme as Theme)?.fontWeights ?? defaultTheme.fontWeights;
   ftSize &&
     styles.push(
       css`
