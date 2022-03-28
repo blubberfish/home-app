@@ -34,6 +34,7 @@ export const OverlayLayout = ({
       pos="relative"
       posX={0}
       posY={0}
+      bg="#0008"
       onClick={onClickOutside}
       {...overlay?.mask}
     />
