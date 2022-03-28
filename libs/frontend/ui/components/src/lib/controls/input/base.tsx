@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, forwardRef } from 'react';
+import { forwardRef, ComponentPropsWithoutRef } from 'react';
 import styled from 'styled-components';
 import {
   border,
@@ -16,7 +16,7 @@ import {
 } from '@blubberfish/style-system';
 import { controlIndication, ControlIndicationProps } from '../styles';
 
-const BaseButton = styled.button<
+const BaseInput = styled.input<
   ColorProps &
   ControlIndicationProps &
   BorderProps &
@@ -29,11 +29,6 @@ const BaseButton = styled.button<
   &:hover {
     text-decoration: underline;
   }
-  svg {
-    width: 1em;
-    height: 1em;
-    fill: currentColor;
-  }
   ${border}
   ${color}
   ${controlIndication}
@@ -43,29 +38,19 @@ const BaseButton = styled.button<
   ${radius}
 `;
 
-export type ButtonPropsExtension = {
-  simple?: boolean;
-  invert?: boolean;
-  label?: string;
-}
-
-export type ButtonProps = ButtonPropsExtension & ComponentPropsWithoutRef<'button'>
-
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ label, simple, invert, children, ...props }: ButtonProps, ref) => {
+export const Input = forwardRef<HTMLInputElement, ComponentPropsWithoutRef<'input'>>(
+  (props: ComponentPropsWithoutRef<'input'>, ref) => {
     return (
-      <BaseButton
+      <BaseInput
         ref={ref}
-        bg={
-          simple ? 'transparent' : invert ? 'background_invert' : 'background'
-        }
-        fg={invert ? 'text_invert' : 'text'}
+        bg="background_strong"
+        fg={'text-strong'}
         ftWeight={3}
-        padX={simple ? 0 : 3}
-        padY={simple ? 0 : 2}
-        rad={2}
+        padX={3}
+        padY={2}
+        rad={0}
         bdr={{ size: 0 }}
-        type="button"
+        bdrB={{ size: 1 }}
         hoverIndication={{
           opacity: 2,
         }}
@@ -73,9 +58,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           opacity: 1,
         }}
         {...props}
-      >
-        {children ? children : label}
-      </BaseButton>
+      />
     );
   }
 );

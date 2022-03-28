@@ -20,15 +20,6 @@ export type ThemeProps = {
 export const Theme = ({ children }: ThemeProps) => (
   <ThemeProvider
     theme={{
-      colors: {
-        background: '#222',
-        background_strong: 'black',
-        background_weak: '#333',
-        background_shadow: '#fff8',
-        background_invert: 'whitesmoke',
-        background_invert_weak: 'gainsboro',
-        background_invert_strong: 'white',
-      },
       images: {
         home: '/assets/img/accent-background.jpg',
         gradient_scales: scales('#358', '#333'),

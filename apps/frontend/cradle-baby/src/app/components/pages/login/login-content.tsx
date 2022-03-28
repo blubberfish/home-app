@@ -16,17 +16,18 @@ import {
   size,
   SizeProps,
 } from '@blubberfish/style-system';
-import { LoginButton } from './login-button';
+import { Button, Input } from '@blubberfish/frontend/ui/components';
+
 
 const Container = styled.div<
   AlignmentProps &
-    BackgroundImageProps &
-    ColorProps &
-    GridProps &
-    PaddingProps &
-    RadiusProps &
-    SizeProps
->`
+  BackgroundImageProps &
+  ColorProps &
+  GridProps &
+  PaddingProps &
+  RadiusProps &
+  SizeProps
+  >`
   ${alignment}
   ${backgroundImage}
   ${color}
@@ -50,13 +51,13 @@ export const LoginContent = () => {
   return (
     <ElevatedContainer bg="background_invert_strong" rad={2} overflow="hidden">
       <Container
-        bgImg="home_gradient"
+        bgImg="gradient_scales"
         bgSize="50px 25px"
         padT={5}
         bg="background_invert_strong"
       />
       <Container pad={5} gap={3}>
-        <input
+        <Input
           name="username"
           placeholder="Username"
           value={username}
@@ -64,8 +65,7 @@ export const LoginContent = () => {
             setUsername(ev.target.value.trim());
           }}
         />
-        <input
-          name="password"
+        <Input
           placeholder="Password"
           value={password}
           onChange={(ev) => {
@@ -73,7 +73,7 @@ export const LoginContent = () => {
           }}
           type="password"
         />
-        <LoginButton label="Sign in" />
+        <Button label="Sign in" />
       </Container>
     </ElevatedContainer>
   );
