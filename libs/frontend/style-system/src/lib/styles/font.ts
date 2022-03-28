@@ -6,26 +6,34 @@ import {
 import { defaultTheme, Theme } from '../theme';
 import { resolve } from '../utils';
 
-export type FontSizeProps = {
+export type FontProps = {
+  ft?: string;
   ftSize?: number | string;
   ftWeight?: number | string;
 };
 
-export const font = <Props extends FontSizeProps>({
+export const font = <Props extends FontProps>({
   theme,
+  ft,
   ftSize,
   ftWeight,
 }: StyledProps<Props>) => {
   const styles: FlattenSimpleInterpolation[] = [];
   const fontSizes = (theme as Theme)?.fontSizes ?? defaultTheme.fontSizes;
   const fontWeights = (theme as Theme)?.fontWeights ?? defaultTheme.fontWeights;
-  ftSize &&
+  ft &&
+    styles.push(
+      css`
+        font-family: ${ft};
+      `
+    );
+  (ftSize || ftSize === 0) &&
     styles.push(
       css`
         font-size: ${resolve(ftSize, fontSizes)};
       `
     );
-  ftWeight &&
+  (ftWeight || ftWeight === 0) &&
     styles.push(
       css`
         font-weight: ${resolve(ftWeight, fontWeights)};

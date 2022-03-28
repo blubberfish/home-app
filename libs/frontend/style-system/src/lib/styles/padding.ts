@@ -30,7 +30,7 @@ export const padding = <Props extends PaddingProps>({
   const padding = (theme as Theme)?.spacing ?? defaultTheme.spacing;
 
   const l = padL || padX || pad;
-  l &&
+  (l || l === 0) &&
     styles.push(
       css`
         padding-left: ${resolve(l, padding)};
@@ -38,7 +38,7 @@ export const padding = <Props extends PaddingProps>({
     );
 
   const r = padR || padX || pad;
-  r &&
+  (r || r === 0) &&
     styles.push(
       css`
         padding-right: ${resolve(r, padding)};
@@ -46,7 +46,7 @@ export const padding = <Props extends PaddingProps>({
     );
 
   const t = padT || padY || pad;
-  t &&
+  (t || t === 0) &&
     styles.push(
       css`
         padding-top: ${resolve(t, padding)};
@@ -54,7 +54,7 @@ export const padding = <Props extends PaddingProps>({
     );
 
   const b = padB || padY || pad;
-  b &&
+  (b || b === 0) &&
     styles.push(
       css`
         padding-bottom: ${resolve(b, padding)};

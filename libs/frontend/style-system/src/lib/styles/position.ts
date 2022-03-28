@@ -34,7 +34,7 @@ export const position = <Props extends PositionProps>({
   const position = (theme as Theme)?.spacing ?? defaultTheme.spacing;
 
   const l = posL || posX;
-  l &&
+  (l || l === 0) &&
     styles.push(
       css`
         left: ${resolve(l, position)};
@@ -42,7 +42,7 @@ export const position = <Props extends PositionProps>({
     );
 
   const r = posR || posX;
-  r &&
+  (r || r === 0) &&
     styles.push(
       css`
         right: ${resolve(r, position)};
@@ -50,7 +50,7 @@ export const position = <Props extends PositionProps>({
     );
 
   const t = posT || posY;
-  t &&
+  (t || t === 0) &&
     styles.push(
       css`
         top: ${resolve(t, position)};
@@ -58,7 +58,7 @@ export const position = <Props extends PositionProps>({
     );
 
   const b = posB || posY;
-  b &&
+  (b || b === 0) &&
     styles.push(
       css`
         bottom: ${resolve(b, position)};

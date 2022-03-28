@@ -54,7 +54,7 @@ export const grid = <Props extends GridProps>({
   templateColumns &&
     styles.push(
       css`
-        template-columns: ${Array.isArray(templateColumns)
+        grid-template-columns: ${Array.isArray(templateColumns)
           ? templateColumns.join(' ')
           : templateColumns};
       `
@@ -63,7 +63,7 @@ export const grid = <Props extends GridProps>({
   templateRows &&
     styles.push(
       css`
-        template-rows: ${Array.isArray(templateRows)
+        grid-template-rows: ${Array.isArray(templateRows)
           ? templateRows.join(' ')
           : templateRows};
       `
@@ -72,7 +72,7 @@ export const grid = <Props extends GridProps>({
   autoColumns &&
     styles.push(
       css`
-        auto-columns: ${Array.isArray(autoColumns)
+        grid-auto-columns: ${Array.isArray(autoColumns)
           ? autoColumns.join(' ')
           : autoColumns};
       `
@@ -81,14 +81,16 @@ export const grid = <Props extends GridProps>({
   autoRows &&
     styles.push(
       css`
-        auto-rows: ${Array.isArray(autoRows) ? autoRows.join(' ') : autoRows};
+        grid-auto-rows: ${Array.isArray(autoRows)
+          ? autoRows.join(' ')
+          : autoRows};
       `
     );
 
   autoFlow &&
     styles.push(
       css`
-        auto-flow: ${autoFlow};
+        grid-auto-flow: ${autoFlow};
       `
     );
 
