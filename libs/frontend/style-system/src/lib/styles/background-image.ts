@@ -7,7 +7,7 @@ import { defaultTheme, Theme } from '../theme';
 import { resolve } from '../utils';
 
 export type BackgroundImageProps = {
-  bgUrl: string;
+  bgUrl?: string;
   bgAttachment?: string;
   bgPosition?: string;
   bgRepeat?: string;
