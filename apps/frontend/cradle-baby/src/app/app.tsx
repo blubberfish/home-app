@@ -1,19 +1,18 @@
-import { ApplicationLayout } from './components/layout/application';
-import { ConstrainedLayout } from './components/layout/constrained';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+import store from './redux';
+import AppRoutes from './components/routes';
+import { Theme } from './components/theme';
 
 export function App() {
   return (
-    <ApplicationLayout
-      head={{
-        right: <div>MENU</div>,
-      }}
-    >
-      <ConstrainedLayout>
-        <header>LOGIN</header>
-        <section>TEST</section>
-        <section>TEST</section>
-      </ConstrainedLayout>
-    </ApplicationLayout>
+    <Provider store={store}>
+      <Theme>
+        <BrowserRouter>
+          <AppRoutes />
+        </BrowserRouter>
+      </Theme>
+    </Provider>
   );
 }
 
