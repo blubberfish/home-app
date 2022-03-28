@@ -6,6 +6,7 @@ export * from './font';
 export * from './grid';
 export * from './indication';
 export * from './margin';
+export * from './opacity';
 export * from './padding';
 export * from './position';
 export * from './size';

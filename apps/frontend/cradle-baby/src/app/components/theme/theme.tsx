@@ -31,7 +31,7 @@ export const Theme = ({ children }: ThemeProps) => (
       },
       images: {
         home: '/assets/img/accent-background.jpg',
-        home_gradient: scales('#358', '#333'),
+        gradient_scales: scales('#358', '#333'),
       },
     }}
   >
