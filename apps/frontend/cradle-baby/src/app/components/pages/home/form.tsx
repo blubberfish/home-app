@@ -36,7 +36,7 @@ const StyledForm = styled.form<ColorProps & RadiusProps>`
 export const Form = () => {
   return (
     <Container
-      bgUrl="home"
+      bgImg="home"
       bgSize="cover"
       padT={2}
       padL={2}

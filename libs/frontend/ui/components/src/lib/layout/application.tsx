@@ -82,8 +82,9 @@ export const ApplicationLayout = ({
       <HeaderContainer
         bg="primary"
         fg="white"
-        bgUrl="login-header"
+        bgImg="login-header"
         bgSize="cover"
+        isUrl
       >
         <StyledHeaderConstrainedLayout
           justifyItems={

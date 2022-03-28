@@ -72,9 +72,9 @@ export const HomePageLayout = ({ left, right }: HomePageLayoutProps) => {
       w="100%"
       hMin="100vh"
       padB={5}
-      bgUrl="home"
+      bgImg="home_gradient"
       bgPosition="center 256px"
-      bgSize="cover"
+      bgSize="50px 25px"
       templateColumns="1fr"
       templateRows="1fr"
     >

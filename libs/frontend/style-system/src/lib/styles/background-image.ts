@@ -7,7 +7,8 @@ import { defaultTheme, Theme } from '../theme';
 import { resolve } from '../utils';
 
 export type BackgroundImageProps = {
-  bgUrl?: string;
+  isUrl?: boolean;
+  bgImg?: string;
   bgAttachment?: string;
   bgPosition?: string;
   bgRepeat?: string;
@@ -16,7 +17,8 @@ export type BackgroundImageProps = {
 
 export const backgroundImage = <Props extends BackgroundImageProps>({
   theme,
-  bgUrl,
+  isUrl,
+  bgImg,
   bgAttachment,
   bgPosition,
   bgRepeat,
@@ -25,9 +27,11 @@ export const backgroundImage = <Props extends BackgroundImageProps>({
   const styles: FlattenSimpleInterpolation[] = [];
   const images = (theme as Theme)?.images ?? defaultTheme.images;
 
-  bgUrl &&
+  bgImg &&
     styles.push(css`
-      background-image: url('${resolve(bgUrl, images)}');
+      background-image: ${isUrl
+        ? `url('${resolve(bgImg, images)})'`
+        : resolve(bgImg, images)};
     `);
 
   bgAttachment &&

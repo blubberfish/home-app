@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import { font, FontProps } from '@blubberfish/style-system';
+import { scales } from './gradient';
 
 const GlobalStyle = createGlobalStyle<FontProps>`
   * {
@@ -27,6 +28,7 @@ export const Theme = ({ children }: ThemeProps) => (
       },
       images: {
         home: '/assets/img/accent-background.jpg',
+        home_gradient: scales('#358', '#333'),
       },
     }}
   >
