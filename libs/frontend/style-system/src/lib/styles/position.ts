@@ -7,13 +7,14 @@ import { defaultTheme, Theme } from '../theme';
 import { resolve } from '../utils';
 
 export type PositionProps = {
-  pos?: 'absolute' | 'relative' | 'sticky';
+  pos?: 'absolute' | 'fixed' | 'relative' | 'sticky';
   posX?: number | string;
   posY?: number | string;
   posL?: number | string;
   posR?: number | string;
   posT?: number | string;
   posB?: number | string;
+  z?: number | string;
 };
 
 export const position = <Props extends PositionProps>({
@@ -25,6 +26,7 @@ export const position = <Props extends PositionProps>({
   posT,
   posX,
   posY,
+  z,
 }: StyledProps<Props>) => {
   const styles: FlattenSimpleInterpolation[] = [
     css`
@@ -32,6 +34,7 @@ export const position = <Props extends PositionProps>({
     `,
   ];
   const position = (theme as Theme)?.spacing ?? defaultTheme.spacing;
+  const layers = (theme as Theme)?.layers ?? defaultTheme.layers;
 
   const l = posL || posX;
   (l || l === 0) &&
@@ -62,6 +65,13 @@ export const position = <Props extends PositionProps>({
     styles.push(
       css`
         bottom: ${resolve(b, position)};
+      `
+    );
+
+  (z || z === 0) &&
+    styles.push(
+      css`
+        z-index: ${resolve(z, layers)};
       `
     );
 

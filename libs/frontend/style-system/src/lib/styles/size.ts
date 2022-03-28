@@ -14,6 +14,7 @@ export type SizeProps = {
   h?: number | string;
   hMax?: number | string;
   hMin?: number | string;
+  overflow?: string;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -28,6 +29,7 @@ export const size = <Props extends SizeProps>({
   h,
   hMax,
   hMin,
+  overflow,
 }: StyledProps<Props>) => {
   const styles: FlattenSimpleInterpolation[] = [];
   const widths = (theme as Theme)?.widths ?? defaultTheme.widths;
@@ -68,6 +70,13 @@ export const size = <Props extends SizeProps>({
     styles.push(
       css`
         max-height: ${resolve(hMax!, heights)};
+      `
+    );
+
+  overflow &&
+    styles.push(
+      css`
+        overflow: ${overflow};
       `
     );
 

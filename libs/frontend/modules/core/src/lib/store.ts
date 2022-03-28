@@ -11,5 +11,5 @@ export const createStore = (slices?: Slice[]) => {
 };
 
 export type GlobalState<S, I extends string = string> = {
-  [key in I]: S;
+  [key in I]?: S;
 };
