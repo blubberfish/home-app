@@ -15,7 +15,7 @@ const Container = styled.div<ColorProps & PositionProps & SizeProps>`
   ${size}
 `;
 
-export type ConstrainedLayoutProps = HTMLAttributes<HTMLDivElement> & {
+export type OverlayLayoutProps = HTMLAttributes<HTMLDivElement> & {
   onClickOutside?: () => void;
   overlay?: {
     mask?: ColorProps;
@@ -23,13 +23,13 @@ export type ConstrainedLayoutProps = HTMLAttributes<HTMLDivElement> & {
   };
 };
 
-export const ConstrainedLayout = ({
+export const OverlayLayout = ({
   children,
   onClickOutside,
   overlay,
   ...props
-}: ConstrainedLayoutProps) => (
-  <Container pos="fixed" posX={0} posY={0} {...props}>
+}: OverlayLayoutProps) => (
+  <Container pos="fixed" posX={0} posY={0} z={2} {...props}>
     <Container
       pos="relative"
       posX={0}
