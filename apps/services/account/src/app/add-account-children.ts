@@ -11,7 +11,7 @@ import { ObjectId } from 'mongodb';
 
 const addAccountChildrenHandler = async (event) => {
   const { path, body } = event;
-  if (!/^\/?account\/.+\/children$/i.test(path)) return null;
+  if (!/^\/?account\/[0-9a-fA-F]+\/children$/i.test(path)) return null;
 
   try {
     const persons = (JSON.parse(body) ?? []) as PersonEntityPayload[];

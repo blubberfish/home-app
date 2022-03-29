@@ -9,7 +9,7 @@ import { ObjectId } from 'mongodb';
 
 const getAccountHandler = async (event) => {
   const { path } = event;
-  if (!/^\/?account$/i.test(path)) return null;
+  if (!/^\/?account\/[0-9a-fA-F]+/i.test(path)) return null;
 
   try {
     const [, id] = (

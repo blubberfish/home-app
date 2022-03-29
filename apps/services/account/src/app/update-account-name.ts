@@ -9,7 +9,7 @@ import { ObjectId } from 'mongodb';
 
 const updateAccountNameHandler = async (event) => {
   const { path, body } = event;
-  if (!/^\/?account\/.+\/name$/i.test(path)) return null;
+  if (!/^\/?account\/[0-9a-fA-F]+\/name$/i.test(path)) return null;
 
   try {
     const data = JSON.parse(body) ?? {};
