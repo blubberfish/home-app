@@ -4,9 +4,9 @@ import { Module } from '@blubberfish/frontend/modules/core';
 import { PATH } from '@blubberfish/frontend/pages/routes';
 import { Button } from '@blubberfish/frontend/ui/components';
 import slice from './redux';
-import { LoginLayout } from './login-layout';
-import { LoginContent } from './login-content';
 import { LoginDivider } from './login-divider';
+import { LoginForm } from './login-form';
+import { LoginLayout } from './login-layout';
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ const LoginPage = () => {
   }, [navigate]);
   return (
     <LoginLayout>
-      <LoginContent />
+      <LoginForm />
       <LoginDivider />
       <Button invert label="Create account" simple onClick={handleNewUser} />
     </LoginLayout>
