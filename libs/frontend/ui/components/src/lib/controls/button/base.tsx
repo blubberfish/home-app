@@ -1,5 +1,5 @@
 import { ComponentPropsWithoutRef, forwardRef, useMemo } from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import {
   border,
   BorderProps,
@@ -13,8 +13,6 @@ import {
   PaddingProps,
   radius,
   RadiusProps,
-  Theme,
-  resolve,
 } from '@blubberfish/style-system';
 import { controlIndication, ControlIndicationProps } from '../styles';
 
@@ -49,7 +47,8 @@ export type ButtonPropsExtension = {
   simple?: boolean;
   invert?: boolean;
   label?: string;
-} & Pick<FontProps, 'ftSize'>;
+} & Pick<FontProps, 'ftSize'> &
+  ColorProps;
 
 export type ButtonProps = ButtonPropsExtension &
   ComponentPropsWithoutRef<'button'>;
