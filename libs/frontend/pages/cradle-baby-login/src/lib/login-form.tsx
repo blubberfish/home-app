@@ -2,6 +2,10 @@ import { FormEvent, useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { setAccountId } from '@blubberfish/frontend/modules/cradle-baby/app';
+import { PATH } from '@blubberfish/frontend/pages/cradle-baby-routes';
+import { Button, Input } from '@blubberfish/frontend/ui/components';
+import { login } from '@blubberfish/services/client';
 import {
   alignment,
   AlignmentProps,
@@ -18,10 +22,7 @@ import {
   size,
   SizeProps,
 } from '@blubberfish/style-system';
-import { login } from '@blubberfish/services/client';
-import { Button, Input } from '@blubberfish/frontend/ui/components';
 import { setAlert } from './redux';
-import { PATH } from '@blubberfish/frontend/pages/cradle-baby-routes';
 
 const Container = styled.div<
   AlignmentProps &
@@ -80,6 +81,7 @@ export const LoginForm = () => {
         password,
       }).then(
         (accountId) => {
+          dispatch(setAccountId(accountId));
           navigate(PATH.DASHBOARD);
         },
         (error) => {
