@@ -23,7 +23,7 @@ import {
 } from '@blubberfish/style-system';
 import { Button, Input } from '@blubberfish/frontend/ui/components';
 import { createAccount } from '@blubberfish/services/client';
-import { setAlert } from './redux';
+import { setAlert, wasSuccessful } from './redux';
 
 const Decoration = styled.div<BackgroundImageProps & ColorProps & PaddingProps>`
   ${backgroundImage}
@@ -99,7 +99,7 @@ export const RegisterForm = () => {
         createAccount({ displayName, password, username })
           .then(
             () => {
-              // TODO
+              dispatch(wasSuccessful());
             },
             (error) => {
               dispatch(

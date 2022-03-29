@@ -1,8 +1,8 @@
 import { GlobalState } from '@blubberfish/frontend/modules/core';
 import { createSelector } from '@reduxjs/toolkit';
-import { name, LoginPageState } from './base';
+import { name, RegisterPageState } from './base';
 
-const stateSelector = (state: GlobalState<LoginPageState, typeof name>) =>
+const stateSelector = (state: GlobalState<RegisterPageState, typeof name>) =>
   state[name];
 
 export const alertSelector = createSelector(

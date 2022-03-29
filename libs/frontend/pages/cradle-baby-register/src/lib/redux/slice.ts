@@ -11,8 +11,11 @@ const slice = createSlice({
     ) {
       state.alert = payload ? { ...payload } : null;
     },
+    wasSuccessful(state) {
+      state.successful = true;
+    },
   },
 });
 
 export default slice;
-export const { setAlert } = slice.actions;
+export const { setAlert, wasSuccessful } = slice.actions;

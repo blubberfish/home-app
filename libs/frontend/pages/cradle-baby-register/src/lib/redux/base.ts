@@ -1,12 +1,14 @@
-export const name = 'login_page';
+export const name = 'register_page';
 
-export type LoginPageState = {
+export type RegisterPageState = {
+  successful?: boolean | null;
   alert?: {
     title: string;
     message: string;
   } | null;
 };
 
-export const getInitialState = (): LoginPageState => ({
+export const getInitialState = (): RegisterPageState => ({
   alert: null,
+  successful: null,
 });
