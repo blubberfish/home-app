@@ -1,5 +1,5 @@
-import { ComponentPropsWithoutRef, forwardRef } from 'react';
-import styled from 'styled-components';
+import { ComponentPropsWithoutRef, forwardRef, useMemo } from 'react';
+import styled, { css } from 'styled-components';
 import {
   border,
   BorderProps,
@@ -13,18 +13,20 @@ import {
   PaddingProps,
   radius,
   RadiusProps,
+  Theme,
+  resolve,
 } from '@blubberfish/style-system';
 import { controlIndication, ControlIndicationProps } from '../styles';
 
 const BaseButton = styled.button<
   ColorProps &
-  ControlIndicationProps &
-  BorderProps &
-  FontProps &
-  FontStyleProps &
-  PaddingProps &
-  RadiusProps
-  >`
+    ControlIndicationProps &
+    BorderProps &
+    FontProps &
+    FontStyleProps &
+    PaddingProps &
+    RadiusProps
+>`
   outline: 0;
   &:hover {
     text-decoration: underline;
@@ -47,12 +49,19 @@ export type ButtonPropsExtension = {
   simple?: boolean;
   invert?: boolean;
   label?: string;
-}
+} & Pick<FontProps, 'ftSize'>;
 
-export type ButtonProps = ButtonPropsExtension & ComponentPropsWithoutRef<'button'>
+export type ButtonProps = ButtonPropsExtension &
+  ComponentPropsWithoutRef<'button'>;
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ label, simple, invert, children, ...props }: ButtonProps, ref) => {
+    const child = useMemo(() => {
+      if (children) {
+        return children;
+      }
+      return label;
+    }, [children, label]);
     return (
       <BaseButton
         ref={ref}
@@ -74,7 +83,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         }}
         {...props}
       >
-        {children ? children : label}
+        {child}
       </BaseButton>
     );
   }
