@@ -22,6 +22,7 @@ export const getAccountInfo = createApi<string, AccountInfo>({
   url: `${BaseUrl.REST}/account`,
   builders: {
     url: (input, base) => `${base}/${input}`,
+    response: async (response) => response as AccountInfo,
   },
 });
 
