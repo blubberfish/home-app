@@ -7,5 +7,6 @@ export const login = createApi<{ username: string; password: string }, string>({
   builders: {
     body: (input) => JSON.stringify(input),
     response: async (response) => response as string,
+    responseType: 'text',
   },
 });

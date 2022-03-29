@@ -9,6 +9,7 @@ export type ApiOption<I, O> = {
     headers: (input?: I) => Promise<HeadersInit>;
     body: (input?: I, headers?: HeadersInit) => string;
     response: (response: unknown, headers: Headers) => Promise<O>;
+    responseType?: 'json' | 'text';
   }>;
 };
 
@@ -52,8 +53,11 @@ export const createApi = <I, O>({
       fetchOptions
     );
     if (response.ok) {
-      const { response: responseBuilder } = builders;
-      return responseBuilder?.(await response.json(), response.headers);
+      const { response: responseBuilder, responseType } = builders;
+      return responseBuilder?.(
+        await response[responseType ?? 'json'](),
+        response.headers
+      );
     } else {
       return Promise.reject(new Error(`api.error_${response.status}`));
     }

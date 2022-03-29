@@ -38,7 +38,7 @@ const Message = styled.p<ColorProps & FontProps>`
   ${font}
 `;
 
-export const RegisterAlert = () => {
+export const LoginAlert = () => {
   const alert = useSelector(alertSelector);
   return alert ? (
     <Container
