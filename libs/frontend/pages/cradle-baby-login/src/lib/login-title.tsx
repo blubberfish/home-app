@@ -8,7 +8,7 @@ const Title = styled.h1<ColorProps & FontProps>`
 `;
 
 export const LoginTitle = () => (
-  <Title fg="text_strong" ftSize={4} ftWeight={3}>
+  <Title fg="text_invert_strong" ftSize={4} ftWeight={3}>
     Sign in
   </Title>
 );

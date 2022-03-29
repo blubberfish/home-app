@@ -15,7 +15,7 @@ const NewUserPage = () => {
     <RegisterLayout>
       <RegisterTitle />
       <RegisterForm />
-      <Button simple label="Cancel" onClick={handleCancel} />
+      <Button invert label="Cancel" onClick={handleCancel} simple />
     </RegisterLayout>
   );
 };

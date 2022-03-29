@@ -23,14 +23,14 @@ import {
 
 const BaseInput = styled.input<
   ColorProps &
-  ControlIndicationProps &
-  ControlPlaceholderProps &
-  BorderProps &
-  FontProps &
-  FontStyleProps &
-  PaddingProps &
-  RadiusProps
-  >`
+    ControlIndicationProps &
+    ControlPlaceholderProps &
+    BorderProps &
+    FontProps &
+    FontStyleProps &
+    PaddingProps &
+    RadiusProps
+>`
   outline: 0;
   &:hover {
     text-decoration: underline;
@@ -61,15 +61,20 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         padY={2}
         rad={0}
         bdr={{ size: 0 }}
-        bdrB={{ size: 1 }}
+        bdrB={{ size: 1, color: invert ? '#0005' : '#fff5' }}
         hoverIndication={{
           opacity: 2,
         }}
         disabledIndication={{
           opacity: 1,
         }}
+        focusIndication={{
+          bdrB: {
+            color: invert ? '#000d' : '#fffd',
+          },
+        }}
         controlPlaceholder={{
-          ftAlign: 'center'
+          ftAlign: 'center',
         }}
         {...props}
       />
