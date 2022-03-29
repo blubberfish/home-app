@@ -1,6 +1,8 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled, { css, keyframes } from 'styled-components';
 import { Button, FontAwesome } from '@blubberfish/frontend/ui/components';
+import { PATH as BASE_PATH } from '@blubberfish/frontend/pages/cradle-baby-routes';
 import {
   alignment,
   AlignmentProps,
@@ -21,6 +23,7 @@ import {
   size,
   SizeProps,
 } from '@blubberfish/style-system';
+import { PATH } from './dashboard-paths';
 
 const slideIn = keyframes`
 from {
@@ -68,6 +71,24 @@ const SlideInContainer = styled(Container)<{ hide?: boolean }>`
 
 export const DashboardMenu = () => {
   const [showMenu, setShowMenu] = useState(false);
+  const navigate = useNavigate();
+  const handleNav = useMemo(
+    () => ({
+      toActivities: () => {
+        setShowMenu(false);
+        navigate(`/${BASE_PATH.DASHBOARD}/${PATH.ACTIVITIES}`);
+      },
+      toBaby: () => {
+        setShowMenu(false);
+        navigate(`/${BASE_PATH.DASHBOARD}/${PATH.BABY}`);
+      },
+      toFamily: () => {
+        setShowMenu(false);
+        navigate(`/${BASE_PATH.DASHBOARD}/${PATH.FAMILY}`);
+      },
+    }),
+    [navigate]
+  );
   return (
     <Container
       bg="background"
@@ -78,11 +99,11 @@ export const DashboardMenu = () => {
       pos="relative"
     >
       <Button
-        ftSize={5}
-        simple
+        ftSize={4}
         onClick={() => {
           setShowMenu(true);
         }}
+        simple
       >
         <FontAwesome.Bars />
       </Button>
@@ -102,13 +123,13 @@ export const DashboardMenu = () => {
         justifyContent="center"
         justifyItems="center"
       >
-        <Button ftSize={4} simple>
+        <Button ftSize={4} simple onClick={handleNav.toFamily}>
           <FontAwesome.PeopleRoof />
         </Button>
-        <Button ftSize={4} simple>
+        <Button ftSize={4} simple onClick={handleNav.toBaby}>
           <FontAwesome.Baby />
         </Button>
-        <Button ftSize={4} simple>
+        <Button ftSize={4} simple onClick={handleNav.toActivities}>
           <FontAwesome.Timeline />
         </Button>
         <Button

@@ -50,8 +50,9 @@ export const DashboardPageLayout = () => {
       templateRows="1fr min-content"
       autoFlow="row"
       autoRows="min-content"
+      gap={3}
     >
-      <Container>
+      <Container templateColumns="1fr" autoRows="min-content" gap={3}>
         <DashboardHead />
         <Outlet />
       </Container>
