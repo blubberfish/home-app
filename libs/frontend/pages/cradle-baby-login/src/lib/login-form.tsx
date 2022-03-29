@@ -98,8 +98,7 @@ export const LoginForm = () => {
           dispatch(
             setAlert({
               title: 'Unable to login',
-              message:
-                'Your username and/or password does not match any accounts.',
+              message: 'Your username and/or password is not valid.',
             })
           );
           setPending(false);

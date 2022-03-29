@@ -34,6 +34,7 @@ const Title = styled.h1<ColorProps & FontProps>`
 
 const Message = styled.p<ColorProps & FontProps>`
   margin: 0;
+  white-space: wrap;
   ${color}
   ${font}
 `;
