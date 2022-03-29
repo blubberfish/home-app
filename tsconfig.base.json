@@ -22,6 +22,9 @@
       "@blubberfish/frontend/modules/cradle-baby/app": [
         "libs/frontend/modules/cradle-baby/app/src/index.ts"
       ],
+      "@blubberfish/frontend/pages/cradle-baby-dashboard": [
+        "libs/frontend/pages/cradle-baby-dashboard/src/index.ts"
+      ],
       "@blubberfish/frontend/pages/cradle-baby-login": [
         "libs/frontend/pages/cradle-baby-login/src/index.ts"
       ],

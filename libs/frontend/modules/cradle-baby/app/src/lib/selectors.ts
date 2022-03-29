@@ -9,3 +9,8 @@ export const accountIdSelector = createSelector(
   stateSelector,
   (state) => state?.account
 );
+
+export const accountInfoSelector = createSelector(
+  stateSelector,
+  (state) => state?.accountInfo
+);

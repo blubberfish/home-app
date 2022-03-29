@@ -6,6 +6,7 @@
     "frontend-hooks": "libs/frontend/hooks",
     "frontend-modules-core": "libs/frontend/modules/core",
     "frontend-modules-cradle-baby-app": "libs/frontend/modules/cradle-baby/app",
+    "frontend-pages-cradle-baby-dashboard": "libs/frontend/pages/cradle-baby-dashboard",
     "frontend-pages-cradle-baby-login": "libs/frontend/pages/cradle-baby-login",
     "frontend-pages-cradle-baby-register": "libs/frontend/pages/cradle-baby-register",
     "frontend-pages-cradle-baby-routes": "libs/frontend/pages/cradle-baby-routes",
