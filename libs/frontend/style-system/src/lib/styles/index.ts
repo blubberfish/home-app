@@ -10,3 +10,4 @@ export * from './opacity';
 export * from './padding';
 export * from './position';
 export * from './size';
+export * from './svg';

@@ -9,3 +9,8 @@ export const alertSelector = createSelector(
   stateSelector,
   (state) => state?.alert
 );
+
+export const successSelector = createSelector(
+  stateSelector,
+  (state) => state?.successful ?? false
+);
