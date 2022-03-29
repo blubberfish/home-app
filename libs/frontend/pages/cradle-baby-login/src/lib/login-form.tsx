@@ -81,11 +81,20 @@ export const LoginForm = () => {
         password,
       }).then(
         (accountId) => {
-          dispatch(setAccountId(accountId));
-          navigate(PATH.DASHBOARD);
+          if (accountId) {
+            dispatch(setAccountId(accountId));
+            navigate(PATH.DASHBOARD);
+          } else {
+            setPending(false);
+            dispatch(
+              setAlert({
+                title: 'Something went wrong',
+                message: 'Sorry please try again.',
+              })
+            );
+          }
         },
         (error) => {
-          console.error(error);
           dispatch(
             setAlert({
               title: 'Unable to login',
