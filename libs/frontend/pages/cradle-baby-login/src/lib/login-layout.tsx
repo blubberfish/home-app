@@ -57,7 +57,7 @@ export const LoginLayout = ({ children }: HomePageLayoutProps) => {
         gap={5}
         padX={3}
         w="100%"
-        wMax="717px"
+        wMax={2}
         marX="auto"
       >
         {children}

@@ -5,6 +5,16 @@ export type ThemePreset =
   | Record<number | string, ThemeValue>;
 
 export const defaultTheme = {
+  breakpoints: {
+    1: '576px',
+    xsmall: '576px',
+    2: '768px',
+    small: '768px',
+    3: '992px',
+    medium: '992px',
+    4: '1200px',
+    large: '1200px',
+  },
   radii: [0, 2, 4, 8, 12, 16],
   spacing: [0, 4, 8, 16, 24, 32, 48, 64, 128],
   fontSizes: [0, 12, 18, 24, 32, 48, 64],
@@ -33,7 +43,7 @@ export const defaultTheme = {
   },
   images: {},
   heights: [0],
-  widths: [0],
+  widths: ['0px', '576px', '768px', '992px', '1200px'],
 };
 
 export type Theme = Partial<{
