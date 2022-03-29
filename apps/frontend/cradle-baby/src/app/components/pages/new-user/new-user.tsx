@@ -12,6 +12,7 @@ const NewUserPage = () => {
   }, [navigate]);
   return (
     <NewUserLayout>
+      <h1>New account</h1>
       <NewUserForm />
       <NewUserButton simple label='Cancel' onClick={handleCancel} />
     </NewUserLayout>

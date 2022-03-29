@@ -58,19 +58,21 @@ export const LoginContent = () => {
       />
       <Container pad={5} gap={3}>
         <Input
+          invert
           name="username"
-          placeholder="Username"
-          value={username}
           onChange={(ev) => {
             setUsername(ev.target.value.trim());
           }}
+          placeholder="Username"
+          value={username}
         />
         <Input
-          placeholder="Password"
-          value={password}
+          invert
           onChange={(ev) => {
             setPassword(ev.target.value.trim());
           }}
+          placeholder="Password"
+          value={password}
           type="password"
         />
         <Button label="Sign in" />
