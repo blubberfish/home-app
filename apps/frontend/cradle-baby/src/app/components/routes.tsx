@@ -5,14 +5,16 @@ import { PATH } from '@blubberfish/frontend/pages/cradle-baby-routes';
 const LoginPage = lazy(
   () => import('@blubberfish/frontend/pages/cradle-baby-login')
 );
-const NewUserPage = lazy(() => import('./pages/new-user'));
+const RegisterPage = lazy(
+  () => import('@blubberfish/frontend/pages/cradle-baby-register')
+);
 
 const Empty = () => null;
 
 export default () => (
   <Suspense fallback={<Empty />}>
     <Routes>
-      <Route path={PATH.REGISTER} element={<NewUserPage />} />
+      <Route path={PATH.REGISTER} element={<RegisterPage />} />
       <Route path={PATH.LOGIN} element={<LoginPage />} />
       <Route path={PATH.ALL} element={<Empty />} />
     </Routes>
