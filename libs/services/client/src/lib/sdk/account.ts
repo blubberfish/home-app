@@ -36,13 +36,16 @@ export const changeAccountName = createApi<{ displayName: string }, void>({
   },
 });
 
-export const addAccountParents = createApi<PersonEntityPayload[], void>({
+export const addAccountParents = createApi<
+  { account: string; data: PersonEntityPayload[] },
+  void
+>({
   method: HttpMethod.PUT,
   restricted: true,
   url: `${BaseUrl.REST}/account`,
   builders: {
-    url: (input, base) => `${base}/${input}/parents`,
-    body: (input) => JSON.stringify(input),
+    url: (input, base) => `${base}/${input?.account}/parents`,
+    body: (input) => JSON.stringify(input?.data),
   },
 });
 
@@ -54,7 +57,7 @@ export const addAccountChildren = createApi<
   restricted: true,
   url: `${BaseUrl.REST}/account`,
   builders: {
-    url: (input, base) => `${base}/${input}/children`,
-    body: (input) => JSON.stringify(input),
+    url: (input, base) => `${base}/${input?.account}/children`,
+    body: (input) => JSON.stringify(input?.data),
   },
 });
