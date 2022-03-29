@@ -1,16 +1,23 @@
-import { Suspense, useMemo } from 'react';
-import { useSelector } from 'react-redux';
-import { accountIdSelector } from '@blubberfish/frontend/modules/cradle-baby/app';
+import { Suspense, useEffect, useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  accountIdSelector,
+  accountInfoThunk,
+} from '@blubberfish/frontend/modules/cradle-baby/app';
 import PublicRoutes from './public';
 import PrivateRoutes from './private';
 
 const Empty = () => null;
 
 export default () => {
-  const isLoggedIn = !!useSelector(accountIdSelector);
+  const dispatch = useDispatch();
+  const accountId = useSelector(accountIdSelector);
   const content = useMemo(
-    () => (isLoggedIn ? <PrivateRoutes /> : <PublicRoutes />),
-    [isLoggedIn]
+    () => (accountId ? <PrivateRoutes /> : <PublicRoutes />),
+    [accountId]
   );
+  useEffect(() => {
+    accountId && dispatch(accountInfoThunk(accountId));
+  }, [accountId, dispatch]);
   return <Suspense fallback={<Empty />}>{content}</Suspense>;
 };

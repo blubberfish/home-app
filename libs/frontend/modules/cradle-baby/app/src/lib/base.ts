@@ -1,3 +1,5 @@
+import { AccountInfo } from '@blubberfish/types';
+
 export const name = 'app';
 
 export const storage = {
@@ -15,8 +17,10 @@ export const storage = {
 
 export type AppState = {
   account?: string | null;
+  accountInfo?: AccountInfo | null;
 };
 
 export const getInitialState = (): AppState => ({
   account: storage.accountId.get(),
+  accountInfo: null,
 });
