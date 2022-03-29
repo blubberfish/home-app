@@ -1,4 +1,5 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useCallback, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import {
   alignment,
@@ -22,7 +23,7 @@ import {
 } from '@blubberfish/style-system';
 import { Button, Input } from '@blubberfish/frontend/ui/components';
 import { createAccount } from '@blubberfish/services/client';
-import { useCallback } from 'react';
+import { setAlert } from './redux';
 
 const Decoration = styled.div<BackgroundImageProps & ColorProps & PaddingProps>`
   ${backgroundImage}
@@ -71,23 +72,58 @@ const Container = styled.div<
 `;
 
 export const RegisterForm = () => {
+  const dispatch = useDispatch();
   const [pending, setPending] = useState(false);
-  const handleSubmit = useCallback((ev: FormEvent<HTMLFormElement>) => {
-    ev.preventDefault();
-    const data = new FormData(ev.currentTarget);
-    const displayName = data.get('displayName')?.toString().trim();
-    const password = data.get('password')?.toString().trim();
-    const confirm = data.get('password_confirm')?.toString().trim();
-    const username = data.get('username')?.toString().trim();
-    if (displayName && username && password) {
-      setPending(true);
-      createAccount({ displayName, password, username })
-        .then()
-        .finally(() => {
-          setPending(false);
-        });
-    }
-  }, []);
+  const handleSubmit = useCallback(
+    (ev: FormEvent<HTMLFormElement>) => {
+      ev.preventDefault();
+      const data = new FormData(ev.currentTarget);
+      const displayName = data.get('displayName')?.toString().trim();
+      const password = data.get('password')?.toString().trim();
+      const confirm = data.get('password_confirm')?.toString().trim();
+      const username = data.get('username')?.toString().trim();
+
+      if (displayName && username && password && confirm) {
+        if (password !== confirm) {
+          dispatch(
+            setAlert({
+              title: 'Please try again',
+              message: 'Your password does not match.',
+            })
+          );
+          return;
+        }
+
+        dispatch(setAlert(null));
+        setPending(true);
+        createAccount({ displayName, password, username })
+          .then(
+            () => {
+              // TODO
+            },
+            (error) => {
+              dispatch(
+                setAlert(
+                  error.message === 'api.error_409'
+                    ? {
+                        title: 'This account already exist',
+                        message: 'Try a different username.',
+                      }
+                    : {
+                        title: 'Something went wrong',
+                        message: `An unknown error has occured ${error.message}.`,
+                      }
+                )
+              );
+            }
+          )
+          .finally(() => {
+            setPending(false);
+          });
+      }
+    },
+    [dispatch]
+  );
 
   return (
     <Container
@@ -131,7 +167,7 @@ export const RegisterForm = () => {
           name="displayName"
           placeholder="Account name"
         />
-        <Button disabled={pending} label="Create" type="submit" />
+        <Button disabled={pending} label="Submit" type="submit" />
       </Form>
     </Container>
   );
