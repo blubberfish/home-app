@@ -13,6 +13,6 @@ export type Name = {
 
 export type Person = {
   name: Partial<{ [language in Language]: Name }>;
-  gender: Gender;
+  gender: 'm' | 'f';
   dtob: Date; // Date-time of birth
 };

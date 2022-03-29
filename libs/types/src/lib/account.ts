@@ -21,7 +21,7 @@ export type Account = AccountInfo & {
   password: string;
 };
 
-export type PersonEntityPayload = Omit<PersonEntity, 'dtob'> & {
+export type PersonEntityPayload = Omit<PersonEntity, 'dtob' | 'uuid'> & {
   dtob: string;
 };
 

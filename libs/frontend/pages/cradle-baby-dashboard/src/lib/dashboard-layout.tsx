@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 import {
@@ -22,13 +23,13 @@ import { DashboardMenu } from './dashboard-menu';
 
 const Container = styled.div<
   AlignmentProps &
-    BorderProps &
-    ColorProps &
-    GridProps &
-    MarginProps &
-    PaddingProps &
-    SizeProps
->`
+  BorderProps &
+  ColorProps &
+  GridProps &
+  MarginProps &
+  PaddingProps &
+  SizeProps
+  >`
   ${alignment}
   ${border}
   ${color}
@@ -37,6 +38,8 @@ const Container = styled.div<
   ${padding}
   ${size}
 `;
+
+const Empty = () => null
 
 export const DashboardPageLayout = () => {
   return (
@@ -54,7 +57,9 @@ export const DashboardPageLayout = () => {
     >
       <Container templateColumns="1fr" autoRows="min-content" gap={3}>
         <DashboardHead />
-        <Outlet />
+        <Suspense fallback={<Empty />}>
+          <Outlet />
+        </Suspense>
       </Container>
       <DashboardMenu />
     </Container>
