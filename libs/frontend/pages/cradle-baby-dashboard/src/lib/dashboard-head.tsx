@@ -1,8 +1,12 @@
-import { ReactNode } from 'react';
-import { useSelector } from 'react-redux';
+import { ReactNode, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { accountInfoSelector } from '@blubberfish/frontend/modules/cradle-baby/app';
 import {
+  accountInfoSelector,
+  exitThunk,
+} from '@blubberfish/frontend/modules/cradle-baby/app';
+import {
+  Button,
   ConstrainedLayout,
   FontAwesome,
 } from '@blubberfish/frontend/ui/components';
@@ -47,8 +51,8 @@ const Container = styled.div<
 
 const ContainerWithIcon = styled(Container)`
   svg {
-    width: 2em;
-    height: 2em;
+    width: 1.2em;
+    height: 1.2em;
     fill: currentColor;
   }
 `;
@@ -62,7 +66,7 @@ const Skeleton = ({ left, right }: SkeletonProps) => (
     templateColumns="max-content 1fr"
     templateRows="1fr"
     alignItems="center"
-    gap={3}
+    gap={2}
   >
     {left ?? <Container h="2em" w="2em" bg="#fff3" rad="50%" />}
     {right ?? <Container h="1em" w="8em" bg="#fff3" />}
@@ -70,22 +74,36 @@ const Skeleton = ({ left, right }: SkeletonProps) => (
 );
 
 export const DashboardHead = () => {
+  const dispatch = useDispatch();
   const info = useSelector(accountInfoSelector);
+  const handleExit = useCallback(() => {
+    dispatch(exitThunk());
+  }, [dispatch]);
+
   return (
     <Container
       bg="background"
       fg="text"
-      overflow="auto"
       templateColumns="1fr"
-      autoFlow="row"
-      autoRows="min-content"
+      templateRows="1fr"
       pad={3}
     >
       <ConstrainedLayout>
-        <Skeleton
-          left={info && <FontAwesome.PeopleRoof />}
-          right={info && <span>{info?.displayName}'s family</span>}
-        />
+        <Container
+          alignContent="center"
+          alignItems="center"
+          templateColumns="1fr max-content"
+          templateRows="1fr"
+          gap={3}
+        >
+          <Skeleton
+            left={info && <FontAwesome.PeopleRoof />}
+            right={info && <span>{info?.displayName}'s family</span>}
+          />
+          <Button simple onClick={handleExit}>
+            <FontAwesome.RightFromBracket />
+          </Button>
+        </Container>
       </ConstrainedLayout>
     </Container>
   );

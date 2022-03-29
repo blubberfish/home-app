@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { getAccountInfo } from '@blubberfish/services/client';
 import { name } from './base';
-import { setAccountInfo } from './slice';
+import { setAccountInfo, setAccountId } from './slice';
 
 export const accountInfoThunk = createAsyncThunk(
   `${name}/thunk/get/account-info`,
@@ -11,5 +11,13 @@ export const accountInfoThunk = createAsyncThunk(
     }
     const info = await getAccountInfo(id);
     info && dispatch(setAccountInfo(info));
+  }
+);
+
+export const exitThunk = createAsyncThunk(
+  `${name}/thunk/exit`,
+  async (_, { dispatch }) => {
+    dispatch(setAccountId(null));
+    dispatch(setAccountInfo(null));
   }
 );
