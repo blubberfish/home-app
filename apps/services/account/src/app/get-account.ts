@@ -18,7 +18,12 @@ const getAccountHandler = async (event) => {
         : (path as string)
     ).split('/');
 
-    if (!id) return apiExceptionFactory(ServiceException.DoesNotExist, '', 404);
+    if (!id)
+      return apiExceptionFactory(
+        ServiceException.DoesNotExist,
+        'ID was not provided.',
+        404
+      );
 
     const accounts = await accountCollectionFactory();
     const account = await accounts.findOne(
@@ -33,7 +38,11 @@ const getAccountHandler = async (event) => {
       }
     );
     if (!account)
-      return apiExceptionFactory(ServiceException.DoesNotExist, '', 404);
+      return apiExceptionFactory(
+        ServiceException.DoesNotExist,
+        'No record found.',
+        404
+      );
 
     return {
       statusCode: 200,

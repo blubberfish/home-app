@@ -35,7 +35,6 @@ export const createApi = <I, O>({
     }
 
     if (restricted) {
-      fetchOptions['credentials'] = 'include';
       if (process.env['NX_APIKEY']) {
         fetchOptions['headers'] = {
           ...fetchOptions['headers'],
