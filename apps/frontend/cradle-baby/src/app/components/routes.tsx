@@ -14,6 +14,7 @@ const Empty = () => null;
 export default () => (
   <Suspense fallback={<Empty />}>
     <Routes>
+      <Route path={PATH.DASHBOARD} element={<Empty />} />
       <Route path={PATH.REGISTER} element={<RegisterPage />} />
       <Route path={PATH.LOGIN} element={<LoginPage />} />
       <Route path={PATH.ALL} element={<Navigate to={PATH.LOGIN} />} />

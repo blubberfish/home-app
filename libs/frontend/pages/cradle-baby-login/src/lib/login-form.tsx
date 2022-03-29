@@ -83,7 +83,7 @@ export const LoginForm = () => {
         (accountId) => {
           if (accountId) {
             dispatch(setAccountId(accountId));
-            navigate(PATH.DASHBOARD);
+            navigate(`../${PATH.DASHBOARD}`);
           } else {
             setPending(false);
             dispatch(
