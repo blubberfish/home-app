@@ -1,7 +1,10 @@
 import { useCallback, useMemo, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { accountIdSelector } from '@blubberfish/frontend/modules/cradle-baby/app';
+import {
+  accountIdSelector,
+  accountInfoThunk,
+} from '@blubberfish/frontend/modules/cradle-baby/app';
 import {
   Button,
   FontAwesome,
@@ -36,6 +39,7 @@ const FormContainer = styled(Container) <BorderProps & ColorProps & RadiusProps>
 `;
 
 export const AddChildForm = () => {
+  const dispatch = useDispatch();
   const accountId = useSelector(accountIdSelector);
   const [pending, setPending] = useState(false);
   const [enFamilyName, setEnFamilyName] = useState('');
@@ -92,6 +96,7 @@ export const AddChildForm = () => {
     }).then(
       () => {
         /** @todo */
+        dispatch(accountInfoThunk(accountId));
       },
       () => {
         /** @todo alert message */
@@ -99,6 +104,7 @@ export const AddChildForm = () => {
       }
     );
   }, [
+    dispatch,
     accountId,
     dtob,
     enFamilyName,
