@@ -46,7 +46,10 @@ export const addAccountParents = createApi<PersonEntityPayload[], void>({
   },
 });
 
-export const addAccountChildren = createApi<PersonEntityPayload[], void>({
+export const addAccountChildren = createApi<
+  { account: string; data: PersonEntityPayload[] },
+  void
+>({
   method: HttpMethod.PUT,
   restricted: true,
   url: `${BaseUrl.REST}/account`,

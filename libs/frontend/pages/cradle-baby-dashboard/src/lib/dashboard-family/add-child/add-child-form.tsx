@@ -1,5 +1,7 @@
 import { useCallback, useMemo, useState } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { accountIdSelector } from '@blubberfish/frontend/modules/cradle-baby/app';
 import {
   Button,
   FontAwesome,
@@ -34,6 +36,7 @@ const FormContainer = styled(Container) <BorderProps & ColorProps & RadiusProps>
 `;
 
 export const AddChildForm = () => {
+  const accountId = useSelector(accountIdSelector);
   const [pending, setPending] = useState(false);
   const [enFamilyName, setEnFamilyName] = useState('');
   const [enGivenName, setEnGivenName] = useState('');
@@ -53,6 +56,8 @@ export const AddChildForm = () => {
 
   const handleSubmit = useCallback(() => {
     /** @todo alert message */
+    if (!accountId) return;
+    /** @todo alert message */
     if (
       !(
         dtob &&
@@ -66,22 +71,25 @@ export const AddChildForm = () => {
       return;
 
     setPending(true);
-    addAccountChildren([
-      {
-        dtob: dtob.toISOString(),
-        gender,
-        name: {
-          en: {
-            family: enFamilyName,
-            given: enGivenName,
-          },
-          zh: {
-            family: zhFamilyName,
-            given: zhGivenName,
+    addAccountChildren({
+      account: accountId,
+      data: [
+        {
+          dtob: dtob.toISOString(),
+          gender,
+          name: {
+            en: {
+              family: enFamilyName,
+              given: enGivenName,
+            },
+            zh: {
+              family: zhFamilyName,
+              given: zhGivenName,
+            },
           },
         },
-      },
-    ]).then(
+      ],
+    }).then(
       () => {
         /** @todo */
       },
@@ -90,7 +98,15 @@ export const AddChildForm = () => {
         setPending(false);
       }
     );
-  }, [dtob, enFamilyName, enGivenName, gender, zhFamilyName, zhGivenName]);
+  }, [
+    accountId,
+    dtob,
+    enFamilyName,
+    enGivenName,
+    gender,
+    zhFamilyName,
+    zhGivenName,
+  ]);
 
   return (
     <Container
