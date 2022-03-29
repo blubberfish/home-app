@@ -32,13 +32,13 @@ const Decoration = styled.div<BackgroundImageProps & ColorProps & PaddingProps>`
 
 const Form = styled.form<
   AlignmentProps &
-  BorderProps &
-  ColorProps &
-  GridProps &
-  MarginProps &
-  PaddingProps &
-  SizeProps
-  >`
+    BorderProps &
+    ColorProps &
+    GridProps &
+    MarginProps &
+    PaddingProps &
+    SizeProps
+>`
   ${alignment}
   ${border}
   ${color}
@@ -50,14 +50,14 @@ const Form = styled.form<
 
 const Container = styled.div<
   AlignmentProps &
-  BorderProps &
-  ColorProps &
-  GridProps &
-  MarginProps &
-  PaddingProps &
-  RadiusProps &
-  SizeProps
-  >`
+    BorderProps &
+    ColorProps &
+    GridProps &
+    MarginProps &
+    PaddingProps &
+    RadiusProps &
+    SizeProps
+>`
   ${alignment}
   ${border}
   ${color}
@@ -70,7 +70,7 @@ const Container = styled.div<
   filter: drop-shadow(0 5px 5px #0003);
 `;
 
-export const NewUserForm = () => {
+export const RegisterForm = () => {
   const [pending, setPending] = useState(false);
   const handleSubmit = useCallback((ev: FormEvent<HTMLFormElement>) => {
     ev.preventDefault();

@@ -39,7 +39,7 @@ export type HomePageLayoutProps = {
   children: ReactNode;
 };
 
-export const NewUserLayout = ({ children }: HomePageLayoutProps) => {
+export const RegisterLayout = ({ children }: HomePageLayoutProps) => {
   return (
     <Container
       bg="background_invert"

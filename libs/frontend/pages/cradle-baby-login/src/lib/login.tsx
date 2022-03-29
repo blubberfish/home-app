@@ -5,6 +5,7 @@ import { Button } from '@blubberfish/frontend/ui/components';
 import { LoginDivider } from './login-divider';
 import { LoginForm } from './login-form';
 import { LoginLayout } from './login-layout';
+import { LoginTitle } from './login-title';
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -13,6 +14,7 @@ const LoginPage = () => {
   }, [navigate]);
   return (
     <LoginLayout>
+      <LoginTitle />
       <LoginForm />
       <LoginDivider />
       <Button invert label="Create account" simple onClick={handleNewUser} />

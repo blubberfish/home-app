@@ -1,1 +1,1 @@
-export { default } from './lib/new-user';
+export { default } from './lib/register';

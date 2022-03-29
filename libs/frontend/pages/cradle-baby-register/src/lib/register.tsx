@@ -2,8 +2,9 @@ import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PATH } from '@blubberfish/frontend/pages/cradle-baby-routes';
 import { Button } from '@blubberfish/frontend/ui/components';
-import { NewUserForm } from './new-user-form';
-import { NewUserLayout } from './new-user-layout';
+import { RegisterForm } from './register-form';
+import { RegisterLayout } from './register-layout';
+import { RegisterTitle } from './register-title';
 
 const NewUserPage = () => {
   const navigate = useNavigate();
@@ -11,11 +12,11 @@ const NewUserPage = () => {
     navigate(`../${PATH.LOGIN}`);
   }, [navigate]);
   return (
-    <NewUserLayout>
-      <h1>New account</h1>
-      <NewUserForm />
+    <RegisterLayout>
+      <RegisterTitle />
+      <RegisterForm />
       <Button simple label="Cancel" onClick={handleCancel} />
-    </NewUserLayout>
+    </RegisterLayout>
   );
 };
 
