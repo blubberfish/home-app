@@ -96,30 +96,27 @@ export const RegisterForm = () => {
 
         dispatch(setAlert(null));
         setPending(true);
-        createAccount({ displayName, password, username })
-          .then(
-            () => {
-              dispatch(wasSuccessful());
-            },
-            (error) => {
-              dispatch(
-                setAlert(
-                  error.message === 'api.error_409'
-                    ? {
-                        title: 'This account already exist',
-                        message: 'Try a different username.',
-                      }
-                    : {
-                        title: 'Something went wrong',
-                        message: `An unknown error has occured ${error.message}.`,
-                      }
-                )
-              );
-            }
-          )
-          .finally(() => {
+        createAccount({ displayName, password, username }).then(
+          () => {
+            dispatch(wasSuccessful());
+          },
+          (error) => {
             setPending(false);
-          });
+            dispatch(
+              setAlert(
+                error.message === 'api.error_409'
+                  ? {
+                      title: 'This account already exists',
+                      message: 'Try a different username.',
+                    }
+                  : {
+                      title: 'Something went wrong',
+                      message: `An unknown error has occured ${error.message}.`,
+                    }
+              )
+            );
+          }
+        );
       }
     },
     [dispatch]
