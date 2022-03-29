@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Navigate, Routes, Route } from 'react-router-dom';
 import { PATH } from '@blubberfish/frontend/pages/cradle-baby-routes';
 
 const LoginPage = lazy(
@@ -16,7 +16,7 @@ export default () => (
     <Routes>
       <Route path={PATH.REGISTER} element={<RegisterPage />} />
       <Route path={PATH.LOGIN} element={<LoginPage />} />
-      <Route path={PATH.ALL} element={<Empty />} />
+      <Route path={PATH.ALL} element={<Navigate to={PATH.LOGIN} />} />
     </Routes>
   </Suspense>
 );
