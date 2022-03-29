@@ -55,7 +55,7 @@ export const controlIndication = <Props extends ControlIndicationProps>({
       &:hover {
         ${border({ theme, ...hoverIndication })}
         ${color({ theme, ...hoverIndication })}
-        ${border({ theme, ...hoverIndication })}
+        ${opacity({ theme, ...hoverIndication })}
       }
     `);
   }
