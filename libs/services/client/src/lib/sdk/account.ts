@@ -7,6 +7,24 @@ import {
 } from '@blubberfish/types';
 import { createApi } from './utils';
 
+const transformAccountInfo = (response: unknown) => {
+  const { family, ...data } = response as AccountInfo;
+  return {
+    ...data,
+    family: {
+      ...family,
+      parents: family.children.map((parent) => ({
+        ...parent,
+        dtob: new Date(parent.dtob),
+      })),
+      children: family.children.map((child) => ({
+        ...child,
+        dtob: new Date(child.dtob),
+      })),
+    },
+  } as AccountInfo;
+};
+
 export const createAccount = createApi<CreateAccountPayload, void>({
   method: HttpMethod.POST,
   restricted: true,
@@ -22,7 +40,7 @@ export const getAccountInfo = createApi<string, AccountInfo>({
   url: `${BaseUrl.REST}/account`,
   builders: {
     url: (input, base) => `${base}/${input}`,
-    response: async (response) => response as AccountInfo,
+    response: async (response) => transformAccountInfo(response),
   },
 });
 
@@ -59,7 +77,7 @@ export const addAccountChildren = createApi<
   builders: {
     url: (input, base) => `${base}/${input?.account}/children`,
     body: (input) => JSON.stringify(input?.data),
-    response: async (response) => response as AccountInfo,
+    response: async (response) => transformAccountInfo(response),
   },
 });
 
@@ -73,6 +91,6 @@ export const deleteAccountChildren = createApi<
   builders: {
     url: (input, base) => `${base}/${input?.account}/children`,
     body: (input) => JSON.stringify(input?.data),
-    response: async (response) => response as AccountInfo,
+    response: async (response) => transformAccountInfo(response),
   },
 });
