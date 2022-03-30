@@ -31,6 +31,13 @@ export const accountCollectionFactory = async () =>
     .db(DATABASE.NAME)
     .collection<Account>(DATABASE.COLLECTION.ACCOUNT);
 
+export const accountBabyLogCollectionFactory = async (id: string) =>
+  id
+    ? (await clientFactory())
+        .db(DATABASE.NAME)
+        .collection(`baby_tracking#${id}`)
+    : null;
+
 /*
 export const usersCollectionFactory = async () =>
   (await clientFactory())
