@@ -1,5 +1,5 @@
 import { MongoClient } from 'mongodb';
-import { Account } from '@blubberfish/types';
+import { Account, BabyActivityProfile } from '@blubberfish/types';
 
 const DATABASE = {
   NAME: 'cradle',
@@ -35,7 +35,7 @@ export const accountBabyLogCollectionFactory = async (id: string) =>
   id
     ? (await clientFactory())
         .db(DATABASE.NAME)
-        .collection(`baby_tracking#${id}`)
+        .collection<BabyActivityProfile>(`baby_tracking#${id}`)
     : null;
 
 /*

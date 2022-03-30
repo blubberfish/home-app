@@ -3,7 +3,7 @@ export type BabyActivityType =
   | 'baby:activity:feed'
   | 'baby:activity:sleep';
 
-export interface BabyProfile {
+export interface BabyActivityProfile {
   belongsTo: string;
   activity: BabyActivityType;
   timestamp: Date;
