@@ -1,3 +1,4 @@
+import { PATH as MAIN_PATH } from '@blubberfish/frontend/pages/cradle-baby-routes';
 import { lazy } from 'react';
 import { Navigate, Routes, Route } from 'react-router-dom';
 import { DashboardPageLayout } from './dashboard-layout';
@@ -17,7 +18,10 @@ const DashboardPage = () => (
       />
       <Route path={`${PATH.BABY}/*`} element={<DashboardBabyPage />} />
       <Route path={`${PATH.FAMILY}/*`} element={<DashboardFamilyPage />} />
-      <Route path="*" element={<Navigate to={`/${PATH.FAMILY}`} />} />
+      <Route
+        path="*"
+        element={<Navigate to={`/${MAIN_PATH.DASHBOARD}/${PATH.FAMILY}`} />}
+      />
     </Route>
   </Routes>
 );
