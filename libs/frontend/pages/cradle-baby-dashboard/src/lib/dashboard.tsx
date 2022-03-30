@@ -1,10 +1,10 @@
-import { lazy } from 'react'
-import { Routes, Route } from 'react-router-dom';
+import { lazy } from 'react';
+import { Navigate, Routes, Route } from 'react-router-dom';
 import { DashboardPageLayout } from './dashboard-layout';
 import { PATH } from './dashboard-paths';
 
-const DashboardBabyPage = lazy(() => import('./dashboard-baby'))
-const DashboardFamilyPage = lazy(() => import('./dashboard-family'))
+const DashboardBabyPage = lazy(() => import('./dashboard-baby'));
+const DashboardFamilyPage = lazy(() => import('./dashboard-family'));
 
 const Empty = ({ label }: { label?: string }) => <div>{label}</div>;
 
@@ -17,7 +17,7 @@ const DashboardPage = () => (
       />
       <Route path={`${PATH.BABY}/*`} element={<DashboardBabyPage />} />
       <Route path={`${PATH.FAMILY}/*`} element={<DashboardFamilyPage />} />
-      <Route path="*" element={<Empty />} />
+      <Route path="*" element={<Navigate to={`/${PATH.FAMILY}`} />} />
     </Route>
   </Routes>
 );
