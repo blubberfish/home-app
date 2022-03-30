@@ -9,3 +9,21 @@ export const logWakeActivity = createApi<BabyActivityPayload, void>({
     body: (input) => JSON.stringify(input),
   },
 });
+
+export const logFeedActivity = createApi<BabyActivityPayload, void>({
+  method: HttpMethod.POST,
+  restricted: true,
+  url: `${BaseUrl.REST}/baby/log/feed`,
+  builders: {
+    body: (input) => JSON.stringify(input),
+  },
+});
+
+export const logSleepActivity = createApi<BabyActivityPayload, void>({
+  method: HttpMethod.POST,
+  restricted: true,
+  url: `${BaseUrl.REST}/baby/log/sleep`,
+  builders: {
+    body: (input) => JSON.stringify(input),
+  },
+});

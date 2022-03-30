@@ -5,6 +5,8 @@ import {
   HttpMethod,
 } from '@blubberfish/services/core';
 import './app/delete-all-activity';
+import './app/log-feed-activity';
+import './app/log-sleep-activity';
 import './app/log-wakeup-activity';
 
 exports.handler = async (event, context) => {
