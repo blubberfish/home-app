@@ -1,4 +1,3 @@
-import { v4 as uuid } from 'uuid';
 import {
   ServiceException,
   apiExceptionFactory,
@@ -6,24 +5,23 @@ import {
   registerHandler,
   accountCollectionFactory,
 } from '@blubberfish/services/core';
-import { PersonEntityPayload } from '@blubberfish/types';
 import { ObjectId } from 'mongodb';
 
-const addAccountChildrenHandler = async (event) => {
+const deleteAccountChildrenHandler = async (event) => {
   const { path, body } = event;
   if (!/^\/?account\/[0-9a-fA-F]+\/children$/i.test(path)) return null;
 
   try {
-    const persons = (JSON.parse(body) ?? []) as PersonEntityPayload[];
-    if (!persons.length)
-      return apiExceptionFactory(ServiceException.IncompletePayload, '', 304);
-
     const [, id] = (
       (path as string).startsWith('/')
         ? (path as string).substring(1)
         : (path as string)
     ).split('/');
     if (!id) return apiExceptionFactory(ServiceException.DoesNotExist, '', 404);
+
+    const children = (JSON.parse(body) ?? []) as string[];
+    if (!children.length)
+      return apiExceptionFactory(ServiceException.IncompletePayload, '', 400);
 
     const accounts = await accountCollectionFactory();
     const { ok, value, lastErrorObject } = await accounts.findOneAndUpdate(
@@ -34,13 +32,9 @@ const addAccountChildrenHandler = async (event) => {
         $set: {
           '_meta.updatedOn': new Date(),
         },
-        $push: {
+        $pull: {
           'family.children': {
-            $each: persons.map(({ dtob, ...person }) => ({
-              ...person,
-              dtob: new Date(dtob),
-              uuid: uuid(),
-            })),
+            $in: children.map((child) => ({ uuid: child })),
           },
         },
       },
@@ -54,17 +48,17 @@ const addAccountChildrenHandler = async (event) => {
       }
     );
 
-    if (!ok) console.error({ '!ok': lastErrorObject });
+    if (!ok) console.error(lastErrorObject);
     return ok
       ? {
           statusCode: 200,
           body: JSON.stringify(value),
         }
-      : { statusCode: 500 };
+      : apiExceptionFactory(ServiceException.Unknown, '', 500);
   } catch (e) {
     console.error(e);
     return apiExceptionFactory(ServiceException.Unknown, e.message, 500);
   }
 };
 
-registerHandler(HttpMethod.PUT, addAccountChildrenHandler);
+registerHandler(HttpMethod.DELETE, deleteAccountChildrenHandler);
