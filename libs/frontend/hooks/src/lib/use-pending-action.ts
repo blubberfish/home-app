@@ -15,6 +15,9 @@ export const usePendingAction = () => {
       setPendingAction(() => undefined);
     });
   }, [pendingAction]);
+  const cancel = useCallback(() => {
+    setPendingAction(() => undefined);
+  }, []);
 
-  return [pendingAction, setPendingAction, execute];
+  return [pendingAction, setPendingAction, execute, cancel];
 };
