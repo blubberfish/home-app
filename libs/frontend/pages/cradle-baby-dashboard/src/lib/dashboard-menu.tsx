@@ -116,11 +116,11 @@ export const DashboardMenu = () => {
         posL={3}
         posR={3}
         rad={3}
-        templateColumns="repeat(3, 1fr) max-content"
+        templateColumns="repeat(4, max-content)"
         autoRows="max-content"
         autoFlow="dense"
         gap={1}
-        justifyContent="center"
+        justifyContent="space-evenly"
         justifyItems="center"
       >
         <Button ftSize={4} simple onClick={handleNav.toFamily}>
