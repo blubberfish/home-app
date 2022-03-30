@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import {
   accountIdSelector,
-  accountInfoThunk,
+  setAccountInfo,
 } from '@blubberfish/frontend/modules/cradle-baby/app';
 import {
   Button,
@@ -32,7 +32,7 @@ const Container = styled.div<AlignmentProps & GridProps & PaddingProps>`
   ${padding}
 `;
 
-const FormContainer = styled(Container) <BorderProps & ColorProps & RadiusProps>`
+const FormContainer = styled(Container)<BorderProps & ColorProps & RadiusProps>`
   ${border}
   ${color}
   ${radius}
@@ -94,9 +94,8 @@ export const AddChildForm = () => {
         },
       ],
     }).then(
-      () => {
-        /** @todo */
-        dispatch(accountInfoThunk(accountId));
+      (updatedAccountInfo) => {
+        updatedAccountInfo && dispatch(setAccountInfo(updatedAccountInfo));
       },
       () => {
         /** @todo alert message */
