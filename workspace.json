@@ -14,6 +14,7 @@
     "frontend-ui-components": "libs/frontend/ui/components",
     "frontend-ui-theme": "libs/frontend/ui/theme",
     "services-account": "apps/services/account",
+    "services-baby": "apps/services/baby",
     "services-client": "libs/services/client",
     "services-core": "libs/services/core",
     "services-realtime": "apps/services/realtime",
