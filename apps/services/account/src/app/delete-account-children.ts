@@ -32,10 +32,8 @@ const deleteAccountChildrenHandler = async (event) => {
         $set: {
           '_meta.updatedOn': new Date(),
         },
-        $pull: {
-          'family.children': {
-            $in: children.map((child) => ({ uuid: child })),
-          },
+        $pullAll: {
+          'family.children': children.map((child) => ({ uuid: child })),
         },
       },
       {
