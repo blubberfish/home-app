@@ -3,7 +3,12 @@ import {
   ConstrainedLayout,
   FontAwesome,
 } from '@blubberfish/frontend/ui/components';
-import { accountInfoSelector } from '@blubberfish/frontend/modules/cradle-baby/app';
+import {
+  accountIdSelector,
+  accountInfoSelector,
+  setAccountInfo,
+} from '@blubberfish/frontend/modules/cradle-baby/app';
+import { deleteAccountChildren } from '@blubberfish/services/client';
 import {
   AlignmentProps,
   alignment,
@@ -22,7 +27,8 @@ import {
   SizeProps,
   size,
 } from '@blubberfish/style-system';
-import { useSelector } from 'react-redux';
+import { useCallback, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { ListSkeleton } from './dashboard-family-skeleton';
@@ -73,8 +79,34 @@ const Text = styled.p<ColorProps & FontProps & SizeProps>`
 `;
 
 export const DashboardFamilyOverview = () => {
+  const [pending, setPending] = useState(false);
+  const dispatch = useDispatch();
+  const accountId = useSelector(accountIdSelector);
   const account = useSelector(accountInfoSelector);
   const navigate = useNavigate();
+  const handleDeleteChild = useCallback(
+    (uuid: string) => {
+      if (!accountId) return;
+      setPending(true);
+      deleteAccountChildren({
+        account: accountId,
+        data: [uuid],
+      })
+        .then(
+          (accountInfo) => {
+            accountInfo && dispatch(setAccountInfo(accountInfo));
+          },
+          (error) => {
+            console.error(error);
+          }
+        )
+        .finally(() => {
+          setPending(false);
+        });
+    },
+    [accountId, dispatch]
+  );
+
   return (
     <ConstrainedContainer gap={5} pad={3}>
       {account?.family.parents.length ? (
@@ -86,7 +118,7 @@ export const DashboardFamilyOverview = () => {
           templateColumns="1fr"
         >
           <Text>Our adults</Text>
-          <ListSkeleton persons={account.family.parents} />
+          <ListSkeleton disabled={pending} persons={account.family.parents} />
         </Container>
       ) : null}
       <Container
@@ -97,9 +129,14 @@ export const DashboardFamilyOverview = () => {
         templateColumns="1fr"
       >
         <Text>Our children</Text>
-        <ListSkeleton persons={account?.family.children} />
+        <ListSkeleton
+          disabled={pending}
+          persons={account?.family.children}
+          onDelete={handleDeleteChild}
+        />
         <AddMemberButton
           simple
+          disabled={pending}
           onClick={() => {
             navigate(PATH.ADD_CHILD);
           }}
