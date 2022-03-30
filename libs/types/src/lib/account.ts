@@ -21,6 +21,12 @@ export type Account = AccountInfo & {
   password: string;
 };
 
+export type AccountInfoPayload = Omit<AccountInfo, '_meta' | 'password'> & {
+  family: {
+    [key in keyof AccountInfo['family']]: PersonEntityPayload;
+  };
+};
+
 export type PersonEntityPayload = Omit<PersonEntity, 'dtob' | 'uuid'> & {
   dtob: string;
 };

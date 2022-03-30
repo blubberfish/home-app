@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AccountInfo } from '@blubberfish/types';
+import { AccountInfoPayload } from '@blubberfish/types';
 import { name, getInitialState, storage } from './base';
 
 const slice = createSlice({
@@ -10,7 +10,10 @@ const slice = createSlice({
       storage.accountId.set(payload);
       state.account = payload;
     },
-    setAccountInfo(state, { payload }: PayloadAction<AccountInfo | null>) {
+    setAccountInfo(
+      state,
+      { payload }: PayloadAction<AccountInfoPayload | null>
+    ) {
       state.accountInfo = payload;
     },
   },

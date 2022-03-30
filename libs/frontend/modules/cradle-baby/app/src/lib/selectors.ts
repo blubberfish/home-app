@@ -1,4 +1,5 @@
 import { GlobalState } from '@blubberfish/frontend/modules/core';
+import { AccountInfo } from '@blubberfish/types';
 import { createSelector } from '@reduxjs/toolkit';
 import { name, AppState } from './base';
 
@@ -10,7 +11,22 @@ export const accountIdSelector = createSelector(
   (state) => state?.account
 );
 
-export const accountInfoSelector = createSelector(
-  stateSelector,
-  (state) => state?.accountInfo
-);
+export const accountInfoSelector = createSelector(stateSelector, (state) => {
+  const info = state?.accountInfo;
+  if (info) {
+    return {
+      ...info,
+      family: {
+        children: info.family.children.map((child) => ({
+          ...child,
+          dtob: new Date(child.dtob),
+        })),
+        parents: info.family.parents.map((parent) => ({
+          ...parent,
+          dtob: new Date(parent.dtob),
+        })),
+      },
+    } as AccountInfo;
+  }
+  return null;
+});

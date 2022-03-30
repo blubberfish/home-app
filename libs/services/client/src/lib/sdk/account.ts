@@ -2,7 +2,7 @@ import {
   BaseUrl,
   HttpMethod,
   CreateAccountPayload,
-  AccountInfo,
+  AccountInfoPayload,
   PersonEntityPayload,
 } from '@blubberfish/types';
 import { createApi } from './utils';
@@ -16,13 +16,13 @@ export const createAccount = createApi<CreateAccountPayload, void>({
   },
 });
 
-export const getAccountInfo = createApi<string, AccountInfo>({
+export const getAccountInfo = createApi<string, AccountInfoPayload>({
   method: HttpMethod.GET,
   restricted: true,
   url: `${BaseUrl.REST}/account`,
   builders: {
     url: (input, base) => `${base}/${input}`,
-    response: async (response) => response as AccountInfo,
+    response: async (response) => response as AccountInfoPayload,
   },
 });
 
@@ -51,7 +51,7 @@ export const addAccountParents = createApi<
 
 export const addAccountChildren = createApi<
   { account: string; data: PersonEntityPayload[] },
-  AccountInfo
+  AccountInfoPayload
 >({
   method: HttpMethod.PUT,
   restricted: true,
@@ -59,13 +59,13 @@ export const addAccountChildren = createApi<
   builders: {
     url: (input, base) => `${base}/${input?.account}/children`,
     body: (input) => JSON.stringify(input?.data),
-    response: async (response) => response as AccountInfo,
+    response: async (response) => response as AccountInfoPayload,
   },
 });
 
 export const deleteAccountChildren = createApi<
   { account: string; data: string[] },
-  AccountInfo
+  AccountInfoPayload
 >({
   method: HttpMethod.DELETE,
   restricted: true,
@@ -73,6 +73,6 @@ export const deleteAccountChildren = createApi<
   builders: {
     url: (input, base) => `${base}/${input?.account}/children`,
     body: (input) => JSON.stringify(input?.data),
-    response: async (response) => response as AccountInfo,
+    response: async (response) => response as AccountInfoPayload,
   },
 });
