@@ -1,17 +1,11 @@
-export type BabyTrackerType =
-  | 'baby:track:wake'
-  | 'baby:track:feed'
-  | 'baby:track:sleep';
+export type BabyActivityType =
+  | 'baby:activity:wake'
+  | 'baby:activity:feed'
+  | 'baby:activity:sleep';
 
 export interface BabyProfile {
-  givenName: string;
-  familyName: string;
-  preferredName?: string;
-  dateOfBirth: Date | string | number;
+  belongsTo: string;
+  activity: BabyActivityType;
+  timestamp: Date;
+  notes?: string;
 }
-
-export type BabyTrackingData = {
-  type: BabyTrackerType;
-  timestamp: number;
-  babyId: string;
-};
