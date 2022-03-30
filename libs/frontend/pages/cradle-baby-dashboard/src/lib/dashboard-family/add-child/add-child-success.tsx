@@ -15,6 +15,8 @@ import {
   radius,
   RadiusProps,
 } from '@blubberfish/style-system';
+import { PATH } from '@blubberfish/frontend/pages/cradle-baby-routes';
+import { PATH as DASHBOARD_PATH } from '../../dashboard-paths';
 
 const Container = styled.div<
   AlignmentProps & ColorProps & GridProps & PaddingProps & RadiusProps
@@ -44,6 +46,11 @@ const Message = styled.p<ColorProps & FontProps>`
   ${font}
 `;
 
+const Anchor = styled.a<ColorProps & FontProps>`
+  ${color}
+  ${font}
+`;
+
 export const AddChildSuccess = () => {
   const [searchParams] = useSearchParams();
 
@@ -58,14 +65,21 @@ export const AddChildSuccess = () => {
       pad={5}
       rad={3}
       templateColumns="max-content"
-      templateRows="repeat(2, min-content)"
+      templateRows="repeat(3, min-content)"
     >
       <Title ftSize={5}>
         <FontAwesome.CircleCheck />
       </Title>
-      <Message fg="text_invert_weak">
+      <Message fg="text_invert_weak" ftWeight={1}>
         Your child was added to the family!
       </Message>
+      <Anchor
+        fg="text_invert_strong"
+        ftWeight={3}
+        href={`/${PATH.DASHBOARD}/${DASHBOARD_PATH.FAMILY}`}
+      >
+        Back to your family
+      </Anchor>
     </Container>
   );
 };
