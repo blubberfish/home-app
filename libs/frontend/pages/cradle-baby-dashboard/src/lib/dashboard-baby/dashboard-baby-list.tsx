@@ -1,10 +1,15 @@
-import { accountChildrenSelector } from '@blubberfish/frontend/modules/cradle-baby/app';
+import {
+  selectAllChildren,
+  selectChildById,
+} from '@blubberfish/frontend/modules/cradle-baby/app';
 import {
   Button,
   ConstrainedLayout,
   FontAwesome,
 } from '@blubberfish/frontend/ui/components';
 import {
+  alignment,
+  AlignmentProps,
   color,
   ColorProps,
   grid,
@@ -14,13 +19,15 @@ import {
   radius,
   RadiusProps,
 } from '@blubberfish/style-system';
+import { ReactNode } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { currentBabySelector, setBaby } from './redux';
+import { currentBabySelector, resetBaby, setBaby } from './redux';
 
 const ConstrainedContainer = styled(ConstrainedLayout) <
-  GridProps & PaddingProps
+  AlignmentProps & GridProps & PaddingProps
   >`
+  ${alignment}
   ${grid}
   ${padding}
 `;
@@ -34,20 +41,67 @@ const Container = styled.div<
   ${radius}
 `;
 
+const GenderIcon = ({ gender }: { gender?: string }) =>
+  gender === 'f' ? <FontAwesome.Venus /> : <FontAwesome.Mars />;
+
+const ButtonContentContainer = ({
+  color,
+  children,
+}: {
+  color?: string;
+  children: ReactNode;
+}) => (
+  <Container
+    bg={color ?? 'background_weak'}
+    padY={2}
+    padX={3}
+    rad={2}
+    gap={2}
+    templateColumns="max-content 1fr"
+    templateRows="min-content"
+  >
+    {children}
+  </Container>
+);
+
+const ListContainer = ({ children }: { children: ReactNode }) => (
+  <ConstrainedContainer
+    gap={3}
+    pad={3}
+    templateColumns={`repeat(3, max-content)`}
+    autoRows="min-content"
+    autoFlow="dense"
+    justifyContent="center"
+  >
+    {children}
+  </ConstrainedContainer>
+);
+
 export const DashboardBabyList = () => {
   const dispatch = useDispatch();
-  const children = useSelector(accountChildrenSelector);
-  const baby = useSelector(currentBabySelector);
+  const children = useSelector(selectAllChildren);
+  const baby = useSelector(
+    selectChildById(useSelector(currentBabySelector) ?? '')
+  );
 
-  if (baby) return null;
+  if (baby)
+    return (
+      <ListContainer>
+        <Button
+          simple
+          onClick={() => {
+            dispatch(resetBaby());
+          }}
+        >
+          <ButtonContentContainer color="error">
+            <FontAwesome.X />
+            <span>{baby.name.en?.preferred ?? baby.name.en?.given}</span>
+          </ButtonContentContainer>
+        </Button>
+      </ListContainer>
+    );
   return (
-    <ConstrainedContainer
-      gap={3}
-      pad={3}
-      templateColumns={`repeat(3, max-content)`}
-      autoRows="min-content"
-      autoFlow="dense"
-    >
+    <ListContainer>
       {children.map((child) => (
         <Button
           key={child.uuid}
@@ -56,24 +110,12 @@ export const DashboardBabyList = () => {
             dispatch(setBaby(child.uuid));
           }}
         >
-          <Container
-            bg="background_weak"
-            padY={2}
-            padX={3}
-            rad={3}
-            gap={3}
-            templateColumns="max-content 1fr"
-            templateRows="min-content"
-          >
-            {child.gender === 'f' ? (
-              <FontAwesome.Venus />
-            ) : (
-              <FontAwesome.Mars />
-            )}
+          <ButtonContentContainer>
+            <GenderIcon gender={child.gender} />
             <span>{child.name.en?.preferred ?? child.name.en?.given}</span>
-          </Container>
+          </ButtonContentContainer>
         </Button>
       ))}
-    </ConstrainedContainer>
+    </ListContainer>
   );
 };

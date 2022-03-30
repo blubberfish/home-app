@@ -36,7 +36,11 @@ export const accountInfoSelector = createSelector(stateSelector, (state) => {
   return null;
 });
 
-export const {
-  selectAll: accountChildrenSelector,
-  selectById: accountChildSelector,
-} = childPersonEntity.getSelectors(childrenEntityStateSelector);
+const { selectAll, selectById } = childPersonEntity.getSelectors(
+  childrenEntityStateSelector
+);
+
+export const selectAllChildren = selectAll;
+export const selectChildById =
+  (id?: string) => (state: GlobalState<AppState, typeof name>) =>
+    id ? selectById(state, id) : null;
