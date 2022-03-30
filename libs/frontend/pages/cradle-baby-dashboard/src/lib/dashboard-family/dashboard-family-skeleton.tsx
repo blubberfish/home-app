@@ -72,8 +72,11 @@ const Container = styled.div<
   ${size}
 `;
 
-export type PersonSkeletonProps = { data?: PersonEntity };
-export const PersonSkeleton = ({ data }: PersonSkeletonProps) => (
+export type PersonSkeletonProps = {
+  data?: PersonEntity;
+  onDelete?: () => void;
+};
+export const PersonSkeleton = ({ data, onDelete }: PersonSkeletonProps) => (
   <Container
     overflow="hidden"
     alignContent="center"
@@ -129,7 +132,7 @@ export const PersonSkeleton = ({ data }: PersonSkeletonProps) => (
       )}
     </Container>
     {(data && (
-      <Button fg="error" simple>
+      <Button fg="error" simple onClick={onDelete}>
         <FontAwesome.Trash />
       </Button>
     )) ?? <Shape w="2em" h="2em" rad="50%" />}
@@ -138,8 +141,9 @@ export const PersonSkeleton = ({ data }: PersonSkeletonProps) => (
 
 export type ListSkeletonProps = {
   persons?: PersonEntity[];
+  onDelete?: (uuid: string) => void;
 };
-export const ListSkeleton = ({ persons }: ListSkeletonProps) => (
+export const ListSkeleton = ({ persons, onDelete }: ListSkeletonProps) => (
   <Container
     autoFlow="dense"
     autoColumns="max-content"
@@ -149,7 +153,13 @@ export const ListSkeleton = ({ persons }: ListSkeletonProps) => (
   >
     {persons ? (
       persons.map((person) => (
-        <PersonSkeleton key={person.uuid} data={person} />
+        <PersonSkeleton
+          key={person.uuid}
+          data={person}
+          onDelete={() => {
+            onDelete && onDelete(person.uuid);
+          }}
+        />
       ))
     ) : (
       <>
