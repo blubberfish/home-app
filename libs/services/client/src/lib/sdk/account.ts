@@ -51,7 +51,7 @@ export const addAccountParents = createApi<
 
 export const addAccountChildren = createApi<
   { account: string; data: PersonEntityPayload[] },
-  void
+  AccountInfo
 >({
   method: HttpMethod.PUT,
   restricted: true,
@@ -59,5 +59,20 @@ export const addAccountChildren = createApi<
   builders: {
     url: (input, base) => `${base}/${input?.account}/children`,
     body: (input) => JSON.stringify(input?.data),
+    response: async (response) => response as AccountInfo,
+  },
+});
+
+export const deleteAccountChildren = createApi<
+  { account: string; data: string[] },
+  AccountInfo
+>({
+  method: HttpMethod.DELETE,
+  restricted: true,
+  url: `${BaseUrl.REST}/account`,
+  builders: {
+    url: (input, base) => `${base}/${input?.account}/children`,
+    body: (input) => JSON.stringify(input?.data),
+    response: async (response) => response as AccountInfo,
   },
 });
