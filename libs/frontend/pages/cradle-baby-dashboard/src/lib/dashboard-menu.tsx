@@ -37,15 +37,15 @@ to {
 
 const Container = styled.div<
   AlignmentProps &
-    BorderProps &
-    ColorProps &
-    GridProps &
-    MarginProps &
-    PaddingProps &
-    PositionProps &
-    RadiusProps &
-    SizeProps
->`
+  BorderProps &
+  ColorProps &
+  GridProps &
+  MarginProps &
+  PaddingProps &
+  PositionProps &
+  RadiusProps &
+  SizeProps
+  >`
   ${alignment}
   ${border}
   ${color}
@@ -57,7 +57,7 @@ const Container = styled.div<
   ${size}
 `;
 
-const SlideInContainer = styled(Container)<{ hide?: boolean }>`
+const SlideInContainer = styled(Container) <{ hide?: boolean }>`
   animation-name: ${slideIn};
   animation-duration: 0.34s;
   animation-timing-function: ease-out;
@@ -91,21 +91,30 @@ export const DashboardMenu = () => {
   );
   return (
     <Container
-      bg="background"
       templateColumns="max-content"
       templateRows="max-content"
-      pad={3}
       justifyContent="center"
-      pos="relative"
+      pos="fixed"
+      posB={5}
+      posR={5}
     >
       <Button
-        ftSize={4}
+        fg="text_invert"
+        ftSize={3}
         onClick={() => {
           setShowMenu(true);
         }}
         simple
       >
-        <FontAwesome.Bars />
+        <Container
+          alignContent="center"
+          justifyContent="center"
+          bg="background_invert"
+          pad={2}
+          rad="50%"
+        >
+          <FontAwesome.Bars />
+        </Container>
       </Button>
       <SlideInContainer
         bg="background_weak"
