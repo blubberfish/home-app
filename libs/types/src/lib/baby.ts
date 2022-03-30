@@ -9,3 +9,9 @@ export interface BabyActivityProfile {
   timestamp: Date;
   notes?: string;
 }
+
+export interface BabyActivityPayload {
+  account: string;
+  baby: string;
+  additionalDetails?: string;
+}

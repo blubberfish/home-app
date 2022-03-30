@@ -4,6 +4,8 @@ import {
   HttpHeader,
   HttpMethod,
 } from '@blubberfish/services/core';
+import './app/delete-all-activity';
+import './app/log-wakeup-activity';
 
 exports.handler = async (event, context) => {
   const { httpMethod, headers } = event;
