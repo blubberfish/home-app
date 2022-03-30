@@ -1,10 +1,15 @@
 import { GlobalState } from '@blubberfish/frontend/modules/core';
 import { AccountInfo } from '@blubberfish/types';
 import { createSelector } from '@reduxjs/toolkit';
-import { name, AppState } from './base';
+import { name, AppState, childPersonEntity } from './base';
 
 const stateSelector = (state: GlobalState<AppState, typeof name>) =>
   state[name];
+
+const childrenEntityStateSelector = createSelector(
+  stateSelector,
+  (state) => state?.children ?? childPersonEntity.getInitialState()
+);
 
 export const accountIdSelector = createSelector(
   stateSelector,
@@ -30,3 +35,8 @@ export const accountInfoSelector = createSelector(stateSelector, (state) => {
   }
   return null;
 });
+
+export const {
+  selectAll: accountChildrenSelector,
+  selectById: accountChildSelector,
+} = childPersonEntity.getSelectors(childrenEntityStateSelector);

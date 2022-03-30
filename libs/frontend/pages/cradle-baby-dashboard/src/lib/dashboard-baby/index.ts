@@ -1,1 +1,1 @@
-export { DashboardBabyPage as default } from './dashboard-baby';
+export { default } from './dashboard-baby';
