@@ -44,6 +44,7 @@ const AddMemberButton = styled(Button)`
 const Container = styled.div<
   AlignmentProps &
     BorderProps &
+    ColorProps &
     GridProps &
     PaddingProps &
     RadiusProps &
@@ -51,6 +52,7 @@ const Container = styled.div<
 >`
   ${alignment}
   ${border}
+  ${color}
   ${grid}
   ${padding}
   ${radius}
@@ -79,7 +81,10 @@ const Text = styled.p<ColorProps & FontProps & SizeProps>`
 `;
 
 export const DashboardFamilyOverview = () => {
-  const [pending, setPending] = useState(false);
+  const [pending, setPending] = useState<{
+    message: string;
+    action: () => Promise<void>;
+  } | null>(null);
   const dispatch = useDispatch();
   const accountId = useSelector(accountIdSelector);
   const account = useSelector(accountInfoSelector);
@@ -87,27 +92,76 @@ export const DashboardFamilyOverview = () => {
   const handleDeleteChild = useCallback(
     (uuid: string) => {
       if (!accountId) return;
-      setPending(true);
-      deleteAccountChildren({
-        account: accountId,
-        data: [uuid],
-      })
-        .then(
-          (accountInfo) => {
-            accountInfo && dispatch(setAccountInfo(accountInfo));
-          },
-          (error) => {
-            console.error(error);
-          }
-        )
-        .finally(() => {
-          setPending(false);
+      const child = account?.family.children.find(
+        (child) => child.uuid === uuid
+      );
+      if (child) {
+        setPending({
+          message: `Are you sure you want to remove ${
+            child.name.en?.preferred ?? child.name.en?.given
+          } from your family?`,
+          action: () =>
+            deleteAccountChildren({
+              account: accountId,
+              data: [uuid],
+            })
+              .then(
+                (accountInfo) => {
+                  accountInfo && dispatch(setAccountInfo(accountInfo));
+                },
+                (error) => {
+                  console.error(error);
+                }
+              )
+              .finally(() => {
+                setPending(null);
+              }),
         });
+      }
     },
-    [accountId, dispatch]
+    [account, accountId, dispatch]
   );
 
-  return (
+  return pending ? (
+    <ConstrainedContainer gap={5} pad={3}>
+      <Container
+        bg="background_weak"
+        justifyItems="center"
+        justifyContent="center"
+        templateRows="repeat(2, min-content)"
+        templateColumns="1fr"
+        gap={3}
+        rad={3}
+        padX={3}
+        padY={2}
+      >
+        <Text>{pending.message}</Text>
+        <Container
+          gap={3}
+          alignItems="center"
+          justifyContent="space-evenly"
+          templateRows="min-content"
+          templateColumns="repeat(2, max-content)"
+        >
+          <Button
+            onClick={() => {
+              pending.action();
+            }}
+          >
+            Yes
+          </Button>
+          <Button
+            bg="error"
+            onClick={() => {
+              setPending(() => null);
+            }}
+          >
+            No
+          </Button>
+        </Container>
+      </Container>
+    </ConstrainedContainer>
+  ) : (
     <ConstrainedContainer gap={5} pad={3}>
       {account?.family.parents.length ? (
         <Container
@@ -118,7 +172,7 @@ export const DashboardFamilyOverview = () => {
           templateColumns="1fr"
         >
           <Text>Our adults</Text>
-          <ListSkeleton disabled={pending} persons={account.family.parents} />
+          <ListSkeleton disabled={!!pending} persons={account.family.parents} />
         </Container>
       ) : null}
       <Container
@@ -130,13 +184,13 @@ export const DashboardFamilyOverview = () => {
       >
         <Text>Our children</Text>
         <ListSkeleton
-          disabled={pending}
+          disabled={!!pending}
           persons={account?.family.children}
           onDelete={handleDeleteChild}
         />
         <AddMemberButton
           simple
-          disabled={pending}
+          disabled={!!pending}
           onClick={() => {
             navigate(PATH.ADD_CHILD);
           }}
