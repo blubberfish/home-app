@@ -67,6 +67,7 @@ export const radius = <Props extends RadiusProps>({
 
 export type BorderStyle = {
   size?: number | string;
+  line?: 'solid' | 'dashed' | 'dotted';
   color?: number | string;
 };
 
@@ -97,7 +98,7 @@ export const border = <Props extends BorderProps>({
   if (l) {
     styles.push(
       css`
-        border-left-style: solid;
+        border-left-style: ${l.line ?? 'solid'};
       `
     );
     if (l.color) {
@@ -120,7 +121,7 @@ export const border = <Props extends BorderProps>({
   if (r) {
     styles.push(
       css`
-        border-right-style: solid;
+        border-right-style: ${r.line ?? 'solid'}; ;
       `
     );
     if (r.color) {
@@ -143,7 +144,7 @@ export const border = <Props extends BorderProps>({
   if (t) {
     styles.push(
       css`
-        border-top-style: solid;
+        border-top-style: ${t.line ?? 'solid'}; ;
       `
     );
     if (t.color) {
@@ -166,7 +167,7 @@ export const border = <Props extends BorderProps>({
   if (b) {
     styles.push(
       css`
-        border-bottom-style: solid;
+        border-bottom-style: ${b.line ?? 'solid'}; ;
       `
     );
     if (b.color) {
