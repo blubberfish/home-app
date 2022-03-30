@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AccountInfoPayload } from '@blubberfish/types';
-import { name, getInitialState, storage } from './base';
+import { childPersonEntity, name, getInitialState, storage } from './base';
 
 const slice = createSlice({
   name,
@@ -15,6 +15,7 @@ const slice = createSlice({
       { payload }: PayloadAction<AccountInfoPayload | null>
     ) {
       state.accountInfo = payload;
+      childPersonEntity.setAll(state.children, payload?.family.children ?? []);
     },
   },
 });

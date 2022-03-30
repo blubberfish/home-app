@@ -3,7 +3,7 @@ import {
   HttpMethod,
   CreateAccountPayload,
   AccountInfoPayload,
-  PersonEntityPayload,
+  CreatePersonEntityPayload,
 } from '@blubberfish/types';
 import { createApi } from './utils';
 
@@ -37,7 +37,7 @@ export const changeAccountName = createApi<{ displayName: string }, void>({
 });
 
 export const addAccountParents = createApi<
-  { account: string; data: PersonEntityPayload[] },
+  { account: string; data: CreatePersonEntityPayload[] },
   void
 >({
   method: HttpMethod.PUT,
@@ -50,7 +50,7 @@ export const addAccountParents = createApi<
 });
 
 export const addAccountChildren = createApi<
-  { account: string; data: PersonEntityPayload[] },
+  { account: string; data: CreatePersonEntityPayload[] },
   AccountInfoPayload
 >({
   method: HttpMethod.PUT,

@@ -21,18 +21,20 @@ export type Account = AccountInfo & {
   password: string;
 };
 
-export type AccountInfoPayload = Omit<AccountInfo, '_meta' | 'password'> & {
-  family: {
-    [key in keyof AccountInfo['family']]: PersonEntityPayload;
-  };
-};
-
-export type PersonEntityPayload = Omit<PersonEntity, 'dtob' | 'uuid'> & {
+export type PersonEntityPayload = Omit<PersonEntity, 'dtob'> & {
   dtob: string;
 };
+
+export type CreatePersonEntityPayload = Omit<PersonEntityPayload, 'uuid'>;
 
 export type CreateAccountPayload = {
   displayName: string;
   username: string;
   password: string;
+};
+
+export type AccountInfoPayload = Omit<AccountInfo, '_meta' | 'password'> & {
+  family: {
+    [key in keyof AccountInfo['family']]: PersonEntityPayload[];
+  };
 };
