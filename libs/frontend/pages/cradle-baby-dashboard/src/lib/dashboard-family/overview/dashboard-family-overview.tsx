@@ -8,7 +8,7 @@ import {
   accountInfoSelector,
   setAccountInfo,
 } from '@blubberfish/frontend/modules/cradle-baby/app';
-import { deleteAccountChildren } from '@blubberfish/services/client';
+import { deleteAccountChildren, clearBabyActivityLog } from '@blubberfish/services/client';
 import {
   AlignmentProps,
   alignment,
@@ -32,7 +32,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { ListSkeleton } from './dashboard-family-skeleton';
-import { PATH } from '../dashboard-paths';
+import { PATH } from '../../dashboard-paths';
 
 const AddMemberButton = styled(Button)`
   svg {
@@ -43,13 +43,13 @@ const AddMemberButton = styled(Button)`
 
 const Container = styled.div<
   AlignmentProps &
-    BorderProps &
-    ColorProps &
-    GridProps &
-    PaddingProps &
-    RadiusProps &
-    SizeProps
->`
+  BorderProps &
+  ColorProps &
+  GridProps &
+  PaddingProps &
+  RadiusProps &
+  SizeProps
+  >`
   ${alignment}
   ${border}
   ${color}
@@ -59,9 +59,9 @@ const Container = styled.div<
   ${size}
 `;
 
-const ConstrainedContainer = styled(ConstrainedLayout)<
+const ConstrainedContainer = styled(ConstrainedLayout) <
   AlignmentProps & ColorProps & GridProps & PaddingProps
->`
+  >`
   ${alignment}
   ${color}
   ${grid}
@@ -97,25 +97,26 @@ export const DashboardFamilyOverview = () => {
       );
       if (child) {
         setPending({
-          message: `Are you sure you want to remove ${
-            child.name.en?.preferred ?? child.name.en?.given
-          } from your family?`,
-          action: () =>
-            deleteAccountChildren({
+          message: `Are you sure you want to remove ${child.name.en?.preferred ?? child.name.en?.given
+            } from your family?`,
+          action: () => clearBabyActivityLog({
+            account: accountId,
+            baby: uuid,
+          }).then(
+            () => deleteAccountChildren({
               account: accountId,
               data: [uuid],
             })
-              .then(
-                (accountInfo) => {
-                  accountInfo && dispatch(setAccountInfo(accountInfo));
-                },
-                (error) => {
-                  console.error(error);
-                }
-              )
-              .finally(() => {
-                setPending(null);
-              }),
+          ).then(
+            (accountInfo) => {
+              accountInfo && dispatch(setAccountInfo(accountInfo));
+            }
+          ).catch((error) => {
+            /** @todo */
+            console.error(error);
+          }).finally(() => {
+            setPending(null);
+          }),
         });
       }
     },
