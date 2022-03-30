@@ -1,4 +1,4 @@
-import { FontAwesome } from '@blubberfish/frontend/ui/components';
+import { Button, FontAwesome } from '@blubberfish/frontend/ui/components';
 import {
   AlignmentProps,
   alignment,
@@ -80,7 +80,7 @@ export const PersonSkeleton = ({ data }: PersonSkeletonProps) => (
     alignItems="center"
     justifyContent="center"
     justifyItems="center"
-    templateColumns="max-content 1fr"
+    templateColumns="max-content 1fr max-content"
     templateRows="1fr"
     bg="background_weak"
     gap={2}
@@ -103,8 +103,8 @@ export const PersonSkeleton = ({ data }: PersonSkeletonProps) => (
         )}
       </Container>
     )) ?? <Shape w="64px" h="64px" rad="50%" />}
-    <Container templateColumns="1fr" templateRows="1fr 1fr" gap={2}>
-      {(data?.name && (
+    <Container templateColumns="1fr" templateRows="repeat(3, 1fr)" gap={2}>
+      {(data && (
         <>
           <Text wMin="8em">
             {data.name.en?.family}&nbsp;
@@ -114,14 +114,25 @@ export const PersonSkeleton = ({ data }: PersonSkeletonProps) => (
             {data.name.zh?.family}
             {data.name.zh?.given}
           </Text>
+          <Text wMin="8em">
+            {data.dtob.getDate().toString().padStart(2, '0')}/
+            {(data.dtob.getMonth() + 1).toString().padStart(2, '0')}/
+            {data.dtob.getFullYear()}
+          </Text>
         </>
       )) ?? (
         <>
           <Shape fg="currentColor" h="1em" w="8em" />
           <Shape fg="currentColor" h="1em" w="8em" />
+          <Shape fg="currentColor" h="1em" w="8em" />
         </>
       )}
     </Container>
+    {(data && (
+      <Button fg="error" simple>
+        <FontAwesome.Trash />
+      </Button>
+    )) ?? <Shape w="2em" h="2em" rad="50%" />}
   </Container>
 );
 

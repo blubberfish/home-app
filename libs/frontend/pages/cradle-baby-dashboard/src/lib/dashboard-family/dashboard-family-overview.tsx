@@ -1,8 +1,14 @@
-import { ConstrainedLayout } from '@blubberfish/frontend/ui/components';
+import {
+  Button,
+  ConstrainedLayout,
+  FontAwesome,
+} from '@blubberfish/frontend/ui/components';
 import { accountInfoSelector } from '@blubberfish/frontend/modules/cradle-baby/app';
 import {
   AlignmentProps,
   alignment,
+  BorderProps,
+  border,
   ColorProps,
   color,
   FontProps,
@@ -17,13 +23,28 @@ import {
   size,
 } from '@blubberfish/style-system';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { ListSkeleton } from './dashboard-family-skeleton';
+import { PATH } from '../dashboard-paths';
+
+const AddMemberButton = styled(Button)`
+  svg {
+    height: 2em;
+    width: 2em;
+  }
+`;
 
 const Container = styled.div<
-  AlignmentProps & GridProps & PaddingProps & RadiusProps & SizeProps
+  AlignmentProps &
+    BorderProps &
+    GridProps &
+    PaddingProps &
+    RadiusProps &
+    SizeProps
 >`
   ${alignment}
+  ${border}
   ${grid}
   ${padding}
   ${radius}
@@ -39,7 +60,7 @@ const ConstrainedContainer = styled(ConstrainedLayout)<
   ${padding}
 `;
 
-const Text = styled.p<ColorProps & FontProps>`
+const Text = styled.p<ColorProps & FontProps & SizeProps>`
   margin: 0;
   svg {
     fill: currentColor;
@@ -48,10 +69,12 @@ const Text = styled.p<ColorProps & FontProps>`
   }
   ${color}
   ${font}
+  ${size}
 `;
 
 export const DashboardFamilyOverview = () => {
   const account = useSelector(accountInfoSelector);
+  const navigate = useNavigate();
   return (
     <ConstrainedContainer gap={5} pad={3}>
       {account?.family.parents.length ? (
@@ -75,6 +98,25 @@ export const DashboardFamilyOverview = () => {
       >
         <Text>Our children</Text>
         <ListSkeleton persons={account?.family.children} />
+        <AddMemberButton
+          simple
+          onClick={() => {
+            navigate(PATH.ADD_CHILD);
+          }}
+        >
+          <Container
+            bdr={{ size: 2, color: 'background_weak', line: 'dashed' }}
+            gap={2}
+            padY={2}
+            padX={3}
+            rad={3}
+            alignItems="center"
+            templateColumns="max-content 1fr"
+          >
+            <FontAwesome.Plus width={32} height={32} />
+            <Text>Add new child</Text>
+          </Container>
+        </AddMemberButton>
       </Container>
     </ConstrainedContainer>
   );
