@@ -159,6 +159,8 @@ export const DashboardBabyActions = () => {
     }));
   }, [account, baby, execute, pending?.id, setPending]);
 
+  const pendingConfirmation = blockActions ? null : pending ? pending.id : null;
+
   useEffect(() => {
     !baby && cancel && cancel();
   }, [baby, cancel]);
@@ -172,12 +174,14 @@ export const DashboardBabyActions = () => {
         simple
         onClick={handleBabyWakeUp}
       >
-        <ButtonContentContainer>
+        <ButtonContentContainer
+          color={
+            pendingConfirmation === ActionType.Wake ? 'success' : undefined
+          }
+        >
           <FontAwesome.SmileBeam />
-          <Text ftAlign='left'>
-            {!blockActions && pending && pending.id === ActionType.Wake
-              ? 'Confirm?'
-              : 'Wake up'}
+          <Text ftAlign="left">
+            {pendingConfirmation === ActionType.Wake ? 'Confirm?' : 'Wake up'}
           </Text>
         </ButtonContentContainer>
       </Button>
@@ -187,12 +191,14 @@ export const DashboardBabyActions = () => {
         simple
         onClick={handleBabyFeeding}
       >
-        <ButtonContentContainer>
+        <ButtonContentContainer
+          color={
+            pendingConfirmation === ActionType.Feed ? 'success' : undefined
+          }
+        >
           <FontAwesome.CookieBite />
-          <Text ftAlign='left'>
-            {!blockActions && pending && pending.id === ActionType.Feed
-              ? 'Confirm?'
-              : 'Feed'}
+          <Text ftAlign="left">
+            {pendingConfirmation === ActionType.Feed ? 'Confirm?' : 'Feed'}
           </Text>
         </ButtonContentContainer>
       </Button>
@@ -204,7 +210,7 @@ export const DashboardBabyActions = () => {
       >
         <ButtonContentContainer>
           <FontAwesome.Bed />
-          <Text ftAlign='left'>
+          <Text ftAlign="left">
             {!blockActions && pending && pending.id === ActionType.Sleep
               ? 'Confirm?'
               : 'Sleep'}
