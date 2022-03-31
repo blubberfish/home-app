@@ -14,6 +14,7 @@ export type BabyActivityProfilePayload = Omit<
   BabyActivityProfile,
   'timestamp'
 > & {
+  _id: string;
   timestamp: string;
 };
 

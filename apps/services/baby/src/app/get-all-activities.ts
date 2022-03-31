@@ -16,16 +16,9 @@ const getAllActivityHandler = async (event) => {
     const logs = await accountBabyLogCollectionFactory(account);
     if (logs && baby) {
       const activities = await logs
-        .find(
-          {
-            belongsTo: baby,
-          },
-          {
-            projection: {
-              _id: 0,
-            },
-          }
-        )
+        .find({
+          belongsTo: baby,
+        })
         .sort({
           dtob: 1,
         });
