@@ -94,6 +94,7 @@ export const DashboardBabyList = () => {
     return (
       <ListContainer columns={1}>
         <Button
+          ftSize={2}
           simple
           onClick={() => {
             dispatch(resetBaby());
@@ -110,6 +111,7 @@ export const DashboardBabyList = () => {
     <ListContainer columns={Math.min(children.length, 3)}>
       {children.map((child) => (
         <Button
+          ftSize={2}
           key={child.uuid}
           simple
           onClick={() => {
