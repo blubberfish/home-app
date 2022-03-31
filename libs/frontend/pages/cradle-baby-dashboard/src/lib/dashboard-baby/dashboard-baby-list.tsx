@@ -64,11 +64,17 @@ const ButtonContentContainer = ({
   </Container>
 );
 
-const ListContainer = ({ children }: { children: ReactNode }) => (
+const ListContainer = ({
+  children,
+  columns,
+}: {
+  children: ReactNode;
+  columns: number;
+}) => (
   <ConstrainedContainer
     gap={3}
     pad={3}
-    templateColumns={`repeat(3, max-content)`}
+    templateColumns={`repeat(${Math.max(columns, 1)}, max-content)`}
     autoRows="min-content"
     autoFlow="dense"
     justifyContent="center"
@@ -86,7 +92,7 @@ export const DashboardBabyList = () => {
 
   if (baby)
     return (
-      <ListContainer>
+      <ListContainer columns={1}>
         <Button
           simple
           onClick={() => {
@@ -101,7 +107,7 @@ export const DashboardBabyList = () => {
       </ListContainer>
     );
   return (
-    <ListContainer>
+    <ListContainer columns={Math.min(children.length, 3)}>
       {children.map((child) => (
         <Button
           key={child.uuid}
