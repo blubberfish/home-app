@@ -22,4 +22,4 @@ const slice = createSlice({
 });
 
 export default slice;
-export const { resetBaby, setBaby } = slice.actions;
+export const { replaceActivityDataSet, resetBaby, setBaby } = slice.actions;

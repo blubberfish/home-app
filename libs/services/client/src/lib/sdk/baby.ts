@@ -15,17 +15,19 @@ export const clearBabyActivityLog = createApi<BabyActivityPayload, void>({
   },
 });
 
-export const getBabyActivityLog = createApi<void, BabyActivityProfilePayload[]>(
-  {
-    method: HttpMethod.GET,
-    restricted: true,
-    url: `${BaseUrl.REST}/baby/log`,
-    builders: {
-      response: async (response) =>
-        (response ?? []) as BabyActivityProfilePayload[],
-    },
-  }
-);
+export const getBabyActivityLog = createApi<
+  BabyActivityPayload,
+  BabyActivityProfilePayload[]
+>({
+  method: HttpMethod.GET,
+  restricted: true,
+  url: `${BaseUrl.REST}/baby/log`,
+  builders: {
+    body: (input) => JSON.stringify(input),
+    response: async (response) =>
+      (response ?? []) as BabyActivityProfilePayload[],
+  },
+});
 
 export const logWakeActivity = createApi<BabyActivityPayload, void>({
   method: HttpMethod.POST,
