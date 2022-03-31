@@ -21,7 +21,8 @@ const getAllActivityHandler = async (event) => {
         })
         .sort({
           dtob: 1,
-        });
+        })
+        .toArray();
       return {
         statusCode: 200,
         body: JSON.stringify(activities),
