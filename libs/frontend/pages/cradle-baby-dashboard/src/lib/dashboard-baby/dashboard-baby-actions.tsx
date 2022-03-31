@@ -217,6 +217,13 @@ export const DashboardBabyActions = () => {
           </Text>
         </ButtonContentContainer>
       </Button>
+      {!blockActions && pending && (
+        <Button ftSize={3} simple onClick={cancel}>
+          <ButtonContentContainer color="error" >
+            <Text ftAlign="left">Cancel</Text>
+          </ButtonContentContainer>
+        </Button>
+      )}
     </ListContainer>
   );
 };
