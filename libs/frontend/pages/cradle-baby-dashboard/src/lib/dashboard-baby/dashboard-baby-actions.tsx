@@ -148,8 +148,8 @@ export const DashboardBabyActions = () => {
   }, [account, baby, execute, pending?.id, setPending]);
 
   useEffect(() => {
-    !baby && cancel && cancel()
-  }, [baby, cancel])
+    !baby && cancel && cancel();
+  }, [baby, cancel]);
 
   if (!baby) return null;
   return (
@@ -160,7 +160,10 @@ export const DashboardBabyActions = () => {
         onClick={handleBabyWakeUp}
       >
         <ButtonContentContainer>
-          <span>Wake up</span>
+          <FontAwesome.SmileBeam />
+          <span>
+            {pending && pending.id !== ActionType.Wake ? 'Confirm?' : 'Wake up'}
+          </span>
         </ButtonContentContainer>
       </Button>
       <Button
@@ -170,7 +173,9 @@ export const DashboardBabyActions = () => {
       >
         <ButtonContentContainer>
           <FontAwesome.CookieBite />
-          <span>Feed</span>
+          <span>
+            {pending && pending.id !== ActionType.Feed ? 'Confirm?' : 'Feed'}
+          </span>
         </ButtonContentContainer>
       </Button>
       <Button
@@ -179,7 +184,10 @@ export const DashboardBabyActions = () => {
         onClick={handleBabySleep}
       >
         <ButtonContentContainer>
-          <span>Sleep</span>
+          <FontAwesome.Bed />
+          <span>
+            {pending && pending.id !== ActionType.Sleep ? 'Confirm?' : 'Sleep'}
+          </span>
         </ButtonContentContainer>
       </Button>
     </ListContainer>
