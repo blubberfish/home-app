@@ -10,6 +10,15 @@ export const clearBabyActivityLog = createApi<BabyActivityPayload, void>({
   },
 });
 
+export const getBabyActivityLog = createApi<BabyActivityPayload, void>({
+  method: HttpMethod.GET,
+  restricted: true,
+  url: `${BaseUrl.REST}/baby/log`,
+  builders: {
+    body: (input) => JSON.stringify(input),
+  },
+});
+
 export const logWakeActivity = createApi<BabyActivityPayload, void>({
   method: HttpMethod.POST,
   restricted: true,
