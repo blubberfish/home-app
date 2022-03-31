@@ -1,4 +1,5 @@
 import {
+  accountIdSelector,
   selectAllChildren,
   selectChildById,
 } from '@blubberfish/frontend/modules/cradle-baby/app';
@@ -7,6 +8,12 @@ import {
   ConstrainedLayout,
   FontAwesome,
 } from '@blubberfish/frontend/ui/components';
+import { usePendingAction } from '@blubberfish/frontend/hooks';
+import {
+  logWakeActivity,
+  logFeedActivity,
+  logSleepActivity,
+} from '@blubberfish/services/client';
 import {
   alignment,
   AlignmentProps,
@@ -19,10 +26,10 @@ import {
   radius,
   RadiusProps,
 } from '@blubberfish/style-system';
-import { ReactNode } from 'react';
+import { ReactNode, useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { currentBabySelector, resetBaby, setBaby } from './redux';
+import { currentBabySelector } from './redux';
 
 const ConstrainedContainer = styled(ConstrainedLayout) <
   AlignmentProps & GridProps & PaddingProps
@@ -77,45 +84,104 @@ const ListContainer = ({ children }: { children: ReactNode }) => (
   </ConstrainedContainer>
 );
 
+enum ActionType {
+  Wake,
+  Sleep,
+  Feed,
+}
+
 export const DashboardBabyActions = () => {
+  const [pending, setPending, execute, cancel] = usePendingAction();
   const dispatch = useDispatch();
+  const account = useSelector(accountIdSelector);
   const children = useSelector(selectAllChildren);
   const baby = useSelector(
     selectChildById(useSelector(currentBabySelector) ?? '')
   );
+  const handleBabyWakeUp = useCallback(() => {
+    if (pending?.id === ActionType.Wake) {
+      execute();
+    }
+    if (!(account && baby)) return;
+    setPending(() => ({
+      id: ActionType.Wake,
+      action: () =>
+        logWakeActivity({
+          account,
+          baby: baby.uuid,
+        }).finally(() => {
+          setPending(() => undefined);
+        }),
+    }));
+  }, [account, baby, execute, pending?.id, setPending]);
+  const handleBabyFeeding = useCallback(() => {
+    if (pending?.id === ActionType.Feed) {
+      execute();
+    }
+    if (!(account && baby)) return;
+    setPending(() => ({
+      id: ActionType.Feed,
+      action: () =>
+        logFeedActivity({
+          account,
+          baby: baby.uuid,
+        }).finally(() => {
+          setPending(() => undefined);
+        }),
+    }));
+  }, [account, baby, execute, pending?.id, setPending]);
+  const handleBabySleep = useCallback(() => {
+    if (pending?.id === ActionType.Sleep) {
+      execute();
+    }
+    if (!(account && baby)) return;
+    setPending(() => ({
+      id: ActionType.Sleep,
+      action: () =>
+        logSleepActivity({
+          account,
+          baby: baby.uuid,
+        }).finally(() => {
+          setPending(() => undefined);
+        }),
+    }));
+  }, [account, baby, execute, pending?.id, setPending]);
 
-  if (baby)
-    return (
-      <ListContainer>
-        <Button
-          simple
-          onClick={() => {
-            dispatch(resetBaby());
-          }}
-        >
-          <ButtonContentContainer color="error">
-            <FontAwesome.X />
-            <span>{baby.name.en?.preferred ?? baby.name.en?.given}</span>
-          </ButtonContentContainer>
-        </Button>
-      </ListContainer>
-    );
+  useEffect(() => {
+    !baby && cancel && cancel()
+  }, [baby, cancel])
+
+  if (!baby) return null;
   return (
     <ListContainer>
-      {children.map((child) => (
-        <Button
-          key={child.uuid}
-          simple
-          onClick={() => {
-            dispatch(setBaby(child.uuid));
-          }}
-        >
-          <ButtonContentContainer>
-            <GenderIcon gender={child.gender} />
-            <span>{child.name.en?.preferred ?? child.name.en?.given}</span>
-          </ButtonContentContainer>
-        </Button>
-      ))}
+      <Button
+        disabled={pending && pending.id !== ActionType.Wake}
+        simple
+        onClick={handleBabyWakeUp}
+      >
+        <ButtonContentContainer>
+          <span>Wake up</span>
+        </ButtonContentContainer>
+      </Button>
+      <Button
+        disabled={pending && pending.id !== ActionType.Feed}
+        simple
+        onClick={handleBabyFeeding}
+      >
+        <ButtonContentContainer>
+          <FontAwesome.CookieBite />
+          <span>Feed</span>
+        </ButtonContentContainer>
+      </Button>
+      <Button
+        disabled={pending && pending.id !== ActionType.Sleep}
+        simple
+        onClick={handleBabySleep}
+      >
+        <ButtonContentContainer>
+          <span>Sleep</span>
+        </ButtonContentContainer>
+      </Button>
     </ListContainer>
   );
 };
