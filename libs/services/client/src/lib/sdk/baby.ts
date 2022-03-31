@@ -1,4 +1,9 @@
-import { BaseUrl, HttpMethod, BabyActivityPayload } from '@blubberfish/types';
+import {
+  BaseUrl,
+  HttpMethod,
+  BabyActivityPayload,
+  BabyActivityProfilePayload,
+} from '@blubberfish/types';
 import { createApi } from './utils';
 
 export const clearBabyActivityLog = createApi<BabyActivityPayload, void>({
@@ -10,12 +15,12 @@ export const clearBabyActivityLog = createApi<BabyActivityPayload, void>({
   },
 });
 
-export const getBabyActivityLog = createApi<BabyActivityPayload, void>({
+export const getBabyActivityLog = createApi<void, BabyActivityProfilePayload>({
   method: HttpMethod.GET,
   restricted: true,
   url: `${BaseUrl.REST}/baby/log`,
   builders: {
-    body: (input) => JSON.stringify(input),
+    response: async (response) => response as BabyActivityProfilePayload,
   },
 });
 

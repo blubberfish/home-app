@@ -10,6 +10,13 @@ export interface BabyActivityProfile {
   notes?: string;
 }
 
+export type BabyActivityProfilePayload = Omit<
+  BabyActivityProfile,
+  'timestamp'
+> & {
+  timestamp: string;
+};
+
 export interface BabyActivityPayload {
   account: string;
   baby: string;
