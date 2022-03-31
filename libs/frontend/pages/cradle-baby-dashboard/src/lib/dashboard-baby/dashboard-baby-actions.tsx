@@ -1,6 +1,5 @@
 import {
   accountIdSelector,
-  selectAllChildren,
   selectChildById,
 } from '@blubberfish/frontend/modules/cradle-baby/app';
 import {
@@ -19,6 +18,8 @@ import {
   AlignmentProps,
   color,
   ColorProps,
+  font,
+  FontProps,
   grid,
   GridProps,
   padding,
@@ -26,8 +27,8 @@ import {
   radius,
   RadiusProps,
 } from '@blubberfish/style-system';
-import { ReactNode, useCallback, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { ReactNode, useCallback, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { currentBabySelector } from './redux';
 
@@ -47,9 +48,6 @@ const Container = styled.div<
   ${padding}
   ${radius}
 `;
-
-const GenderIcon = ({ gender }: { gender?: string }) =>
-  gender === 'f' ? <FontAwesome.Venus /> : <FontAwesome.Mars />;
 
 const ButtonContentContainer = ({
   color,
@@ -75,14 +73,20 @@ const ListContainer = ({ children }: { children: ReactNode }) => (
   <ConstrainedContainer
     gap={3}
     pad={3}
-    templateColumns={`repeat(3, max-content)`}
+    templateColumns="max-content"
     autoRows="min-content"
-    autoFlow="dense"
+    autoFlow="row"
+    alignItems="center"
+    justifyItems="stretch"
     justifyContent="center"
   >
     {children}
   </ConstrainedContainer>
 );
+
+const Text = styled.span<FontProps>`
+  ${font}
+`;
 
 enum ActionType {
   Wake,
@@ -91,10 +95,9 @@ enum ActionType {
 }
 
 export const DashboardBabyActions = () => {
+  const [blockActions, setBlockActions] = useState(false);
   const [pending, setPending, execute, cancel] = usePendingAction();
-  const dispatch = useDispatch();
   const account = useSelector(accountIdSelector);
-  const children = useSelector(selectAllChildren);
   const baby = useSelector(
     selectChildById(useSelector(currentBabySelector) ?? '')
   );
@@ -105,13 +108,16 @@ export const DashboardBabyActions = () => {
     if (!(account && baby)) return;
     setPending(() => ({
       id: ActionType.Wake,
-      action: () =>
-        logWakeActivity({
+      action: () => {
+        setBlockActions(true);
+        return logWakeActivity({
           account,
           baby: baby.uuid,
         }).finally(() => {
+          setBlockActions(false);
           setPending(() => undefined);
-        }),
+        });
+      },
     }));
   }, [account, baby, execute, pending?.id, setPending]);
   const handleBabyFeeding = useCallback(() => {
@@ -121,13 +127,16 @@ export const DashboardBabyActions = () => {
     if (!(account && baby)) return;
     setPending(() => ({
       id: ActionType.Feed,
-      action: () =>
-        logFeedActivity({
+      action: () => {
+        setBlockActions(true);
+        return logFeedActivity({
           account,
           baby: baby.uuid,
         }).finally(() => {
+          setBlockActions(false);
           setPending(() => undefined);
-        }),
+        });
+      },
     }));
   }, [account, baby, execute, pending?.id, setPending]);
   const handleBabySleep = useCallback(() => {
@@ -137,13 +146,16 @@ export const DashboardBabyActions = () => {
     if (!(account && baby)) return;
     setPending(() => ({
       id: ActionType.Sleep,
-      action: () =>
-        logSleepActivity({
+      action: () => {
+        setBlockActions(true);
+        return logSleepActivity({
           account,
           baby: baby.uuid,
         }).finally(() => {
+          setBlockActions(false);
           setPending(() => undefined);
-        }),
+        });
+      },
     }));
   }, [account, baby, execute, pending?.id, setPending]);
 
@@ -155,39 +167,48 @@ export const DashboardBabyActions = () => {
   return (
     <ListContainer>
       <Button
-        disabled={pending && pending.id !== ActionType.Wake}
+        disabled={blockActions || (pending && pending.id !== ActionType.Wake)}
+        ftSize={3}
         simple
         onClick={handleBabyWakeUp}
       >
         <ButtonContentContainer>
           <FontAwesome.SmileBeam />
-          <span>
-            {pending && pending.id !== ActionType.Wake ? 'Confirm?' : 'Wake up'}
-          </span>
+          <Text ftAlign='left'>
+            {!blockActions && pending && pending.id === ActionType.Wake
+              ? 'Confirm?'
+              : 'Wake up'}
+          </Text>
         </ButtonContentContainer>
       </Button>
       <Button
-        disabled={pending && pending.id !== ActionType.Feed}
+        ftSize={3}
+        disabled={blockActions || (pending && pending.id !== ActionType.Feed)}
         simple
         onClick={handleBabyFeeding}
       >
         <ButtonContentContainer>
           <FontAwesome.CookieBite />
-          <span>
-            {pending && pending.id !== ActionType.Feed ? 'Confirm?' : 'Feed'}
-          </span>
+          <Text ftAlign='left'>
+            {!blockActions && pending && pending.id === ActionType.Feed
+              ? 'Confirm?'
+              : 'Feed'}
+          </Text>
         </ButtonContentContainer>
       </Button>
       <Button
-        disabled={pending && pending.id !== ActionType.Sleep}
+        ftSize={3}
+        disabled={blockActions || (pending && pending.id !== ActionType.Sleep)}
         simple
         onClick={handleBabySleep}
       >
         <ButtonContentContainer>
           <FontAwesome.Bed />
-          <span>
-            {pending && pending.id !== ActionType.Sleep ? 'Confirm?' : 'Sleep'}
-          </span>
+          <Text ftAlign='left'>
+            {!blockActions && pending && pending.id === ActionType.Sleep
+              ? 'Confirm?'
+              : 'Sleep'}
+          </Text>
         </ButtonContentContainer>
       </Button>
     </ListContainer>
