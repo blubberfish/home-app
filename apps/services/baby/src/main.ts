@@ -4,7 +4,7 @@ import {
   HttpHeader,
   HttpMethod,
 } from '@blubberfish/services/core';
-import './app/get-all-activity';
+import './app/get-all-activities';
 import './app/delete-all-activity';
 import './app/log-feed-activity';
 import './app/log-sleep-activity';
