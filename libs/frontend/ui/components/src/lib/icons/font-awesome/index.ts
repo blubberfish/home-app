@@ -1,6 +1,7 @@
 export { ReactComponent as Baby } from './baby.svg';
 export { ReactComponent as Bars } from './bars.svg';
 export { ReactComponent as CircleCheck } from './circle-check.svg';
+export { ReactComponent as CookieBite } from './cookie-bite.svg';
 export { ReactComponent as Mars } from './mars.svg';
 export { ReactComponent as PeopleRoof } from './people-roof.svg';
 export { ReactComponent as Plus } from './plus.svg';

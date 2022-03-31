@@ -24,10 +24,10 @@ export const usePendingAction = (): [
     action().finally(() => {
       setPendingAction(() => undefined);
     });
-  }, [pendingAction]);
+  }, [pendingAction, setPendingAction]);
   const cancel = useCallback(() => {
     setPendingAction(() => undefined);
-  }, []);
+  }, [setPendingAction]);
 
   return [pendingAction, setPendingAction, execute, cancel];
 };
