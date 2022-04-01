@@ -12,6 +12,7 @@ import {
   logWakeActivity,
   logFeedActivity,
   logSleepActivity,
+  logNursingActivity,
 } from '@blubberfish/services/client';
 import {
   alignment,
@@ -103,9 +104,9 @@ const Text = styled.span<FontProps>`
 `;
 
 enum ActionType {
-  Wake,
-  Sleep,
   Feed,
+  Nursing,
+  Sleep,
 }
 
 export const DashboardBabyActions = () => {
@@ -115,16 +116,16 @@ export const DashboardBabyActions = () => {
   const baby = useSelector(
     selectChildById(useSelector(currentBabySelector) ?? '')
   );
-  const handleBabyWakeUp = useCallback(() => {
-    if (pending?.id === ActionType.Wake) {
+  const handleBabyNursing = useCallback(() => {
+    if (pending?.id === ActionType.Nursing) {
       execute();
     }
     if (!(account && baby)) return;
     setPending(() => ({
-      id: ActionType.Wake,
+      id: ActionType.Nursing,
       action: () => {
         setBlockActions(true);
-        return logWakeActivity({
+        return logNursingActivity({
           account,
           baby: baby.uuid,
         }).finally(() => {
@@ -183,25 +184,8 @@ export const DashboardBabyActions = () => {
   return (
     <ListContainer>
       <Button
-        disabled={blockActions || (pending && pending.id !== ActionType.Wake)}
         ftSize={3}
-        simple
-        onClick={handleBabyWakeUp}
-      >
-        <ButtonContentContainer
-          color={
-            pendingConfirmation === ActionType.Wake ? 'success' : undefined
-          }
-        >
-          <FontAwesome.SmileBeam />
-          <Text ftAlign="left" ftSize={2}>
-            {pendingConfirmation === ActionType.Wake ? 'Confirm?' : 'Wake up'}
-          </Text>
-        </ButtonContentContainer>
-      </Button>
-      <Button
-        ftSize={3}
-        disabled={blockActions || (pending && pending.id !== ActionType.Feed)}
+        disabled={blockActions}
         simple
         onClick={handleBabyFeeding}
       >
@@ -217,8 +201,25 @@ export const DashboardBabyActions = () => {
         </ButtonContentContainer>
       </Button>
       <Button
+        disabled={blockActions}
         ftSize={3}
-        disabled={blockActions || (pending && pending.id !== ActionType.Sleep)}
+        simple
+        onClick={handleBabyNursing}
+      >
+        <ButtonContentContainer
+          color={
+            pendingConfirmation === ActionType.Nursing ? 'success' : undefined
+          }
+        >
+          <FontAwesome.Mitten />
+          <Text ftAlign="left" ftSize={2}>
+            {pendingConfirmation === ActionType.Nursing ? 'Confirm?' : 'Nurse'}
+          </Text>
+        </ButtonContentContainer>
+      </Button>
+      <Button
+        ftSize={3}
+        disabled={blockActions}
         simple
         onClick={handleBabySleep}
       >
