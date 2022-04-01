@@ -62,10 +62,10 @@ const Indicator = styled.div<ColorProps>`
 `;
 
 const colors: { [key in BabyActivityType]: string } = {
-  'baby:activity:feed': 'green',
-  'baby:activity:sleep': 'blue',
-  'baby:activity:wake': 'red',
-  'baby:activity:nurse': 'yellow',
+  'baby:activity:feed': 'darkseagreen',
+  'baby:activity:sleep': 'thistle',
+  'baby:activity:wake': 'pink',
+  'baby:activity:nurse': 'powderblue',
 };
 
 const DashboardActivitiesDay = ({
@@ -97,7 +97,7 @@ const DashboardActivitiesDay = ({
       templateColumns="repeat(24, 16px)"
       templateRows="repeat(1, 16px)"
       autoFlow="column dense"
-      gap={1}
+      gap="1px"
       pos="relative"
     >
       {content}
@@ -132,7 +132,7 @@ export const DashboardActivitiesGrid = () => {
   const normalizedActivities = useSelector(normalizedDataSelector);
 
   return (
-    <Grid gap={1} templateRows="repeat(3, max-content)" pos="relative">
+    <Grid gap="1px" templateRows="repeat(3, max-content)" pos="relative">
       {days.map((day) => {
         return (
           <DashboardActivitiesDay
