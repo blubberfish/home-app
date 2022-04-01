@@ -14,6 +14,7 @@ import {
   size,
   SizeProps,
 } from '@blubberfish/style-system';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { resetBaby, setBaby, clearDataSet, currentBabySelector } from './redux';
@@ -36,6 +37,10 @@ export const DashboardActivitiesBabies = () => {
   const dispatch = useDispatch();
   const babies = useSelector(selectAllChildren);
   const baby = useSelector(currentBabySelector);
+  useEffect(() => {
+    babies.length === 1 && dispatch(setBaby(babies[0].uuid));
+  }, [babies, dispatch]);
+
   return (
     <Container
       justifyContent="center"

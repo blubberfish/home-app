@@ -19,14 +19,14 @@ import {
   radius,
   RadiusProps,
 } from '@blubberfish/style-system';
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { currentBabySelector, resetBaby, setBaby } from './redux';
 
-const ConstrainedContainer = styled(ConstrainedLayout) <
+const ConstrainedContainer = styled(ConstrainedLayout)<
   AlignmentProps & GridProps & PaddingProps
-  >`
+>`
   ${alignment}
   ${grid}
   ${padding}
@@ -34,7 +34,7 @@ const ConstrainedContainer = styled(ConstrainedLayout) <
 
 const Container = styled.div<
   ColorProps & GridProps & PaddingProps & RadiusProps
-  >`
+>`
   ${color}
   ${grid}
   ${padding}
@@ -89,6 +89,10 @@ export const DashboardBabyList = () => {
   const baby = useSelector(
     selectChildById(useSelector(currentBabySelector) ?? '')
   );
+
+  useEffect(() => {
+    children.length === 1 && dispatch(setBaby(children[0].uuid));
+  }, [children, dispatch]);
 
   if (baby)
     return (
