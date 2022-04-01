@@ -7,6 +7,7 @@ import {
 import './app/get-all-activities';
 import './app/delete-all-activity';
 import './app/log-feed-activity';
+import './app/log-nursing-activity';
 import './app/log-sleep-activity';
 import './app/log-wakeup-activity';
 

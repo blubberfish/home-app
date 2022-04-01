@@ -45,6 +45,15 @@ export const logWakeActivity = createApi<BabyActivityPayload, void>({
   },
 });
 
+export const logNursingActivity = createApi<BabyActivityPayload, void>({
+  method: HttpMethod.POST,
+  restricted: true,
+  url: `${BaseUrl.REST}/baby/log/nursing`,
+  builders: {
+    body: (input) => JSON.stringify(input),
+  },
+});
+
 export const logFeedActivity = createApi<BabyActivityPayload, void>({
   method: HttpMethod.POST,
   restricted: true,
