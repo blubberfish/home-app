@@ -127,8 +127,8 @@ const DashboardActivitiesDay = ({
   );
   return (
     <Grid
-      templateColumns="repeat(4, 24px)"
-      templateRows="repeat(6, 24px)"
+      templateColumns="repeat(24, 24px)"
+      templateRows="repeat(1, 24px)"
       autoFlow="column dense"
       gap={1}
     >
@@ -143,18 +143,15 @@ export const DashboardActivitiesGrid = () => {
   const normalizedActivities = useDateNormalizedActivities(activities);
 
   return (
-    <Grid gap={3} templateColumns="repeat(3, max-content)">
+    <Grid gap={1} templateRows="repeat(3, max-content)">
       {days.map((day) => {
         return (
-          <div key={day.toISOString()}>
-            <header>{day.format('DD MMM')}</header>
-            <DashboardActivitiesDay
-              activities={
-                normalizedActivities[day.year()]?.[day.month()]?.[day.date()] ??
-                []
-              }
-            />
-          </div>
+          <DashboardActivitiesDay
+            activities={
+              normalizedActivities[day.year()]?.[day.month()]?.[day.date()] ??
+              []
+            }
+          />
         );
       })}
     </Grid>
