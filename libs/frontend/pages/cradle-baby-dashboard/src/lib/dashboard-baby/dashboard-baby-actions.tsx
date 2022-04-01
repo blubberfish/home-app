@@ -32,9 +32,9 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { currentBabySelector } from './redux';
 
-const ConstrainedContainer = styled(ConstrainedLayout) <
+const ConstrainedContainer = styled(ConstrainedLayout)<
   AlignmentProps & GridProps & PaddingProps
-  >`
+>`
   ${alignment}
   ${grid}
   ${padding}
@@ -42,7 +42,7 @@ const ConstrainedContainer = styled(ConstrainedLayout) <
 
 const Container = styled.div<
   ColorProps & GridProps & PaddingProps & RadiusProps
-  >`
+>`
   ${color}
   ${grid}
   ${padding}
@@ -208,7 +208,11 @@ export const DashboardBabyActions = () => {
         simple
         onClick={handleBabySleep}
       >
-        <ButtonContentContainer>
+        <ButtonContentContainer
+          color={
+            pendingConfirmation === ActionType.Sleep ? 'success' : undefined
+          }
+        >
           <FontAwesome.Bed />
           <Text ftAlign="left">
             {!blockActions && pending && pending.id === ActionType.Sleep
@@ -219,7 +223,7 @@ export const DashboardBabyActions = () => {
       </Button>
       {!blockActions && pending && (
         <Button ftSize={3} simple onClick={cancel}>
-          <ButtonContentContainer color="error" >
+          <ButtonContentContainer color="error">
             <Text ftAlign="left">Cancel</Text>
           </ButtonContentContainer>
         </Button>
