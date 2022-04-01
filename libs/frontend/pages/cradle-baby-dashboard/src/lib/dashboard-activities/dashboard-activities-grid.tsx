@@ -1,10 +1,19 @@
-import { grid, GridProps } from '@blubberfish/style-system';
+import {
+  color,
+  ColorProps,
+  grid,
+  GridProps,
+  radius,
+  RadiusProps,
+  size,
+  SizeProps,
+} from '@blubberfish/style-system';
 import {
   BabyActivityType,
   BabyActivityProfilePayload,
 } from '@blubberfish/types';
-import moment, { Moment } from 'moment';
-import { useMemo, useState } from 'react';
+import moment from 'moment';
+import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { activitySelector } from './redux';
@@ -48,7 +57,7 @@ const useDateNormalizedActivities = (data: BabyActivityProfilePayload[]) =>
               ...seed[time.year()]?.[time.month()],
               [time.date()]: [
                 ...(seed[time.year()]?.[time.month()]?.[time.date()] ?? []),
-                current.activity,
+                current,
               ],
             },
           },
@@ -73,9 +82,22 @@ const useTimeNormalizedActivities = (data: BabyActivityProfilePayload[]) =>
     [data]
   );
 
-const Container = styled.div<GridProps>`
+const Grid = styled.div<ColorProps & GridProps & RadiusProps & SizeProps>`
+  ${color}
   ${grid}
+  ${radius}
+  ${size}
 `;
+
+const Indicator = styled.div<ColorProps>`
+  ${color}
+`;
+
+const colors: { [key in BabyActivityType]: string } = {
+  'baby:activity:feed': 'green',
+  'baby:activity:sleep': 'blue',
+  'baby:activity:wake': 'red',
+};
 
 const DashboardActivitiesDay = ({
   activities,
@@ -86,15 +108,33 @@ const DashboardActivitiesDay = ({
   const content = useMemo(
     () =>
       new Array(24).fill(0).map((hour, i) => (
-        <div key={i}>
-          {(normalizedActivities[hour + i] ?? []).map((current) => (
-            <span key={current.timestamp}>{current.activity}</span>
+        <Grid
+          key={i}
+          overflow="hidden"
+          bg="background_weak"
+          templateColumns="1fr"
+          autoRows="1fr"
+          autoFlow="row"
+          gap="1px"
+          rad={2}
+        >
+          {(normalizedActivities[hour + i] ?? []).map((current, i) => (
+            <Indicator key={i} bg={colors[current.activity]} />
           ))}
-        </div>
+        </Grid>
       )),
     [normalizedActivities]
   );
-  return <div>{content}</div>;
+  return (
+    <Grid
+      templateColumns="repeat(4, 24px)"
+      templateRows="repeat(6, 24px)"
+      autoFlow="column dense"
+      gap={1}
+    >
+      {content}
+    </Grid>
+  );
 };
 
 export const DashboardActivitiesGrid = () => {
@@ -103,7 +143,7 @@ export const DashboardActivitiesGrid = () => {
   const normalizedActivities = useDateNormalizedActivities(activities);
 
   return (
-    <Container gap={3}>
+    <Grid gap={3} templateColumns="repeat(3, max-content)">
       {days.map((day) => {
         return (
           <div key={day.toISOString()}>
@@ -117,6 +157,6 @@ export const DashboardActivitiesGrid = () => {
           </div>
         );
       })}
-    </Container>
+    </Grid>
   );
 };
