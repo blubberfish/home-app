@@ -10,7 +10,7 @@ const slice = createSlice({
       state,
       { payload }: PayloadAction<BabyActivityProfilePayload[]>
     ) {
-      activityEntity.setAll(state.activities, payload);
+      state.activities = activityEntity.setAll(state.activities, payload);
     },
     setBaby(state, { payload }: PayloadAction<string>) {
       state.baby = payload;
