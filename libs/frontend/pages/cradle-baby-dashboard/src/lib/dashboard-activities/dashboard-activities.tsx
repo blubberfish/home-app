@@ -17,14 +17,14 @@ const DashboardActivitiesPage = () => {
   const account = useSelector(accountIdSelector);
   const baby = useSelector(currentBabySelector);
   useEffect(() => {
-    console.log({
-      account,
-      baby
-    })
-    account && baby && dispatch(activityLogThunk({
-      account,
-      baby
-    }))
+    account &&
+      baby &&
+      dispatch(
+        activityLogThunk({
+          account,
+          baby,
+        })
+      );
   }, [account, baby, dispatch]);
   return (
     <Container gap={3}>
