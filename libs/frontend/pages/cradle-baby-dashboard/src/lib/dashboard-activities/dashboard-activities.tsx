@@ -14,6 +14,7 @@ import styled from 'styled-components';
 import slice, { activityLogThunk, currentBabySelector } from './redux';
 import { DashboardActivitiesBabies } from './dashboard-activities-babies';
 import { DashboardActivitiesGrid } from './dashboard-activities-grid';
+import { DashboardActivitiesGridTitle } from './dashboard-activities-grid-title';
 
 const Container = styled.div<AlignmentProps & GridProps & PaddingProps>`
   ${alignment}
@@ -42,11 +43,19 @@ const DashboardActivitiesPage = () => {
       autoFlow="row"
       justifyContent="center"
       justifyItems="center"
-      gap={3}
+      gap={5}
       pad={3}
     >
       <DashboardActivitiesBabies />
-      <DashboardActivitiesGrid />
+      <Container
+        templateColumns="max-content"
+        autoRows="min-content"
+        autoFlow="row"
+        gap={3}
+      >
+        <DashboardActivitiesGridTitle />
+        <DashboardActivitiesGrid />
+      </Container>
     </Container>
   );
 };

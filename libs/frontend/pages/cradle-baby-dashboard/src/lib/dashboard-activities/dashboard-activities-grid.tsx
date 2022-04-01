@@ -80,10 +80,9 @@ const DashboardActivitiesDay = ({
           key={i}
           overflow="hidden"
           bg="background_weak"
-          templateColumns="1fr"
+          autoColumns="1fr"
           autoRows="1fr"
           autoFlow="row"
-          gap="1px"
           rad={2}
         >
           {(activities[hour + i] ?? []).map((current, i) => (
@@ -95,8 +94,8 @@ const DashboardActivitiesDay = ({
   );
   return (
     <Grid
-      templateColumns="repeat(24, 24px)"
-      templateRows="repeat(1, 24px)"
+      templateColumns="repeat(24, 16px)"
+      templateRows="repeat(1, 16px)"
       autoFlow="column dense"
       gap={1}
       pos="relative"
