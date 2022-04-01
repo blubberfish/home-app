@@ -10,10 +10,12 @@ export const activityEntity = createEntityAdapter<BabyActivityProfilePayload>({
 
 export type DashboardActivitiesState = {
   baby?: string | null;
+  dataSetLoading?: boolean | null;
   activities: EntityState<BabyActivityProfilePayload>;
 };
 
 export const getInitialState = (): DashboardActivitiesState => ({
   baby: null,
+  dataSetLoading: null,
   activities: activityEntity.getInitialState(),
 });

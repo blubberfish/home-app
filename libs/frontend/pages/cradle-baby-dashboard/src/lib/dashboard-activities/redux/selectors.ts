@@ -13,6 +13,11 @@ export const currentBabySelector = createSelector(
   (state) => state?.baby
 );
 
+export const dataSetLoadingSelector = createSelector(
+  stateSelector,
+  (state) => state?.dataSetLoading
+);
+
 const activityEntityStateSelector = createSelector(
   stateSelector,
   (state) => state?.activities ?? activityEntity.getInitialState()

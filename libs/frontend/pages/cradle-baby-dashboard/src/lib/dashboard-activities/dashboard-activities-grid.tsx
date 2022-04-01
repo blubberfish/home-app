@@ -1,8 +1,12 @@
 import {
+  alignment,
+  AlignmentProps,
   color,
   ColorProps,
   grid,
   GridProps,
+  position,
+  PositionProps,
   radius,
   RadiusProps,
   size,
@@ -13,7 +17,11 @@ import moment from 'moment';
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { normalizedDataSelector, TimeNormalizedActivity } from './redux';
+import {
+  normalizedDataSelector,
+  TimeNormalizedActivity,
+  dataSetLoadingSelector,
+} from './redux';
 
 const useLast3Days = () => {
   return useMemo(
@@ -33,9 +41,18 @@ const useLast3Days = () => {
   );
 };
 
-const Grid = styled.div<ColorProps & GridProps & RadiusProps & SizeProps>`
+const Grid = styled.div<
+  AlignmentProps &
+    ColorProps &
+    GridProps &
+    PositionProps &
+    RadiusProps &
+    SizeProps
+>`
+  ${alignment}
   ${color}
   ${grid}
+  ${position}
   ${radius}
   ${size}
 `;
@@ -82,8 +99,31 @@ const DashboardActivitiesDay = ({
       templateRows="repeat(1, 24px)"
       autoFlow="column dense"
       gap={1}
+      pos="relative"
     >
       {content}
+    </Grid>
+  );
+};
+
+const DataLoadingScreen = () => {
+  const loading = useSelector(dataSetLoadingSelector);
+  if (!loading) {
+    return null;
+  }
+  return (
+    <Grid
+      alignContent="center"
+      alignItems="center"
+      justifyContent="center"
+      justifyItems="center"
+      bg="#fff3"
+      pos="absolute"
+      posX={0}
+      posY={0}
+      rad={2}
+    >
+      Loading
     </Grid>
   );
 };
@@ -93,7 +133,7 @@ export const DashboardActivitiesGrid = () => {
   const normalizedActivities = useSelector(normalizedDataSelector);
 
   return (
-    <Grid gap={1} templateRows="repeat(3, max-content)">
+    <Grid gap={1} templateRows="repeat(3, max-content)" pos="relative">
       {days.map((day) => {
         return (
           <DashboardActivitiesDay
@@ -104,6 +144,7 @@ export const DashboardActivitiesGrid = () => {
           />
         );
       })}
+      <DataLoadingScreen />
     </Grid>
   );
 };

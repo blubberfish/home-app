@@ -16,7 +16,7 @@ import {
 } from '@blubberfish/style-system';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { resetBaby, setBaby, currentBabySelector } from './redux';
+import { resetBaby, setBaby, clearDataSet, currentBabySelector } from './redux';
 
 const Container = styled.div<AlignmentProps & GridProps>`
   ${alignment}
@@ -76,6 +76,7 @@ export const DashboardActivitiesBabies = () => {
           type="button"
           onClick={() => {
             dispatch(resetBaby());
+            dispatch(clearDataSet([]));
           }}
         >
           <ButtonContainer

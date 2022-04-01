@@ -6,6 +6,12 @@ const slice = createSlice({
   name,
   initialState: getInitialState(),
   reducers: {
+    clearDataSet(
+      state,
+      { payload }: PayloadAction<BabyActivityProfilePayload[]>
+    ) {
+      state.activities = activityEntity.removeAll(state.activities);
+    },
     replaceActivityDataSet(
       state,
       { payload }: PayloadAction<BabyActivityProfilePayload[]>
@@ -18,8 +24,21 @@ const slice = createSlice({
     resetBaby(state) {
       state.baby = null;
     },
+    setLoading(state) {
+      state.dataSetLoading = true;
+    },
+    unsetLoading(state) {
+      state.dataSetLoading = false;
+    },
   },
 });
 
 export default slice;
-export const { replaceActivityDataSet, resetBaby, setBaby } = slice.actions;
+export const {
+  clearDataSet,
+  replaceActivityDataSet,
+  resetBaby,
+  setBaby,
+  setLoading,
+  unsetLoading,
+} = slice.actions;

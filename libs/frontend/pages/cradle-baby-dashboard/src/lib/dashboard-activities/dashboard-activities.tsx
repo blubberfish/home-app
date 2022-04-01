@@ -1,6 +1,8 @@
 import { Module } from '@blubberfish/frontend/modules/core';
 import { accountIdSelector } from '@blubberfish/frontend/modules/cradle-baby/app';
 import {
+  alignment,
+  AlignmentProps,
   grid,
   GridProps,
   padding,
@@ -13,7 +15,8 @@ import slice, { activityLogThunk, currentBabySelector } from './redux';
 import { DashboardActivitiesBabies } from './dashboard-activities-babies';
 import { DashboardActivitiesGrid } from './dashboard-activities-grid';
 
-const Container = styled.div<GridProps & PaddingProps>`
+const Container = styled.div<AlignmentProps & GridProps & PaddingProps>`
+  ${alignment}
   ${grid}
   ${padding}
 `;
@@ -34,9 +37,11 @@ const DashboardActivitiesPage = () => {
   }, [account, baby, dispatch]);
   return (
     <Container
-      templateColumns="1fr"
+      templateColumns="max-content"
       autoRows="min-content"
       autoFlow="row"
+      justifyContent="center"
+      justifyItems="center"
       gap={3}
       pad={3}
     >
