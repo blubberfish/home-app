@@ -9,7 +9,7 @@ import { BabyActivityPayload } from '@blubberfish/types';
 
 const addNursingActivityHandler = async (event) => {
   const { path, body } = event;
-  if (!/^\/?baby\/log\/sleep$/i.test(path)) return null;
+  if (!/^\/?baby\/log\/nursing$/i.test(path)) return null;
 
   try {
     const { account, baby, additionalDetails } = (JSON.parse(body) ??
