@@ -1,6 +1,7 @@
 export type BabyActivityType =
   | 'baby:activity:wake'
   | 'baby:activity:feed'
+  | 'baby:activity:nurse'
   | 'baby:activity:sleep';
 
 export interface BabyActivityProfile {
