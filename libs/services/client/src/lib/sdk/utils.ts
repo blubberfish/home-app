@@ -5,7 +5,7 @@ export type ApiOption<I, O> = {
   restricted?: boolean;
   method?: HttpMethod;
   builders?: Partial<{
-    url: (input?: I, base?: string) => string;
+    url: (input?: I, base?: string) => string | null | undefined;
     headers: (input?: I) => Promise<HeadersInit>;
     body: (input?: I, headers?: HeadersInit) => string;
     response: (response: unknown, headers: Headers) => Promise<O>;

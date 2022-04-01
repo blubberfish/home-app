@@ -23,7 +23,14 @@ export const getBabyActivityLog = createApi<
   restricted: true,
   url: `${BaseUrl.REST}/baby/log`,
   builders: {
-    headers: async (input) => ({ ...input }),
+    url: (input, base) =>
+      input
+        ? Object.entries(input).reduce(
+            (seed, [key, value], i) =>
+              `${seed}${i > 0 ? ',' : ''}${key}=${value}`,
+            `${base}?`
+          )
+        : base,
     response: async (response) =>
       (response ?? []) as BabyActivityProfilePayload[],
   },
