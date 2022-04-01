@@ -23,14 +23,14 @@ export const getBabyActivityLog = createApi<
   restricted: true,
   url: `${BaseUrl.REST}/baby/log`,
   builders: {
-    url: (input, base) =>
-      input
-        ? Object.entries(input).reduce(
-            (seed, [key, value], i) =>
-              `${seed}${i > 0 ? ',' : ''}${key}=${value}`,
-            `${base}?`
-          )
-        : base,
+    url: (input, base) => {
+      const query = new URLSearchParams();
+      input &&
+        Object.entries(input).forEach(([key, value]) => {
+          query.set(key, value);
+        });
+      return `${base}?${query.toString()}`;
+    },
     response: async (response) =>
       (response ?? []) as BabyActivityProfilePayload[],
   },
