@@ -26,6 +26,8 @@ import {
   PaddingProps,
   radius,
   RadiusProps,
+  size,
+  SizeProps,
 } from '@blubberfish/style-system';
 import { ReactNode, useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -41,12 +43,19 @@ const ConstrainedContainer = styled(ConstrainedLayout)<
 `;
 
 const Container = styled.div<
-  ColorProps & GridProps & PaddingProps & RadiusProps
+  AlignmentProps &
+    ColorProps &
+    GridProps &
+    PaddingProps &
+    RadiusProps &
+    SizeProps
 >`
+  ${alignment}
   ${color}
   ${grid}
   ${padding}
   ${radius}
+  ${size}
 `;
 
 const ButtonContentContainer = ({
@@ -58,12 +67,17 @@ const ButtonContentContainer = ({
 }) => (
   <Container
     bg={color ?? 'background_weak'}
-    padY={2}
-    padX={3}
-    rad={2}
+    pad={2}
+    rad="50%"
     gap={2}
-    templateColumns="max-content 1fr"
-    templateRows="min-content"
+    alignContent="center"
+    alignItems="center"
+    justifyContent="center"
+    justifyItems="center"
+    templateColumns="max-content"
+    templateRows="1f min-content"
+    h="5em"
+    w="5em"
   >
     {children}
   </Container>
@@ -180,7 +194,7 @@ export const DashboardBabyActions = () => {
           }
         >
           <FontAwesome.SmileBeam />
-          <Text ftAlign="left">
+          <Text ftAlign="left" ftSize={2}>
             {pendingConfirmation === ActionType.Wake ? 'Confirm?' : 'Wake up'}
           </Text>
         </ButtonContentContainer>
@@ -197,7 +211,7 @@ export const DashboardBabyActions = () => {
           }
         >
           <FontAwesome.CookieBite />
-          <Text ftAlign="left">
+          <Text ftAlign="left" ftSize={2}>
             {pendingConfirmation === ActionType.Feed ? 'Confirm?' : 'Feed'}
           </Text>
         </ButtonContentContainer>
@@ -214,7 +228,7 @@ export const DashboardBabyActions = () => {
           }
         >
           <FontAwesome.Bed />
-          <Text ftAlign="left">
+          <Text ftAlign="left" ftSize={2}>
             {!blockActions && pending && pending.id === ActionType.Sleep
               ? 'Confirm?'
               : 'Sleep'}
