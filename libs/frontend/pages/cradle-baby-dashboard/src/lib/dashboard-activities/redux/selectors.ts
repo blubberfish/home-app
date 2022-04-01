@@ -13,6 +13,11 @@ export const currentBabySelector = createSelector(
   (state) => state?.baby
 );
 
+export const colorsSelector = createSelector(
+  stateSelector,
+  (state) => state?.colors
+);
+
 export const dataSetLoadingSelector = createSelector(
   stateSelector,
   (state) => state?.dataSetLoading

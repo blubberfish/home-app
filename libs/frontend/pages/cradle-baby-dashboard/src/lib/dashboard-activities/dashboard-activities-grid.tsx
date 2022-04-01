@@ -12,7 +12,6 @@ import {
   size,
   SizeProps,
 } from '@blubberfish/style-system';
-import { BabyActivityType } from '@blubberfish/types';
 import moment from 'moment';
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
@@ -21,7 +20,9 @@ import {
   normalizedDataSelector,
   TimeNormalizedActivity,
   dataSetLoadingSelector,
+  colorsSelector,
 } from './redux';
+import { getInitialState } from './redux/base';
 
 const useLast3Days = () => {
   return useMemo(
@@ -61,18 +62,12 @@ const Indicator = styled.div<ColorProps>`
   ${color}
 `;
 
-const colors: { [key in BabyActivityType]: string } = {
-  'baby:activity:feed': 'thistle',
-  'baby:activity:sleep': 'darkseagreen',
-  'baby:activity:wake': 'tomato',
-  'baby:activity:nurse': 'powderblue',
-};
-
 const DashboardActivitiesDay = ({
   activities,
 }: {
   activities: TimeNormalizedActivity;
 }) => {
+  const colors = useSelector(colorsSelector);
   const content = useMemo(
     () =>
       new Array(24).fill(0).map((hour, i) => (
@@ -86,11 +81,14 @@ const DashboardActivitiesDay = ({
           rad={2}
         >
           {(activities[hour + i] ?? []).map((current, i) => (
-            <Indicator key={i} bg={colors[current.activity]} />
+            <Indicator
+              key={i}
+              bg={(colors ?? getInitialState().colors)[current.activity]}
+            />
           ))}
         </Grid>
       )),
-    [activities]
+    [activities, colors]
   );
   return (
     <Grid

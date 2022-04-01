@@ -15,6 +15,7 @@ import slice, { activityLogThunk, currentBabySelector } from './redux';
 import { DashboardActivitiesBabies } from './dashboard-activities-babies';
 import { DashboardActivitiesGrid } from './dashboard-activities-grid';
 import { DashboardActivitiesGridTitle } from './dashboard-activities-grid-title';
+import { DashboardActivitiesLegend } from './dashboard-activities-legend';
 
 const Container = styled.div<AlignmentProps & GridProps & PaddingProps>`
   ${alignment}
@@ -54,7 +55,15 @@ const DashboardActivitiesPage = () => {
         gap={3}
       >
         <DashboardActivitiesGridTitle />
-        <DashboardActivitiesGrid />
+        <Container
+          alignItems="center"
+          templateColumns="repeat(2, max-content)"
+          templateRows="min-content"
+          gap={2}
+        >
+          <DashboardActivitiesGrid />
+          <DashboardActivitiesLegend />
+        </Container>
       </Container>
     </Container>
   );
