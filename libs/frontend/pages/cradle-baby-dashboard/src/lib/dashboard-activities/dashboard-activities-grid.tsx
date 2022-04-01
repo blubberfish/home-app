@@ -97,6 +97,7 @@ const colors: { [key in BabyActivityType]: string } = {
   'baby:activity:feed': 'green',
   'baby:activity:sleep': 'blue',
   'baby:activity:wake': 'red',
+  'baby:activity:nurse': 'yellow',
 };
 
 const DashboardActivitiesDay = ({
