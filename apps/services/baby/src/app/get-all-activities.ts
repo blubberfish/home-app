@@ -20,6 +20,9 @@ const getAllActivityHandler = async (event) => {
         const activities = await logs
           .find({
             belongsTo: baby,
+            timestamp: {
+              $gte: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000),
+            },
           })
           .sort({
             dtob: 1,
