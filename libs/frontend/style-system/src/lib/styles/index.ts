@@ -9,5 +9,6 @@ export * from './margin';
 export * from './opacity';
 export * from './padding';
 export * from './position';
+export * from './responsive';
 export * from './size';
 export * from './svg';
