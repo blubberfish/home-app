@@ -1,57 +1,172 @@
-import { Box, Grid, ContrainedBox } from '@blubberfish/frontend/components/box';
-import { Bars } from '@blubberfish/frontend/components/icons/font-awesome';
 import {
+  RightFromBracket,
+  Baby,
+  PeopleRoof,
+  Timeline,
+} from '@blubberfish/frontend/components/icons/font-awesome';
+import {
+  accountInfoSelector,
+  exitThunk,
+} from '@blubberfish/frontend/modules/cradle-baby/app';
+import {
+  alignment,
+  AlignmentProps,
   color,
   ColorProps,
+  display,
+  DisplayProps,
+  font,
+  FontProps,
   grid,
   GridProps,
   gridPos,
   GridPositionProps,
+  margin,
+  MarginProps,
+  padding,
+  PaddingProps,
   responsive,
   ResponsiveProps,
   size,
   SizeProps,
 } from '@blubberfish/style-system';
+import { useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
+import { NavButton } from './button';
+import { PATH } from '../routes';
 
-const responsiveGridLayout = responsive<GridProps>((props) => [grid(props)]);
+const restrainingProps: SizeProps = {
+  w: '100%',
+  wMax: '1024px',
+};
 
 const Container = styled.div<
-  ColorProps & SizeProps & ResponsiveProps<GridProps>
+  AlignmentProps &
+    ColorProps &
+    MarginProps &
+    PaddingProps &
+    SizeProps &
+    GridProps
 >`
-  padding-bottom: env(safe-area-inset-bottom);
-  padding-top: env(safe-area-inset-top);
+  ${alignment}
   ${color}
+  ${grid}
+  ${margin}
+  ${padding}
   ${size}
-  ${responsiveGridLayout}
 `;
 
-const responsiveNavBar = responsive<GridPositionProps>(gridPos);
-const Nav = styled.nav<ResponsiveProps<GridPositionProps>>`
-  padding-bottom: env(safe-area-inset-bottom);
-  padding-top: env(safe-area-inset-top);
-  ${color}
-  ${size}
+const Title = styled.h1<FontProps>`
+  margin: 0;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  ${font}
+`;
+
+const LogOutButton = styled.button<FontProps & PaddingProps>`
+  border: 0;
+  border-radius: 0;
+  margin: 0;
+  outline: 0;
+  color: currentColor;
+  background-color: transparent;
+  ${font}
+  svg {
+    height: 1em;
+    width: 1em;
+    fill: currentColor;
+  }
+`;
+
+const responsiveNavBar = responsive<DisplayProps>(display);
+const Nav = styled.nav<
+  GridProps & GridPositionProps & ResponsiveProps<DisplayProps>
+>`
+  ${grid}
+  ${gridPos}
   ${responsiveNavBar}
 `;
 
-export type DashboardLayout = {
-  nav: [];
-};
+const Main = styled.main<GridProps & GridPositionProps>`
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-top: env(safe-area-inset-top);
+  ${grid}
+  ${gridPos}
+`;
 
-export const DashboardLayout = (props: DashboardLayout) => (
-  <Container
-    h="100vh"
-    w="100%"
-    responsive={[
-      {
-        templateRows: 'min-content 1fr',
-        templateColumns: '1fr',
-      },
-      {
-        templateColumns: 'max-content 1fr',
-      },
-    ]}
-  ></Container>
-);
+export const DashboardLayout = () => {
+  const dispatch = useDispatch();
+  const info = useSelector(accountInfoSelector);
+  const handleExit = useCallback(() => {
+    dispatch(exitThunk());
+  }, [dispatch]);
+  return (
+    <Container
+      bg="background"
+      fg="text"
+      h="100vh"
+      w="100%"
+      templateRows="min-content 1fr"
+      templateColumns="1fr"
+    >
+      <Container
+        marX="auto"
+        padX={3}
+        padY={2}
+        templateRows="min-content"
+        templateColumns="1fr max-content"
+        {...restrainingProps}
+      >
+        <Title ftSize={3}>
+          {info?.displayName ? `${info?.displayName}'s` : 'My'} family
+        </Title>
+        <LogOutButton ftSize={3} onClick={handleExit} pad={3} type="button">
+          <RightFromBracket />
+        </LogOutButton>
+      </Container>
+      {info && (
+        <Container
+          marX="auto"
+          padT={2}
+          padX={3}
+          templateRows="1fr"
+          templateColumns="max-content 1fr"
+          {...restrainingProps}
+        >
+          <Nav
+            gap={3}
+            gridCol={1}
+            gridRow={1}
+            autoFlow="row"
+            autoRows="min-content"
+            templateColumns="1fr"
+            responsive={[{ disp: 'none' }, { disp: 'grid' }]}
+          >
+            <NavButton
+              icon={<PeopleRoof />}
+              label="Overview"
+              to={PATH.FAMILY}
+            />
+            <NavButton
+              icon={<Baby />}
+              label="Activities"
+              to={PATH.ACTIVITIES}
+            />
+            <NavButton icon={<Timeline />} label="History" to={PATH.HISTORY} />
+          </Nav>
+          <Main
+            gridCol={2}
+            gridRow={1}
+            autoFlow="row"
+            autoRows="1fr"
+            templateColumns="1fr"
+          >
+            <Outlet />
+          </Main>
+        </Container>
+      )}
+    </Container>
+  );
+};
