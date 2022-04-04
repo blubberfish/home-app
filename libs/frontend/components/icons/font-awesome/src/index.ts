@@ -1,0 +1,15 @@
+export { ReactComponent as Baby } from './lib/baby.svg';
+export { ReactComponent as Bars } from './lib/bars.svg';
+export { ReactComponent as Bed } from './lib/bed.svg';
+export { ReactComponent as CircleCheck } from './lib/circle-check.svg';
+export { ReactComponent as CookieBite } from './lib/cookie-bite.svg';
+export { ReactComponent as Mars } from './lib/mars.svg';
+export { ReactComponent as Mitten } from './lib/mitten.svg';
+export { ReactComponent as PeopleRoof } from './lib/people-roof.svg';
+export { ReactComponent as Plus } from './lib/plus.svg';
+export { ReactComponent as RightFromBracket } from './lib/right-from-bracket.svg';
+export { ReactComponent as SmileBeam } from './lib/smile-beam.svg';
+export { ReactComponent as Timeline } from './lib/timeline.svg';
+export { ReactComponent as Trash } from './lib/trash.svg';
+export { ReactComponent as Venus } from './lib/venus.svg';
+export { ReactComponent as X } from './lib/x.svg';

@@ -1,0 +1,25 @@
+{
+  "root": "libs/frontend/components/box",
+  "sourceRoot": "libs/frontend/components/box/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/frontend/components/box/**/*.{ts,tsx,js,jsx}"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/frontend/components/box"],
+      "options": {
+        "jestConfig": "libs/frontend/components/box/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

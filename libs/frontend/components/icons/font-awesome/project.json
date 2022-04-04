@@ -1,0 +1,25 @@
+{
+  "root": "libs/frontend/components/icons/font-awesome",
+  "sourceRoot": "libs/frontend/components/icons/font-awesome/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/frontend/components/icons/font-awesome/**/*.{ts,tsx,js,jsx}"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/frontend/components/icons/font-awesome"],
+      "options": {
+        "jestConfig": "libs/frontend/components/icons/font-awesome/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}
