@@ -96,3 +96,42 @@ export const grid = <Props extends GridProps>({
 
   return styles;
 };
+
+export type GridPositionProps = {
+  gridCol?: number;
+  gridColSpan?: number;
+  gridRow?: number;
+  gridRowSpan?: number;
+};
+
+export const gridPos = <Props extends GridPositionProps>({
+  theme,
+  gridCol,
+  gridColSpan,
+  gridRow,
+  gridRowSpan,
+}: StyledProps<Props>) => {
+  const styles: FlattenSimpleInterpolation[] = [
+    css`
+      display: grid;
+    `,
+  ];
+
+  if (gridCol) {
+    styles.push(
+      css`
+        grid-column: ${gridCol} / span ${gridColSpan || 1};
+      `
+    );
+  }
+
+  if (gridRow) {
+    styles.push(
+      css`
+        grid-row: ${gridRow} / span ${gridRowSpan || 1};
+      `
+    );
+  }
+
+  return styles;
+};
