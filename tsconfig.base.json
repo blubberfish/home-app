@@ -24,6 +24,9 @@
       "@blubberfish/frontend/components/carousel": [
         "libs/frontend/components/carousel/src/index.ts"
       ],
+      "@blubberfish/frontend/components/icons/feather": [
+        "libs/frontend/components/icons/feather/src/index.ts"
+      ],
       "@blubberfish/frontend/components/icons/font-awesome": [
         "libs/frontend/components/icons/font-awesome/src/index.ts"
       ],

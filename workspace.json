@@ -4,6 +4,7 @@
     "frontend-components-box": "libs/frontend/components/box",
     "frontend-components-button": "libs/frontend/components/button",
     "frontend-components-carousel": "libs/frontend/components/carousel",
+    "frontend-components-icons-feather": "libs/frontend/components/icons/feather",
     "frontend-components-icons-font-awesome": "libs/frontend/components/icons/font-awesome",
     "frontend-cradle": "apps/frontend/cradle",
     "frontend-cradle-baby": "apps/frontend/cradle-baby",
