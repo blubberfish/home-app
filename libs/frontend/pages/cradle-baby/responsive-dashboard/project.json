@@ -1,0 +1,27 @@
+{
+  "root": "libs/frontend/pages/cradle-baby/responsive-dashboard",
+  "sourceRoot": "libs/frontend/pages/cradle-baby/responsive-dashboard/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/frontend/pages/cradle-baby/responsive-dashboard/**/*.{ts,tsx,js,jsx}"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": [
+        "coverage/libs/frontend/pages/cradle-baby/responsive-dashboard"
+      ],
+      "options": {
+        "jestConfig": "libs/frontend/pages/cradle-baby/responsive-dashboard/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

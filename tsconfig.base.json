@@ -52,6 +52,9 @@
       "@blubberfish/frontend/pages/cradle-baby-routes": [
         "libs/frontend/pages/cradle-baby-routes/src/index.ts"
       ],
+      "@blubberfish/frontend/pages/cradle-baby/responsive-dashboard": [
+        "libs/frontend/pages/cradle-baby/responsive-dashboard/src/index.ts"
+      ],
       "@blubberfish/frontend/ui/components": [
         "libs/frontend/ui/components/src/index.ts"
       ],

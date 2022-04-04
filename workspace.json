@@ -15,6 +15,7 @@
     "frontend-pages-cradle-baby-dashboard": "libs/frontend/pages/cradle-baby-dashboard",
     "frontend-pages-cradle-baby-login": "libs/frontend/pages/cradle-baby-login",
     "frontend-pages-cradle-baby-register": "libs/frontend/pages/cradle-baby-register",
+    "frontend-pages-cradle-baby-responsive-dashboard": "libs/frontend/pages/cradle-baby/responsive-dashboard",
     "frontend-pages-cradle-baby-routes": "libs/frontend/pages/cradle-baby-routes",
     "frontend-style-system": "libs/frontend/style-system",
     "frontend-ui-components": "libs/frontend/ui/components",
