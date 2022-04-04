@@ -4,21 +4,37 @@ import {
   FlattenSimpleInterpolation,
   StyledProps,
 } from 'styled-components';
+import { defaultTheme, Theme } from '../theme';
+import { resolve } from '../utils';
 
-export type ResponsiveProps<Props extends StyledProps<{}>> = {
-  [mediaQuery: string]: (props: Props) => FlattenSimpleInterpolation[];
+export type ResponsiveProps<Props extends {}> = {
+  responsive?: Props[];
 };
 
 export const responsive =
-  <Props extends StyledProps<{}>>(setup: ResponsiveProps<Props>) =>
-  (props: Props) => {
+  <Props extends {}>(
+    generator: (props: StyledProps<Props>) => FlattenSimpleInterpolation[]
+  ) =>
+  ({ responsive, theme }: StyledProps<ResponsiveProps<Props>>) => {
     const styles: FlattenSimpleInterpolation[] = [];
-    Object.entries(setup).forEach(([mediaQuery, fn]) => {
-      styles.push(css`
-        ${mediaQuery} {
-          ${fn(props)}
-        }
-      `);
+    const breakpoints =
+      (theme as Theme).breakpoints || defaultTheme.breakpoints;
+    responsive?.forEach((style, i) => {
+      if (i > 0) {
+        styles.push(
+          css`
+            @media only screen and (min-width: ${resolve(i, breakpoints)}) {
+              ${generator({ ...style, theme })}
+            }
+          `
+        );
+      } else {
+        styles.push(
+          css`
+            ${generator({ ...style, theme })}
+          `
+        );
+      }
     });
     return styles;
   };
