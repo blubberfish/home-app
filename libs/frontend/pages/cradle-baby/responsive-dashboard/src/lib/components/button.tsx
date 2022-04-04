@@ -84,7 +84,7 @@ export const NavLink = ({ icon, label, to }: NavLinkProps) => {
       rad={3}
     >
       <Container
-        gap={3}
+        gap={2}
         padX={3}
         padY={2}
         alignContent="center"
@@ -111,7 +111,7 @@ export const NavButton = ({ icon, label, onClick }: NavButtonProps) => (
     rad={3}
   >
     <Container
-      gap={3}
+      gap={2}
       padX={3}
       padY={2}
       alignContent="center"

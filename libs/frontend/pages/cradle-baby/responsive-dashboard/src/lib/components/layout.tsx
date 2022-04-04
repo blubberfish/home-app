@@ -65,21 +65,6 @@ const Title = styled.h1<FontProps>`
   ${font}
 `;
 
-const LogOutButton = styled.button<FontProps & PaddingProps>`
-  border: 0;
-  border-radius: 0;
-  margin: 0;
-  outline: 0;
-  color: currentColor;
-  background-color: transparent;
-  ${font}
-  svg {
-    height: 1em;
-    width: 1em;
-    fill: currentColor;
-  }
-`;
-
 const responsiveNavBar = responsive<DisplayProps>(display);
 const Nav = styled.nav<
   GridProps & GridPositionProps & ResponsiveProps<DisplayProps>
@@ -146,7 +131,7 @@ export const DashboardLayout = () => {
             <NavLink icon={<Timeline />} label="History" to={PATH.HISTORY} />
             <NavButton
               icon={<RightFromBracket />}
-              label="History"
+              label="Log out"
               onClick={handleExit}
             />
           </Nav>
