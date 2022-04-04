@@ -14,15 +14,15 @@ import {
   SizeProps,
 } from '@blubberfish/style-system';
 
-export const Box = styled.div<
-  BorderProps &
-    ColorProps &
-    MarginProps &
-    PaddingProps &
-    PositionProps &
-    RadiusProps &
-    SizeProps
->`
+export type BoxStyleProps = BorderProps &
+  ColorProps &
+  MarginProps &
+  PaddingProps &
+  PositionProps &
+  RadiusProps &
+  SizeProps;
+
+export const Box = styled.div<BoxStyleProps>`
   box-sizing: border-box;
   ${color}
   ${margin}

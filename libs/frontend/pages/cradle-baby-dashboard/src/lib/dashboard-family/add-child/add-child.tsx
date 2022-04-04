@@ -6,7 +6,7 @@ import {
   PaddingProps,
 } from '@blubberfish/style-system';
 import { Module } from '@blubberfish/frontend/modules/core';
-import { ConstrainedLayout } from '@blubberfish/frontend/ui/components';
+import { ContrainedBox as ConstrainedLayout } from '@blubberfish/frontend/ui/components';
 import slice from './redux';
 import { AddChildAlert } from './add-child-alert';
 import { AddChildForm } from './add-child-form';

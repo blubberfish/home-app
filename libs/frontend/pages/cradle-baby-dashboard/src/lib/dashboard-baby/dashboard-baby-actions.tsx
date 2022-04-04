@@ -4,12 +4,11 @@ import {
 } from '@blubberfish/frontend/modules/cradle-baby/app';
 import {
   Button,
-  ConstrainedLayout,
+  ContrainedBox as ConstrainedLayout,
   FontAwesome,
 } from '@blubberfish/frontend/ui/components';
 import { usePendingAction } from '@blubberfish/frontend/hooks';
 import {
-  logWakeActivity,
   logFeedActivity,
   logSleepActivity,
   logNursingActivity,

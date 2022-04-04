@@ -7,7 +7,7 @@ import {
 } from '@blubberfish/frontend/modules/cradle-baby/app';
 import {
   Button,
-  ConstrainedLayout,
+  ContrainedBox,
   FontAwesome,
 } from '@blubberfish/frontend/ui/components';
 import {
@@ -88,7 +88,7 @@ export const DashboardHead = () => {
       templateRows="1fr"
       pad={3}
     >
-      <ConstrainedLayout>
+      <ContrainedBox>
         <Container
           alignContent="center"
           alignItems="center"
@@ -104,7 +104,7 @@ export const DashboardHead = () => {
             <FontAwesome.RightFromBracket />
           </Button>
         </Container>
-      </ConstrainedLayout>
+      </ContrainedBox>
     </Container>
   );
 };
