@@ -122,9 +122,6 @@ export const DashboardLayout = () => {
         <Title ftSize={3}>
           {info?.displayName ? `${info?.displayName}'s` : 'My'} family
         </Title>
-        <LogOutButton ftSize={3} onClick={handleExit} pad={3} type="button">
-          <RightFromBracket />
-        </LogOutButton>
       </Container>
       {info && (
         <Container
