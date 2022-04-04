@@ -1,0 +1,25 @@
+{
+  "root": "libs/frontend/components/input",
+  "sourceRoot": "libs/frontend/components/input/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/frontend/components/input/**/*.{ts,tsx,js,jsx}"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/frontend/components/input"],
+      "options": {
+        "jestConfig": "libs/frontend/components/input/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

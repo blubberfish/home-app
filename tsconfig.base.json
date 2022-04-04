@@ -30,6 +30,9 @@
       "@blubberfish/frontend/components/icons/font-awesome": [
         "libs/frontend/components/icons/font-awesome/src/index.ts"
       ],
+      "@blubberfish/frontend/components/input": [
+        "libs/frontend/components/input/src/index.ts"
+      ],
       "@blubberfish/frontend/hooks": ["libs/frontend/hooks/src/index.ts"],
       "@blubberfish/frontend/modules/core": [
         "libs/frontend/modules/core/src/index.ts"

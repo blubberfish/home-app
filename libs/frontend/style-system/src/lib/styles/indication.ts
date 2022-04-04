@@ -11,6 +11,7 @@ export enum IndicationType {
   Disabled = 'disabled',
   Focus = 'focus',
   Hover = 'hover',
+  Placeholder = 'placeholder',
 }
 
 export const indication =
