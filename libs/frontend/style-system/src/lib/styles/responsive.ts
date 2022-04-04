@@ -23,7 +23,7 @@ export const responsive =
       if (i > 0) {
         styles.push(
           css`
-            @media only screen and (min-width: ${resolve(i, breakpoints)} {
+            @media only screen and (min-width: ${resolve(i, breakpoints)}) {
               ${generator({ ...style, theme })}
             }
           `
