@@ -30,7 +30,7 @@ import {
   size,
   SizeProps,
 } from '@blubberfish/style-system';
-import { useCallback } from 'react';
+import { Suspense, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
@@ -80,6 +80,8 @@ const Main = styled.main<GridProps & GridPositionProps>`
   ${grid}
   ${gridPos}
 `;
+
+const Empty = () => null;
 
 export const DashboardLayout = () => {
   const dispatch = useDispatch();
@@ -142,7 +144,9 @@ export const DashboardLayout = () => {
             autoRows="1fr"
             templateColumns="1fr"
           >
-            <Outlet />
+            <Suspense fallback={<Empty />}>
+              <Outlet />
+            </Suspense>
           </Main>
         </Container>
       )}
