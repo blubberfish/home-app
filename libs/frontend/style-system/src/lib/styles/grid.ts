@@ -3,10 +3,11 @@ import {
   FlattenSimpleInterpolation,
   StyledProps,
 } from 'styled-components';
+import { DisplayProps, display } from './display';
 import { defaultTheme, Theme } from '../theme';
 import { resolve } from '../utils';
 
-export type GridProps = {
+export type GridProps = DisplayProps & {
   gap?: number | string;
   gapX?: number | string;
   gapY?: number | string;
@@ -19,6 +20,7 @@ export type GridProps = {
 
 export const grid = <Props extends GridProps>({
   theme,
+  disp,
   gapX,
   gapY,
   gap,
@@ -28,11 +30,9 @@ export const grid = <Props extends GridProps>({
   autoFlow,
   autoRows,
 }: StyledProps<Props>) => {
-  const styles: FlattenSimpleInterpolation[] = [
-    css`
-      display: grid;
-    `,
-  ];
+  const styles: FlattenSimpleInterpolation[] = disp
+    ? []
+    : display({ disp: 'grid', theme });
   const spacing = (theme as Theme)?.spacing || defaultTheme.spacing;
 
   const gX = gapX || gap;
