@@ -34,7 +34,7 @@ import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
-import { NavButton } from './button';
+import { NavButton, NavLink } from './button';
 import { PATH } from '../routes';
 
 const restrainingProps: SizeProps = {
@@ -136,7 +136,7 @@ export const DashboardLayout = () => {
           {...restrainingProps}
         >
           <Nav
-            gap={3}
+            gap={1}
             gridCol={1}
             gridRow={1}
             autoFlow="row"
@@ -144,17 +144,14 @@ export const DashboardLayout = () => {
             templateColumns="1fr"
             responsive={[{ disp: 'none' }, { disp: 'grid' }]}
           >
+            <NavLink icon={<PeopleRoof />} label="Overview" to={PATH.FAMILY} />
+            <NavLink icon={<Baby />} label="Activities" to={PATH.ACTIVITIES} />
+            <NavLink icon={<Timeline />} label="History" to={PATH.HISTORY} />
             <NavButton
-              icon={<PeopleRoof />}
-              label="Overview"
-              to={PATH.FAMILY}
+              icon={<RightFromBracket />}
+              label="History"
+              onClick={handleExit}
             />
-            <NavButton
-              icon={<Baby />}
-              label="Activities"
-              to={PATH.ACTIVITIES}
-            />
-            <NavButton icon={<Timeline />} label="History" to={PATH.HISTORY} />
           </Nav>
           <Main
             gridCol={2}
