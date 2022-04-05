@@ -7,6 +7,7 @@ import { createEntityAdapter, EntityState } from '@reduxjs/toolkit';
 export const name = 'dashboard.activities';
 
 export type VisualizationColors = { [key in BabyActivityType]: string };
+export type GenderColors = { [key in 'm' | 'f']: string };
 
 export const activityEntity = createEntityAdapter<BabyActivityProfilePayload>({
   selectId: (model) => model._id,
@@ -29,16 +30,27 @@ export type DashboardActivitiesState = {
   baby?: string | null;
   pending?: PendingAction | null;
   activities: EntityState<BabyActivityProfilePayload>;
-  colors: VisualizationColors;
+  colors: {
+    visualization: VisualizationColors;
+    gender: GenderColors;
+  };
 };
 
-export const getInitialState = (): DashboardActivitiesState => ({
-  baby: null,
-  activities: activityEntity.getInitialState(),
-  colors: {
+export const defaultColors: DashboardActivitiesState['colors'] = {
+  visualization: {
     'baby:activity:feed': 'goldenrod',
     'baby:activity:sleep': 'forestgreen',
     'baby:activity:wake': 'tomato',
     'baby:activity:nurse': 'skyblue',
   },
+  gender: {
+    m: 'PowderBlue',
+    f: 'Pink',
+  },
+};
+
+export const getInitialState = (): DashboardActivitiesState => ({
+  baby: null,
+  activities: activityEntity.getInitialState(),
+  colors: defaultColors,
 });
