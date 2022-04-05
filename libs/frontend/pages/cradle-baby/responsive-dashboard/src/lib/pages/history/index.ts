@@ -1,1 +1,1 @@
-export { HistoryPage as default } from './history';
+export { default } from './history';

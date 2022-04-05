@@ -113,6 +113,7 @@ export const DashboardLayout = () => {
       {info && (
         <Container
           marX="auto"
+          gap={3}
           padT={2}
           padX={3}
           templateRows="1fr"

@@ -1,6 +1,4 @@
 import {
-  color,
-  ColorProps,
   grid,
   GridProps,
   radius,
@@ -8,23 +6,43 @@ import {
   responsive,
   ResponsiveProps,
 } from '@blubberfish/style-system';
-import { BabyActivityType } from '@blubberfish/types';
-import { useSelector } from 'react-redux';
+import { ReactNode } from 'react';
 import styled from 'styled-components';
-import { colorsSelector } from '../redux';
 
 type ResponsiveCellGridProps = GridProps;
 const responsiveGrid = responsive<ResponsiveCellGridProps>(grid);
 
 const Container = styled.div<
-  ResponsiveProps<ResponsiveCellGridProps> & RadiusProps
+  GridProps & ResponsiveProps<ResponsiveCellGridProps> & RadiusProps
 >`
+  ${grid}
   ${responsiveGrid}
   ${radius}
 `;
 
-export type CellGridProps = {};
+export type CellGridProps = {
+  children?: ReactNode;
+};
 
-export const CellGrid = ({}: CellGridProps) => {
-  return <Container rad={1}></Container>;
+export const CellGrid = ({ children }: CellGridProps) => {
+  return (
+    <Container
+      gap={1}
+      rad={1}
+      responsive={[
+        {
+          templateColumns: 'repeat(3, 24px)',
+          templateRows: 'repeat(24, 24px)',
+          autoFlow: 'row dense',
+        },
+        {
+          templateColumns: 'repeat(24, 24px)',
+          templateRows: 'repeat(3, 24px)',
+          autoFlow: 'column dense',
+        },
+      ]}
+    >
+      {children}
+    </Container>
+  );
 };
