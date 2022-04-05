@@ -18,11 +18,6 @@ export const colorsSelector = createSelector(
   (state) => state?.colors
 );
 
-export const dataSetLoadingSelector = createSelector(
-  stateSelector,
-  (state) => state?.dataSetLoading
-);
-
 const activityEntityStateSelector = createSelector(
   stateSelector,
   (state) => state?.activities ?? activityEntity.getInitialState()
