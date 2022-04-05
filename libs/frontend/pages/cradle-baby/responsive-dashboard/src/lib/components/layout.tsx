@@ -42,13 +42,16 @@ const restrainingProps: SizeProps = {
   wMax: '1024px',
 };
 
+const responsiveGridLayout = responsive<GridProps>(grid);
+
 const Container = styled.div<
   AlignmentProps &
     ColorProps &
     MarginProps &
     PaddingProps &
     SizeProps &
-    GridProps
+    GridProps &
+    ResponsiveProps<GridProps>
 >`
   ${alignment}
   ${color}
@@ -56,6 +59,7 @@ const Container = styled.div<
   ${margin}
   ${padding}
   ${size}
+  ${responsiveGridLayout}
 `;
 
 const Title = styled.h1<FontProps>`
@@ -113,11 +117,11 @@ export const DashboardLayout = () => {
       {info && (
         <Container
           marX="auto"
-          gap={3}
           padT={2}
           padX={3}
           templateRows="1fr"
           templateColumns="max-content 1fr"
+          responsive={[{ gap: 0 }, { gap: 3 }]}
           {...restrainingProps}
         >
           <Nav

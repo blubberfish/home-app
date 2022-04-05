@@ -8,8 +8,14 @@ import {
   AlignmentProps,
   color,
   ColorProps,
+  font,
+  FontProps,
   grid,
   GridProps,
+  indication,
+  IndicationType,
+  opacity,
+  OpacityProps,
   padding,
   PaddingProps,
   radius,
@@ -17,14 +23,17 @@ import {
 } from '@blubberfish/style-system';
 import moment from 'moment';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { genderColorsSelector } from './redux';
 
-const P = styled.p`
+const P = styled.p<ColorProps & FontProps>`
   margin: 0;
+  ${color}
+  ${font}
 `;
 
-const TableContainer = styled.div<GridProps>`
+const Container = styled.div<GridProps>`
   ${grid}
 `;
 
@@ -37,17 +46,34 @@ const TableCellContainer = styled.div<
   ${padding}
 `;
 
+type RowIndicationProps = {
+  indication?: {
+    [IndicationType.Hover]?: OpacityProps;
+  };
+};
+const rowIndication = indication<RowIndicationProps>(IndicationType.Hover, [
+  ({ indication, theme }) =>
+    opacity({ theme, ...indication?.[IndicationType.Hover] }),
+]);
 const TableRowContainer = styled.div<
-  AlignmentProps & ColorProps & GridProps & PaddingProps & RadiusProps
+  AlignmentProps &
+    ColorProps &
+    GridProps &
+    PaddingProps &
+    RadiusProps &
+    RowIndicationProps
 >`
+  cursor: pointer;
   ${alignment}
   ${color}
   ${grid}
   ${padding}
   ${radius}
+  ${rowIndication}
 `;
 
 type RowProps = {
+  onClick?: () => void;
   dob: Date;
   gender: 'm' | 'f';
   enName: string;
@@ -55,7 +81,15 @@ type RowProps = {
   zhName: string;
   zhAlias?: string;
 };
-const Row = ({ dob, gender, enName, zhName, enAlias, zhAlias }: RowProps) => {
+const Row = ({
+  onClick,
+  dob,
+  gender,
+  enName,
+  zhName,
+  enAlias,
+  zhAlias,
+}: RowProps) => {
   const colors = useSelector(genderColorsSelector);
   const svgProps = {
     fill: colors[gender],
@@ -64,6 +98,12 @@ const Row = ({ dob, gender, enName, zhName, enAlias, zhAlias }: RowProps) => {
   };
   return (
     <TableRowContainer
+      onClick={onClick}
+      indication={{
+        [IndicationType.Hover]: {
+          opacity: 2,
+        },
+      }}
       justifyItems="center"
       templateRows="min-content"
       templateColumns="repeat(2, max-content) repeat(2, 1fr)"
@@ -78,7 +118,7 @@ const Row = ({ dob, gender, enName, zhName, enAlias, zhAlias }: RowProps) => {
         {gender === 'f' ? <Venus {...svgProps} /> : <Mars {...svgProps} />}
       </TableCellContainer>
       <TableCellContainer alignItems="center" alignContent="center">
-        {moment(dob).format('YYYY MMM, DD')}
+        {moment(dob).format('DD MMM YYYY')}
       </TableCellContainer>
       <TableCellContainer
         templateColumns="max-content"
@@ -89,7 +129,11 @@ const Row = ({ dob, gender, enName, zhName, enAlias, zhAlias }: RowProps) => {
         gap={1}
       >
         <P>{enName}</P>
-        {enAlias && <P>{enAlias}</P>}
+        {enAlias && (
+          <P fg="text_weak" ftSize={1}>
+            {enAlias}
+          </P>
+        )}
       </TableCellContainer>
       <TableCellContainer
         alignItems="center"
@@ -100,40 +144,64 @@ const Row = ({ dob, gender, enName, zhName, enAlias, zhAlias }: RowProps) => {
         gap={1}
       >
         <P>{zhName}</P>
-        {zhAlias && <P>{zhAlias}</P>}
+        {zhAlias && (
+          <P fg="text_weak" ftSize={1}>
+            {zhAlias}
+          </P>
+        )}
       </TableCellContainer>
     </TableRowContainer>
   );
 };
 
 export const ChildrenTable = () => {
+  const navigate = useNavigate();
   const account = useSelector(accountInfoSelector);
+
   if (!account) return null;
 
   const children = account.family.children;
 
   return (
-    <TableContainer
+    <Container
       templateColumns="1fr"
       autoRows="max-content"
       autoFlow="row"
       gap={3}
     >
-      {children.map((child) => (
+      <P>Choose child</P>
+      <Container
+        templateColumns="1fr"
+        autoRows="max-content"
+        autoFlow="row"
+        gap={2}
+      >
+        {children.map((child) => (
+          <Row
+            key={child.uuid}
+            dob={child.dtob}
+            gender={child.gender}
+            enAlias={child.name.en?.preferred}
+            enName={`${[child.name.en?.family, child.name.en?.given]
+              .filter((x) => !!x)
+              .join(' ')}`}
+            zhAlias={child.name.zh?.preferred}
+            zhName={`${[child.name.zh?.family, child.name.zh?.given]
+              .filter((x) => !!x)
+              .join('')}`}
+            onClick={() => {
+              navigate(child.uuid);
+            }}
+          />
+        ))}
         <Row
-          key={child.uuid}
-          dob={child.dtob}
-          gender={child.gender}
-          enAlias={child.name.en?.preferred}
-          enName={`${[child.name.en?.family, child.name.en?.given]
-            .filter((x) => !!x)
-            .join(' ')}`}
-          zhAlias={child.name.zh?.preferred}
-          zhName={`${[child.name.zh?.family, child.name.zh?.given]
-            .filter((x) => !!x)
-            .join(' ')}`}
+          dob={new Date()}
+          gender="f"
+          enAlias="Ezra"
+          enName="Abc Asd Erty"
+          zhName="AVB"
         />
-      ))}
-    </TableContainer>
+      </Container>
+    </Container>
   );
 };
