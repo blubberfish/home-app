@@ -194,13 +194,6 @@ export const ChildrenTable = () => {
             }}
           />
         ))}
-        <Row
-          dob={new Date()}
-          gender="f"
-          enAlias="Ezra"
-          enName="Abc Asd Erty"
-          zhName="AVB"
-        />
       </Container>
     </Container>
   );
