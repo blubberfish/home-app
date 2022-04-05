@@ -2,12 +2,7 @@ import { GlobalState } from '@blubberfish/frontend/modules/core';
 import { BabyActivityProfilePayload } from '@blubberfish/types';
 import { createSelector } from '@reduxjs/toolkit';
 import moment from 'moment';
-import {
-  activityEntity,
-  getInitialState,
-  DashboardActivitiesState,
-  name,
-} from './base';
+import { activityEntity, DashboardActivitiesState, name } from './base';
 
 const stateSelector = (
   state: GlobalState<DashboardActivitiesState, typeof name>
@@ -20,12 +15,7 @@ export const currentBabySelector = createSelector(
 
 export const colorsSelector = createSelector(
   stateSelector,
-  (state) => state?.colors ?? getInitialState().colors
-);
-
-export const dataSetLoadingSelector = createSelector(
-  stateSelector,
-  (state) => state?.dataSetLoading
+  (state) => state?.colors
 );
 
 const activityEntityStateSelector = createSelector(
