@@ -13,27 +13,16 @@ export const activityEntity = createEntityAdapter<BabyActivityProfilePayload>({
   sortComparer: (e1, e2) => e1.timestamp.localeCompare(e2.timestamp),
 });
 
-export type PendingAction = {
-  id: string | number;
-  action: () => Promise<void>;
-  running?: boolean | null;
-};
-
-export type Alert = {
-  title: string;
-  message: string;
-};
-
 export type DashboardActivitiesState = {
-  alert?: Alert | null;
   baby?: string | null;
-  pending?: PendingAction | null;
+  dataSetLoading?: boolean | null;
   activities: EntityState<BabyActivityProfilePayload>;
   colors: VisualizationColors;
 };
 
 export const getInitialState = (): DashboardActivitiesState => ({
   baby: null,
+  dataSetLoading: null,
   activities: activityEntity.getInitialState(),
   colors: {
     'baby:activity:feed': 'goldenrod',

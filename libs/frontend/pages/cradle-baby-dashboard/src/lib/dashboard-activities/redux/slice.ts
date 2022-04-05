@@ -1,30 +1,15 @@
 import { BabyActivityProfilePayload } from '@blubberfish/types';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import {
-  Alert,
-  PendingAction,
-  activityEntity,
-  getInitialState,
-  name,
-} from './base';
+import { name, getInitialState, activityEntity } from './base';
 
 const slice = createSlice({
   name,
   initialState: getInitialState(),
   reducers: {
-    setAlert(state, { payload }: PayloadAction<Alert>) {
-      state.alert = payload;
-    },
-    dismissAlert(state) {
-      state.alert = null;
-    },
-    setPending(state, { payload }: PayloadAction<PendingAction>) {
-      state.pending = payload;
-    },
-    unsetPending(state) {
-      state.pending = null;
-    },
-    clearDataSet(state) {
+    clearDataSet(
+      state,
+      { payload }: PayloadAction<BabyActivityProfilePayload[]>
+    ) {
       state.activities = activityEntity.removeAll(state.activities);
     },
     replaceActivityDataSet(
@@ -39,6 +24,12 @@ const slice = createSlice({
     resetBaby(state) {
       state.baby = null;
     },
+    setLoading(state) {
+      state.dataSetLoading = true;
+    },
+    unsetLoading(state) {
+      state.dataSetLoading = false;
+    },
   },
 });
 
@@ -48,8 +39,6 @@ export const {
   replaceActivityDataSet,
   resetBaby,
   setBaby,
-  setAlert,
-  dismissAlert,
-  setPending,
-  unsetPending,
+  setLoading,
+  unsetLoading,
 } = slice.actions;
