@@ -27,7 +27,6 @@ export type Alert = {
 
 export type DashboardActivitiesState = {
   alert?: Alert | null;
-  baby?: string | null;
   pending?: PendingAction | null;
   activities: EntityState<BabyActivityProfilePayload>;
   colors: {
@@ -50,7 +49,6 @@ export const defaultColors: DashboardActivitiesState['colors'] = {
 };
 
 export const getInitialState = (): DashboardActivitiesState => ({
-  baby: null,
   activities: activityEntity.getInitialState(),
   colors: defaultColors,
 });

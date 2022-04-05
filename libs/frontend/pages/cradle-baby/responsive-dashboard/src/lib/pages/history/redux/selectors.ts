@@ -13,11 +13,6 @@ const stateSelector = (
   state: GlobalState<DashboardActivitiesState, typeof name>
 ) => state[name];
 
-export const currentBabySelector = createSelector(
-  stateSelector,
-  (state) => state?.baby
-);
-
 export const visualizationColorsSelector = createSelector(
   stateSelector,
   (state) => state?.colors.visualization ?? defaultColors.visualization

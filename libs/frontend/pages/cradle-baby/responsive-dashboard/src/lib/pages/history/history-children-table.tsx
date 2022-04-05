@@ -154,7 +154,7 @@ const Row = ({
   );
 };
 
-export const ChildrenTable = () => {
+const ChildrenTablePage = () => {
   const navigate = useNavigate();
   const account = useSelector(accountInfoSelector);
 
@@ -169,7 +169,7 @@ export const ChildrenTable = () => {
       autoFlow="row"
       gap={3}
     >
-      <P>Choose child</P>
+      <P>Choose a child to view their history</P>
       <Container
         templateColumns="1fr"
         autoRows="max-content"
@@ -198,3 +198,5 @@ export const ChildrenTable = () => {
     </Container>
   );
 };
+
+export default ChildrenTablePage;

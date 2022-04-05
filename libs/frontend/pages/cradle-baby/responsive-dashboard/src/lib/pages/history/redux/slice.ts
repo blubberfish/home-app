@@ -33,12 +33,6 @@ const slice = createSlice({
     ) {
       state.activities = activityEntity.setAll(state.activities, payload);
     },
-    setBaby(state, { payload }: PayloadAction<string>) {
-      state.baby = payload;
-    },
-    resetBaby(state) {
-      state.baby = null;
-    },
   },
 });
 
@@ -46,8 +40,6 @@ export default slice;
 export const {
   clearDataSet,
   replaceActivityDataSet,
-  resetBaby,
-  setBaby,
   setAlert,
   dismissAlert,
   setPending,
