@@ -1,0 +1,25 @@
+{
+  "root": "libs/frontend/pages/cradle-baby-dashboard-history",
+  "sourceRoot": "libs/frontend/pages/cradle-baby-dashboard-history/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/frontend/pages/cradle-baby-dashboard-history/**/*.{ts,tsx,js,jsx}"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/frontend/pages/cradle-baby-dashboard-history"],
+      "options": {
+        "jestConfig": "libs/frontend/pages/cradle-baby-dashboard-history/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

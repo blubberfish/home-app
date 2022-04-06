@@ -3,6 +3,7 @@ export { ReactComponent as Bars } from './lib/bars.svg';
 export { ReactComponent as Bed } from './lib/bed.svg';
 export { ReactComponent as CircleCheck } from './lib/circle-check.svg';
 export { ReactComponent as CookieBite } from './lib/cookie-bite.svg';
+export { ReactComponent as Gear } from './lib/gear.svg';
 export { ReactComponent as Mars } from './lib/mars.svg';
 export { ReactComponent as Mitten } from './lib/mitten.svg';
 export { ReactComponent as PeopleRoof } from './lib/people-roof.svg';

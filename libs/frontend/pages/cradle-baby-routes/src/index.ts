@@ -4,3 +4,10 @@ export const PATH = {
   LOGIN: 'login',
   ALL: '*',
 };
+
+export const DASHBOARD_PATH = {
+  FAMILY: 'family',
+  ACTIVITIES: 'activities',
+  HISTORY: 'history',
+  SETTINGS: 'settings',
+};

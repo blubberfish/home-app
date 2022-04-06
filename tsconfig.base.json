@@ -43,6 +43,18 @@
       "@blubberfish/frontend/pages/cradle-baby-dashboard": [
         "libs/frontend/pages/cradle-baby-dashboard/src/index.ts"
       ],
+      "@blubberfish/frontend/pages/cradle-baby-dashboard-activities": [
+        "libs/frontend/pages/cradle-baby-dashboard-activities/src/index.ts"
+      ],
+      "@blubberfish/frontend/pages/cradle-baby-dashboard-family": [
+        "libs/frontend/pages/cradle-baby-dashboard-family/src/index.ts"
+      ],
+      "@blubberfish/frontend/pages/cradle-baby-dashboard-history": [
+        "libs/frontend/pages/cradle-baby-dashboard-history/src/index.ts"
+      ],
+      "@blubberfish/frontend/pages/cradle-baby-dashboard-settings": [
+        "libs/frontend/pages/cradle-baby-dashboard-settings/src/index.ts"
+      ],
       "@blubberfish/frontend/pages/cradle-baby-login": [
         "libs/frontend/pages/cradle-baby-login/src/index.ts"
       ],
@@ -51,6 +63,9 @@
       ],
       "@blubberfish/frontend/pages/cradle-baby-routes": [
         "libs/frontend/pages/cradle-baby-routes/src/index.ts"
+      ],
+      "@blubberfish/frontend/pages/cradle-baby/backup": [
+        "libs/frontend/pages/cradle-baby/backup/src/index.ts"
       ],
       "@blubberfish/frontend/pages/cradle-baby/responsive-dashboard": [
         "libs/frontend/pages/cradle-baby/responsive-dashboard/src/index.ts"
