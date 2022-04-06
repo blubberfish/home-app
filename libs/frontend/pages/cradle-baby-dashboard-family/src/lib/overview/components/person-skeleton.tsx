@@ -84,7 +84,7 @@ export const PersonSkeleton = ({ data, onClick }: PersonSkeletonProps) => {
     () =>
       name
         ?.split(' ')
-        .slice(0, 1)
+        .slice(0, 2)
         .map((word) => word[0])
         .join('') ?? null,
     [name]

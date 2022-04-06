@@ -42,26 +42,40 @@ const Container = styled.div<
 
 export type PersonSkeletonListProps = {
   data?: PersonEntity[];
+  onClick?: (uuid: string) => void;
 };
 
-export const PersonListSkeleton = ({ data }: PersonSkeletonListProps) => {
+export const PersonListSkeleton = ({
+  data,
+  onClick,
+}: PersonSkeletonListProps) => {
   return (
     <Container
       gap={3}
       autoRows="min-content"
       responsive={[
         {
-          justifyContent: 'space-evenly',
-          templateColumns: 'repeat(3, max-content)',
+          justifyContent: 'start',
+          templateColumns: `repeat(${Math.min(
+            5,
+            data?.length ?? 1
+          )}, max-content)`,
         },
         {
-          justifyContent: 'start',
           templateColumns: 'repeat(8, max-content)',
         },
       ]}
     >
       {data ? (
-        data.map((entity) => <PersonSkeleton key={entity.uuid} data={entity} />)
+        data.map((entity) => (
+          <PersonSkeleton
+            key={entity.uuid}
+            data={entity}
+            onClick={() => {
+              onClick && onClick(entity.uuid);
+            }}
+          />
+        ))
       ) : (
         <>
           <PersonSkeleton />
