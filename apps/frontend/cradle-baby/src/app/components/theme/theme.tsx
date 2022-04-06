@@ -11,6 +11,9 @@ const GlobalStyle = createGlobalStyle<FontProps>`
     margin: 0;
     ${font}
   }
+  svg {
+    vertical-align: middle;
+  }
 `;
 
 export type ThemeProps = {

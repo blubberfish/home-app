@@ -5,7 +5,13 @@ export const name = 'dashboard.family.overview';
 
 export const childEntity = createEntityAdapter<PersonEntity>();
 
+export type PendingAction = {
+  id: string;
+  action: () => Promise<void>;
+};
+
 export type OverviewState = {
+  pending?: PendingAction | null;
   children: EntityState<PersonEntity>;
 };
 
