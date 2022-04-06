@@ -1,13 +1,16 @@
 import { DASHBOARD_FAMILY_PATH } from '@blubberfish/frontend/pages/cradle-baby-routes';
+import { lazy } from 'react';
 import { Navigate, Routes, Route } from 'react-router-dom';
-import { Overview } from './overview';
 
 const Empty = () => null;
+const ChildDetails = lazy(() => import('./child-details'));
+const Overview = lazy(() => import('./overview'));
 
 const DashboardFamilyPage = () => (
   <Routes>
     <Route path={DASHBOARD_FAMILY_PATH.OVERVIEW} element={<Overview />} />
-    <Route path={DASHBOARD_FAMILY_PATH.CHILD} element={<Empty />} />
+    <Route path={DASHBOARD_FAMILY_PATH.ADD_CHILD} element={<Empty />} />
+    <Route path={DASHBOARD_FAMILY_PATH.CHILD} element={<ChildDetails />} />
     <Route
       path="*"
       element={<Navigate to={DASHBOARD_FAMILY_PATH.OVERVIEW} />}

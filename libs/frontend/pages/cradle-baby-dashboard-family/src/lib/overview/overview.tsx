@@ -32,7 +32,7 @@ export const Overview = () => {
       autoFlow="row"
       gap={3}
     >
-      <OverviewAdultsList />
+      {/* <OverviewAdultsList /> */}
       <OverviewChildrenList />
     </Container>
   );
