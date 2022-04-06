@@ -10,13 +10,15 @@ import { DashboardLayout } from './components/layout';
 import slice from './redux';
 import { PATH } from './routes';
 
+const ActivitiesPage = lazy(
+  () => import('@blubberfish/frontend/pages/cradle-baby-dashboard-activities')
+);
 const FamilyPage = lazy(
   () => import('@blubberfish/frontend/pages/cradle-baby-dashboard-family')
 );
 const HistoryPage = lazy(
   () => import('@blubberfish/frontend/pages/cradle-baby-dashboard-history')
 );
-const Empty = () => null;
 
 export const DashboardPage = () => {
   const dispatch = useDispatch();
@@ -29,7 +31,7 @@ export const DashboardPage = () => {
       <Routes>
         <Route element={<DashboardLayout />}>
           <Route path={`${PATH.FAMILY}/*`} element={<FamilyPage />} />
-          <Route path={`${PATH.ACTIVITIES}/*`} element={<Empty />} />
+          <Route path={`${PATH.ACTIVITIES}/*`} element={<ActivitiesPage />} />
           <Route path={`${PATH.HISTORY}/*`} element={<HistoryPage />} />
           <Route path="*" element={<Navigate to="family" />} />
         </Route>
