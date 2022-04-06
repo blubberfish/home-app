@@ -10,7 +10,9 @@ import { DashboardLayout } from './components/layout';
 import slice from './redux';
 import { PATH } from './routes';
 
-const HistoryPage = lazy(() => import('./pages/history'));
+const HistoryPage = lazy(
+  () => import('@blubberfish/frontend/pages/cradle-baby-dashboard-history')
+);
 const Empty = () => null;
 
 export const DashboardPage = () => {
