@@ -11,7 +11,7 @@ import {
   SizeProps,
 } from '@blubberfish/style-system';
 import styled from 'styled-components';
-import { OverviewAdultList } from './overview-adults-list';
+import { OverviewAdultsList } from './overview-adults-list';
 import { OverviewChildrenList } from './overview-children-list';
 
 const Container = styled.div<
@@ -32,7 +32,7 @@ export const Overview = () => {
       autoFlow="row"
       gap={3}
     >
-      <OverviewAdultList />
+      <OverviewAdultsList />
       <OverviewChildrenList />
     </Container>
   );

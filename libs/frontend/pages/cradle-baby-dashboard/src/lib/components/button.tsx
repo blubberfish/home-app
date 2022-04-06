@@ -71,7 +71,7 @@ export type NavLinkProps = {
   label: string;
 };
 export const NavLink = ({ icon, label, to }: NavLinkProps) => {
-  const match = useMatch(`/${PATH.DASHBOARD}/${to}`);
+  const match = useMatch(`/${PATH.DASHBOARD}/${to}/*`);
   const navigate = useNavigate();
   return (
     <Button
