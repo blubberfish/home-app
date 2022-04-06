@@ -13,6 +13,7 @@ export const DASHBOARD_PATH = {
 };
 
 export const DASHBOARD_FAMILY_PATH = {
+  OVERVIEW: 'overview',
   ADD_ADULT: 'add/adult',
   ADD_CHILD: 'add/child',
 };
