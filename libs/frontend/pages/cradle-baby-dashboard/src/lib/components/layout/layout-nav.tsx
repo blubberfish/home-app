@@ -1,5 +1,3 @@
-import { RightFromBracket } from '@blubberfish/frontend/components/icons/font-awesome';
-import { exitThunk } from '@blubberfish/frontend/modules/cradle-baby/app';
 import {
   display,
   DisplayProps,
@@ -10,10 +8,9 @@ import {
   responsive,
   ResponsiveProps,
 } from '@blubberfish/style-system';
-import { useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { NavButton, NavLink } from '../button';
+import { NavLink } from '../button';
 import { navListSelector } from '../../redux';
 
 const responsiveNavBar = responsive<DisplayProps>(display);
@@ -26,12 +23,7 @@ const Nav = styled.nav<
 `;
 
 export const DashboardLayoutNav = () => {
-  const dispatch = useDispatch();
   const items = useSelector(navListSelector);
-  const handleExit = useCallback(() => {
-    dispatch(exitThunk());
-  }, [dispatch]);
-  console.log(items);
   return (
     <Nav
       gap={1}
@@ -50,11 +42,6 @@ export const DashboardLayoutNav = () => {
           to={item.path}
         />
       ))}
-      <NavButton
-        icon={<RightFromBracket />}
-        label="Log out"
-        onClick={handleExit}
-      />
     </Nav>
   );
 };

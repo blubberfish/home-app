@@ -97,29 +97,3 @@ export const NavLink = ({ icon, label, to }: NavLinkProps) => {
     </Button>
   );
 };
-
-export type NavButtonProps = {
-  onClick: () => void;
-  icon: JSX.Element;
-  label: string;
-};
-export const NavButton = ({ icon, label, onClick }: NavButtonProps) => (
-  <Button
-    bdr={{ size: 0 }}
-    hover={{ bg: 'background_weak' }}
-    onClick={onClick}
-    rad={3}
-  >
-    <Container
-      gap={2}
-      padX={3}
-      padY={2}
-      alignContent="center"
-      templateRows="min-content"
-      templateColumns="max-content 1fr"
-    >
-      {icon}
-      <span>{label}</span>
-    </Container>
-  </Button>
-);

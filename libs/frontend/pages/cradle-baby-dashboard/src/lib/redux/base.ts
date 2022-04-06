@@ -4,8 +4,8 @@ import {
   PeopleRoof,
   Timeline,
 } from '@blubberfish/frontend/components/icons/font-awesome';
+import { DASHBOARD_PATH } from '@blubberfish/frontend/pages/cradle-baby-routes';
 import { ComponentType, SVGProps } from 'react';
-import { PATH } from '../routes';
 
 export const name = 'dashboard';
 
@@ -23,9 +23,9 @@ export type DashboardPageState = {
 export const getInitialState = (): DashboardPageState => ({
   menu: null,
   navItems: [
-    { label: 'Overview', path: PATH.FAMILY, icon: PeopleRoof },
-    { label: 'Activities', path: PATH.ACTIVITIES, icon: Baby },
-    { label: 'History', path: PATH.HISTORY, icon: Timeline },
-    { label: 'Settings', path: PATH.SETTINGS, icon: Gear },
+    { label: 'Overview', path: DASHBOARD_PATH.FAMILY, icon: PeopleRoof },
+    { label: 'Activities', path: DASHBOARD_PATH.ACTIVITIES, icon: Baby },
+    { label: 'History', path: DASHBOARD_PATH.HISTORY, icon: Timeline },
+    { label: 'Settings', path: DASHBOARD_PATH.SETTINGS, icon: Gear },
   ],
 });

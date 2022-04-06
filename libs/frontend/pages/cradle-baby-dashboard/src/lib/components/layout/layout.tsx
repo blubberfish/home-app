@@ -1,14 +1,5 @@
-import {
-  RightFromBracket,
-  Baby,
-  PeopleRoof,
-  Timeline,
-  Bars,
-} from '@blubberfish/frontend/components/icons/font-awesome';
-import {
-  accountInfoSelector,
-  exitThunk,
-} from '@blubberfish/frontend/modules/cradle-baby/app';
+import { Bars } from '@blubberfish/frontend/components/icons/font-awesome';
+import { accountInfoSelector } from '@blubberfish/frontend/modules/cradle-baby/app';
 import {
   alignment,
   AlignmentProps,
@@ -16,8 +7,6 @@ import {
   ColorProps,
   display,
   DisplayProps,
-  font,
-  FontProps,
   grid,
   GridProps,
   gridPos,
@@ -31,13 +20,12 @@ import {
   size,
   SizeProps,
 } from '@blubberfish/style-system';
-import { Suspense, useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { Suspense } from 'react';
+import { useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 import { DashboardLayoutNav } from './layout-nav';
-import { NavButton, NavLink } from '../button';
-import { PATH } from '../../routes';
+import { DashboardLayoutTitle } from './layout-title';
 
 const restrainingProps: SizeProps = {
   w: '100%',
@@ -64,13 +52,6 @@ const Container = styled.div<
   ${responsiveGridLayout}
 `;
 
-const Title = styled.h1<FontProps>`
-  margin: 0;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  ${font}
-`;
-
 const responsiveMenuButton = responsive<DisplayProps>(display);
 const MenuButton = styled.button<ResponsiveProps<DisplayProps>>`
   border: 0;
@@ -89,15 +70,6 @@ const MenuButton = styled.button<ResponsiveProps<DisplayProps>>`
   ${responsiveMenuButton}
 `;
 
-const responsiveNavBar = responsive<DisplayProps>(display);
-const Nav = styled.nav<
-  GridProps & GridPositionProps & ResponsiveProps<DisplayProps>
->`
-  ${grid}
-  ${gridPos}
-  ${responsiveNavBar}
-`;
-
 const Main = styled.main<GridProps & GridPositionProps>`
   padding-bottom: env(safe-area-inset-bottom);
   padding-top: env(safe-area-inset-top);
@@ -108,11 +80,7 @@ const Main = styled.main<GridProps & GridPositionProps>`
 const Empty = () => null;
 
 export const DashboardLayout = () => {
-  const dispatch = useDispatch();
   const info = useSelector(accountInfoSelector);
-  const handleExit = useCallback(() => {
-    dispatch(exitThunk());
-  }, [dispatch]);
   return (
     <Container
       bg="background"
@@ -131,9 +99,7 @@ export const DashboardLayout = () => {
         templateColumns="1fr max-content"
         {...restrainingProps}
       >
-        <Title ftSize={3}>
-          {info?.displayName ? `${info?.displayName}'s` : 'My'} family
-        </Title>
+        <DashboardLayoutTitle />
         <MenuButton responsive={[{ disp: 'initial' }, { disp: 'none' }]}>
           <Bars />
         </MenuButton>
