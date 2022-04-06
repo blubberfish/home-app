@@ -16,7 +16,7 @@ import {
   size,
   SizeProps,
 } from '@blubberfish/style-system';
-import { PersonEntityPayload } from '@blubberfish/types';
+import { PersonEntity } from '@blubberfish/types';
 import { useMemo } from 'react';
 import styled, { keyframes } from 'styled-components';
 
@@ -67,7 +67,7 @@ const ContainerWithAnimation = styled(Container)`
 `;
 
 export type PersonSkeletonProps = {
-  data?: PersonEntityPayload;
+  data?: PersonEntity;
   onClick?: () => void;
 };
 

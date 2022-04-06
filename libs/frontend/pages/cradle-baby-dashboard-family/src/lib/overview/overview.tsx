@@ -11,7 +11,8 @@ import {
   SizeProps,
 } from '@blubberfish/style-system';
 import styled from 'styled-components';
-import { PersonListSkeleton } from './components/person-list-skeleton';
+import { OverviewAdultList } from './overview-adults-list';
+import { OverviewChildrenList } from './overview-children-list';
 
 const Container = styled.div<
   ColorProps & GridProps & PaddingProps & RadiusProps & SizeProps
@@ -31,64 +32,8 @@ export const Overview = () => {
       autoFlow="row"
       gap={3}
     >
-      <PersonListSkeleton />
-      <PersonListSkeleton />
-      <PersonListSkeleton
-        data={[
-          {
-            uuid: 'Test',
-            dtob: 'test',
-            gender: 'm',
-            name: {
-              en: { family: 'Chua', given: 'Ning Xi', preferred: 'Ezra' },
-            },
-          },
-          {
-            uuid: 'Test',
-            dtob: 'test',
-            gender: 'm',
-            name: {
-              en: { family: 'Chua', given: 'Ning Xi', preferred: 'Ezra' },
-            },
-          },
-          {
-            uuid: 'Test',
-            dtob: 'test',
-            gender: 'm',
-            name: {
-              en: { family: 'Chua', given: 'Ning Xi', preferred: 'Ezra' },
-            },
-          },
-          {
-            uuid: 'Test',
-            dtob: 'test',
-            gender: 'm',
-            name: {
-              en: { family: 'Chua', given: 'Ning Xi', preferred: 'Ezra' },
-            },
-          },
-          {
-            uuid: 'Test',
-            dtob: 'test',
-            gender: 'm',
-            name: {
-              en: { family: 'Chua', given: 'Ning Xi', preferred: 'Ezra' },
-            },
-          },
-          {
-            uuid: 'Test',
-            dtob: 'test',
-            gender: 'm',
-            name: {
-              en: {
-                family: 'Chua',
-                given: 'Ning Xi',
-                preferred: 'Ezra super long name more than 10 characters',
-              },
-            },
-          },
-        ]}
-      />
+      <OverviewAdultList />
+      <OverviewChildrenList />
     </Container>
   );
 };

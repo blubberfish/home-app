@@ -14,7 +14,7 @@ import {
   size,
   SizeProps,
 } from '@blubberfish/style-system';
-import { PersonEntityPayload } from '@blubberfish/types';
+import { PersonEntity } from '@blubberfish/types';
 import styled from 'styled-components';
 import { PersonSkeleton } from './person-skeleton';
 
@@ -41,7 +41,7 @@ const Container = styled.div<
 `;
 
 export type PersonSkeletonListProps = {
-  data?: PersonEntityPayload[];
+  data?: PersonEntity[];
 };
 
 export const PersonListSkeleton = ({ data }: PersonSkeletonListProps) => {
