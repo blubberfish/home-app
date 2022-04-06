@@ -31,14 +31,14 @@ const pulseAnimation = keyframes`
 
 const Container = styled.div<
   AlignmentProps &
-    ColorProps &
-    FontProps &
-    GridProps &
-    GridPositionProps &
-    PaddingProps &
-    RadiusProps &
-    SizeProps
->`
+  ColorProps &
+  FontProps &
+  GridProps &
+  GridPositionProps &
+  PaddingProps &
+  RadiusProps &
+  SizeProps
+  >`
   ${alignment}
   ${color}
   ${font}
@@ -76,7 +76,7 @@ export const PersonSkeleton = ({ data, onClick }: PersonSkeletonProps) => {
     () =>
       data
         ? data.name.en?.preferred ??
-          `${data.name.en?.family} ${data.name.en?.given}`
+        `${data.name.en?.family} ${data.name.en?.given}`
         : null,
     [data]
   );
@@ -119,7 +119,7 @@ export const PersonSkeleton = ({ data, onClick }: PersonSkeletonProps) => {
       ) : (
         <>
           <Container
-            bg="background_weak"
+            bg="background"
             alignContent="center"
             alignItems="center"
             justifyContent="center"
@@ -132,8 +132,7 @@ export const PersonSkeleton = ({ data, onClick }: PersonSkeletonProps) => {
             {initials}
           </Container>
           <Label ftSize={1} ftAlign="center" w="4em" overflow="hidden">
-            {data.name.en?.preferred ??
-              `${data.name.en?.family} ${data.name.en?.given}`}
+            {data.name.en?.preferred ?? data.name.en?.given}
           </Label>
         </>
       )}

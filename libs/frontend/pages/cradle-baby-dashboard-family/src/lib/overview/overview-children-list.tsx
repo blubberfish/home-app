@@ -14,6 +14,8 @@ import {
   IndicationType,
   opacity,
   OpacityProps,
+  padding,
+  PaddingProps,
   radius,
   RadiusProps,
 } from '@blubberfish/style-system';
@@ -23,9 +25,14 @@ import { useNavigate, generatePath } from 'react-router-dom';
 import styled from 'styled-components';
 import { PersonListSkeleton } from './components/person-list-skeleton';
 
-const Container = styled.section<AlignmentProps & GridProps>`
+const Container = styled.section<
+  AlignmentProps & ColorProps & GridProps & PaddingProps & RadiusProps
+  >`
   ${alignment}
+  ${color}
   ${grid}
+  ${padding}
+  ${radius}
 `;
 
 const Title = styled.header<AlignmentProps & ColorProps & GridProps>`
@@ -88,10 +95,13 @@ export const OverviewChildrenList = () => {
 
   return (
     <Container
+      bg="background_weak"
       templateColumns="1fr"
       autoRows="min-content"
       autoFlow="row"
       gap={2}
+      pad={2}
+      rad={2}
     >
       <Title
         fg="text_weak"

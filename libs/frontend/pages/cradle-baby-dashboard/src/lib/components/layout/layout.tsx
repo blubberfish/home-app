@@ -37,13 +37,13 @@ const responsiveGridLayout = responsive<GridProps>(grid);
 
 const Container = styled.div<
   AlignmentProps &
-    ColorProps &
-    MarginProps &
-    PaddingProps &
-    SizeProps &
-    GridProps &
-    ResponsiveProps<GridProps>
->`
+  ColorProps &
+  MarginProps &
+  PaddingProps &
+  SizeProps &
+  GridProps &
+  ResponsiveProps<GridProps>
+  >`
   ${alignment}
   ${color}
   ${grid}
@@ -95,27 +95,29 @@ export const DashboardLayout = () => {
       templateRows="min-content 1fr"
       templateColumns="1fr"
     >
-      <Container
-        marX="auto"
-        padX={3}
-        padY={2}
-        alignContent="center"
-        templateRows="min-content"
-        templateColumns="1fr max-content"
-        {...restrainingProps}
-      >
-        <DashboardLayoutTitle />
-        <MenuButton
-          responsive={[{ disp: 'initial' }, { disp: 'none' }]}
-          onClick={handleClickMenu}
+      <Container bg="background_weak">
+        <Container
+          marX="auto"
+          pad={3}
+          padY={2}
+          alignContent="center"
+          templateRows="min-content"
+          templateColumns="1fr max-content"
+          {...restrainingProps}
         >
-          <Bars />
-        </MenuButton>
+          <DashboardLayoutTitle />
+          <MenuButton
+            responsive={[{ disp: 'initial' }, { disp: 'none' }]}
+            onClick={handleClickMenu}
+          >
+            <Bars />
+          </MenuButton>
+        </Container>
       </Container>
       {info && (
         <Container
           marX="auto"
-          padT={2}
+          padT={3}
           padX={3}
           templateRows="1fr"
           templateColumns="max-content 1fr"
