@@ -18,3 +18,8 @@ export const DASHBOARD_FAMILY_PATH = {
   ADD_CHILD: 'child/new',
   CHILD: 'child/details/:id',
 };
+
+export const DASHBOARD_ACTIVITIES_PATH = {
+  children: 'list',
+  log: 'child/:uuid',
+};

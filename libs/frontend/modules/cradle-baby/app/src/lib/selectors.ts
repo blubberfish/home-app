@@ -1,7 +1,7 @@
 import { GlobalState } from '@blubberfish/frontend/modules/core';
 import { AccountInfo } from '@blubberfish/types';
 import { createSelector } from '@reduxjs/toolkit';
-import { name, AppState, childPersonEntity } from './base';
+import { name, AppState, childPersonEntity, defaultColorMap } from './base';
 
 const stateSelector = (state: GlobalState<AppState, typeof name>) =>
   state[name];
@@ -44,3 +44,13 @@ export const selectAllChildren = selectAll;
 export const selectChildById =
   (id?: string) => (state: GlobalState<AppState, typeof name>) =>
     id ? selectById(state, id) : null;
+
+export const genderColorSelector = createSelector(
+  stateSelector,
+  (state) => state?.colors.gender ?? defaultColorMap.gender
+);
+
+export const activityColorSelector = createSelector(
+  stateSelector,
+  (state) => state?.colors.activity ?? defaultColorMap.activity
+);

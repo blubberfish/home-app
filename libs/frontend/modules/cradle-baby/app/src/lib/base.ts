@@ -1,4 +1,8 @@
-import { AccountInfoPayload, PersonEntityPayload } from '@blubberfish/types';
+import {
+  AccountInfoPayload,
+  PersonEntityPayload,
+  BabyActivityType,
+} from '@blubberfish/types';
 import { createEntityAdapter, EntityState } from '@reduxjs/toolkit';
 
 export const name = 'app';
@@ -21,14 +25,38 @@ export const childPersonEntity = createEntityAdapter<PersonEntityPayload>({
   sortComparer: (e1, e2) => Date.parse(e1.dtob) - Date.parse(e2.dtob),
 });
 
+export type CustomColorMap = {
+  activity: {
+    [key in BabyActivityType]: string;
+  };
+  gender: {
+    [key in 'm' | 'f']: string;
+  };
+};
+
+export const defaultColorMap: CustomColorMap = {
+  activity: {
+    'baby:activity:feed': 'blue',
+    'baby:activity:nurse': 'orange',
+    'baby:activity:sleep': 'green',
+    'baby:activity:wake': 'red',
+  },
+  gender: {
+    f: 'lightpink',
+    m: 'powderblue',
+  },
+};
+
 export type AppState = {
   account?: string | null;
   accountInfo?: AccountInfoPayload | null;
   children: EntityState<PersonEntityPayload>;
+  colors: CustomColorMap;
 };
 
 export const getInitialState = (): AppState => ({
   account: storage.accountId.get(),
   accountInfo: null,
   children: childPersonEntity.getInitialState(),
+  colors: defaultColorMap,
 });
