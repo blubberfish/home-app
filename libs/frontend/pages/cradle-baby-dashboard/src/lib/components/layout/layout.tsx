@@ -20,12 +20,13 @@ import {
   size,
   SizeProps,
 } from '@blubberfish/style-system';
-import { Suspense } from 'react';
-import { useSelector } from 'react-redux';
+import { Suspense, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 import { DashboardLayoutNav } from './layout-nav';
 import { DashboardLayoutTitle } from './layout-title';
+import { openMenu } from '../../redux';
 
 const restrainingProps: SizeProps = {
   w: '100%',
@@ -80,7 +81,11 @@ const Main = styled.main<GridProps & GridPositionProps>`
 const Empty = () => null;
 
 export const DashboardLayout = () => {
+  const dispatch = useDispatch();
   const info = useSelector(accountInfoSelector);
+  const handleClickMenu = useCallback(() => {
+    dispatch(openMenu());
+  }, [dispatch]);
   return (
     <Container
       bg="background"
@@ -100,7 +105,10 @@ export const DashboardLayout = () => {
         {...restrainingProps}
       >
         <DashboardLayoutTitle />
-        <MenuButton responsive={[{ disp: 'initial' }, { disp: 'none' }]}>
+        <MenuButton
+          responsive={[{ disp: 'initial' }, { disp: 'none' }]}
+          onClick={handleClickMenu}
+        >
           <Bars />
         </MenuButton>
       </Container>
