@@ -10,6 +10,9 @@ import { DashboardLayout } from './components/layout';
 import slice from './redux';
 import { PATH } from './routes';
 
+const FamilyPage = lazy(
+  () => import('@blubberfish/frontend/pages/cradle-baby-dashboard-family')
+);
 const HistoryPage = lazy(
   () => import('@blubberfish/frontend/pages/cradle-baby-dashboard-history')
 );
@@ -25,7 +28,7 @@ export const DashboardPage = () => {
     <Module slice={slice}>
       <Routes>
         <Route element={<DashboardLayout />}>
-          <Route path={`${PATH.FAMILY}/*`} element={<Empty />} />
+          <Route path={`${PATH.FAMILY}/*`} element={<FamilyPage />} />
           <Route path={`${PATH.ACTIVITIES}/*`} element={<Empty />} />
           <Route path={`${PATH.HISTORY}/*`} element={<HistoryPage />} />
           <Route path="*" element={<Navigate to="family" />} />

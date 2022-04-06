@@ -1,3 +1,4 @@
+import { PATH } from '@blubberfish/frontend/pages/cradle-baby-routes';
 import {
   alignment,
   AlignmentProps,
@@ -20,7 +21,6 @@ import {
 } from '@blubberfish/style-system';
 import { useMatch, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { BASE } from '../routes';
 
 export type ButtonIndicationStyle = ColorProps & OpacityProps;
 export type ButtonIndicationProps = {
@@ -71,7 +71,7 @@ export type NavLinkProps = {
   label: string;
 };
 export const NavLink = ({ icon, label, to }: NavLinkProps) => {
-  const match = useMatch(`${BASE}/${to}`);
+  const match = useMatch(`/${PATH.DASHBOARD}/${to}`);
   const navigate = useNavigate();
   return (
     <Button
