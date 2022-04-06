@@ -37,12 +37,12 @@ const hoverIndication = indication<ButtonIndicationProps>(
 
 export const Button = styled.button<
   ButtonIndicationProps &
-    BorderProps &
-    ColorProps &
-    FontProps &
-    PaddingProps &
-    RadiusProps
->`
+  BorderProps &
+  ColorProps &
+  FontProps &
+  PaddingProps &
+  RadiusProps
+  >`
   background-color: transparent;
   color: currentColor;
   text-align: left;
@@ -69,8 +69,9 @@ export type NavLinkProps = {
   to: string;
   icon: JSX.Element;
   label: string;
+  onClick?: () => void
 };
-export const NavLink = ({ icon, label, to }: NavLinkProps) => {
+export const NavLink = ({ icon, label, to, onClick }: NavLinkProps) => {
   const match = useMatch(`/${PATH.DASHBOARD}/${to}/*`);
   const navigate = useNavigate();
   return (
@@ -78,7 +79,7 @@ export const NavLink = ({ icon, label, to }: NavLinkProps) => {
       bdr={{ size: 0 }}
       bg={match ? 'background_weak' : undefined}
       hover={{ bg: 'background_weak' }}
-      onClick={() => {
+      onClick={onClick ? onClick : () => {
         navigate(to);
       }}
       rad={3}

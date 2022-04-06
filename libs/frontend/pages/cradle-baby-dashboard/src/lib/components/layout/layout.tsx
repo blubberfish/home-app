@@ -1,5 +1,4 @@
 import { Bars } from '@blubberfish/frontend/components/icons/font-awesome';
-import { accountInfoSelector } from '@blubberfish/frontend/modules/cradle-baby/app';
 import {
   alignment,
   AlignmentProps,
@@ -21,9 +20,10 @@ import {
   SizeProps,
 } from '@blubberfish/style-system';
 import { Suspense, useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
+import { DashboardLayoutMenu } from './layout-menu';
 import { DashboardLayoutNav } from './layout-nav';
 import { DashboardLayoutTitle } from './layout-title';
 import { openMenu } from '../../redux';
@@ -82,7 +82,6 @@ const Empty = () => null;
 
 export const DashboardLayout = () => {
   const dispatch = useDispatch();
-  const info = useSelector(accountInfoSelector);
   const handleClickMenu = useCallback(() => {
     dispatch(openMenu());
   }, [dispatch]);
@@ -114,30 +113,29 @@ export const DashboardLayout = () => {
           </MenuButton>
         </Container>
       </Container>
-      {info && (
-        <Container
-          marX="auto"
-          padT={3}
-          padX={3}
-          templateRows="1fr"
-          templateColumns="max-content 1fr"
-          responsive={[{ gap: 0 }, { gap: 3 }]}
-          {...restrainingProps}
+      <Container
+        marX="auto"
+        padT={3}
+        padX={3}
+        templateRows="1fr"
+        templateColumns="max-content 1fr"
+        responsive={[{ gap: 0 }, { gap: 3 }]}
+        {...restrainingProps}
+      >
+        <DashboardLayoutNav />
+        <Main
+          gridCol={2}
+          gridRow={1}
+          autoFlow="row"
+          autoRows="1fr"
+          templateColumns="1fr"
         >
-          <DashboardLayoutNav />
-          <Main
-            gridCol={2}
-            gridRow={1}
-            autoFlow="row"
-            autoRows="1fr"
-            templateColumns="1fr"
-          >
-            <Suspense fallback={<Empty />}>
-              <Outlet />
-            </Suspense>
-          </Main>
-        </Container>
-      )}
+          <Suspense fallback={<Empty />}>
+            <Outlet />
+          </Suspense>
+        </Main>
+      </Container>
+      <DashboardLayoutMenu />
     </Container>
   );
 };
