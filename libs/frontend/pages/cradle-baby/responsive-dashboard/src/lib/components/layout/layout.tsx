@@ -3,6 +3,7 @@ import {
   Baby,
   PeopleRoof,
   Timeline,
+  Bars,
 } from '@blubberfish/frontend/components/icons/font-awesome';
 import {
   accountInfoSelector,
@@ -34,8 +35,8 @@ import { Suspense, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
-import { NavButton, NavLink } from './button';
-import { PATH } from '../routes';
+import { NavButton, NavLink } from '../button';
+import { PATH } from '../../routes';
 
 const restrainingProps: SizeProps = {
   w: '100%',
@@ -67,6 +68,24 @@ const Title = styled.h1<FontProps>`
   white-space: nowrap;
   text-overflow: ellipsis;
   ${font}
+`;
+
+const responsiveMenuButton = responsive<DisplayProps>(display);
+const MenuButton = styled.button<ResponsiveProps<DisplayProps>>`
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: currentColor;
+  margin: 0;
+  outline: 0;
+  padding: 0;
+  svg {
+    height: 1em;
+    width: 1em;
+    fill: currentColor;
+    vertical-align: middle;
+  }
+  ${responsiveMenuButton}
 `;
 
 const responsiveNavBar = responsive<DisplayProps>(display);
@@ -106,6 +125,7 @@ export const DashboardLayout = () => {
         marX="auto"
         padX={3}
         padY={2}
+        alignContent="center"
         templateRows="min-content"
         templateColumns="1fr max-content"
         {...restrainingProps}
@@ -113,6 +133,9 @@ export const DashboardLayout = () => {
         <Title ftSize={3}>
           {info?.displayName ? `${info?.displayName}'s` : 'My'} family
         </Title>
+        <MenuButton responsive={[{ disp: 'initial' }, { disp: 'none' }]}>
+          <Bars />
+        </MenuButton>
       </Container>
       {info && (
         <Container
