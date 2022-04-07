@@ -17,12 +17,7 @@ const LogPage = () => {
   if (!child)
     return <Navigate to={`../${DASHBOARD_ACTIVITIES_PATH.CHILDREN}`} />;
   return (
-    <Container
-      autoFlow="row"
-      autoRows='min-content'
-      templateColumns='1fr'
-      gap={3}
-    >
+    <Container templateRows="min-content 1fr" templateColumns="1fr" gap={3}>
       <LogHeader />
       <LogActions />
     </Container>

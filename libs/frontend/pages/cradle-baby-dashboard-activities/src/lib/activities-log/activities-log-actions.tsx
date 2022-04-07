@@ -13,6 +13,8 @@ import {
   logWakeActivity,
 } from '@blubberfish/services/client';
 import {
+  alignment,
+  AlignmentProps,
   color,
   ColorProps,
   font,
@@ -25,6 +27,8 @@ import {
   PaddingProps,
   opacity,
   OpacityProps,
+  responsive,
+  ResponsiveProps,
   size,
   SizeProps,
 } from '@blubberfish/style-system';
@@ -34,7 +38,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { useChild } from './hooks';
 import {
+  alertSelector,
   pendingSelector,
+  dismissAlert,
+  setAlert,
   setPending,
   confirmPending,
   dismissPending,
@@ -102,8 +109,16 @@ const P = styled.p<FontProps>`
   ${font}
 `;
 
-const Container = styled.div<GridProps>`
+type ResponsiveContainerProps = AlignmentProps & GridProps;
+const responsiveContainer = responsive<ResponsiveContainerProps>((props) => [
+  ...(alignment(props) ?? []),
+  ...(grid(props) ?? []),
+]);
+const Container = styled.div<
+  GridProps & ResponsiveProps<ResponsiveContainerProps>
+>`
   ${grid}
+  ${responsiveContainer}
 `;
 
 const useActivities = () =>
@@ -151,28 +166,48 @@ export const LogActions = () => {
         setPending({
           id: activity,
           action: () => {
+            const error = (e: Error) => {
+              dispatch(
+                setAlert({
+                  title: 'Unable to log activity',
+                  message: `Something went wrong. ${e}`,
+                })
+              );
+            };
+            const finalise = () => {
+              dispatch(dismissPending());
+            };
+            dispatch(dismissAlert());
             dispatch(confirmPending());
             switch (activity) {
               case 'baby:activity:feed':
                 return logFeedActivity({
                   account,
                   baby: child.uuid,
-                }).finally(() => dispatch(dismissPending()));
+                })
+                  .catch(error)
+                  .finally(finalise);
               case 'baby:activity:nurse':
                 return logNursingActivity({
                   account,
                   baby: child.uuid,
-                }).finally(() => dispatch(dismissPending()));
+                })
+                  .catch(error)
+                  .finally(finalise);
               case 'baby:activity:sleep':
                 return logSleepActivity({
                   account,
                   baby: child.uuid,
-                }).finally(() => dispatch(dismissPending()));
+                })
+                  .catch(error)
+                  .finally(finalise);
               case 'baby:activity:wake':
                 return logWakeActivity({
                   account,
                   baby: child.uuid,
-                }).finally(() => dispatch(dismissPending()));
+                })
+                  .catch(error)
+                  .finally(finalise);
               default:
                 dispatch(dismissPending());
                 return Promise.resolve();
@@ -186,9 +221,21 @@ export const LogActions = () => {
 
   return (
     <Container
-      autoFlow="row"
       autoRows="min-content"
-      templateColumns="1fr"
+      responsive={[
+        {
+          alignContent: 'center',
+          justifyItems: 'center',
+          autoFlow: 'row',
+          autoColumns: '1fr',
+        },
+        {
+          alignContent: 'start',
+          autoFlow: 'column',
+          autoRows: 'min-content',
+          autoColumns: 'max-content',
+        },
+      ]}
       gap={3}
     >
       {list.map((activity) => {
@@ -212,11 +259,16 @@ export const LogActions = () => {
             }}
             onClick={() => {
               if (pending?.id !== activity) handleLog(activity);
+              if (pending?.id === activity && !pending.active) {
+                pending.action();
+              }
             }}
             type="button"
           >
             <Icon />
-            <P ftSize={2}>{label[activity]}</P>
+            <P ftSize={1}>
+              {pending?.id === activity ? 'Confirm?' : label[activity]}
+            </P>
           </Button>
         );
       })}
@@ -242,7 +294,7 @@ export const LogActions = () => {
           type="button"
         >
           <X />
-          <P ftSize={2}>Cancel</P>
+          <P ftSize={1}>Cancel</P>
         </Button>
       )}
     </Container>
