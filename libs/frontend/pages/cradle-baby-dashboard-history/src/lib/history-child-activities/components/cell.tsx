@@ -6,15 +6,23 @@ import {
   GridProps,
   radius,
   RadiusProps,
+  responsive,
+  ResponsiveProps,
 } from '@blubberfish/style-system';
 import { BabyActivityType } from '@blubberfish/types';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-const Container = styled.div<ColorProps & GridProps & RadiusProps>`
+type ResponsiveCellProps = GridProps;
+const responsiveCell = responsive<ResponsiveCellProps>(grid);
+const Container = styled.div<
+  ColorProps & GridProps & RadiusProps & ResponsiveProps<ResponsiveCellProps>
+>`
+  overflow: hidden;
   ${color}
   ${grid}
   ${radius}
+  ${responsiveCell}
 `;
 
 const Shading = styled.section<ColorProps>`
@@ -28,11 +36,20 @@ export const Cell = ({ activities = [] }: CellProps) => {
   const colors = useSelector(activityColorsSelector);
   return (
     <Container
-      templateColumns="1fr"
-      autoFlow="row"
-      autoRows="1fr"
       bg="background_weak"
       rad={1}
+      responsive={[
+        {
+          templateColumns: '1fr',
+          autoFlow: 'row',
+          autoRows: '1fr',
+        },
+        {
+          templateRows: '1fr',
+          autoFlow: 'column',
+          autoColumns: '1fr',
+        },
+      ]}
     >
       {activities.map((activity, i) => (
         <Shading key={i} bg={colors[activity]} />
