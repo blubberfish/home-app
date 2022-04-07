@@ -1,13 +1,7 @@
-import {
-  BabyActivityType,
-  BabyActivityProfilePayload,
-} from '@blubberfish/types';
+import { BabyActivityProfilePayload } from '@blubberfish/types';
 import { createEntityAdapter, EntityState } from '@reduxjs/toolkit';
 
-export const name = 'dashboard.activities';
-
-export type VisualizationColors = { [key in BabyActivityType]: string };
-export type GenderColors = { [key in 'm' | 'f']: string };
+export const name = 'dashboard.history.activities';
 
 export const activityEntity = createEntityAdapter<BabyActivityProfilePayload>({
   selectId: (model) => model._id,
@@ -29,26 +23,8 @@ export type DashboardActivitiesState = {
   alert?: Alert | null;
   pending?: PendingAction | null;
   activities: EntityState<BabyActivityProfilePayload>;
-  colors: {
-    visualization: VisualizationColors;
-    gender: GenderColors;
-  };
-};
-
-export const defaultColors: DashboardActivitiesState['colors'] = {
-  visualization: {
-    'baby:activity:feed': 'goldenrod',
-    'baby:activity:sleep': 'forestgreen',
-    'baby:activity:wake': 'tomato',
-    'baby:activity:nurse': 'skyblue',
-  },
-  gender: {
-    m: 'PowderBlue',
-    f: 'Pink',
-  },
 };
 
 export const getInitialState = (): DashboardActivitiesState => ({
   activities: activityEntity.getInitialState(),
-  colors: defaultColors,
 });

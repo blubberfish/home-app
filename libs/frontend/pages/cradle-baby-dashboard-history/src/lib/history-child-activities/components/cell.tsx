@@ -1,3 +1,4 @@
+import { activityColorsSelector } from '@blubberfish/frontend/modules/cradle-baby/app';
 import {
   color,
   ColorProps,
@@ -9,7 +10,6 @@ import {
 import { BabyActivityType } from '@blubberfish/types';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { colorsSelector } from '../redux';
 
 const Container = styled.div<ColorProps & GridProps & RadiusProps>`
   ${color}
@@ -25,7 +25,7 @@ export type CellProps = {
   activities?: BabyActivityType[];
 };
 export const Cell = ({ activities = [] }: CellProps) => {
-  const colors = useSelector(colorsSelector);
+  const colors = useSelector(activityColorsSelector);
   return (
     <Container
       templateColumns="1fr"
