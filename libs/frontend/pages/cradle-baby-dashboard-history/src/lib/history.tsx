@@ -7,7 +7,7 @@ import slice from './redux';
 const Empty = () => null;
 
 const ChildrenTablePage = lazy(() => import('./history-children-table'));
-const ChildHistoryPage = lazy(() => import('./history-child-history'));
+const ChildActivitiesPage = lazy(() => import('./history-child-activities'));
 
 const HistoryPage = () => (
   <Suspense fallback={<Empty />}>
@@ -16,7 +16,10 @@ const HistoryPage = () => (
         path={DASHBOARD_HISTORY_PATH.CHILDREN}
         element={<ChildrenTablePage />}
       />
-      <Route path={DASHBOARD_HISTORY_PATH.LOG} element={<ChildHistoryPage />} />
+      <Route
+        path={DASHBOARD_HISTORY_PATH.LOG}
+        element={<ChildActivitiesPage />}
+      />
       <Route
         path="*"
         element={<Navigate to={DASHBOARD_HISTORY_PATH.CHILDREN} />}

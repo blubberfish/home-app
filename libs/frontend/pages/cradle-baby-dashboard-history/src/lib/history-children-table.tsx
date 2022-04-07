@@ -2,7 +2,11 @@ import {
   Mars,
   Venus,
 } from '@blubberfish/frontend/components/icons/font-awesome';
-import { accountInfoSelector } from '@blubberfish/frontend/modules/cradle-baby/app';
+import {
+  accountInfoSelector,
+  genderColorsSelector,
+} from '@blubberfish/frontend/modules/cradle-baby/app';
+import { DASHBOARD_HISTORY_PATH } from '@blubberfish/frontend/pages/cradle-baby-routes';
 import {
   alignment,
   AlignmentProps,
@@ -23,9 +27,8 @@ import {
 } from '@blubberfish/style-system';
 import moment from 'moment';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { generatePath, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { genderColorsSelector } from './redux';
 
 const P = styled.p<ColorProps & FontProps>`
   margin: 0;
@@ -190,7 +193,11 @@ const ChildrenTablePage = () => {
               .filter((x) => !!x)
               .join('')}`}
             onClick={() => {
-              navigate(child.uuid);
+              navigate(
+                generatePath(`../${DASHBOARD_HISTORY_PATH.LOG}`, {
+                  uuid: child.uuid,
+                })
+              );
             }}
           />
         ))}
