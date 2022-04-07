@@ -31,8 +31,8 @@ export const CellGrid = ({ children }: CellGridProps) => {
       rad={1}
       responsive={[
         {
-          templateColumns: 'repeat(3, 24px)',
-          templateRows: 'repeat(24, 24px)',
+          templateColumns: 'repeat(3, 16px)',
+          templateRows: 'repeat(24, 16px)',
           autoFlow: 'column dense',
         },
         {
