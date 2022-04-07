@@ -4,6 +4,7 @@ import { grid, GridProps } from '@blubberfish/style-system';
 import { Navigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { LogActions } from './activities-log-actions';
+import { LogAlert } from './activities-log-alert';
 import { LogHeader } from './activities-log-header';
 import { useChild } from './hooks';
 import slice from './redux';
@@ -20,6 +21,7 @@ const LogPage = () => {
     <Container templateRows="min-content 1fr" templateColumns="1fr" gap={3}>
       <LogHeader />
       <LogActions />
+      <LogAlert />
     </Container>
   );
 };

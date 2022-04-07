@@ -1,6 +1,7 @@
 export const name = 'dashboard.activities.log';
 
 export type Alert = {
+  type?: 'error' | 'success';
   title: string;
   message: string;
 };

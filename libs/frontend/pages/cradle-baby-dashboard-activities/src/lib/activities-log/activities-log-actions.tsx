@@ -38,7 +38,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { useChild } from './hooks';
 import {
-  alertSelector,
   pendingSelector,
   dismissAlert,
   setAlert,
@@ -174,6 +173,19 @@ export const LogActions = () => {
                 })
               );
             };
+            const success = () => {
+              const pronoun = child.gender === 'm' ? 'his' : 'her';
+              dispatch(
+                setAlert({
+                  type: 'success',
+                  title: 'Activity logged',
+                  message: `${pronoun.replace(
+                    'h',
+                    'H'
+                  )} activity has been recorded. Go to history to see ${pronoun} past activities.`,
+                })
+              );
+            };
             const finalise = () => {
               dispatch(dismissPending());
             };
@@ -185,28 +197,28 @@ export const LogActions = () => {
                   account,
                   baby: child.uuid,
                 })
-                  .catch(error)
+                  .then(success, error)
                   .finally(finalise);
               case 'baby:activity:nurse':
                 return logNursingActivity({
                   account,
                   baby: child.uuid,
                 })
-                  .catch(error)
+                  .then(success, error)
                   .finally(finalise);
               case 'baby:activity:sleep':
                 return logSleepActivity({
                   account,
                   baby: child.uuid,
                 })
-                  .catch(error)
+                  .then(success, error)
                   .finally(finalise);
               case 'baby:activity:wake':
                 return logWakeActivity({
                   account,
                   baby: child.uuid,
                 })
-                  .catch(error)
+                  .then(success, error)
                   .finally(finalise);
               default:
                 dispatch(dismissPending());
