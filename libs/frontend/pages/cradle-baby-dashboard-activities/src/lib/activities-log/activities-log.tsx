@@ -3,6 +3,7 @@ import { DASHBOARD_ACTIVITIES_PATH } from '@blubberfish/frontend/pages/cradle-ba
 import { grid, GridProps } from '@blubberfish/style-system';
 import { Navigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { LogActions } from './activities-log-actions';
 import { LogHeader } from './activities-log-header';
 import { useChild } from './hooks';
 import slice from './redux';
@@ -23,6 +24,7 @@ const LogPage = () => {
       gap={3}
     >
       <LogHeader />
+      <LogActions />
     </Container>
   );
 };
