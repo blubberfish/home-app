@@ -8,6 +8,8 @@ import {
   PaddingProps,
   responsive,
   ResponsiveProps,
+  size,
+  SizeProps,
 } from '@blubberfish/style-system';
 import { Fragment, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,12 +21,17 @@ import { activityLogThunk } from './redux';
 
 const responsiveContainer = responsive<AlignmentProps>(alignment);
 const Container = styled.div<
-  AlignmentProps & GridProps & PaddingProps & ResponsiveProps<AlignmentProps>
+  AlignmentProps &
+    GridProps &
+    PaddingProps &
+    ResponsiveProps<AlignmentProps> &
+    SizeProps
 >`
   ${alignment}
   ${grid}
   ${padding}
   ${responsiveContainer}
+  ${size}
 `;
 
 export const ChildActivitiesVisualization = () => {
@@ -51,6 +58,7 @@ export const ChildActivitiesVisualization = () => {
       templateColumns="1fr"
       templateRows="1fr"
       responsive={[{ alignItems: 'center' }, { alignItems: 'start' }]}
+      overflow="auto"
     >
       <CellGrid>
         {activityList.map((activties, i) => (

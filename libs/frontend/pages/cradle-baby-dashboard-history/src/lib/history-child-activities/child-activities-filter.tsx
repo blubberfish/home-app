@@ -1,6 +1,13 @@
 import {
+  Filter,
+  X,
+  CircleCheck,
+} from '@blubberfish/frontend/components/icons/font-awesome';
+import {
   alignment,
   AlignmentProps,
+  border,
+  BorderProps,
   color,
   ColorProps,
   font,
@@ -13,22 +20,51 @@ import {
   RadiusProps,
   responsive,
   ResponsiveProps,
-  size,
-  SizeProps,
 } from '@blubberfish/style-system';
-import moment from 'moment';
-import { useMemo } from 'react';
+import { BabyActivityType } from '@blubberfish/types';
+import { ComponentType, SVGProps } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { useChild } from './hooks';
+import { filterSelector, toggleFilter } from './redux';
 
-const Shape = styled.div<ColorProps & RadiusProps & SizeProps>`
+const StyledCircleCheck = styled(CircleCheck)<ColorProps>`
+  fill: currentColor;
   ${color}
-  ${radius}
-  ${size}
+`;
+const StyledX = styled(X)<ColorProps>`
+  fill: currentColor;
+  ${color}
 `;
 
-const P = styled.p`
-  margin: 0;
+const Button = styled.button<
+  AlignmentProps &
+    BorderProps &
+    ColorProps &
+    GridProps &
+    PaddingProps &
+    RadiusProps
+>`
+  border: 0;
+  border-radius: 0;
+  background-color: transparent;
+  color: currentColor;
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  grid-template-rows: min-content;
+  p {
+    margin: 0;
+  }
+  svg {
+    height: 1em;
+    width: 1em;
+    fill: currentColor;
+  }
+  ${alignment}
+  ${border}
+  ${color}
+  ${grid}
+  ${padding}
+  ${radius}
 `;
 
 const responsiveContainer = responsive<FontProps>(font);
@@ -40,6 +76,11 @@ const Container = styled.div<
     RadiusProps &
     ResponsiveProps<FontProps>
 >`
+  svg {
+    height: 1em;
+    width: 1em;
+    fill: currentColor;
+  }
   ${alignment}
   ${color}
   ${grid}
@@ -48,44 +89,60 @@ const Container = styled.div<
   ${responsiveContainer}
 `;
 
-const Text = ({ value }: { value?: string | null }) =>
-  value ? <P>{value}</P> : <Shape bg="currentColor" h="1em" w="5em" />;
+const filterLabel: { [key in BabyActivityType]: string } = {
+  'baby:activity:feed': 'Feeding',
+  'baby:activity:nurse': 'Nurse',
+  'baby:activity:sleep': 'Sleeping',
+  'baby:activity:wake': 'Wake up',
+};
 
 export const ChildActivitiesFilter = () => {
-  const child = useChild();
-  const enName = useMemo(
-    () =>
-      child?.name.en?.preferred ??
-      `${child?.name.en?.family} ${child?.name.en?.given}`,
-    [child]
-  );
-  const zhName = useMemo(
-    () =>
-      child?.name.zh?.preferred ??
-      `${child?.name.zh?.family}${child?.name.zh?.given}`,
-    [child]
-  );
-  const dob = useMemo(
-    () => (child ? moment(child.dtob).format('DD MMM YYYY (HH:mm)') : null),
-    [child]
-  );
-
+  const dispatch = useDispatch();
+  const filters = useSelector(filterSelector);
   return (
     <Container
       alignItems="center"
-      justifyContent="space-between"
-      bg="background_weak"
-      gap={2}
-      pad={2}
-      rad={2}
+      justifyContent="space-evenly"
+      gap={3}
       templateRows="min-content"
-      autoColumns="max-content"
+      templateColumns="max-content 1fr"
       autoFlow="column"
       responsive={[{ ftSize: 1 }, { ftSize: 2 }]}
     >
-      <Text value={enName} />
-      <Text value={zhName} />
-      <Text value={dob} />
+      <Filter />
+      <Container
+        alignItems="center"
+        justifyContent="space-evenly"
+        bg="background_weak"
+        gap={2}
+        pad={2}
+        rad={2}
+        templateRows="min-content"
+        autoColumns="max-content"
+        autoFlow="column"
+        responsive={[{ ftSize: 1 }, { ftSize: 2 }]}
+      >
+        {Object.keys(filters).map((key) => (
+          <Button
+            key={key}
+            alignItems="center"
+            alignContent="center"
+            gap={1}
+            pad={1}
+            rad={1}
+            onClick={() => {
+              dispatch(toggleFilter(key as BabyActivityType));
+            }}
+          >
+            {filters[key as BabyActivityType] ? (
+              <StyledCircleCheck fg="success" />
+            ) : (
+              <StyledX fg="error" />
+            )}
+            <p>{filterLabel[key as BabyActivityType]}</p>
+          </Button>
+        ))}
+      </Container>
     </Container>
   );
 };
