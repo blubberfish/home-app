@@ -23,3 +23,8 @@ export const DASHBOARD_ACTIVITIES_PATH = {
   CHILDREN: 'children',
   LOG: 'child/:uuid',
 };
+
+export const DASHBOARD_HISTORY_PATH = {
+  CHILDREN: 'children',
+  LOG: 'child/:uuid',
+};

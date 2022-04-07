@@ -169,7 +169,7 @@ const ChildrenTablePage = () => {
       autoFlow="row"
       gap={3}
     >
-      <P>Choose a child to view their history</P>
+      <P fg="text_weak">Select a child to view their past activities</P>
       <Container
         templateColumns="1fr"
         autoRows="max-content"
