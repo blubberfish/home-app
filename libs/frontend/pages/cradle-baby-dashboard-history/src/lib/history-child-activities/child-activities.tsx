@@ -1,4 +1,5 @@
 import { Navigate } from 'react-router-dom';
+import { CellGrid } from './components/grid';
 import { useChild } from './hooks';
 
 const ChildHistoryPage = () => {
@@ -7,7 +8,7 @@ const ChildHistoryPage = () => {
   if (!baby) {
     return <Navigate to=".." />;
   }
-  return null;
+  return <CellGrid />;
 };
 
 export default ChildHistoryPage;

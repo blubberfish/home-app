@@ -1,1 +1,1 @@
-export { default } from './history-child-activities';
+export { default } from './child-activities';
