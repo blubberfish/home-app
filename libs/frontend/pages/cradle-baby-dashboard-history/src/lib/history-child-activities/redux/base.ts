@@ -23,7 +23,7 @@ export type Alert = {
 };
 
 export type Filter = {
-  [key in BabyActivityType]: boolean;
+  [key in BabyActivityType]?: boolean;
 };
 
 export type DashboardActivitiesState = {
@@ -37,7 +37,7 @@ export const defaultFilter: Filter = {
   'baby:activity:feed': true,
   'baby:activity:nurse': true,
   'baby:activity:sleep': true,
-  'baby:activity:wake': true,
+  // 'baby:activity:wake': true,
 };
 
 export const getInitialState = (): DashboardActivitiesState => ({

@@ -59,7 +59,7 @@ const Button = styled.button<
   display: grid;
   align-content: center;
   align-items: center;
-  grid-template-columns: repeat(2, max-content) 1fr;
+  grid-template-columns: max-content 1fr max-content;
   grid-template-rows: min-content;
   p {
     margin: 0;
@@ -99,7 +99,7 @@ const Container = styled.div<
   ${responsiveContainer}
 `;
 
-const filterLabel: { [key in BabyActivityType]: string } = {
+const filterLabel: { [key in BabyActivityType]?: string } = {
   'baby:activity:feed': 'Feeding',
   'baby:activity:nurse': 'Nurse',
   'baby:activity:sleep': 'Sleeping',
@@ -145,18 +145,18 @@ export const ChildActivitiesFilter = () => {
               dispatch(toggleFilter(key as BabyActivityType));
             }}
           >
+            <Shape
+              bg={colors[key as BabyActivityType]}
+              rad="50%"
+              h="8px"
+              w="8px"
+            />
+            <p>{filterLabel[key as BabyActivityType]}</p>
             {filters[key as BabyActivityType] ? (
               <StyledCircleCheck fg="success" />
             ) : (
               <StyledX fg="error" />
             )}
-            <Shape
-              bg={colors[key as BabyActivityType]}
-              rad="50%"
-              h="4px"
-              w="4px"
-            />
-            <p>{filterLabel[key as BabyActivityType]}</p>
           </Button>
         ))}
       </Container>
