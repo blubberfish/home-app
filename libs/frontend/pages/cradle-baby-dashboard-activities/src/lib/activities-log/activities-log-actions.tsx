@@ -52,7 +52,7 @@ type ButtonIndicationProps = {
   };
 };
 const buttonDisabledIndication = indication<ButtonIndicationProps>(
-  IndicationType.Hover,
+  IndicationType.Disabled,
   [
     ({ indication, theme }) =>
       color({ theme, ...indication?.[IndicationType.Disabled] }),
