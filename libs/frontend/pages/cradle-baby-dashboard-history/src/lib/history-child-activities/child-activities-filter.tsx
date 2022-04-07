@@ -3,6 +3,7 @@ import {
   X,
   CircleCheck,
 } from '@blubberfish/frontend/components/icons/font-awesome';
+import { activityColorsSelector } from '@blubberfish/frontend/modules/cradle-baby/app';
 import {
   alignment,
   AlignmentProps,
@@ -20,6 +21,8 @@ import {
   RadiusProps,
   responsive,
   ResponsiveProps,
+  size,
+  SizeProps,
 } from '@blubberfish/style-system';
 import { BabyActivityType } from '@blubberfish/types';
 import { useDispatch, useSelector } from 'react-redux';
@@ -35,6 +38,12 @@ const StyledX = styled(X)<ColorProps>`
   ${color}
 `;
 
+const Shape = styled.div<ColorProps & RadiusProps & SizeProps>`
+  ${color}
+  ${radius}
+  ${size}
+`;
+
 const Button = styled.button<
   AlignmentProps &
     BorderProps &
@@ -48,7 +57,9 @@ const Button = styled.button<
   background-color: transparent;
   color: currentColor;
   display: grid;
-  grid-template-columns: max-content 1fr;
+  align-content: center;
+  align-items: center;
+  grid-template-columns: repeat(2, max-content) 1fr;
   grid-template-rows: min-content;
   p {
     margin: 0;
@@ -98,6 +109,7 @@ const filterLabel: { [key in BabyActivityType]: string } = {
 export const ChildActivitiesFilter = () => {
   const dispatch = useDispatch();
   const filters = useSelector(filterSelector);
+  const colors = useSelector(activityColorsSelector);
   return (
     <Container
       alignItems="center"
@@ -138,6 +150,12 @@ export const ChildActivitiesFilter = () => {
             ) : (
               <StyledX fg="error" />
             )}
+            <Shape
+              bg={colors[key as BabyActivityType]}
+              rad="50%"
+              h="4px"
+              w="4px"
+            />
             <p>{filterLabel[key as BabyActivityType]}</p>
           </Button>
         ))}

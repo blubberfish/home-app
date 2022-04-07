@@ -4,7 +4,7 @@ import moment from 'moment';
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { activitySelector } from '../redux';
+import { activitySelector, filterSelector } from '../redux';
 
 export const useChild = () => {
   const { uuid } = useParams();
@@ -34,6 +34,7 @@ export type ActivityTimeMap = {
 
 export const useNormalizedActivities = () => {
   const activityHistory = useSelector(activitySelector);
+  const filters = useSelector(filterSelector);
   return useMemo(() => {
     const normalization: ActivityTimeMap = {};
     activityHistory.forEach((data) => {
@@ -50,10 +51,12 @@ export const useNormalizedActivities = () => {
         normalization[timestamp.year()][timestamp.month()][timestamp.date()][
           timestamp.hour()
         ] ?? [];
-      normalization[timestamp.year()][timestamp.month()][timestamp.date()][
-        timestamp.hour()
-      ].push(data);
+      if (filters[data.activity]) {
+        normalization[timestamp.year()][timestamp.month()][timestamp.date()][
+          timestamp.hour()
+        ].push(data);
+      }
     });
     return normalization;
-  }, [activityHistory]);
+  }, [activityHistory, filters]);
 };
