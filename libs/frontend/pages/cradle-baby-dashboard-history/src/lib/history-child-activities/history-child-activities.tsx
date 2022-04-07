@@ -1,10 +1,8 @@
-import { selectChildById } from '@blubberfish/frontend/modules/cradle-baby/app';
-import { useSelector } from 'react-redux';
-import { Navigate, useParams } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
+import { useChild } from './hooks';
 
 const ChildHistoryPage = () => {
-  const params = useParams();
-  const baby = useSelector(selectChildById(params['uuid']));
+  const baby = useChild();
 
   if (!baby) {
     return <Navigate to=".." />;
