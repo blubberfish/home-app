@@ -36,10 +36,10 @@ export type CustomColorMap = {
 
 export const defaultColorMap: CustomColorMap = {
   activity: {
-    'baby:activity:feed': 'blue',
-    'baby:activity:nurse': 'orange',
-    'baby:activity:sleep': 'green',
-    'baby:activity:wake': 'red',
+    'baby:activity:feed': 'LightSkyBlue',
+    'baby:activity:nurse': 'LightSalmon',
+    'baby:activity:sleep': 'MediumSeaGreen',
+    'baby:activity:wake': 'PaleVioletRed',
   },
   gender: {
     f: 'lightpink',
