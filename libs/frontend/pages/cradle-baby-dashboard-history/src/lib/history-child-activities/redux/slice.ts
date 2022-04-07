@@ -21,27 +21,32 @@ const slice = createSlice({
     setPending(state, { payload }: PayloadAction<PendingAction>) {
       state.pending = payload;
     },
-    unsetPending(state) {
+    dismissPending(state) {
       state.pending = null;
     },
-    clearDataSet(state) {
-      state.activities = activityEntity.removeAll(state.activities);
+    confirmPending(state) {
+      if (state.pending) {
+        state.pending.active = true;
+      }
     },
     replaceActivityDataSet(
       state,
       { payload }: PayloadAction<BabyActivityProfilePayload[]>
     ) {
-      state.activities = activityEntity.setAll(state.activities, payload);
+      state.activities = activityEntity.setAll(
+        activityEntity.removeAll(state.activities),
+        payload
+      );
     },
   },
 });
 
 export default slice;
 export const {
-  clearDataSet,
   replaceActivityDataSet,
   setAlert,
   dismissAlert,
   setPending,
-  unsetPending,
+  dismissPending,
+  confirmPending,
 } = slice.actions;

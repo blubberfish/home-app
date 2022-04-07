@@ -33,12 +33,12 @@ export const CellGrid = ({ children }: CellGridProps) => {
         {
           templateColumns: 'repeat(3, 24px)',
           templateRows: 'repeat(24, 24px)',
-          autoFlow: 'row dense',
+          autoFlow: 'column dense',
         },
         {
           templateColumns: 'repeat(24, 24px)',
           templateRows: 'repeat(3, 24px)',
-          autoFlow: 'column dense',
+          autoFlow: 'row dense',
         },
       ]}
     >

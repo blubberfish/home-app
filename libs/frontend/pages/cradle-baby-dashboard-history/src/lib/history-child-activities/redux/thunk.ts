@@ -2,7 +2,7 @@ import { getBabyActivityLog } from '@blubberfish/services/client';
 import { BabyActivityPayload } from '@blubberfish/types';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { name } from './base';
-import { replaceActivityDataSet } from './slice';
+import { setAlert, replaceActivityDataSet } from './slice';
 
 export const activityLogThunk = createAsyncThunk(
   `${name}/get/activities`,
@@ -11,7 +11,14 @@ export const activityLogThunk = createAsyncThunk(
       const data = await getBabyActivityLog(input);
       data && dispatch(replaceActivityDataSet(data));
     } catch (e) {
-      console.error(e);
+      process.env['ENV'] === 'developement' && console.error(e);
+      dispatch(
+        setAlert({
+          title: 'Unable to retrieve history',
+          message:
+            'Something went wrong and the data cannot be loaded. Please try again.',
+        })
+      );
     }
   }
 );

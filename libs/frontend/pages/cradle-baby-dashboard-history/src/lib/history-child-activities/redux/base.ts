@@ -10,8 +10,8 @@ export const activityEntity = createEntityAdapter<BabyActivityProfilePayload>({
 
 export type PendingAction = {
   id: string | number;
+  active?: boolean | null;
   action: () => Promise<void>;
-  running?: boolean | null;
 };
 
 export type Alert = {
