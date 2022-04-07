@@ -33,12 +33,14 @@ export type DashboardActivitiesState = {
   filter: Filter;
 };
 
+export const defaultFilter: Filter = {
+  'baby:activity:feed': true,
+  'baby:activity:nurse': true,
+  'baby:activity:sleep': true,
+  'baby:activity:wake': true,
+};
+
 export const getInitialState = (): DashboardActivitiesState => ({
   activities: activityEntity.getInitialState(),
-  filter: {
-    'baby:activity:feed': false,
-    'baby:activity:nurse': false,
-    'baby:activity:sleep': false,
-    'baby:activity:wake': false,
-  },
+  filter: defaultFilter,
 });

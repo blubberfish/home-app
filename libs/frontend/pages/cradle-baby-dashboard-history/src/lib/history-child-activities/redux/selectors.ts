@@ -1,6 +1,12 @@
 import { GlobalState } from '@blubberfish/frontend/modules/core';
 import { createSelector } from '@reduxjs/toolkit';
-import { activityEntity, DashboardActivitiesState, name } from './base';
+import {
+  activityEntity,
+  DashboardActivitiesState,
+  defaultFilter,
+  Filter,
+  name,
+} from './base';
 
 const stateSelector = (
   state: GlobalState<DashboardActivitiesState, typeof name>
@@ -17,5 +23,5 @@ export const { selectAll: activitySelector } = activityEntity.getSelectors(
 
 export const filterSelector = createSelector(
   stateSelector,
-  (state) => state?.filter
+  (state): Filter => state?.filter ?? defaultFilter
 );

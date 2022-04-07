@@ -1,4 +1,7 @@
-import { BabyActivityProfilePayload } from '@blubberfish/types';
+import {
+  BabyActivityProfilePayload,
+  BabyActivityType,
+} from '@blubberfish/types';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
   Alert,
@@ -38,6 +41,9 @@ const slice = createSlice({
         payload
       );
     },
+    toggleFilter(state, { payload }: PayloadAction<BabyActivityType>) {
+      state.filter[payload] = !state.filter[payload];
+    },
   },
 });
 
@@ -49,4 +55,5 @@ export const {
   setPending,
   dismissPending,
   confirmPending,
+  toggleFilter,
 } = slice.actions;
