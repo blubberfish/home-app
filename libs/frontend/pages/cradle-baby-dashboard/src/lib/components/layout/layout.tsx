@@ -37,13 +37,13 @@ const responsiveGridLayout = responsive<GridProps>(grid);
 
 const Container = styled.div<
   AlignmentProps &
-  ColorProps &
-  MarginProps &
-  PaddingProps &
-  SizeProps &
-  GridProps &
-  ResponsiveProps<GridProps>
-  >`
+    ColorProps &
+    MarginProps &
+    PaddingProps &
+    SizeProps &
+    GridProps &
+    ResponsiveProps<GridProps>
+>`
   ${alignment}
   ${color}
   ${grid}

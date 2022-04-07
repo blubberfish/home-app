@@ -28,6 +28,6 @@ const LoginPage = () => {
 
 export default () => (
   <Module slice={slice}>
-    <LoginPage />;
+    <LoginPage />
   </Module>
 );

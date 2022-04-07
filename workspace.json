@@ -12,7 +12,6 @@
     "frontend-hooks": "libs/frontend/hooks",
     "frontend-modules-core": "libs/frontend/modules/core",
     "frontend-modules-cradle-baby-app": "libs/frontend/modules/cradle-baby/app",
-    "frontend-pages-cradle-baby-backup": "libs/frontend/pages/cradle-baby/backup",
     "frontend-pages-cradle-baby-dashboard": "libs/frontend/pages/cradle-baby-dashboard",
     "frontend-pages-cradle-baby-dashboard-activities": "libs/frontend/pages/cradle-baby-dashboard-activities",
     "frontend-pages-cradle-baby-dashboard-family": "libs/frontend/pages/cradle-baby-dashboard-family",
