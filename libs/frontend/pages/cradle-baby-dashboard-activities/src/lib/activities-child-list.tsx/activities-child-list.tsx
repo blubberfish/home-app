@@ -2,8 +2,8 @@ import {
   Mars,
   Venus,
 } from '@blubberfish/frontend/components/icons/font-awesome';
-import { Module } from '@blubberfish/frontend/modules/core'
-import { accountInfoSelector } from '@blubberfish/frontend/modules/cradle-baby/app';
+import { accountInfoSelector, genderColorsSelector } from '@blubberfish/frontend/modules/cradle-baby/app';
+import { DASHBOARD_ACTIVITIES_PATH } from '@blubberfish/frontend/pages/cradle-baby-routes'
 import {
   alignment,
   AlignmentProps,
@@ -24,9 +24,8 @@ import {
 } from '@blubberfish/style-system';
 import moment from 'moment';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { generatePath, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { genderColorsSelector } from './redux';
 
 const P = styled.p<ColorProps & FontProps>`
   margin: 0;
@@ -155,7 +154,7 @@ const Row = ({
   );
 };
 
-const ChildrenTablePage = () => {
+export const ChildListPage = () => {
   const navigate = useNavigate();
   const account = useSelector(accountInfoSelector);
 
@@ -170,7 +169,7 @@ const ChildrenTablePage = () => {
       autoFlow="row"
       gap={3}
     >
-      <P>Choose a child to view their history</P>
+      <P fg='text_weak'>Select a child to log their activities</P>
       <Container
         templateColumns="1fr"
         autoRows="max-content"
@@ -191,7 +190,7 @@ const ChildrenTablePage = () => {
               .filter((x) => !!x)
               .join('')}`}
             onClick={() => {
-              navigate(child.uuid);
+              navigate(generatePath(`../${DASHBOARD_ACTIVITIES_PATH.LOG}`, { uuid: child.uuid }));
             }}
           />
         ))}
@@ -199,5 +198,3 @@ const ChildrenTablePage = () => {
     </Container>
   );
 };
-
-export default () => <Module> <ChildrenTablePage /></Module>;

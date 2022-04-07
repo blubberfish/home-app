@@ -2,18 +2,16 @@ import { DASHBOARD_ACTIVITIES_PATH } from '@blubberfish/frontend/pages/cradle-ba
 import { lazy } from 'react';
 import { Navigate, Routes, Route } from 'react-router-dom';
 
-// const AddChild = lazy(() => import('./add-child'));
-// const ChildDetails = lazy(() => import('./child-details'));
-// const Overview = lazy(() => import('./overview'));
-const Empty = () => null
+const List = lazy(() => import('./activities-child-list.tsx'));
+const Log = lazy(() => import('./activities-log'));
 
 const DashboardActivitiesPage = () => (
   <Routes>
-    <Route path={DASHBOARD_ACTIVITIES_PATH.children} element={<Empty />} />
-    <Route path={DASHBOARD_ACTIVITIES_PATH.log} element={<Empty />} />
+    <Route path={DASHBOARD_ACTIVITIES_PATH.CHILDREN} element={<List />} />
+    <Route path={DASHBOARD_ACTIVITIES_PATH.LOG} element={<Log />} />
     <Route
       path="*"
-      element={<Navigate to={DASHBOARD_ACTIVITIES_PATH.children} />}
+      element={<Navigate to={DASHBOARD_ACTIVITIES_PATH.CHILDREN} />}
     />
   </Routes>
 );

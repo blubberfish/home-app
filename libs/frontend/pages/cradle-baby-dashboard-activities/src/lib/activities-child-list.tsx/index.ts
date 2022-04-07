@@ -1,1 +1,1 @@
-export { default } from './activities-child-list';
+export { ChildListPage as default } from './activities-child-list';

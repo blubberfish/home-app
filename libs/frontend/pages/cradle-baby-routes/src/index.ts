@@ -20,6 +20,6 @@ export const DASHBOARD_FAMILY_PATH = {
 };
 
 export const DASHBOARD_ACTIVITIES_PATH = {
-  children: 'list',
-  log: 'child/:uuid',
+  CHILDREN: 'children',
+  LOG: 'child/:uuid',
 };

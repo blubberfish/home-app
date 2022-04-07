@@ -45,12 +45,12 @@ export const selectChildById =
   (id?: string) => (state: GlobalState<AppState, typeof name>) =>
     id ? selectById(state, id) : null;
 
-export const genderColorSelector = createSelector(
+export const genderColorsSelector = createSelector(
   stateSelector,
   (state) => state?.colors.gender ?? defaultColorMap.gender
 );
 
-export const activityColorSelector = createSelector(
+export const activityColorsSelector = createSelector(
   stateSelector,
   (state) => state?.colors.activity ?? defaultColorMap.activity
 );

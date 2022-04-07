@@ -1,1 +1,1 @@
-export { default } from './v1/dashboard-baby';
+export { default } from './lib/page';
