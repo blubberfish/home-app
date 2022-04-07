@@ -22,7 +22,6 @@ import {
   ResponsiveProps,
 } from '@blubberfish/style-system';
 import { BabyActivityType } from '@blubberfish/types';
-import { ComponentType, SVGProps } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { filterSelector, toggleFilter } from './redux';
