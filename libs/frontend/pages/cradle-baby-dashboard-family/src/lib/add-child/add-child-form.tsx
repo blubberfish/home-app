@@ -48,6 +48,7 @@ import {
   confirmPending,
   dismissAlert,
   dismissPending,
+  alertSelector,
 } from './redux';
 
 type ButtonIndicationProps = {
@@ -183,6 +184,7 @@ export const AddChildForm = () => {
     [form]
   );
   const colors = useSelector(genderColorsSelector);
+  const alert = useSelector(alertSelector);
   const pending = useSelector(pendingActionSelector);
   const handleChangeDToB = useCallback(
     (ev: ChangeEvent<HTMLInputElement>) => {
@@ -273,40 +275,51 @@ export const AddChildForm = () => {
         );
         return;
       }
+      if (pending) {
+        pending.action();
+        return;
+      }
       dispatch(
         setPending({
           id: 'add.child',
           action: () => {
-            dispatch(dismissAlert())
+            dispatch(dismissAlert());
             dispatch(confirmPending());
             return addAccountChildren({
               account,
               data: [form as CreatePersonEntityPayload],
-            }).then(
-              (updatedInfo) => {
-                updatedInfo && dispatch(setAccountInfo(updatedInfo));
-                dispatch(setAlert({
-                  type: 'success',
-                  title: 'Success',
-                  message: 'Your child has been added to your family.'
-                }))
-              },
-              (e) => {
-                dispatch(setAlert({
-                  title: 'Something went wrong',
-                  message: e.message
-                }))
-              }
-            ).finally(() => {
-              dispatch(dismissPending())
-            });
+            })
+              .then(
+                (updatedInfo) => {
+                  updatedInfo && dispatch(setAccountInfo(updatedInfo));
+                  dispatch(
+                    setAlert({
+                      type: 'success',
+                      title: 'Success',
+                      message: 'Your child has been added to your family.',
+                    })
+                  );
+                },
+                (e) => {
+                  dispatch(
+                    setAlert({
+                      title: 'Something went wrong',
+                      message: e.message,
+                    })
+                  );
+                }
+              )
+              .finally(() => {
+                dispatch(dismissPending());
+              });
           },
         })
       );
     },
-    [account, dispatch, form]
+    [account, dispatch, form, pending]
   );
 
+  if (alert?.type === 'success') return null
   return (
     <Form
       onSubmit={handleSubmit}
@@ -572,8 +585,9 @@ export const AddChildForm = () => {
         </Section>
       )}
       <Button
-        bg="text"
-        fg="background"
+        bg={pending ? 'success' : 'text'}
+        disabled={pending?.started}
+        fg={pending ? 'text' : 'background'}
         indication={{
           [IndicationType.Disabled]: {
             opacity: 1,
@@ -587,7 +601,7 @@ export const AddChildForm = () => {
         rad={2}
         type="submit"
       >
-        Submit
+        {pending ? 'Confirm?' : 'Submit'}
       </Button>
     </Form>
   );
