@@ -19,9 +19,9 @@ import {
   radius,
   RadiusProps,
 } from '@blubberfish/style-system';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { alertSelector, dismissAlert } from './redux';
+import { alertSelector } from './redux';
 
 const Container = styled.div<
   AlignmentProps &
@@ -61,7 +61,6 @@ const A = styled.a<ColorProps & FontProps>`
 `;
 
 export const AddChildSuccess = () => {
-  const dispatch = useDispatch();
   const alert = useSelector(alertSelector);
   if (!alert) return null;
   if (alert.type === 'error') return null;
@@ -77,9 +76,6 @@ export const AddChildSuccess = () => {
       gap={2}
       pad={2}
       rad={2}
-      onClick={() => {
-        dispatch(dismissAlert());
-      }}
     >
       <P fg="success">
         <CircleCheck fill="currentColor" height="64px" width="64px" />
