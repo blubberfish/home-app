@@ -1,8 +1,12 @@
 import { Module } from '@blubberfish/frontend/modules/core';
 import slice from './redux';
-import Page from './v1'
+import { AddChildForm } from './add-child-form';
 
-const AddChildPage = () => <Page />;
+const AddChildPage = () => (
+  <div>
+    <AddChildForm />
+  </div>
+);
 
 export default () => (
   <Module slice={slice}>
