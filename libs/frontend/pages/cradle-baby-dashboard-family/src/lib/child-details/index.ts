@@ -1,1 +1,1 @@
-export { ChildDetails as default } from './child-details';
+export { default } from './child-details';

@@ -2,6 +2,7 @@ import {
   Mars,
   Venus,
 } from '@blubberfish/frontend/components/icons/font-awesome';
+import { Module } from '@blubberfish/frontend/modules/core';
 import { selectChildById } from '@blubberfish/frontend/modules/cradle-baby/app';
 import { DASHBOARD_FAMILY_PATH } from '@blubberfish/frontend/pages/cradle-baby-routes';
 import {
@@ -25,6 +26,8 @@ import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import { ChildDeleteButton } from './child-delete-button';
+import slice from './redux';
 
 const Shape = styled.div<ColorProps & RadiusProps & SizeProps>`
   ${color}
@@ -69,7 +72,7 @@ const Container = styled.div<
   ${radius}
 `;
 
-export const ChildDetails = () => {
+const ChildDetails = () => {
   const uuid = useParams()['id'];
   const child = useSelector(selectChildById(uuid));
   const displayName = useMemo(() => {
@@ -120,6 +123,13 @@ export const ChildDetails = () => {
           text={moment(child.dtob).format('DD MMM YYYY')}
         />
       </Container>
+      <ChildDeleteButton />
     </Container>
   );
 };
+
+export default () => (
+  <Module slice={slice}>
+    <ChildDetails />
+  </Module>
+);
