@@ -9,6 +9,7 @@ import styled from 'styled-components';
 import slice from './redux';
 import { AddChildAlert } from './add-child-alert';
 import { AddChildForm } from './add-child-form';
+import { AddChildSuccess } from './add-child-success';
 
 const Container = styled.div<GridProps & PaddingProps>`
   ${grid}
@@ -23,6 +24,7 @@ const AddChildPage = () => (
     gap={3}
   >
     <AddChildAlert />
+    <AddChildSuccess />
     <AddChildForm />
   </Container>
 );
