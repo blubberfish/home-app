@@ -319,7 +319,7 @@ export const AddChildForm = () => {
     [account, dispatch, form, pending]
   );
 
-  if (alert?.type === 'success') return null
+  if (alert?.type === 'success') return null;
   return (
     <Form
       onSubmit={handleSubmit}
@@ -328,11 +328,13 @@ export const AddChildForm = () => {
       autoFlow="row"
       gap={3}
     >
-      <Heading fg="text_weak" ftWeight={1}>
+      <Heading fg="text_weak" ftSize={3} ftWeight={1}>
         Add child to our family
       </Heading>
       <Section bg="background_weak" gap={2} pad={2} rad={2}>
-        <SubHeading ftWeight={1}>My child is a</SubHeading>
+        <SubHeading ftSize={2} ftWeight={1}>
+          My child is a
+        </SubHeading>
         <Section
           templateRows="min-content"
           autoColumns="max-content"
@@ -387,7 +389,9 @@ export const AddChildForm = () => {
       </Section>
       {form?.gender && (
         <Section bg="background_weak" gap={2} pad={2} rad={2}>
-          <SubHeading ftWeight={1}>and is borned on</SubHeading>
+          <SubHeading ftSize={2} ftWeight={1}>
+            and is borned on
+          </SubHeading>
           <Input
             bdrB={{ size: 1, color: 'background' }}
             disabled={!!pending}
@@ -416,7 +420,9 @@ export const AddChildForm = () => {
       )}
       {form?.dtob && (
         <Section bg="background_weak" gap={2} pad={2} rad={2}>
-          <SubHeading ftWeight={1}>and {pronoun} name is</SubHeading>
+          <SubHeading ftSize={2} ftWeight={1}>
+            and {pronoun} name is
+          </SubHeading>
           <Section
             responsive={[
               {
