@@ -9,3 +9,13 @@ export const pendingActionSelector = createSelector(
   stateSelector,
   (state) => state?.pending
 );
+
+export const alertSelector = createSelector(
+  stateSelector,
+  (state) => state?.alert
+);
+
+export const formSelector = createSelector(
+  stateSelector,
+  (state) => state?.form
+);
