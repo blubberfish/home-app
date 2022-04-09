@@ -6,7 +6,11 @@ import {
   accountInfoSelector,
   genderColorsSelector,
 } from '@blubberfish/frontend/modules/cradle-baby/app';
-import { DASHBOARD_HISTORY_PATH } from '@blubberfish/frontend/pages/cradle-baby-routes';
+import {
+  DASHBOARD_HISTORY_PATH,
+  DASHBOARD_PATH,
+  PATH,
+} from '@blubberfish/frontend/pages/cradle-baby-routes';
 import {
   alignment,
   AlignmentProps,
@@ -86,8 +90,8 @@ const Row = ({ onClick, gender, enName, zhName }: RowProps) => {
           opacity: 2,
         },
       }}
-      alignContent='center'
-      alignItems='center'
+      alignContent="center"
+      alignItems="center"
       justifyItems="center"
       templateRows="min-content"
       templateColumns="repeat(3, max-content)"
@@ -143,6 +147,25 @@ const ChildrenTablePage = () => {
             }}
           />
         ))}
+        {children.length === 0 && (
+          <TableRowContainer
+            bg="background_weak"
+            indication={{
+              [IndicationType.Hover]: {
+                opacity: 2,
+              },
+            }}
+            justifyItems="center"
+            onClick={() => {
+              navigate(`/${PATH.DASHBOARD}/${DASHBOARD_PATH.FAMILY}`);
+            }}
+            padX={3}
+            padY={2}
+            rad={2}
+          >
+            <span>Add a child to your family first</span>
+          </TableRowContainer>
+        )}
       </Container>
     </Container>
   );

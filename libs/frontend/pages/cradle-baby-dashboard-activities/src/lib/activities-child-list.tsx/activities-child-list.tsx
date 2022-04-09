@@ -2,8 +2,15 @@ import {
   Mars,
   Venus,
 } from '@blubberfish/frontend/components/icons/font-awesome';
-import { accountInfoSelector, genderColorsSelector } from '@blubberfish/frontend/modules/cradle-baby/app';
-import { DASHBOARD_ACTIVITIES_PATH } from '@blubberfish/frontend/pages/cradle-baby-routes'
+import {
+  accountInfoSelector,
+  genderColorsSelector,
+} from '@blubberfish/frontend/modules/cradle-baby/app';
+import {
+  DASHBOARD_ACTIVITIES_PATH,
+  DASHBOARD_PATH,
+  PATH,
+} from '@blubberfish/frontend/pages/cradle-baby-routes';
 import {
   alignment,
   AlignmentProps,
@@ -71,12 +78,7 @@ type RowProps = {
   zhName: string;
   zhAlias?: string;
 };
-const Row = ({
-  onClick,
-  gender,
-  enName,
-  zhName,
-}: RowProps) => {
+const Row = ({ onClick, gender, enName, zhName }: RowProps) => {
   const colors = useSelector(genderColorsSelector);
   const svgProps = {
     fill: colors[gender],
@@ -91,8 +93,8 @@ const Row = ({
           opacity: 2,
         },
       }}
-      alignContent='center'
-      alignItems='center'
+      alignContent="center"
+      alignItems="center"
       justifyItems="center"
       templateRows="min-content"
       templateColumns="repeat(3, max-content)"
@@ -125,7 +127,7 @@ export const ChildListPage = () => {
       autoFlow="row"
       gap={3}
     >
-      <P fg='text_weak'>Select a child to log their activities</P>
+      <P fg="text_weak">Select a child to log their activities</P>
       <Container
         templateColumns="1fr"
         autoRows="max-content"
@@ -141,10 +143,33 @@ export const ChildListPage = () => {
             enName={child.name.en?.preferred ?? child.name.en?.given ?? ''}
             zhName={child.name.zh?.preferred ?? child.name.zh?.given ?? ''}
             onClick={() => {
-              navigate(generatePath(`../${DASHBOARD_ACTIVITIES_PATH.LOG}`, { uuid: child.uuid }));
+              navigate(
+                generatePath(`../${DASHBOARD_ACTIVITIES_PATH.LOG}`, {
+                  uuid: child.uuid,
+                })
+              );
             }}
           />
         ))}
+        {children.length === 0 && (
+          <TableRowContainer
+            bg="background_weak"
+            indication={{
+              [IndicationType.Hover]: {
+                opacity: 2,
+              },
+            }}
+            justifyItems="center"
+            onClick={() => {
+              navigate(`/${PATH.DASHBOARD}/${DASHBOARD_PATH.FAMILY}`);
+            }}
+            padX={3}
+            padY={2}
+            rad={2}
+          >
+            <span>Add a child to your family first</span>
+          </TableRowContainer>
+        )}
       </Container>
     </Container>
   );
