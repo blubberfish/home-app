@@ -43,9 +43,10 @@ export const AddChildAlert = () => {
   const dispatch = useDispatch();
   const alert = useSelector(alertSelector);
   if (!alert) return null;
+  if (alert.type === 'success') return null;
   return (
     <Container
-      bg={alert.type === 'success' ? 'success_accent' : 'error_accent'}
+      bg='error_accent'
       fg="text_invert_weak"
       gap={1}
       pad={2}
@@ -57,7 +58,7 @@ export const AddChildAlert = () => {
         dispatch(dismissAlert());
       }}
     >
-      <H1 fg={alert.type === 'success' ? 'success' : 'error'} ftSize={2}>
+      <H1 fg='error' ftSize={2}>
         {alert.title}
       </H1>
       <P ftSize={1}>{alert.message}</P>
