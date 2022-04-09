@@ -22,7 +22,6 @@ import {
   radius,
   RadiusProps,
 } from '@blubberfish/style-system';
-import moment from 'moment';
 import { useSelector } from 'react-redux';
 import { generatePath, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
@@ -35,15 +34,6 @@ const P = styled.p<ColorProps & FontProps>`
 
 const Container = styled.div<GridProps>`
   ${grid}
-`;
-
-const TableCellContainer = styled.div<
-  AlignmentProps & ColorProps & GridProps & PaddingProps
-  >`
-  ${alignment}
-  ${color}
-  ${grid}
-  ${padding}
 `;
 
 type RowIndicationProps = {
@@ -83,12 +73,9 @@ type RowProps = {
 };
 const Row = ({
   onClick,
-  dob,
   gender,
   enName,
   zhName,
-  enAlias,
-  zhAlias,
 }: RowProps) => {
   const colors = useSelector(genderColorsSelector);
   const svgProps = {
@@ -104,9 +91,11 @@ const Row = ({
           opacity: 2,
         },
       }}
+      alignContent='center'
+      alignItems='center'
       justifyItems="center"
       templateRows="min-content"
-      templateColumns="repeat(2, max-content) repeat(2, 1fr)"
+      templateColumns="repeat(3, max-content)"
       autoFlow="column"
       bg="background_weak"
       gap={3}
@@ -114,42 +103,9 @@ const Row = ({
       padY={2}
       rad={2}
     >
-      <TableCellContainer alignItems="center" alignContent="center">
-        {gender === 'f' ? <Venus {...svgProps} /> : <Mars {...svgProps} />}
-      </TableCellContainer>
-      <TableCellContainer alignItems="center" alignContent="center">
-        {moment(dob).format('DD MMM YYYY')}
-      </TableCellContainer>
-      <TableCellContainer
-        templateColumns="max-content"
-        autoRows="min-content"
-        autoFlow="row"
-        alignItems="center"
-        alignContent="center"
-        gap={1}
-      >
-        <P>{enName}</P>
-        {enAlias && (
-          <P fg="text_weak" ftSize={1}>
-            {enAlias}
-          </P>
-        )}
-      </TableCellContainer>
-      <TableCellContainer
-        alignItems="center"
-        alignContent="center"
-        templateColumns="max-content"
-        autoRows="min-content"
-        autoFlow="row"
-        gap={1}
-      >
-        <P>{zhName}</P>
-        {zhAlias && (
-          <P fg="text_weak" ftSize={1}>
-            {zhAlias}
-          </P>
-        )}
-      </TableCellContainer>
+      {gender === 'f' ? <Venus {...svgProps} /> : <Mars {...svgProps} />}
+      <P>{enName}</P>
+      <P>{zhName}</P>
     </TableRowContainer>
   );
 };
@@ -181,14 +137,9 @@ export const ChildListPage = () => {
             key={child.uuid}
             dob={child.dtob}
             gender={child.gender}
-            enAlias={child.name.en?.preferred}
-            enName={`${[child.name.en?.family, child.name.en?.given]
-              .filter((x) => !!x)
-              .join(' ')}`}
-            zhAlias={child.name.zh?.preferred}
-            zhName={`${[child.name.zh?.family, child.name.zh?.given]
-              .filter((x) => !!x)
-              .join('')}`}
+            /** @todo proper handling of empty string */
+            enName={child.name.en?.preferred ?? child.name.en?.given ?? ''}
+            zhName={child.name.zh?.preferred ?? child.name.zh?.given ?? ''}
             onClick={() => {
               navigate(generatePath(`../${DASHBOARD_ACTIVITIES_PATH.LOG}`, { uuid: child.uuid }));
             }}
