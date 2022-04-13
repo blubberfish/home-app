@@ -22,8 +22,7 @@ jobs:
         run: |
           npm ci
           npx nx build frontend-cradle-baby --prod
-          cd dist/app/cradle-baby
       - name: Upload to bucket
         run: |
           aws s3 rm s3://app.blubberfish.cradle-baby --recursive
-          aws s3 cp dist/app/cradle-baby s3://app.blubberfish.cradle-baby --recursive
+          aws s3 cp dist/apps/cradle-baby s3://app.blubberfish.cradle-baby --recursive
