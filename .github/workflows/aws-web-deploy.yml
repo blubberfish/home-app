@@ -25,4 +25,4 @@ jobs:
       - name: Upload to bucket
         run: |
           aws s3 rm s3://app.blubberfish.cradle-baby --recursive
-          aws s3 cp dist/apps/cradle-baby s3://app.blubberfish.cradle-baby --recursive
+          aws s3 cp dist/apps/frontend/cradle-baby s3://app.blubberfish.cradle-baby --recursive
