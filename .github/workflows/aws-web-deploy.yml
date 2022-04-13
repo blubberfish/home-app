@@ -1,0 +1,29 @@
+on:
+  workflow_dispatch:
+env:
+  aws_region: ap-southeast-1
+jobs:
+  Build-And-Deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.5.1
+        with:
+          node-version: 16
+          registry-url: https://npm.pkg.github.com
+      - uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_U }}
+          aws-secret-access-key: ${{ secrets.AWS_ACCESS_S }}
+          aws-region: ${{ env.aws_region }}
+      - name: Build project
+        env:
+          NX_APIKEY: ${{ secrets.NX_APIKEY }}
+        run: |
+          npm ci
+          npx nx build frontend-cradle-baby --prod
+          cd dist/app/cradle-baby
+      - name: Upload to bucket
+        run: |
+          aws s3 rm s3://app.blubberfish.cradle-baby --recursive
+          aws s3 cp dist/app/cradle-baby s3://app.blubberfish.cradle-baby --recursive
