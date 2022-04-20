@@ -3,8 +3,21 @@ import { BabyActivityProfilePayload } from '@blubberfish/types';
 import moment from 'moment';
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { activitySelector, filterSelector } from '../redux';
+
+export enum VisualizationType {
+  list,
+  grid,
+}
+
+export const useVisualizationType = () => {
+  const { search } = useLocation();
+  const query = useMemo(() => new URLSearchParams(search), [search]);
+  return query.get('display') === 'list'
+    ? VisualizationType.list
+    : VisualizationType.grid;
+};
 
 export const useChild = () => {
   const { uuid } = useParams();
