@@ -16,17 +16,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { Cell } from './components/cell';
 import { CellGrid } from './components/grid';
-import { useChild, useLast3Days, useNormalizedActivities } from './hooks';
+import { useChild, useLast3Days, useNormalizedActivities, useVisualizationType, VisualizationType } from './hooks';
 import { activityLogThunk } from './redux';
 
 const responsiveContainer = responsive<AlignmentProps>(alignment);
 const Container = styled.div<
   AlignmentProps &
-    GridProps &
-    PaddingProps &
-    ResponsiveProps<AlignmentProps> &
-    SizeProps
->`
+  GridProps &
+  PaddingProps &
+  ResponsiveProps<AlignmentProps> &
+  SizeProps
+  >`
   ${alignment}
   ${grid}
   ${padding}
@@ -35,6 +35,7 @@ const Container = styled.div<
 `;
 
 export const ChildActivitiesVisualization = () => {
+  const visualType = useVisualizationType()
   const dispatch = useDispatch();
   const account = useSelector(accountIdSelector);
   const baby = useChild();
@@ -52,6 +53,7 @@ export const ChildActivitiesVisualization = () => {
     account && baby && dispatch(activityLogThunk({ account, baby: baby.uuid }));
   }, [dispatch, account, baby]);
 
+  if (visualType !== VisualizationType.grid) return null
   return (
     <Container
       justifyItems="center"

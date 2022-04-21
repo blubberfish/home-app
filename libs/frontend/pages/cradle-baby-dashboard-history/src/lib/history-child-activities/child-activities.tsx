@@ -12,12 +12,14 @@ import { Navigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { ChildActivitiesFilter } from './child-activities-filter';
 import { ChildActivitiesHeader } from './child-activities-header';
+import { ChildActivitiesFooter } from './child-activities-footer';
+import { ChildActivitiesList } from './child-activities-list';
 import { ChildActivitiesVisualization } from './child-activities-visualization';
 import { useChild } from './hooks';
 
 const Container = styled.div<
   AlignmentProps & GridProps & PaddingProps & SizeProps
->`
+  >`
   ${alignment}
   ${grid}
   ${padding}
@@ -39,7 +41,9 @@ const ChildHistoryPage = () => {
     >
       <ChildActivitiesHeader />
       <ChildActivitiesVisualization />
+      <ChildActivitiesList />
       <ChildActivitiesFilter />
+      <ChildActivitiesFooter />
     </Container>
   );
 };
