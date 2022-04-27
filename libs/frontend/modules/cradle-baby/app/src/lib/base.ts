@@ -37,6 +37,11 @@ export type CustomColorMap = {
 export const defaultColorMap: CustomColorMap = {
   activity: {
     'baby:activity:feed': 'LightSkyBlue',
+    'baby:activity:feed:bottle': 'lavender',
+    'baby:activity:feed:latch:l': 'lightsteelblue',
+    'baby:activity:feed:latch:r': 'steelblue',
+    'baby:activity:nurse:defecate': 'goldenrod',
+    'baby:activity:nurse:urinate': 'gold',
     'baby:activity:nurse': 'LightSalmon',
     'baby:activity:sleep': 'MediumSeaGreen',
     'baby:activity:wake': 'PaleVioletRed',

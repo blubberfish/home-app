@@ -31,11 +31,11 @@ import { activityLogThunk } from './redux';
 const responsiveContainer = responsive<AlignmentProps>(alignment);
 const Container = styled.div<
   AlignmentProps &
-  GridProps &
-  PaddingProps &
-  ResponsiveProps<AlignmentProps> &
-  SizeProps
-  >`
+    GridProps &
+    PaddingProps &
+    ResponsiveProps<AlignmentProps> &
+    SizeProps
+>`
   ${alignment}
   ${grid}
   ${padding}
@@ -45,6 +45,11 @@ const Container = styled.div<
 
 const labels: { [key in BabyActivityType]: string } = {
   'baby:activity:feed': 'Feeding started',
+  'baby:activity:feed:bottle': 'Bottle feeding started',
+  'baby:activity:feed:latch:l': 'Latched onto left side',
+  'baby:activity:feed:latch:r': 'Latched onto right side',
+  'baby:activity:nurse:defecate': 'Defecated',
+  'baby:activity:nurse:urinate': 'Urinated',
   'baby:activity:nurse': 'Nursing started',
   'baby:activity:sleep': 'Fell asleep',
   'baby:activity:wake': 'Wake up',
@@ -72,7 +77,7 @@ export const ChildActivitiesList = () => {
             ...seed,
             ...Object.values(
               activityMap[current.year()]?.[current.month()]?.[
-              current.date()
+                current.date()
               ] ?? {}
             ).reduce(
               (subSeed: BabyActivityProfilePayload[], list) => [
