@@ -5,7 +5,7 @@ export type BabyActivityType =
   | 'baby:activity:feed:latch:r'
   | 'baby:activity:feed:bottle'
   | 'baby:activity:nurse'
-  | 'baby:activity:nurse:urine'
+  | 'baby:activity:nurse:urinate'
   | 'baby:activity:nurse:defecate'
   | 'baby:activity:nurse'
   | 'baby:activity:sleep';
