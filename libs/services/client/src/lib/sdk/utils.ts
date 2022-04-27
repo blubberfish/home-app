@@ -1,5 +1,7 @@
 import { HttpHeader, HttpMethod } from '@blubberfish/types';
 
+export type API<I, O> = (params?: I) => Promise<O | undefined>;
+
 export type ApiOption<I, O> = {
   url: string;
   restricted?: boolean;
@@ -18,7 +20,7 @@ export const createApi = <I, O>({
   restricted,
   builders = {},
   method = HttpMethod.GET,
-}: ApiOption<I, O>) => {
+}: ApiOption<I, O>): API<I, O> => {
   return async (params?: I) => {
     const {
       url: urlBuilder,

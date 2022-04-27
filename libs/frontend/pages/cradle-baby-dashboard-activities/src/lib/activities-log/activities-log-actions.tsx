@@ -7,10 +7,12 @@ import {
 } from '@blubberfish/frontend/components/icons/font-awesome';
 import { accountIdSelector } from '@blubberfish/frontend/modules/cradle-baby/app';
 import {
-  logFeedActivity,
-  logNursingActivity,
-  logSleepActivity,
-  logWakeActivity,
+  API,
+  logBottleFeedActivity,
+  logLatchLeftFeedActivity,
+  logLatchRightFeedActivity,
+  logNursingDefecateActivity,
+  logNursingUrinationActivity,
 } from '@blubberfish/services/client';
 import {
   alignment,
@@ -32,7 +34,7 @@ import {
   size,
   SizeProps,
 } from '@blubberfish/style-system';
-import { BabyActivityType } from '@blubberfish/types';
+import { BabyActivityType, BabyActivityPayload } from '@blubberfish/types';
 import { ComponentType, SVGProps, useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
@@ -130,6 +132,9 @@ const useActivities = () =>
       label: {
         [key in BabyActivityType]: string;
       };
+      service: {
+        [key in BabyActivityType]?: API<BabyActivityPayload, void>;
+      };
     } => ({
       list: [
         'baby:activity:feed:bottle',
@@ -160,6 +165,13 @@ const useActivities = () =>
         'baby:activity:sleep': 'Sleep',
         'baby:activity:wake': 'Wake',
       },
+      service: {
+        'baby:activity:feed:bottle': logBottleFeedActivity,
+        'baby:activity:feed:latch:l': logLatchLeftFeedActivity,
+        'baby:activity:feed:latch:r': logLatchRightFeedActivity,
+        'baby:activity:nurse:defecate': logNursingDefecateActivity,
+        'baby:activity:nurse:urinate': logNursingUrinationActivity,
+      },
     }),
     []
   );
@@ -169,7 +181,7 @@ export const LogActions = () => {
   const account = useSelector(accountIdSelector);
   const pending = useSelector(pendingSelector);
   const child = useChild();
-  const { list, icon, label } = useActivities();
+  const { list, icon, label, service } = useActivities();
   const handleLog = useCallback(
     (activity: BabyActivityType) => {
       if (!account || !child) return;
@@ -203,44 +215,21 @@ export const LogActions = () => {
             };
             dispatch(dismissAlert());
             dispatch(confirmPending());
-            switch (activity) {
-              case 'baby:activity:feed':
-                return logFeedActivity({
-                  account,
-                  baby: child.uuid,
-                })
-                  .then(success, error)
-                  .finally(finalise);
-              case 'baby:activity:nurse':
-                return logNursingActivity({
-                  account,
-                  baby: child.uuid,
-                })
-                  .then(success, error)
-                  .finally(finalise);
-              case 'baby:activity:sleep':
-                return logSleepActivity({
-                  account,
-                  baby: child.uuid,
-                })
-                  .then(success, error)
-                  .finally(finalise);
-              case 'baby:activity:wake':
-                return logWakeActivity({
-                  account,
-                  baby: child.uuid,
-                })
-                  .then(success, error)
-                  .finally(finalise);
-              default:
-                dispatch(dismissPending());
-                return Promise.resolve();
+            const remote = service[activity];
+            if (remote) {
+              return remote({
+                account,
+                baby: child.uuid,
+              })
+                .then(success, error)
+                .finally(finalise);
             }
+            return Promise.resolve();
           },
         })
       );
     },
-    [account, child, dispatch]
+    [account, child, dispatch, service]
   );
 
   return (
