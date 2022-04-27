@@ -25,8 +25,8 @@ import {
   useLast3Days,
   useNormalizedActivities,
   VisualizationType,
-} from './hooks';
-import { activityLogThunk } from './redux';
+} from '../hooks';
+import { activityLogThunk } from '../redux';
 
 const responsiveContainer = responsive<AlignmentProps>(alignment);
 const Container = styled.div<
