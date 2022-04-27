@@ -54,12 +54,12 @@ const rowIndication = indication<RowIndicationProps>(IndicationType.Hover, [
 ]);
 const TableRowContainer = styled.div<
   AlignmentProps &
-  ColorProps &
-  GridProps &
-  PaddingProps &
-  RadiusProps &
-  RowIndicationProps
-  >`
+    ColorProps &
+    GridProps &
+    PaddingProps &
+    RadiusProps &
+    RowIndicationProps
+>`
   cursor: pointer;
   ${alignment}
   ${color}
@@ -140,7 +140,7 @@ const ChildrenTablePage = () => {
             zhName={child.name.zh?.preferred ?? child.name.zh?.given ?? ''}
             onClick={() => {
               navigate(
-                generatePath(`../${DASHBOARD_HISTORY_PATH.LOG}`, {
+                generatePath(`../${DASHBOARD_HISTORY_PATH.LOG}?display=list`, {
                   uuid: child.uuid,
                 })
               );
