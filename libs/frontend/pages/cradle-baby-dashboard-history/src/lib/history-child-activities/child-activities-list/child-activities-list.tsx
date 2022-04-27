@@ -2,10 +2,16 @@ import { accountIdSelector } from '@blubberfish/frontend/modules/cradle-baby/app
 import {
   alignment,
   AlignmentProps,
+  color,
+  ColorProps,
+  font,
+  FontProps,
   grid,
   GridProps,
   padding,
   PaddingProps,
+  radius,
+  RadiusProps,
   responsive,
   ResponsiveProps,
   size,
@@ -31,21 +37,29 @@ import { activityLogThunk } from '../redux';
 const responsiveContainer = responsive<AlignmentProps>(alignment);
 const Container = styled.div<
   AlignmentProps &
+    ColorProps &
     GridProps &
     PaddingProps &
     ResponsiveProps<AlignmentProps> &
+    RadiusProps &
     SizeProps
 >`
   ${alignment}
+  ${color}
   ${grid}
   ${padding}
-  ${responsiveContainer}
+  ${radius}
   ${size}
+  ${responsiveContainer}
+`;
+
+const Text = styled.span<FontProps>`
+  ${font}
 `;
 
 const labels: { [key in BabyActivityType]: string } = {
   'baby:activity:feed': 'Feeding started',
-  'baby:activity:feed:bottle': 'Bottle feeding started',
+  'baby:activity:feed:bottle': 'Started bottle feeding',
   'baby:activity:feed:latch:l': 'Latched onto left side',
   'baby:activity:feed:latch:r': 'Latched onto right side',
   'baby:activity:nurse:defecate': 'Defecated',
@@ -55,6 +69,18 @@ const labels: { [key in BabyActivityType]: string } = {
   'baby:activity:wake': 'Wake up',
 };
 
+const colors: { [key in BabyActivityType]: string } = {
+  'baby:activity:feed': 'aliceblue',
+  'baby:activity:feed:bottle': 'aliceblue',
+  'baby:activity:feed:latch:l': 'aliceblue',
+  'baby:activity:feed:latch:r': 'aliceblue',
+  'baby:activity:nurse:defecate': 'LemonChiffon',
+  'baby:activity:nurse:urinate': 'LemonChiffon',
+  'baby:activity:nurse': 'LemonChiffon',
+  'baby:activity:sleep': 'background_weak',
+  'baby:activity:wake': 'background_weak',
+};
+
 export const ChildActivitiesList = () => {
   const visualType = useVisualizationType();
   const dispatch = useDispatch();
@@ -62,13 +88,6 @@ export const ChildActivitiesList = () => {
   const baby = useChild();
   const last3Days = useLast3Days();
   const activityMap = useNormalizedActivities();
-  // const activityList = useMemo(
-  //   () =>
-  //     Object.values(
-  //       activityMap[today.year()]?.[today.month()]?.[today.date()] ?? {}
-  //     ).reduce((seed, current) => [...seed, ...current], []),
-  //   [activityMap, today]
-  // );
   const activityList = useMemo(
     () =>
       last3Days
@@ -108,11 +127,19 @@ export const ChildActivitiesList = () => {
       {activityList.map(({ activity, timestamp }) => (
         <Container
           key={timestamp.toString()}
-          gap={2}
-          templateColumns="max-content 1fr"
+          bg={colors[activity]}
+          fg="text_invert"
+          gap={1}
+          padX={2}
+          padY={1}
+          rad={2}
+          templateColumns="1fr"
+          templateRows="repeat(2, min-content)"
         >
-          <section>{labels[activity]}</section>
-          <section>{moment(timestamp).format('YYYY-MMM-DD, HH:mm')}</section>
+          <Text ftSize={1} ftWeight={2}>
+            {moment(timestamp).format('YYYY-MMM-DD, HH:mm')}
+          </Text>
+          <Text>{labels[activity]}</Text>
         </Container>
       ))}
     </Container>
