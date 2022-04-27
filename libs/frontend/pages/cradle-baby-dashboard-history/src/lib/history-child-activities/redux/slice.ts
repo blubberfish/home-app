@@ -42,7 +42,25 @@ const slice = createSlice({
       );
     },
     toggleFilter(state, { payload }: PayloadAction<BabyActivityType>) {
-      state.filter[payload] = !state.filter[payload];
+      if (payload.search('baby:activity:feed' as BabyActivityType)) {
+        state.filter['baby:activity:feed'] =
+          !state.filter['baby:activity:feed'];
+        state.filter['baby:activity:feed:bottle'] =
+          state.filter['baby:activity:feed'];
+        state.filter['baby:activity:feed:latch:l'] =
+          state.filter['baby:activity:feed'];
+        state.filter['baby:activity:feed:latch:r'] =
+          state.filter['baby:activity:feed'];
+      } else if (payload.search('baby:activity:nurse' as BabyActivityType)) {
+        state.filter['baby:activity:nurse'] =
+          !state.filter['baby:activity:nurse'];
+        state.filter['baby:activity:nurse:defecate'] =
+          state.filter['baby:activity:nurse'];
+        state.filter['baby:activity:nurse:urinate'] =
+          state.filter['baby:activity:nurse'];
+      } else {
+        state.filter[payload] = !state.filter[payload];
+      }
     },
   },
 });

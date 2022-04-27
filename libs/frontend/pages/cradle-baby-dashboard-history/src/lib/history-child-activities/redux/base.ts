@@ -35,7 +35,12 @@ export type DashboardActivitiesState = {
 
 export const defaultFilter: Filter = {
   'baby:activity:feed': true,
+  'baby:activity:feed:bottle': true,
+  'baby:activity:feed:latch:l': true,
+  'baby:activity:feed:latch:r': true,
   'baby:activity:nurse': true,
+  'baby:activity:nurse:defecate': true,
+  'baby:activity:nurse:urinate': true,
   'baby:activity:sleep': true,
   // 'baby:activity:wake': true,
 };
