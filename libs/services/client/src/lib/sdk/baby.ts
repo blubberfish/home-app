@@ -54,6 +54,26 @@ export const logNursingActivity = createApi<BabyActivityPayload, void>({
   },
 });
 
+export const logNursingUrinationActivity = createApi<BabyActivityPayload, void>(
+  {
+    method: HttpMethod.POST,
+    restricted: true,
+    url: `${BaseUrl.REST}/baby/log/urinate`,
+    builders: {
+      body: (input) => JSON.stringify(input),
+    },
+  }
+);
+
+export const logNursingDefecateActivity = createApi<BabyActivityPayload, void>({
+  method: HttpMethod.POST,
+  restricted: true,
+  url: `${BaseUrl.REST}/baby/log/defecate`,
+  builders: {
+    body: (input) => JSON.stringify(input),
+  },
+});
+
 export const logFeedActivity = createApi<BabyActivityPayload, void>({
   method: HttpMethod.POST,
   restricted: true,

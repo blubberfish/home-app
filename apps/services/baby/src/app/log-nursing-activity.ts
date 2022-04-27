@@ -37,7 +37,7 @@ const addNursingActivityHandler = async (event) => {
 
 const addNursingUrinationActivityHandler = async (event) => {
   const { path, body } = event;
-  if (!/^\/?baby\/log\/nursing$/i.test(path)) return null;
+  if (!/^\/?baby\/log\/urinate$/i.test(path)) return null;
 
   try {
     const { account, baby, additionalDetails } = (JSON.parse(body) ??
@@ -65,7 +65,7 @@ const addNursingUrinationActivityHandler = async (event) => {
 
 const addNursingDefecationActivityHandler = async (event) => {
   const { path, body } = event;
-  if (!/^\/?baby\/log\/nursing$/i.test(path)) return null;
+  if (!/^\/?baby\/log\/defecate$/i.test(path)) return null;
 
   try {
     const { account, baby, additionalDetails } = (JSON.parse(body) ??
