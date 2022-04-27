@@ -63,6 +63,33 @@ export const logFeedActivity = createApi<BabyActivityPayload, void>({
   },
 });
 
+export const logBottleFeedActivity = createApi<BabyActivityPayload, void>({
+  method: HttpMethod.POST,
+  restricted: true,
+  url: `${BaseUrl.REST}/baby/log/feed/bottle`,
+  builders: {
+    body: (input) => JSON.stringify(input),
+  },
+});
+
+export const logLatchLeftFeedActivity = createApi<BabyActivityPayload, void>({
+  method: HttpMethod.POST,
+  restricted: true,
+  url: `${BaseUrl.REST}/baby/log/latch/left`,
+  builders: {
+    body: (input) => JSON.stringify(input),
+  },
+});
+
+export const logLatchRightFeedActivity = createApi<BabyActivityPayload, void>({
+  method: HttpMethod.POST,
+  restricted: true,
+  url: `${BaseUrl.REST}/baby/log/latch/right`,
+  builders: {
+    body: (input) => JSON.stringify(input),
+  },
+});
+
 export const logSleepActivity = createApi<BabyActivityPayload, void>({
   method: HttpMethod.POST,
   restricted: true,
