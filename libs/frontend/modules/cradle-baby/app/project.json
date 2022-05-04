@@ -1,0 +1,25 @@
+{
+  "root": "libs/frontend/modules/cradle-baby/app",
+  "sourceRoot": "libs/frontend/modules/cradle-baby/app/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/frontend/modules/cradle-baby/app/**/*.{ts,tsx,js,jsx}"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/frontend/modules/cradle-baby/app"],
+      "options": {
+        "jestConfig": "libs/frontend/modules/cradle-baby/app/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

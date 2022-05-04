@@ -1,0 +1,25 @@
+{
+  "root": "libs/frontend/pages/cradle-baby-login",
+  "sourceRoot": "libs/frontend/pages/cradle-baby-login/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/frontend/pages/cradle-baby-login/**/*.{ts,tsx,js,jsx}"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/frontend/pages/cradle-baby-login"],
+      "options": {
+        "jestConfig": "libs/frontend/pages/cradle-baby-login/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

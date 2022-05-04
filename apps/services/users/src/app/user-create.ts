@@ -10,7 +10,7 @@ import {
 
 const userCreateHandler = async (event) => {
   const { path, body } = event;
-  if (!/^\/?user$/i.test(path)) return null;
+  if (!/^\/?user\/?/i.test(path)) return null;
 
   let { familyName, givenName, password, username, preferredName } =
     (JSON.parse(body || '') || {}) as Partial<CreateUserPayload>;
@@ -38,7 +38,9 @@ const userCreateHandler = async (event) => {
       preferredName,
       username,
       password: await obfuscate(password),
-      createdOn: new Date().toISOString(),
+      meta: {
+        createdOn: new Date().toISOString(),
+      },
     });
 
     return {

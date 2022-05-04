@@ -1,4 +1,3 @@
-import { serialize } from 'cookie';
 import { v4 as uuid } from 'uuid';
 import {
   ServiceException,
@@ -7,6 +6,7 @@ import {
   match,
   registerHandler,
   usersCollectionFactory,
+  sessionFactory,
 } from '@blubberfish/services/core';
 
 const loginHandler = async (event) => {
@@ -24,8 +24,10 @@ const loginHandler = async (event) => {
           { _id: person._id },
           {
             $set: {
-              webToken: sessionId,
-              webTokenCreatedOn: new Date().toISOString(),
+              'sessionContext.web': {
+                session: sessionId,
+                startedOn: new Date().toISOString(),
+              },
             },
           },
           {
@@ -33,20 +35,19 @@ const loginHandler = async (event) => {
             upsert: false,
             projection: {
               password: 0,
-              webToken: 0,
-              webTokenCreatedOn: 0,
-              socketToken: 0,
-              socketTokenCreatedOn: 0,
+              sessionContext: 0,
             },
           }
         );
 
         return {
           statusCode: 200,
-          headers: {
-            'Set-Cookie': serialize('S', sessionId),
-          },
-          body: JSON.stringify(value),
+          body: JSON.stringify(
+            sessionFactory({
+              userId: value._id.toHexString(),
+              webSessionId: sessionId,
+            })
+          ),
         };
       }
     } catch (e) {

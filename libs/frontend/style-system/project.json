@@ -1,0 +1,43 @@
+{
+  "root": "libs/frontend/style-system",
+  "sourceRoot": "libs/frontend/style-system/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/frontend/style-system",
+        "tsConfig": "libs/frontend/style-system/tsconfig.lib.json",
+        "project": "libs/frontend/style-system/package.json",
+        "entryFile": "libs/frontend/style-system/src/index.ts",
+        "external": ["react/jsx-runtime"],
+        "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+        "compiler": "babel",
+        "assets": [
+          {
+            "glob": "libs/frontend/style-system/README.md",
+            "input": ".",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/frontend/style-system/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/frontend/style-system"],
+      "options": {
+        "jestConfig": "libs/frontend/style-system/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

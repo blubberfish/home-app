@@ -1,14 +1,17 @@
-import { HttpMethod } from '@blubberfish/types';
+import { HttpHeader, HttpMethod } from '@blubberfish/types';
+
+export type API<I, O> = (params?: I) => Promise<O | undefined>;
 
 export type ApiOption<I, O> = {
   url: string;
   restricted?: boolean;
   method?: HttpMethod;
   builders?: Partial<{
-    url: (input?: I, base?: string) => string;
+    url: (input?: I, base?: string) => string | null | undefined;
     headers: (input?: I) => Promise<HeadersInit>;
     body: (input?: I, headers?: HeadersInit) => string;
     response: (response: unknown, headers: Headers) => Promise<O>;
+    responseType?: 'json' | 'text';
   }>;
 };
 
@@ -17,7 +20,7 @@ export const createApi = <I, O>({
   restricted,
   builders = {},
   method = HttpMethod.GET,
-}: ApiOption<I, O>) => {
+}: ApiOption<I, O>): API<I, O> => {
   return async (params?: I) => {
     const {
       url: urlBuilder,
@@ -33,11 +36,13 @@ export const createApi = <I, O>({
       fetchOptions['headers'] = await headersBuilder(params);
     }
 
-    if (restricted && process.env['NX_APIKEY']) {
-      fetchOptions['headers'] = {
-        ...fetchOptions['headers'],
-        'x-api-key': process.env['NX_APIKEY'],
-      };
+    if (restricted) {
+      if (process.env['NX_APIKEY']) {
+        fetchOptions['headers'] = {
+          ...fetchOptions['headers'],
+          [HttpHeader.APIKEY]: process.env['NX_APIKEY'],
+        };
+      }
     }
 
     if (bodyBuilder) {
@@ -49,8 +54,11 @@ export const createApi = <I, O>({
       fetchOptions
     );
     if (response.ok) {
-      const { response: responseBuilder } = builders;
-      return responseBuilder?.(await response.json(), response.headers);
+      const { response: responseBuilder, responseType } = builders;
+      return responseBuilder?.(
+        await response[responseType ?? 'json'](),
+        response.headers
+      );
     } else {
       return Promise.reject(new Error(`api.error_${response.status}`));
     }
