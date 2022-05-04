@@ -30,11 +30,11 @@ import styled from 'styled-components';
 import { useVisualizationType, VisualizationType } from './hooks';
 import { filterSelector, toggleFilter } from './redux';
 
-const StyledCircleCheck = styled(CircleCheck) <ColorProps>`
+const StyledCircleCheck = styled(CircleCheck)<ColorProps>`
   fill: currentColor;
   ${color}
 `;
-const StyledX = styled(X) <ColorProps>`
+const StyledX = styled(X)<ColorProps>`
   fill: currentColor;
   ${color}
 `;
@@ -47,12 +47,12 @@ const Shape = styled.div<ColorProps & RadiusProps & SizeProps>`
 
 const Button = styled.button<
   AlignmentProps &
-  BorderProps &
-  ColorProps &
-  GridProps &
-  PaddingProps &
-  RadiusProps
-  >`
+    BorderProps &
+    ColorProps &
+    GridProps &
+    PaddingProps &
+    RadiusProps
+>`
   border: 0;
   border-radius: 0;
   background-color: transparent;
@@ -81,12 +81,12 @@ const Button = styled.button<
 const responsiveContainer = responsive<FontProps>(font);
 const Container = styled.div<
   AlignmentProps &
-  ColorProps &
-  GridProps &
-  PaddingProps &
-  RadiusProps &
-  ResponsiveProps<FontProps>
-  >`
+    ColorProps &
+    GridProps &
+    PaddingProps &
+    RadiusProps &
+    ResponsiveProps<FontProps>
+>`
   svg {
     height: 1em;
     width: 1em;
@@ -102,7 +102,12 @@ const Container = styled.div<
 
 const filterLabel: { [key in BabyActivityType]?: string } = {
   'baby:activity:feed': 'Feeding',
+  'baby:activity:feed:bottle': 'Bottle',
+  'baby:activity:feed:latch:l': 'Latch (L)',
+  'baby:activity:feed:latch:r': 'Latch (R)',
   'baby:activity:nurse': 'Nurse',
+  'baby:activity:nurse:defecate': 'Poop',
+  'baby:activity:nurse:urinate': 'Pee',
   'baby:activity:sleep': 'Sleeping',
   'baby:activity:wake': 'Wake up',
 };
@@ -111,9 +116,9 @@ export const ChildActivitiesFilter = () => {
   const dispatch = useDispatch();
   const filters = useSelector(filterSelector);
   const colors = useSelector(activityColorsSelector);
-  const visualization = useVisualizationType()
+  const visualization = useVisualizationType();
 
-  if (visualization !== VisualizationType.grid) return null
+  if (visualization !== VisualizationType.grid) return null;
   return (
     <Container
       alignItems="center"
