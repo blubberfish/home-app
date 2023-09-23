@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "bin": {
-    "cradle-build": "./cradle-build.js"
+    "cradle-build": "./cradle-build.js",
+    "cradle-dev-server": "./cradle-dev-server.js"
   },
   "devDependencies": {},
   "scripts": {},
