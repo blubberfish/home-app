@@ -13,7 +13,7 @@ const devServerConfig = await importConfig(
 );
 
 function startServer() {
-  const port = process.env.PORT || 8000;
+  const port = devServerConfig?.port || 8000;
   const app = express();
 
   log.info(
