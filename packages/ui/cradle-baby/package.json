@@ -1,0 +1,12 @@
+{
+  "name": "@blubberfish/cradle-baby-ui",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.ts",
+  "scripts": {
+    "build:css": "tailwindcss -i public/blubberfish-cradle.css -o dist/blubberfish-cradle.css"
+  },
+  "author": "Chua Siang Poh",
+  "license": "UNLICENSED",
+  "dependencies": {}
+}
