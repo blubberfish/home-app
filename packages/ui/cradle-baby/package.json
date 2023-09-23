@@ -4,6 +4,7 @@
   "description": "",
   "main": "src/index.ts",
   "scripts": {
+    "build:js": "cradle-build",
     "build:css": "tailwindcss -i public/blubberfish-cradle.css -o dist/blubberfish-cradle.css"
   },
   "type": "module",

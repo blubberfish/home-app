@@ -1,0 +1,13 @@
+{
+  "name": "@packages/scripts",
+  "version": "1.0.0",
+  "description": "",
+  "bin": {
+    "cradle-build": "./cradle-build.js"
+  },
+  "devDependencies": {},
+  "scripts": {},
+  "type": "module",
+  "author": "Chua Siang Poh",
+  "license": "UNLICENSED"
+}

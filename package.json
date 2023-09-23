@@ -36,6 +36,7 @@
     "typescript": "^5.2.2"
   },
   "workspaces": [
-    "packages/ui/cradle-baby"
+    "packages/ui/cradle-baby",
+    "packages/scripts"
   ]
 }
