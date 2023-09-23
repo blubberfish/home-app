@@ -5,7 +5,9 @@
   "main": "src/index.ts",
   "scripts": {
     "build:js": "cradle-build",
+    "build:js-watch": "cradle-build --watch",
     "build:css": "tailwindcss -i public/blubberfish-cradle.css -o dist/cradle.css",
+    "build:css-watch": "tailwindcss -i public/blubberfish-cradle.css -o dist/cradle.css --watch",
     "serve": "cradle-dev-server"
   },
   "type": "module",
