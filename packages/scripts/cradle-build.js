@@ -7,7 +7,9 @@ log.info('[cradle-build]: Started');
 
 const root = process.cwd();
 
-const buildConfig = await importConfig(path.resolve('esbuild.config.js'));
+const buildConfig = await importConfig(path.resolve('esbuild.config.js'), {
+  useDefault: true,
+});
 
 if (!buildConfig) {
   log.error('[cradle-build]: no build config available');
