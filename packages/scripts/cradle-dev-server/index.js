@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import express from 'express';
 import path from 'path';
-import { importConfig, log } from './utils/index.js';
+import { importConfig, log } from '../utils/index.js';
 
 log.info(`[cradle-dev-server]: Started.`);
 
