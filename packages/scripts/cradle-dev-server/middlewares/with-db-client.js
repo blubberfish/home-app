@@ -1,5 +1,5 @@
 import { MongoClient } from 'mongodb';
-import { log } from '../../../utils/index.js';
+import { log } from '../../utils/index.js';
 
 /** @type {{ (url: string): import('mongodb').MongoClient }} */
 const getClient = (() => {
