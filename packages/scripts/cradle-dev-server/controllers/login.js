@@ -65,9 +65,11 @@ controller.post(
         if (!matchedCount) {
           throw new Error('could not set token');
         }
-        log.info(MODULE, result);
         const url = new URL(req.headers.referer);
-        url.search = new URLSearchParams({ token }).toString();
+        url.search = new URLSearchParams({
+          token,
+          uid: account._id,
+        }).toString();
         return res.redirect(url.toString());
       }
       return next(new Error(FAIL_REASON.BAD_CREDENTIAL));
