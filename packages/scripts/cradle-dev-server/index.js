@@ -2,8 +2,11 @@
 import express from 'express';
 import path from 'path';
 import { importConfig, log } from '../utils/index.js';
+import { LoginController } from './controllers/index.js';
 
-log.info(`[cradle-dev-server]: Started.`);
+const MODULE = '[DevServer]';
+
+log.info(MODULE, `Started.`);
 
 const devServerConfig = await importConfig(
   path.resolve('dev-server.config.js'),
@@ -17,18 +20,19 @@ function startServer() {
   const app = express();
 
   log.info(
+    MODULE,
     devServerConfig?.staticDir
-      ? `[cradle-dev-server]: Static files located at ${path.resolve(
-          devServerConfig.staticDir,
-        )}.`
-      : `[cradle-dev-server]: No static files.`,
+      ? `Static files located at ${path.resolve(devServerConfig.staticDir)}.`
+      : `No static files.`,
   );
   if (devServerConfig?.staticDir) {
     app.use(express.static(devServerConfig?.staticDir || 'dist'));
   }
 
+  app.use('/api', LoginController);
+
   app.listen(port, () => {
-    log.info(`[cradle-dev-server]: Listening to port ${port}.`);
+    log.info(MODULE, `Listening to port ${port}.`);
   });
 }
 
