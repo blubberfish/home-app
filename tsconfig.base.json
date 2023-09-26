@@ -2,77 +2,22 @@
   "compileOnSave": false,
   "compilerOptions": {
     "rootDir": ".",
+    "declaration": true,
     "sourceMap": true,
-    "declaration": false,
     "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "importHelpers": true,
-    "target": "es2015",
+    "target": "esnext",
     "module": "esnext",
-    "lib": ["es2017", "dom"],
+    "lib": [],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {
-      "@blubberfish/frontend/components/box": [
-        "libs/frontend/components/box/src/index.ts"
-      ],
-      "@blubberfish/frontend/components/button": [
-        "libs/frontend/components/button/src/index.ts"
-      ],
-      "@blubberfish/frontend/components/carousel": [
-        "libs/frontend/components/carousel/src/index.ts"
-      ],
-      "@blubberfish/frontend/components/icons/feather": [
-        "libs/frontend/components/icons/feather/src/index.ts"
-      ],
-      "@blubberfish/frontend/components/icons/font-awesome": [
-        "libs/frontend/components/icons/font-awesome/src/index.ts"
-      ],
-      "@blubberfish/frontend/components/input": [
-        "libs/frontend/components/input/src/index.ts"
-      ],
-      "@blubberfish/frontend/hooks": ["libs/frontend/hooks/src/index.ts"],
-      "@blubberfish/frontend/modules/core": [
-        "libs/frontend/modules/core/src/index.ts"
-      ],
-      "@blubberfish/frontend/modules/cradle-baby/app": [
-        "libs/frontend/modules/cradle-baby/app/src/index.ts"
-      ],
-      "@blubberfish/frontend/pages/cradle-baby-dashboard": [
-        "libs/frontend/pages/cradle-baby-dashboard/src/index.ts"
-      ],
-      "@blubberfish/frontend/pages/cradle-baby-dashboard-activities": [
-        "libs/frontend/pages/cradle-baby-dashboard-activities/src/index.ts"
-      ],
-      "@blubberfish/frontend/pages/cradle-baby-dashboard-family": [
-        "libs/frontend/pages/cradle-baby-dashboard-family/src/index.ts"
-      ],
-      "@blubberfish/frontend/pages/cradle-baby-dashboard-history": [
-        "libs/frontend/pages/cradle-baby-dashboard-history/src/index.ts"
-      ],
-      "@blubberfish/frontend/pages/cradle-baby-dashboard-settings": [
-        "libs/frontend/pages/cradle-baby-dashboard-settings/src/index.ts"
-      ],
-      "@blubberfish/frontend/pages/cradle-baby-login": [
-        "libs/frontend/pages/cradle-baby-login/src/index.ts"
-      ],
-      "@blubberfish/frontend/pages/cradle-baby-register": [
-        "libs/frontend/pages/cradle-baby-register/src/index.ts"
-      ],
-      "@blubberfish/frontend/pages/cradle-baby-routes": [
-        "libs/frontend/pages/cradle-baby-routes/src/index.ts"
-      ],
-      "@blubberfish/frontend/ui/components": [
-        "libs/frontend/ui/components/src/index.ts"
-      ],
-      "@blubberfish/frontend/ui/theme": ["libs/frontend/ui/theme/src/index.ts"],
-      "@blubberfish/services/client": ["libs/services/client/src/index.ts"],
-      "@blubberfish/services/core": ["libs/services/core/src/index.ts"],
-      "@blubberfish/style-system": ["libs/frontend/style-system/src/index.ts"],
-      "@blubberfish/types": ["libs/types/src/index.ts"]
-    }
+    "paths": {}
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ],
+  "include": [
+    "src"
+  ]
 }

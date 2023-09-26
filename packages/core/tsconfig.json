@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "rootDir": ".",
+    "declaration": false,
+    "moduleResolution": "NodeNext",
+    "module": "NodeNext",
+    "lib": [
+      "es2017",
+      "dom"
+    ],
+    "outDir": "js",
+  },
+  "exclude": [
+    "js"
+  ],
+  "include": [
+    "./*.ts",
+  ],
+  "extends": [
+    "../../tsconfig.base.json"
+  ]
+}

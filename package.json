@@ -40,6 +40,7 @@
   },
   "workspaces": [
     "packages/ui/cradle-baby",
-    "packages/scripts"
+    "packages/scripts",
+    "packages/core"
   ]
 }
